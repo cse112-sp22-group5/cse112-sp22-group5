@@ -6,8 +6,9 @@ import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules
 import { colorChange } from './modules/color-change.js';
 import { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearTasksButton } from './modules/task-list.js'
 import { breakReminders } from './modules/break-reminder.js'
+import {googleTranslateElementInit} from "./modules/muli-language.js";
 
-
+googleTranslateElementInit();
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
 document.getElementById('start-button').addEventListener('click', onStart);
