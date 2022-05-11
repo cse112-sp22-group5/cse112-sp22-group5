@@ -11,11 +11,17 @@
     "eslint-plugin-jasmine": "^4.1.2",
     "jest": "^26.6.3",
     "jsdoc": "^3.6.6",
-    "minami": "^1.2.3"
+    "minami": "^1.2.3",
+    "prettier": "^2.6.2"
   },
   "scripts": {
     "test": "jest --env=jsdom",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write ."
+    }
   },
   "jest": {
     "collectCoverage": true,
@@ -37,5 +43,8 @@
   "bugs": {
     "url": "https://github.com/nidhigiridhar/cse110-w21-group35/issues"
   },
-  "homepage": "https://github.com/nidhigiridhar/cse110-w21-group35#readme"
+  "homepage": "https://github.com/nidhigiridhar/cse110-w21-group35#readme",
+  "dependencies": {
+    "husky": "^8.0.1"
+  }
 }
