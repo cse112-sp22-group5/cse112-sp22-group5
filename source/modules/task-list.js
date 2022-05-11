@@ -3,7 +3,7 @@
  * @function
  * @description Opens or closes add-task form
  */
-export function addTaskButton() {
+function addTaskButton() {
     let button = document.getElementById("add-task-form");
     if (button.classList.contains("hidden") === true) {
         button.classList.remove("hidden");
@@ -18,7 +18,7 @@ export function addTaskButton() {
  * @function
  * @description Closes add-task form
  */
-export function cancelTask() {
+function cancelTask() {
     document.getElementById("task-name").value = "";
     document.getElementById("add-task-form").classList.add("hidden");
 }
@@ -28,7 +28,7 @@ export function cancelTask() {
  * @function
  * @description Adds new task to task list
  */
-export function saveTask() {
+function saveTask() {
     let taskNameInput = document.getElementById("task-name");
     let taskList = document.getElementById("task-list");
     let newTask = createCustomTaskTag(taskNameInput.value);
@@ -100,7 +100,7 @@ function createCustomTaskTag(taskName) {
  * @function
  * @description Clears Task List
  */
-export function clearTasksButton() {
+function clearTasksButton() {
     let taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
 }
@@ -118,4 +118,4 @@ export function clearTasksButton() {
  */
 
  // Export all functions
- export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, finishTask, clearTasksButton }
+ export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearTasksButton }

@@ -5,7 +5,7 @@ import { revealHelp, hideHelp } from './modules/help.js';
 import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
 import { colorChange } from './modules/color-change.js';
 import { breakReminders } from './modules/breakReminder.js'
-import { addTaskButton, cancelTask, saveTask, createCustomTaskTag, finishTask } from './modules/task-list.js'
+import { addTaskButton, cancelTask, saveTask, createCustomTaskTag } from './modules/task-list.js'
 
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
