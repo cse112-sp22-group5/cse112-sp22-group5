@@ -4,9 +4,9 @@ import { onStart, onReset, checkState, updateState, timer, setCustomTime, keyboa
 import { revealHelp, hideHelp } from './modules/help.js';
 import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
 import { colorChange } from './modules/color-change.js';
-import { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearTasksButton } from './modules/task-list.js'
-import { breakReminders } from './modules/break-reminder.js'
-import {googleTranslateElementInit} from "./modules/muli-language.js";
+import { breakReminders } from './modules/breakReminder.js'
+import { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, clearCompletedTasks } from './modules/task-list.js'
+import {googleTranslateElementInit} from './modules/muli-language.js';
 
 googleTranslateElementInit();
 // Timer
@@ -17,7 +17,7 @@ document.getElementById('reset-button').addEventListener('click', onReset);
 // Keyboard shortcuts
 document.addEventListener('keydown', (event) => {
     // only allow this event to be fired when task form is hidden
-    if (document.getElementById("add-task-form").classList.contains("hidden"))
+    if (document.getElementById('add-task-form').classList.contains('hidden'))
         keyboardShortcut(event);
 });
 
@@ -29,12 +29,13 @@ document.getElementById('close-settings').addEventListener('click', hideSettings
 
 
 // Task List
-document.getElementById("add-tasks-button").addEventListener("click", addTaskButton);
-document.getElementById("task-name").addEventListener("keypress", (event) => {
-    if (event.key === "Enter") // allow user to hit enter to save task
+document.getElementById('add-tasks-button').addEventListener('click', addTaskButton);
+document.getElementById('task-name').addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') // allow user to hit enter to save task
         saveTask();
 })
 document.getElementById('save-button').addEventListener('click', saveTask);
 document.getElementById('cancel-button').addEventListener('click', cancelTask);
-document.getElementById('clear-tasks-button').addEventListener('click', clearTasksButton);
+document.getElementById('clear-tasks-button').addEventListener('click', clearAllTasks);
+document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
 

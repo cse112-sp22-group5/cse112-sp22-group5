@@ -1,0 +1,9 @@
+---
+exclude_paths:
+  - ".github/**"
+  - "admin/**"
+  - "coverage/**"
+  - "cypress/**"
+  - "node_modules/**"
+  - "specs/**"
+  - package-lock.json

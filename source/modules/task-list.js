@@ -20,6 +20,7 @@ function addTaskButton() {
     let button = document.getElementById("add-task-form");
     if (button.classList.contains("hidden") === true) {
         button.classList.remove("hidden");
+        document.getElementById("task-name").focus();
     }
     else {
         button.classList.add("hidden");
@@ -58,7 +59,7 @@ function saveTask() {
         taskList.appendChild(newTask);
     }
     else { // edit old task
-        TASK_CONTENT.value = taskNameInput.value;
+        TASK_CONTENT.innerText = taskNameInput.value;
     }
     cancelTask();
 }
@@ -66,17 +67,18 @@ function saveTask() {
 
 
 /**
- * @name setFinished
- * @function
- * @description Sets task attribute "finished" to true or false based on current state
- * @param {string} taskContainer container element of task
- * @returns 
+ * @name selectTask
+ * @function 
+ * @description Display selected task at top of task list
  */
-function setFinished(taskContainer) {
-    if (taskContainer.getAttribute("finished") == false) {
-        taskContainer.setAttribute('finished', 'true');
-    } else {
-        taskContainer.setAttribute('finished', 'false');
+function selectTask(taskName) {
+    let currentTask = document.getElementById('current-task');
+    const tasks = document.querySelectorAll('input[name="task-option"]');
+    for (let task of tasks) {
+        if (task.checked) {
+            currentTask.innerText = task.value;
+            break;
+        }
     }
 }
 
@@ -89,26 +91,49 @@ function setFinished(taskContainer) {
  */
 function createCustomTaskTag(taskName) {
     let taskContainer = document.createElement('li');
+    let taskLabel = document.createElement('label');
     let taskButton = document.createElement('input');
     let editButton = document.createElement('button');
+    let doneButton = document.createElement('button');
 
-    // When user clicks on the task, it gets crossed off
-    taskButton.addEventListener('click', setFinished(taskContainer));
-    
     taskContainer.setAttribute('class', 'task');
     taskContainer.style.border = '3px solid black';
-    taskContainer.setAttribute('finished', 'false');
     
-    taskButton.setAttribute('type', 'button');
+    // When user clicks on the task, it gets crossed off
+    taskButton.setAttribute('type', 'radio');
+    taskButton.setAttribute('id', taskName);
+    taskButton.setAttribute('class', 'task-button');
+    taskButton.setAttribute('name', 'task-option');
+    taskButton.addEventListener('click', function(e) {
+        let currentTask = document.getElementById('current-task');
+            if (this.checked) {
+                currentTask.innerText = taskLabel.innerText;
+            }
+    });
 
-    taskButton.setAttribute('class', 'task-label');
-    taskButton.value = taskName;
+    taskLabel.setAttribute('class', 'task-label');
+    taskLabel.setAttribute('for', taskName);
+    taskLabel.innerText = taskName;
 
     editButton.innerText = 'Edit';
-    
+    doneButton.innerText = 'Done';
+    doneButton.style = "margin-left:50px";
+
+    // Check off task when complete
+    doneButton.addEventListener('click', () => {
+        if (taskButton.getAttribute('done') != 'true') {
+            taskButton.setAttribute('done', 'true');
+        } else {
+            taskButton.setAttribute('done', 'false');
+        }
+        
+    });
+
     taskContainer.appendChild(taskButton);
+    taskContainer.appendChild(taskLabel);
     taskContainer.appendChild(editButton);
-    setEditTask(taskContainer);
+    taskContainer.appendChild(doneButton);
+    setEditTask(taskLabel, editButton);
     return taskContainer;
 }
 
@@ -116,12 +141,12 @@ function createCustomTaskTag(taskName) {
  * @name setEditTask
  * @function
  * @description Set up edit task
- * @param taskContainer a task container
+ * @param taskLabel task name
+ * @param editButton edit button of the task
  */
-function setEditTask(taskContainer) {
-    // children[1] - the edit button is the 1th child of taskContainer
-    taskContainer.children[1].addEventListener('click', () => {
-        loadForm(taskContainer.children[0]);
+function setEditTask(taskLabel, editButton) {
+    editButton.addEventListener('click', () => {
+        loadForm(taskLabel);
     });
 }
 
@@ -134,20 +159,36 @@ function setEditTask(taskContainer) {
 function loadForm(content){
     let taskName = document.getElementById("task-name");
     document.getElementById("add-task-form").classList.remove("hidden");
-    taskName.value = content.value;
+    taskName.value = content.innerText;
     taskName.focus();
     setTaskContent(content);
     setSaveFlag(EDIT_ON);
 }
 
 /**
- * @name clearTasksButton
+ * @name clearAllTasks
  * @function
  * @description Clears Task List
  */
-function clearTasksButton() {
+function clearAllTasks() {
     let taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
+}
+
+/**
+ * @name clearCompletedTasks
+ * @function
+ * @description Clears Completed Tasks
+ */
+function clearCompletedTasks() {
+    let taskList = document.getElementById("task-list");
+    let children = taskList.children;
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].children[0].getAttribute('done') == 'true') {
+            taskList.removeChild(children[i]);
+            i--;
+        } 
+    }
 }
 
 /**
@@ -196,4 +237,4 @@ function inputSanitizer(input) {
 
 
  // Export all functions
- export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearTasksButton };
+ export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, clearCompletedTasks };

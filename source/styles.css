@@ -3,14 +3,19 @@
 
 /******** Variables ********/
 :root {
+
+  /* Refactor Option */
+  --primary-color: #77a4e9;
+  /* --secondary-color:  #FFFFFF;
+  --primary-font: 'Helvetica Neue', sans-serif; 
+  --secondary-font: 'Raleway', sans-serif; */
+
   --clr-light: #ffffff;
-  --clr-base-pomo: #77a4e9;
-  --clr-base-short: #eaa478;
-  --clr-base-long: #88b9ae;
-  --clr-accent-pomo: #032e77c9;
+  --clr-accent-pomo: #032e77;
   --clr-accent-short: #923201;
   --clr-accent-long: #01795f;
   --clr-circle-pomo: #0084ff;
+
   --clr-circle-short: #ff7300;
   --clr-circle-long: #03e6b4;
   --clr-dark: #424242;
@@ -42,43 +47,80 @@
   --transition-time: 1s;
 }
 
-/******** General Styles ********/
-body {
-  background-color: var(--clr-base-pomo);
-  font-family: var(--ff-secondary);
-  color: var(--clr-dark);
-  display: flexbox;
-  transition-property: background-color;
-  transition-duration: var(--transition-time);
+/******** GLOBALS ********/
+/* Text */
+h1, h2, h3 {
+  font-family: var(--ff-primary);
+  font-size: var(--fs-title-small);
+  margin: auto;
+} 
+a{
+  color: #FFFFFF;
 }
-body[state="pomo"] {
-  background-color: var(--clr-base-pomo);
-}
-body[state="short"] {
-  background-color: var(--clr-base-short);
-}
-body[state="long"] {
-  background-color: var(--clr-base-long);
+a:hover{
+  color: #DDDDDD;
+  text-decoration-color: #DDDDDD;
 }
 b {
   font-weight: var(--fw-bold);
 }
 
-/******** Title ********/
-h1 {
-  font-family: var(--ff-primary);
-  font-size: var(--fs-title-small);
+
+/* Body */
+body {
+  font-family: var(--ff-secondary);
+  color: var(--clr-dark);
+  transition-property: background-color;
+  transition-duration: var(--transition-time);
+}
+body[state="pomo"] {
+  background-color: var(--primary-color);
+}
+body[state="short"] {
+  background-color: #eaa478;
+}
+body[state="long"] {
+  background-color: #88b9ae;
+}
+
+/* REFACTOR OPTION: Classes for different state? */
+/* .pomo{
+  background-color: var(--primary-color);
+}
+.short{
+  background-color: #eaa478;
+}
+.long{
+  background-color: #88b9ae;
+} */
+
+/* Interaction */
+button {
   margin: auto;
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  font-size: var(--fs-mode-button-small);
+  color: var(--clr-dark);
+  border-radius: 10px;
+  border: none;
+  position: absolute;
 }
-@media(min-width: 400px) {
-  h1 {font-size: var(--fs-title-medium);}
+
+form {
+  padding-top: 15px;
 }
-@media(min-width: 755px) {
-  h1 {font-size: var(--fs-title-large);}
+select {
+  width: 50px;
+  height: 30px;
+  font-size: 20px;
+  margin-bottom: 10px;;
 }
+
+/* Footer */
+footer {
+  font-size: var(--fs-footer);
+  text-align: center;
+}
+
+
 
 /******** Counter ********/
 #counter-container {
@@ -93,36 +135,17 @@ h1 {
   top: 10px;
   text-align: center;
 }
-@media (min-width: 500px) {
-  #counter-container {
-    right: 0px;
-    font-size: var(--fs-counter-small);
-  }
-}
-@media (min-width: 800px) {
-  #counter-container {
-    right: 3%;
-    font-size: var(--fs-counter-medium);
-  }
-}
-@media (min-width: 980px) {
-  #counter-container {
-    right: 7%;
-    font-size: var(--fs-counter-large);
-  }
-}
+
 #counter-container > img {
   max-width: 100%;
   width: 100%;
   height: auto;
-  /* opacity: 0.7; */
 }
 #streak-counter, #total-counter {
   position: absolute;
   top: 34%;
   left: 17%;
   width: 65%;
-  /* background-color: rgba(0, 0, 0, 0.712); */
 }
 #total-counter {
   top: 48%;
@@ -145,9 +168,7 @@ h1 {
   width: 100%;
   margin-bottom: 50px;
 }
-h2 {
-  text-align: center;
-}
+
 /******** Progress Bar ********/
 .circle {
   background-color: var(--clr-light);
@@ -158,7 +179,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content:center;
-  box-shadow: 3px 3px var(--clr-dark);
+  
 }
 .circle.pomo {
   border-color: var(--clr-circle-pomo);
@@ -194,29 +215,20 @@ h2 {
   font-size: var(--fs-mode-button-small);
   width: 100%;
 }
-@media (min-width: 755px) {
-  #state {
-    font-size: var(--fs-mode-button-large);
-  }
-}
+
 #timer-display {
   font-family: var(--ff-timer);
   font-size: var(--fs-timer-small);
   color: var(--clr-light);
   border: 10px solid var(--clr-accent-pomo);
   border-radius: 30px;
-  text-shadow: 4px 5px var(--clr-dark);
   width: 70vw;
   min-width: 320px;
   max-width: 550px;
   transition-property: border-color;
   transition-duration: var(--transition-time);
 }
-@media (min-width: 768px) {
-  #timer-display {
-    font-size: var(--fs-timer-large);
-  }
-}
+
 #timer-display[state="pomo"] {
   border-color: var(--clr-accent-pomo);
 }
@@ -228,21 +240,7 @@ h2 {
 }
 
 /******** Buttons ********/
-button {
-  margin: auto;
-  font-size: var(--fs-mode-button-small);
-  color: var(--clr-dark);
-  border-radius: 10px;
-  border: none;
-  box-shadow: 2px 3px 2px 2px var(--clr-dark);
-  position: absolute;
-}
-@media (min-width: 755px) {
-  #start-button, #reset-button {
-    font-size: var(--fs-mode-button-large);
-    border-radius: 15px;
-  }
-}
+
 #start-button, #reset-button {
   min-width: 120px;
   max-width: 170px;
@@ -282,21 +280,8 @@ button.help-button {
   font-size: var(--fs-mode-button-small);
   border-radius: 10px;
   border: none;
-  box-shadow: 2px 3px 2px 2px var(--clr-dark);
 }
-@media (min-width: 500px) {
-  button.help-button { 
-    left: 5%;
-    top: 10%;
-    font-size: var(--fs-mode-button-large);
-    border-radius: 12px;
-  }
-}
-@media (min-width: 700px) {
-  button.help-button { 
-    border-radius: 15px;
-  }
-}
+
 .modal {
   display: none;
   position: fixed;
@@ -325,14 +310,7 @@ button.help-button {
 .help-content > h3 {
     font-size: var(--fs-instructions-title-small);
 }
-@media (min-width: 700px) {
-  .help-content{
-    font-size: var(--fs-instructions-large);
-  }
-  .help-content > h3 {
-    font-size: var(--fs-instructions-title-large);
-  }
-}
+
 #close-modal {
   float: left;
   font-size: 50px;
@@ -352,21 +330,8 @@ button.settings {
   font-size: var(--fs-mode-button-small);
   border-radius: 10px;
   border: none;
-  box-shadow: 2px 3px 2px 2px var(--clr-dark);
 }
-@media (min-width: 500px) {
-  button.settings { 
-    font-size: var(--fs-mode-button-large);
-    border-radius: 12px;
-    margin-left: 50px;
-    top: 10%;
-  }
-}
-@media (min-width: 700px) {
-  button.settings { 
-    border-radius: 15px;
-  }
-}
+
 #cog { 
   position: relative;
   margin-left: -6px;
@@ -374,11 +339,7 @@ button.settings {
   border-radius: 15px;
   border: none;
 }
-@media (min-width: 650px) {
-  #cog { 
-    margin-top: -1px;
-  }
-}
+
 .settings-modal {
   display: none;
   position: fixed;
@@ -404,18 +365,11 @@ button.settings {
   max-width: 450px;
 }
 
-form {
-  padding-top: 15px;
-}
+
 #form-enabler {
   border: 0;
 }
-select {
-  width: 50px;
-  height: 30px;
-  font-size: 20px;
-  margin-bottom: 10px;;
-}
+
 #close-settings {
   float: left;
   font-size: 40px;
@@ -441,11 +395,7 @@ select {
   font-weight: bold;
   color: var(--pink);
 }
-@media screen and (max-width: 600px) {
-  .switches li::before {
-    display: none;
-  }
-}
+
 .switches label {
   display: flex;
   align-items: center;
@@ -456,7 +406,6 @@ select {
   width: 60px;
   height: 34px;
   border-radius: 34px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
   background: var(--gray);
   transition: all 0.3s;
 }
@@ -505,28 +454,36 @@ li {
   margin: 5px;
 }
 
-/******** Footer ********/
-footer {
-  font-size: var(--fs-footer);
-  width: 100%;
-  height: 60px;
+/******** Task List ********/
+/* * {
+    border: 3px solid black;
+
+} */
+
+#current-task-container {
+  display: block;
+  text-align: center;
+  margin: 1em;
+  padding: 1em;
+}
+
+#tasks-button-container {
+}
+
+#tasks-button-container > button {
   position: relative;
-  right: 10px;
-  top: 20px;
-}
-footer > p {
-  float: right;
   margin-right: 10px;
-  padding-top: 10px;
-}
-footer > img {
-  width: 50px;
-  float: right;
-  border-radius: 10px;
 }
 
+#add-tasks-button {
+}
 
-/*------- Task List ------------*/
+#clear-tasks-button {
+}
+
+#clear-completed-tasks-button {
+}
+
 #cancel-button {
   margin-left: -80px;
 }
@@ -539,11 +496,147 @@ footer > img {
   height: 200px;
   z-index: 100;
 }
+
 #add-task-form div{
   margin-top: 10px;
 }
 
+<<<<<<< HEAD
 /* #google-translate-element {
   position: absolute;
   top: 0%;
 } */
+=======
+.task-label, .task-button {
+  text-align: left;
+  background-color: white;
+  color:black;
+  text-decoration: none;
+}
+
+.task-button[done="true"] + label {
+  text-decoration: line-through;
+  color:gray;
+}
+
+
+/******** MEDIA QUERIES ORGANIZED ********/
+/** Title **/
+@media(min-width: 400px) {
+  h1 {font-size: var(--fs-title-medium);}
+}
+@media(min-width: 755px) {
+  h1 {font-size: var(--fs-title-large);}
+}
+
+/** Counter **/
+@media (min-width: 500px) {
+  #counter-container {
+    right: 0px;
+    font-size: var(--fs-counter-small);
+  }
+}
+@media (min-width: 800px) {
+  #counter-container {
+    right: 3%;
+    font-size: var(--fs-counter-medium);
+  }
+}
+@media (min-width: 980px) {
+  #counter-container {
+    right: 7%;
+    font-size: var(--fs-counter-large);
+  }
+}
+
+/**  Timer Mode **/
+@media (min-width: 755px) {
+  #state {
+    font-size: var(--fs-mode-button-large);
+  }
+}
+
+@media (min-width: 768px) {
+  #timer-display {
+    font-size: var(--fs-timer-large);
+  }
+}
+
+/** Buttons **/
+@media (min-width: 755px) {
+  #start-button, #reset-button {
+    font-size: var(--fs-mode-button-large);
+    border-radius: 15px;
+  }
+}
+
+/** Help **/
+@media (min-width: 500px) {
+  button.help-button { 
+    left: 5%;
+    top: 10%;
+    font-size: var(--fs-mode-button-large);
+    border-radius: 12px;
+  }
+}
+@media (min-width: 700px) {
+  button.help-button { 
+    border-radius: 15px;
+  }
+}
+@media (min-width: 700px) {
+  .help-content{
+    font-size: var(--fs-instructions-large);
+  }
+  .help-content > h3 {
+    font-size: var(--fs-instructions-title-large);
+  }
+}
+
+/** Button Settings**/
+@media (min-width: 500px) {
+  button.settings { 
+    font-size: var(--fs-mode-button-large);
+    border-radius: 12px;
+    margin-left: 50px;
+    top: 10%;
+  }
+}
+@media (min-width: 700px) {
+  button.settings { 
+    border-radius: 15px;
+  }
+}
+@media (min-width: 650px) {
+  #cog { 
+    margin-top: -1px;
+  }
+}
+
+/** Switches **/
+@media screen and (max-width: 600px) {
+  .switches li::before {
+    display: none;
+  }
+}
+
+
+/******** MEDIA QUERIES REFACTORED ********/
+
+/* Mobile: Portrait and Landscape */
+@media only screen and (min-width: 320px) and (max-width: 767px){
+
+}
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 979px){
+
+}
+footer > img {
+  width: 50px;
+  float: right;
+  border-radius: 10px;
+}
+
+
+
+>>>>>>> 13382d79c8070293a9a486683f6887d1fe8d9191
