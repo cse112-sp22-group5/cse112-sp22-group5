@@ -6,8 +6,8 @@ on:
       - develop
 
 jobs:
-  run-linters:
-    name: Run linters
+  run-linters-dev:
+    name: Run Linters
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,8 @@ jobs:
           continue_on_error: "false"
           eslint_dir: ./source/
 
-  Jest:
+  run-jest-dev:
+    name: Run Unit Testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -43,37 +44,47 @@ jobs:
           npm test color-change.test.js
           npm test progress-bar.test.js
 
-  cypress-run:
-    runs-on: ubuntu-16.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+  # cypress-run:
+  #   name: Run E2E Testing
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
   
-  jsdocs:
+  run-jsdocs-dev:
+    name: Deploy JSDocs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Build
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: ./source
-          output_dir: ./docs
-
-      - name: Build
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./source
-          output_dir: ./docs
+          output_dir: ./specs/documentation/jsdocs/
+          recurse: true
           template: minami
+          front_page: ./specs/documentation/jsdocs/docHomepage.md
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3.7.3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          external_repository: cse112-sp22-group5/cse112-sp22-group5-docs
-          publish_dir: ./docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./specs/documentation/jsdocs/
+
+  dev-preview:
+    name: Create a preview
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTORO_B340E }}'
+          projectId: productoro-b340e
+          channelId: dev

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.05% </span>
+                <span class="strong">77.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>96/123</span>
+                <span class='fraction'>97/125</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.5% </span>
+                <span class="strong">47.61% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/40</span>
+                <span class='fraction'>20/42</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.05% </span>
+                <span class="strong">77.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>96/123</span>
+                <span class='fraction'>97/125</span>
             </div>
         
             
@@ -400,7 +400,11 @@
 <a name='L341'></a><a href='#L341'>341</a>
 <a name='L342'></a><a href='#L342'>342</a>
 <a name='L343'></a><a href='#L343'>343</a>
-<a name='L344'></a><a href='#L344'>344</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -545,6 +549,10 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
@@ -745,7 +753,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { colorChange } from './color-change.js';
 import { showNotif, getNotificationStatus, playSound} from './notifications.js';
-import { breakReminders } from './breakReminder.js';
+import { breakReminders } from './break-reminder.js';
 import { progressBar } from './progress-bar.js';
 &nbsp;
 let 
@@ -842,9 +850,13 @@ function checkState() {
             document.getElementById('timer-display').innerText = 
                 `${SHORT_MINS}:00`;
             
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             <span class="missing-if-branch" title="else path not taken" >E</span>if(SHORT_MINS &lt; 10) {
                 let time = document.getElementById('timer-display').innerText; 
                 document.getElementById('timer-display').innerText = '0' + time;
+
             } 
             document.getElementById('reset-button').disabled = true; // disable reset button
         }
@@ -864,8 +876,17 @@ function updateState() {
         if(timer.counter.totalPomos % LONG_MOD === 0) {
             timer.currState = LONG_STATE;
             document.getElementById('state').innerText = LONG_STATE;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             document.getElementById('timer-display').innerText = 
                 `${LONG_MINS}:00`;
+
+>>>>>>> develop
+=======
+            document.getElementById('timer-display').innerText = 
+                `${LONG_MINS}:00`;
+
         }
         // next state is a short break 
         else {
@@ -873,8 +894,20 @@ function updateState() {
             document.getElementById('state').innerText = SHORT_STATE;
             document.getElementById('timer-display').innerText = 
                 `${SHORT_MINS}:00`;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             let time = document.getElementById('timer-display').innerText; 
             <span class="missing-if-branch" title="else path not taken" >E</span>if(SHORT_MINS &lt; 10) {
+=======
+            let time = document.getElementById('timerDisplay').innerText; 
+            if(SHORT_MINS &lt; 10) {
+>>>>>>> develop
+=======
+            let time = document.getElementById('timer-display').innerText; 
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(SHORT_MINS &lt; 10) {
+
+>>>>>>> develop
                 time = '0' + time;
                 document.getElementById('timer-display').innerText = time;
             } 
@@ -886,6 +919,17 @@ function updateState() {
     else {
         timer.currState = WORK_STATE;
         document.getElementById('state').innerText = WORK_STATE;
+
+        document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
+        document.getElementById('reset-button').disabled = true; // disable reset button
+        // remove settings warning after 4 pomos
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(document.getElementById('total').innerText % 4 == 0) {
+<span class="cstat-no" title="statement not covered" >            document.getElementById('warning').style.display = 'none';</span>
+        }
+
+        document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
+        document.getElementById('reset-button').disabled = true; // disable reset button
+
         document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
         document.getElementById('reset-button').disabled = true; // disable reset button
     }
@@ -1041,8 +1085,8 @@ function onReset() {
  * @description Opens the settings modal when the settings button is clicked
  */
 function revealSettings() {
-    let settingsModal = document.getElementById('settings-modal');
-    settingsModal.style.display = 'block';
+    let settings-modal = document.getElementById('settings-modal');
+    settings-modal.style.display = 'block';
     let settingsBtn = document.getElementById('settings-button');
     settingsBtn.disabled = true; 
 }
@@ -1052,8 +1096,8 @@ function revealSettings() {
  * @description Closes the settings modal when the 'x' inside the modal or anywhere outside of the modal is clicked
  */
 function hideSettings() {
-    let settingsModal = document.getElementById('settings-modal');
-    settingsModal.style.display = 'none';
+    let settings-modal = document.getElementById('settings-modal');
+    settings-modal.style.display = 'none';
     <span class="missing-if-branch" title="if path not taken" >I</span>if(document.getElementById('warning').innerText === 'Work Periods must be greater than Break Periods'){
 <span class="cstat-no" title="statement not covered" >        document.getElementById('warning').style.display = 'none';</span>
     }
@@ -1067,7 +1111,7 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 function <span class="fstat-no" title="function not covered" >keyboardShortcut(</span>event) {
-<span class="cstat-no" title="statement not covered" >    if (document.getElementById('keyboardToggle').checked){</span>
+<span class="cstat-no" title="statement not covered" >    if (document.getElementById('keyboard-toggle').checked){</span>
 <span class="cstat-no" title="statement not covered" >        if(event.code === 'Space') {</span>
             // if the timer is static, start timer
 <span class="cstat-no" title="statement not covered" >            if(document.getElementById('start-button').disabled == false ) {</span>
@@ -1093,7 +1137,7 @@ export {onStart, onReset, checkState,updateState, timer, setCustomTime,
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Mar 17 2021 22:44:24 GMT-0700 (Pacific Daylight Time)
+                at Sun May 08 2022 17:31:29 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="prettify.js"></script>
