@@ -4,7 +4,8 @@ import { onStart, onReset, checkState, updateState, timer, setCustomTime, keyboa
 import { revealHelp, hideHelp } from './modules/help.js';
 import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
 import { colorChange } from './modules/color-change.js';
-import { breakReminders } from './modules/breakReminder.js'
+import { breakReminders } from './modules/break-reminder.js';
+import { setBackgroundMusic } from './modules/background-music.js';
 import { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, clearCompletedTasks } from './modules/task-list.js'
 
 // Timer
@@ -25,6 +26,7 @@ document.getElementById('close-modal').addEventListener('click', hideHelp);
 document.getElementById('settings-button').addEventListener('click', revealSettings);
 document.getElementById('close-settings').addEventListener('click', hideSettings);
 
+document.getElementById('bg-music').addEventListener('change', setBackgroundMusic);
 
 // Task List
 document.getElementById("add-tasks-button").addEventListener("click", addTaskButton);
@@ -36,4 +38,3 @@ document.getElementById('save-button').addEventListener('click', saveTask);
 document.getElementById('cancel-button').addEventListener('click', cancelTask);
 document.getElementById('clear-tasks-button').addEventListener('click', clearAllTasks);
 document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
-
