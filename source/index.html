@@ -1,89 +1,164 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='styles.css'>
+    <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/9.7.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.7.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.7.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <script type="module" src="./main.js"></script>
+    <title>Productoro</title>
+</head>
+<body state='pomo'>
+    <header> 
+         <!-- Help Modal, Settings Modal, Title, Counter?  -->
+        <h1 class='text-center'>Productoro</h1>
+        <div class='container' id='counter-container'>
+            <img src='img/tomato.png' alt='tomato'>
+            <div id='streak-counter'><b>Streak:</b> <span id='streak'>0</span></div>
+            <div id='total-counter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
+        </div>
+        
+        <div id='breakReminder' style='color:#464646; visibility: hidden'></div>
+        <div id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></div>   <!--ensures divs are hidden on init load -->
+    </header>
+    <main>
+        <!-- Break Reminder, Timer, Buttons? -->
+    </main>
+    <div class='container' id='timerContainer'>
+        <h2 class='text-center' id='state'>Work State</h2> <!-- mode name changes based on state of timer -->
+        <div class='progress-container container'>
+            <div class='circle pomo'></div>
+            <div class='circle short'></div>
+            <div class='circle pomo'></div>
+            <div class='circle short'></div>
+            <div class='circle pomo'></div>
+            <div class='circle short'></div>
+            <div class='circle pomo'></div>
+            <div class='circle long'></div>
+        </div>
+        <div class='container' id='timer-display' state='pomo'>25:00</div> <!-- displays the timer countdown -->
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <div class='button-container'> <!-- container for start and reset buttons-->
+        <button type=button class='timer-button' id='start-button'>Start</button>
+        <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+    </div>
+    <div id='help-container'> <!-- container for non-static instructions-->
+        <button type=button class='help-button' id='help-button'>?</button>
+        <div id='help-modal' class='modal'>
+            <div class='help-content'>
+                <!-- Modal content -->
+                <span id='close-modal'>&times;</span>
+                    <h3>What is a Pomodoro Timer?</h3>
+                    <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
+                        Work intervals are typically 25 minutes long with five minute breaks between each interval. 
+                        A longer 15 minute break occurs between every fourth and fifth interval.</p>
+                    <p>The Pomodoro technique increases productivity, enhances focus while working, and can be used by anyone!</p>
+                    <h3>How to use Productoro:</h3>
+                    <ol>
+                        <li>Press <b>Start</b> to begin your pomodoro timer. Your first work state will begin and the timer will begin counting down from 25 minutes.</li>
+                        <li>After 25 minutes, the timer will stop, play an audio alarm will sound and transition you into your short, five minute break. The audio alarm can be disabled in settings. You must click <b>Start</b> to begin the five minute break. At the end of the break, the timer will transition back into showing a countdown from 25 minutes.</li>
+                        <li>The pomos and breaks will continue to automatically transition with a long break occurring after every fourth pomo. During a pomo, <b>Reset</b> can be pressed to restart the current pomo. After pressing reset, <b>Start</b> must be pressed again to begin the countdown on the timer.</li>
+                        <li>You can change the length of a break and pomo in the settings tab.</li>
+                        <li>Keyboard control preferences can also be set in the settings. Simply press the spacebar while the clock is idle to start the timer. Pressing the space bar again will reset the current timer, but resetting is only allowed during a work session.</li>
+                    </ol>
+            </div>
+            
+        </div>
+    </div>
+    
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    <div id='setting-container'>
+        <button type=button class='settings' id='settings-button'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
+        <div id='settings-modal' class='modal'>
+            <div class='settings-content'>
+            <span id='close-settings'>&times;</span>
+            <form id='time-limits'>
+                <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
+                <p><b>Select lengths for </b></p>
+                
+                <fieldset id='form-enabler'>
+                    <label id='work-label'>Work Session</label> 
+                    <select name='work-time' id='work-time'>
+                        <option id='work-option25' value='25' selected>25</option>
+                        <option id='work-option30' value='30'>30</option>
+                        <option id='work-option45' value='45'>45</option>
+                        <option id='work-option60' value='60'>60</option>
+                    </select>
+                    <br>
+            
+                    <label id='short-break-time'>Short Break</label>
+                    <select name='short-break-time' id='short-break-time'>
+                        <option id='sb-option5' value='5' selected>5</option>
+                        <option id='sb-option10' value='10'>10</option>
+                        <option id='sb-option15' value='15'>15</option>
+                    </select>
+                    <br>
+            
+                    <label id='long-break-time'>Long Break</label>
+                    <select name='long-break-time' id='long-break-time'>
+                        <option id='lb-option15' value='15' selected>15</option>
+                        <option id='lb-option20' value='20'>20</option>
+                        <option id='lb-option25' value='25'>25</option>
+                        <option id='lb-option30' value='30'>30</option>
+                    </select>
+                    <br>
+                </fieldset>  
+                <div id='notif-reminder'> Remember to have system notifications enabled!</div>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+                <ul class='switches'>
+                    <li>
+                      <input type='checkbox' id='notif-toggle' name="notif-toggle" checked>
+                      <label for='notif-toggle'>
+                        <span>Audio Alarm</span>
+                        <span></span>
+                      </label>
+                    </li>
+                    <li>
+                        <input type='checkbox' id='keyboard-toggle' name="keyboard-toggle" checked>
+                        <label for='keyboard-toggle'>
+                          <span>Keyboard Shortcuts</span>
+                          <span></span>
+                        </label>
+                      </li>
+                </ul>
+            </form>    
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Task List -->
+    <h3 id="current-task-container">Current Task: <span id="current-task"></span></h3>
+
+    <h2>Tasks</h2>
+    <div id="tasks-button-container">
+        <button type="button" id="add-tasks-button">Add Tasks</button>
+        <button type="button" id="clear-tasks-button">Clear Tasks</button>
+        <button type="button" id="clear-completed-tasks-button">Clear Completed Tasks</button>
+    </div>
+    <div id="task-list-container">
+        
+        <form onsubmit="return false;" id="add-task-form" class="hidden settings-content">
+            <label for="taskName">Task:</label><br>
+            <input type="text" id="task-name" name="taskName" placeholder="What are you doing?"><br>
+            <div class="form-buttons">
+                <button id="cancel-button">Cancel</button>
+                <button id="save-button">Save</button>
+            </div>
+        </form>
+          <br><br><br>
+        <ol id="task-list">
+
+        </ol>
+    </div>
+        
+    <footer>
+        <p>Made by the <a href="../index.html">Dream Team</a></p>
+        <p>Taken by the 10x Racoons</p>
+    </footer>
+    
+</body>
 </html>
