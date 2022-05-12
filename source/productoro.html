@@ -9,20 +9,24 @@
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
     <script type="module" src="./main.js"></script>
-
     <title>Productoro</title>
 </head>
 <body state='pomo'>
-    <header>  
+    <header> 
+         <!-- Help Modal, Settings Modal, Title, Counter?  -->
         <h1 class='text-center'>Productoro</h1>
-        <div class='container' id='counterContainer'>
+        <div class='container' id='counter-container'>
             <img src='img/tomato.png' alt='tomato'>
-            <div id='streakCounter'><b>Streak:</b> <span id='streak'>0</span></div>
-            <div id='totalCounter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
+            <div id='streak-counter'><b>Streak:</b> <span id='streak'>0</span></div>
+            <div id='total-counter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
         </div>
+        
         <div id='breakReminder' style='color:#464646; visibility: hidden'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></div>   <!--ensures divs are hidden on init load -->
     </header>
+    <main>
+        <!-- Break Reminder, Timer, Buttons? -->
+    </main>
     <div class='container' id='timerContainer'>
         <h2 class='text-center' id='state'>Work State</h2> <!-- mode name changes based on state of timer -->
         <div class='progress-container container'>
@@ -35,18 +39,18 @@
             <div class='circle pomo'></div>
             <div class='circle long'></div>
         </div>
-        <div class='container' id='timerDisplay' state='pomo'>25:00</div> <!-- displays the timer countdown -->
+        <div class='container' id='timer-display' state='pomo'>25:00</div> <!-- displays the timer countdown -->
     </div>
-    <div id='buttonContainer'> <!-- container for start and reset buttons-->
-        <button type=button class='timer-button' id='startButton'>Start</button>
-        <button type=button class='timer-button' id='resetButton' disabled>Reset</button>
+    <div class='button-container'> <!-- container for start and reset buttons-->
+        <button type=button class='timer-button' id='start-button'>Start</button>
+        <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
     </div>
-    <div id='helpContainer'> <!-- container for non-static instructions-->
-        <button type=button class='help-button' id='helpButton'>?</button>
-        <div id='helpModal' class='modal'>
+    <div id='help-container'> <!-- container for non-static instructions-->
+        <button type=button class='help-button' id='help-button'>?</button>
+        <div id='help-modal' class='modal'>
             <div class='help-content'>
                 <!-- Modal content -->
-                <span id='closeModal'>&times;</span>
+                <span id='close-modal'>&times;</span>
                     <h3>What is a Pomodoro Timer?</h3>
                     <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                         Work intervals are typically 25 minutes long with five minute breaks between each interval. 
@@ -66,55 +70,55 @@
     </div>
     
 
-    <div id='settingContainer'>
-        <button type=button class='settings' id='settingsButton'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
-        <div id='settingsModal' class='modal'>
+    <div id='setting-container'>
+        <button type=button class='settings' id='settings-button'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
+        <div id='settings-modal' class='modal'>
             <div class='settings-content'>
-            <span id='closeSettings'>&times;</span>
-            <form id='timeLimits'>
+            <span id='close-settings'>&times;</span>
+            <form id='time-limits'>
                 <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
                 <p><b>Select lengths for </b></p>
                 
-                <fieldset id='formEnabler'>
-                    <label id='workLabel'>Work Session</label> 
-                    <select name='workTime' id='workTime'>
-                        <option id='workOption25' value='25' selected>25</option>
-                        <option id='workOption30' value='30'>30</option>
-                        <option id='workOption45' value='45'>45</option>
-                        <option id='workOption60' value='60'>60</option>
+                <fieldset id='form-enabler'>
+                    <label id='work-label'>Work Session</label> 
+                    <select name='work-time' id='work-time'>
+                        <option id='work-option25' value='25' selected>25</option>
+                        <option id='work-option30' value='30'>30</option>
+                        <option id='work-option45' value='45'>45</option>
+                        <option id='work-option60' value='60'>60</option>
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Short Break</label>
-                    <select name='shortBreakTime' id='shortBreakTime'>
-                        <option id='sbOption5' value='5' selected>5</option>
-                        <option id='sbOption10' value='10'>10</option>
-                        <option id='sbOption15' value='15'>15</option>
+                    <label id='short-break-time'>Short Break</label>
+                    <select name='short-break-time' id='short-break-time'>
+                        <option id='sb-option5' value='5' selected>5</option>
+                        <option id='sb-option10' value='10'>10</option>
+                        <option id='sb-option15' value='15'>15</option>
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Long Break</label>
-                    <select name='longBreakTime' id='longBreakTime'>
-                        <option id='lbOption15' value='15' selected>15</option>
-                        <option id='lbOption20' value='20'>20</option>
-                        <option id='lbOption25' value='25'>25</option>
-                        <option id='lbOption30' value='30'>30</option>
+                    <label id='long-break-time'>Long Break</label>
+                    <select name='long-break-time' id='long-break-time'>
+                        <option id='lb-option15' value='15' selected>15</option>
+                        <option id='lb-option20' value='20'>20</option>
+                        <option id='lb-option25' value='25'>25</option>
+                        <option id='lb-option30' value='30'>30</option>
                     </select>
                     <br>
                 </fieldset>  
-                <div id='notifReminder'> Remember to have system notifications enabled!</div>
+                <div id='notif-reminder'> Remember to have system notifications enabled!</div>
 
                 <ul class='switches'>
                     <li>
-                      <input type='checkbox' id='notifToggle' checked>
-                      <label for='notifToggle'>
+                      <input type='checkbox' id='notif-toggle' name="notif-toggle" checked>
+                      <label for='notif-toggle'>
                         <span>Audio Alarm</span>
                         <span></span>
                       </label>
                     </li>
                     <li>
-                        <input type='checkbox' id='keyboardToggle' checked>
-                        <label for='keyboardToggle'>
+                        <input type='checkbox' id='keyboard-toggle' name="keyboard-toggle" checked>
+                        <label for='keyboard-toggle'>
                           <span>Keyboard Shortcuts</span>
                           <span></span>
                         </label>
@@ -125,11 +129,36 @@
             
         </div>
     </div>
+
+    <!-- Task List -->
+    <h3 id="current-task-container">Current Task: <span id="current-task"></span></h3>
+
+    <h2>Tasks</h2>
+    <div id="tasks-button-container">
+        <button type="button" id="add-tasks-button">Add Tasks</button>
+        <button type="button" id="clear-tasks-button">Clear Tasks</button>
+        <button type="button" id="clear-completed-tasks-button">Clear Completed Tasks</button>
+    </div>
+    <div id="task-list-container">
+        
+        <form onsubmit="return false;" id="add-task-form" class="hidden settings-content">
+            <label for="taskName">Task:</label><br>
+            <input type="text" id="task-name" name="taskName" placeholder="What are you doing?"><br>
+            <div class="form-buttons">
+                <button id="cancel-button">Cancel</button>
+                <button id="save-button">Save</button>
+            </div>
+        </form>
+          <br><br><br>
+        <ol id="task-list">
+
+        </ol>
+    </div>
         
     <footer>
-        <img src='img/dream-team-logo.png' alt='Dream Team logo'>
-        <p>Made by the Dream Team</p>
+        <p>Made by the <a href="../index.html">Dream Team</a></p>
+        <p>Taken by the 10x Racoons</p>
     </footer>
-
+    
 </body>
 </html>

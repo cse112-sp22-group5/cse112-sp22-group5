@@ -4,9 +4,9 @@
  * @description Opens the help modal when the help button is clicked
  */
 function revealHelp() {
-    let helpModal = document.getElementById('helpModal');
+    let helpModal = document.getElementById('help-modal');
     helpModal.style.display = 'block';
-    document.getElementById('helpButton').disabled = true; 
+    document.getElementById('help-button').disabled = true; 
 }
 
 /**
@@ -15,9 +15,9 @@ function revealHelp() {
  * @description Closes the help modal when the 'x' inside the modal or anywhere outside of the modal is clicked
  */
 function hideHelp() {
-    let helpModal = document.getElementById('helpModal');
+    let helpModal = document.getElementById('help-modal');
     helpModal.style.display = 'none';
-    document.getElementById('helpButton').disabled = false; 
+    document.getElementById('help-button').disabled = false; 
 }
 
 // export functions for testing

@@ -44,15 +44,15 @@ jobs:
           npm test color-change.test.js
           npm test progress-bar.test.js
 
-  run-cypress-master:
-    name: Run E2E Testing
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # run-cypress-master:
+  #   name: Run E2E Testing
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
   
   run-jsdocs-master:
     name: Deploy JSDocs
@@ -75,3 +75,17 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./specs/documentation/jsdocs/
+
+  firebase-deploy:
+    name: Deploy to firebase hostring
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTORO_B340E }}'
+          projectId: productoro-b340e
+          channelId: live

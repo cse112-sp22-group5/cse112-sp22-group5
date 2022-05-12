@@ -134,23 +134,23 @@ function colorChange() {
   switch(timer.currState) {
     case WORK_STATE:
       document.body.setAttribute('state','pomo');
-      document.getElementById('timerDisplay').setAttribute('state','pomo');
+      document.getElementById('timer-display').setAttribute('state','pomo');
       document.querySelector('.progress-container').setAttribute('state','pomo');
       break;
 &nbsp;
     case SHORT_STATE:
       document.body.setAttribute('state','short');
-      document.getElementById('timerDisplay').setAttribute('state','short');
+      document.getElementById('timer-display').setAttribute('state','short');
       break;
 &nbsp;
     case LONG_STATE:
       document.body.setAttribute('state','long');
-      document.getElementById('timerDisplay').setAttribute('state','long');
+      document.getElementById('timer-display').setAttribute('state','long');
       break;
       
 <span class="branch-3 cbranch-no" title="branch not covered" >    default:</span>
 <span class="cstat-no" title="statement not covered" >      document.body.setAttribute('state','pomo');</span>
-<span class="cstat-no" title="statement not covered" >      document.getElementById('timerDisplay').setAttribute('state','pomo');</span>
+<span class="cstat-no" title="statement not covered" >      document.getElementById('timer-display').setAttribute('state','pomo');</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
   }
 }
