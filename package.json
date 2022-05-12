@@ -9,20 +9,17 @@
     "cypress": "^6.5.0",
     "eslint": "^7.21.0",
     "eslint-plugin-jasmine": "^4.1.2",
-    "husky": "^4.3.8",
+    "husky": "^8.0.1",
     "jest": "^26.6.3",
     "jsdoc": "^3.6.6",
+    "lint-staged": "^12.4.1",
     "minami": "^1.2.3",
     "prettier": "^2.6.2"
   },
   "scripts": {
     "test": "jest --env=jsdom",
-    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "prettier --write source/. && git add -A ."
-    }
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
+    "prepare": "husky install"
   },
   "jest": {
     "collectCoverage": true,
@@ -44,5 +41,9 @@
   "bugs": {
     "url": "https://github.com/nidhigiridhar/cse110-w21-group35/issues"
   },
-  "homepage": "https://github.com/nidhigiridhar/cse110-w21-group35#readme"
+  "homepage": "https://github.com/nidhigiridhar/cse110-w21-group35#readme",
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
 }
