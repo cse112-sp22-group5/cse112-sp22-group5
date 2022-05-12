@@ -119,48 +119,79 @@
       </div>
     </div>
 
-    <div id="setting-container">
-      <button type="button" class="settings" id="settings-button">
-        <img id="cog" src="img/settings-icon.png" alt="settings-icon" />
-      </button>
-      <div id="settings-modal" class="modal">
-        <div class="settings-content">
-          <span id="close-settings">&times;</span>
-          <form id="time-limits">
-            <div id="warning" style="display: none">
-              Wait until the end of your next break to change the times!
-            </div>
-            <p><b>Select lengths for </b></p>
+    <div id='setting-container'>
+        <button type=button class='settings' id='settings-button'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
+        <div id='settings-modal' class='modal'>
+            <div class='settings-content'>
+            <span id='close-settings'>&times;</span>
+            <form id='time-limits'>
+                <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
+                <p><b>Select lengths for </b></p>
+                
+                <fieldset id='form-enabler'>
+                    <label id='work-label'>Work Session</label>
+                    <input name='work-time' id='work-time' type='range' min='25' max='100' value='25'>
+                    <p><span id='work-time-val'>25</span> minutes</p>
+                    <br>
+            
+                    <label id='short-break-label'>Short Break</label>
+                    <input name='short-break-time' id='short-break-time' type='range' min='5' max='15' value='5'>
+                    <p><span id='short-break-time-val'>5</span> minutes</p>
+                    <br>
+            
+                    <label id='long-break-label'>Long Break</label>
+                    <input name='long-break-time' id='long-break-time' type='range' min='15' max='30' value='15'>
+                    <p><span id='long-break-time-val'>15</span> minutes</p>
+                    <br>
+                </fieldset>  
+                <div id='notif-reminder'> Remember to have system notifications enabled!</div>
+                <br>
+                <label id='bg-music-label'>Background Music</label>
+                <select name='bg-music' id='bg-music'>
+                    <option id='bg-music-option-none' value='None' selected>None</option>
+                    <option id='bg-music-option-lofi' value='Lofi'>Lofi</option>
+                    <option id='bg-music-option-classical' value='Classical'>Classical</option>
+                </select>
+                <div id='current-mix' style='display: none;'>
+                    <p id='track-name'></p>
+                    <button type=button id='prevTrackButton' style='position: relative;'>Prev</button>
+                    <button type=button id='nxtTrackButton'  style='position: relative;'>Nxt</button>
+                </div>
+                <br>
+                <audio id='background-audio' controls></audio>
+                <ul class='switches'>
+                    <li>
+                      <input type='checkbox' id='notif-toggle' name="notif-toggle" checked>
+                      <label for='notif-toggle'>
+                        <span>Audio Alarm</span>
+                        <span></span>
+                      </label>
+                    </li>
+                    <li>
+                        <input type='checkbox' id='keyboard-toggle' name="keyboard-toggle" checked>
+                        <label for='keyboard-toggle'>
+                          <span>Keyboard Shortcuts</span>
+                          <span></span>
+                        </label>
+                      </li>
+                </ul>
 
-            <fieldset id="form-enabler">
-              <label id="work-label">Work Session</label>
-              <select name="work-time" id="work-time">
-                <option id="work-option25" value="25" selected>25</option>
-                <option id="work-option30" value="30">30</option>
-                <option id="work-option45" value="45">45</option>
-                <option id="work-option60" value="60">60</option>
-              </select>
-              <br />
-
-              <label id="short-break-time">Short Break</label>
-              <select name="short-break-time" id="short-break-time">
-                <option id="sb-option5" value="5" selected>5</option>
-                <option id="sb-option10" value="10">10</option>
-                <option id="sb-option15" value="15">15</option>
-              </select>
-              <br />
-
-              <label id="long-break-time">Long Break</label>
-              <select name="long-break-time" id="long-break-time">
-                <option id="lb-option15" value="15" selected>15</option>
-                <option id="lb-option20" value="20">20</option>
-                <option id="lb-option25" value="25">25</option>
-                <option id="lb-option30" value="30">30</option>
-              </select>
-              <br />
-            </fieldset>
-            <div id="notif-reminder">
-              Remember to have system notifications enabled!
+                <ul class='alarm-settings'>
+                    <li>
+                        <label for='alarm-volume'>Alarm Volume</label>
+                        <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
+                    </li>
+                    <li>
+                      <label id='alarm-sounds-label'>Alarm Sounds</label>
+                      <select name='alarm-sounds' id='alarm-sounds'>
+                        <option id='alarm-sound-option1' value='1' selected>Default</option>
+                        <option id='alarm-sound-option2' value='2'>Sound 2</option>
+                        <option id='alarm-sound-option3' value='3'>Sound 3</option>
+                      </select>
+                      <br>
+                    </li>
+                </ul>
+            </form>    
             </div>
 
             <ul class="switches">
