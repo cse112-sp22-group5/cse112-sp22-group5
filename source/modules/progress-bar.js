@@ -1,10 +1,9 @@
-const 
-    /** @constant @type {HTMLElement} **/ 
-    progress = document.getElementById('progress'),
-    /** @constant @type {HTMLElement} **/ 
-    circles = document.querySelectorAll('.circle');
+const /** @constant @type {HTMLElement} **/
+  progress = document.getElementById("progress"),
+  /** @constant @type {HTMLElement} **/
+  circles = document.querySelectorAll(".circle");
 
-/** @type {number} **/ 
+/** @type {number} **/
 let currentDeactive = 0;
 
 /**
@@ -15,7 +14,7 @@ let currentDeactive = 0;
 function progressBar() {
   currentDeactive++;
   update();
-  if(currentDeactive == circles.length) {
+  if (currentDeactive == circles.length) {
     reset();
   }
 }
@@ -26,9 +25,9 @@ function progressBar() {
  * @description Deactivates a circle when a state finishes
  */
 function update() {
-  circles.forEach((circle,idx) => {
-    if(idx < currentDeactive) {
-      circle.classList.add('deactive');
+  circles.forEach((circle, idx) => {
+    if (idx < currentDeactive) {
+      circle.classList.add("deactive");
     }
   });
 }
@@ -40,11 +39,10 @@ function update() {
  */
 function reset() {
   circles.forEach((circle) => {
-    circle.classList.remove('deactive');
+    circle.classList.remove("deactive");
   });
   currentDeactive = 0;
 }
 
 // export functions and variables for testing
 export { progress, circles, currentDeactive, progressBar, update, reset };
-

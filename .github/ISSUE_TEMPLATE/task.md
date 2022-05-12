@@ -1,16 +1,15 @@
 ---
 name: Task
 about: Task for Sprint
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
-# Task Name 
+# Task Name
 
 ## Description (1-2 lines)
 
-## Completion Requirements 
+## Completion Requirements
 
 ## Links/Resources

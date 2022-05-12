@@ -16,13 +16,12 @@
     "prettier": "^2.6.2"
   },
   "scripts": {
-    "lint": "prettier --check .",
     "test": "jest --env=jsdom",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --check . && git add -A ."
+      "pre-commit": "prettier --write source/. && git add -A ."
     }
   },
   "jest": {

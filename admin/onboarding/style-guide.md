@@ -20,21 +20,25 @@
         </body>
     </html>
 
-* Use div tags to divide page into *major* sections
+- Use div tags to divide page into _major_ sections
 
 ## Shortcuts
+
 ### #[idName]
-  create div with id of idName
+
+create div with id of idName
 
     type #header and hit enter to get <div id='header'></div>
 
 ### .[className]
-  create div with class of className
+
+create div with class of className
 
     type .container and hit enter to get <div class='container'></div>
 
-### [tagName]*numberofTags
-  create multiple tags in one line
+### [tagName]\*numberofTags
+
+create multiple tags in one line
 
     type li*3 to get
     <li></li>
@@ -42,7 +46,8 @@
     <li></li>
 
 ### Mix them!
-  create multiple tags with ids or classes
+
+create multiple tags with ids or classes
 
     type li.items*3 to get
     <li class='items'></li>
@@ -92,18 +97,19 @@
     }
 
 # Javascript
-VSCode can understand JSDoc annotations so typing /** and hitting enter should provide a function header template.
+
+VSCode can understand JSDoc annotations so typing /\*\* and hitting enter should provide a function header template.
 
     /**
      * @name
      * @function
      * @description
-     * @param {type} [name] [description] 
+     * @param {type} [name] [description]
      * @return {type}
      */
 
 Example
-    
+
     /**
      * @name updateTimer
      * @function

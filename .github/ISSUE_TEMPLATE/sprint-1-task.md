@@ -1,16 +1,15 @@
 ---
 name: Sprint 1 Task
 about: Task for Sprint 1
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
-# Task Name 
+# Task Name
 
 ## Description (1-2 lines)
 
-## Completion Requirements 
+## Completion Requirements
 
 ## Links/Resources
