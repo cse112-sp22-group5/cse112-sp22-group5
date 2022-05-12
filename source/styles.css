@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 
 /******** Variables ********/
 :root {
-
   /* Refactor Option */
   --primary-color: #77a4e9;
   /* --secondary-color:  #FFFFFF;
@@ -20,11 +19,11 @@
   --clr-circle-long: #03e6b4;
   --clr-dark: #424242;
   --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0,0,0,0.4);
+  --clr-faded-black: rgba(0, 0, 0, 0.4);
 
-  --ff-timer: 'Helvetica Neue', sans-serif; 
-  --ff-primary: 'Raleway', sans-serif;
-  --ff-secondary: 'Roboto', sans-serif;
+  --ff-timer: "Helvetica Neue", sans-serif;
+  --ff-primary: "Raleway", sans-serif;
+  --ff-secondary: "Roboto", sans-serif;
 
   --fs-timer-large: 160px;
   --fs-timer-small: 100px;
@@ -43,28 +42,29 @@
   --fs-footer: 15px;
 
   --fw-bold: 700;
-  
+
   --transition-time: 1s;
 }
 
 /******** GLOBALS ********/
 /* Text */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--ff-primary);
   font-size: var(--fs-title-small);
   margin: auto;
-} 
-a{
-  color: #FFFFFF;
 }
-a:hover{
-  color: #DDDDDD;
-  text-decoration-color: #DDDDDD;
+a {
+  color: #ffffff;
+}
+a:hover {
+  color: #dddddd;
+  text-decoration-color: #dddddd;
 }
 b {
   font-weight: var(--fw-bold);
 }
-
 
 /* Body */
 body {
@@ -111,7 +111,7 @@ select {
   width: 50px;
   height: 30px;
   font-size: 20px;
-  margin-bottom: 10px;;
+  margin-bottom: 10px;
 }
 
 /* Footer */
@@ -119,8 +119,6 @@ footer {
   font-size: var(--fs-footer);
   text-align: center;
 }
-
-
 
 /******** Counter ********/
 #counter-container {
@@ -141,7 +139,8 @@ footer {
   width: 100%;
   height: auto;
 }
-#streak-counter, #total-counter {
+#streak-counter,
+#total-counter {
   position: absolute;
   top: 34%;
   left: 17%;
@@ -152,8 +151,9 @@ footer {
 }
 
 /******** break reminders ********/
-#break-reminder, #reminder {
-  display : block;
+#break-reminder,
+#reminder {
+  display: block;
   position: relative;
   text-align: center;
   padding-top: 10px;
@@ -178,8 +178,7 @@ footer {
   width: 25px;
   display: flex;
   align-items: center;
-  justify-content:center;
-  
+  justify-content: center;
 }
 .circle.pomo {
   border-color: var(--clr-circle-pomo);
@@ -207,7 +206,8 @@ footer {
 
 /******** Timer ********/
 /**** Mode ****/
-#state, #timer-display {
+#state,
+#timer-display {
   text-align: center;
   margin: auto;
 }
@@ -241,7 +241,8 @@ footer {
 
 /******** Buttons ********/
 
-#start-button, #reset-button {
+#start-button,
+#reset-button {
   min-width: 120px;
   max-width: 170px;
   width: 16vw;
@@ -249,7 +250,7 @@ footer {
   max-height: 60px;
   height: 10vw;
 }
-#start-button { 
+#start-button {
   right: 52%;
 }
 #reset-button {
@@ -262,7 +263,10 @@ footer {
   height: 100px;
   width: 100%;
 }
-#help-button, #setting-container, #settings-button, #cog {
+#help-button,
+#setting-container,
+#settings-button,
+#cog {
   min-width: 40px;
   max-width: 60px;
   width: 7vw;
@@ -272,7 +276,7 @@ footer {
 }
 
 /******** Help ********/
-button.help-button { 
+button.help-button {
   position: absolute;
   left: 8%;
   top: 5%;
@@ -308,7 +312,7 @@ button.help-button {
   overflow-y: auto;
 }
 .help-content > h3 {
-    font-size: var(--fs-instructions-title-small);
+  font-size: var(--fs-instructions-title-small);
 }
 
 #close-modal {
@@ -321,7 +325,7 @@ button.help-button {
 }
 
 /******** Settings ********/
-button.settings { 
+button.settings {
   position: absolute;
   left: 8%;
   top: 12%;
@@ -332,7 +336,7 @@ button.settings {
   border: none;
 }
 
-#cog { 
+#cog {
   position: relative;
   margin-left: -6px;
   margin-top: -1px;
@@ -364,7 +368,6 @@ button.settings {
   min-width: 300px;
   max-width: 450px;
 }
-
 
 #form-enabler {
   border: 0;
@@ -422,8 +425,8 @@ button.settings {
   left: 4px;
   bottom: 4px;
   background-color: black;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 .switches span:last-child::after {
@@ -436,7 +439,7 @@ button.settings {
   background-size: 12px 12px;
 }
 .switches [type="checkbox"]:checked + label span:last-child {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 .switches [type="checkbox"]:checked + label span:last-child::before {
   -webkit-transform: translateX(26px);
@@ -497,30 +500,34 @@ li {
   z-index: 100;
 }
 
-#add-task-form div{
+#add-task-form div {
   margin-top: 10px;
 }
 
-.task-label, .task-button {
+.task-label,
+.task-button {
   text-align: left;
   background-color: white;
-  color:black;
+  color: black;
   text-decoration: none;
 }
 
 .task-button[done="true"] + label {
   text-decoration: line-through;
-  color:gray;
+  color: gray;
 }
-
 
 /******** MEDIA QUERIES ORGANIZED ********/
 /** Title **/
-@media(min-width: 400px) {
-  h1 {font-size: var(--fs-title-medium);}
+@media (min-width: 400px) {
+  h1 {
+    font-size: var(--fs-title-medium);
+  }
 }
-@media(min-width: 755px) {
-  h1 {font-size: var(--fs-title-large);}
+@media (min-width: 755px) {
+  h1 {
+    font-size: var(--fs-title-large);
+  }
 }
 
 /** Counter **/
@@ -558,7 +565,8 @@ li {
 
 /** Buttons **/
 @media (min-width: 755px) {
-  #start-button, #reset-button {
+  #start-button,
+  #reset-button {
     font-size: var(--fs-mode-button-large);
     border-radius: 15px;
   }
@@ -566,7 +574,7 @@ li {
 
 /** Help **/
 @media (min-width: 500px) {
-  button.help-button { 
+  button.help-button {
     left: 5%;
     top: 10%;
     font-size: var(--fs-mode-button-large);
@@ -574,12 +582,12 @@ li {
   }
 }
 @media (min-width: 700px) {
-  button.help-button { 
+  button.help-button {
     border-radius: 15px;
   }
 }
 @media (min-width: 700px) {
-  .help-content{
+  .help-content {
     font-size: var(--fs-instructions-large);
   }
   .help-content > h3 {
@@ -589,7 +597,7 @@ li {
 
 /** Button Settings**/
 @media (min-width: 500px) {
-  button.settings { 
+  button.settings {
     font-size: var(--fs-mode-button-large);
     border-radius: 12px;
     margin-left: 50px;
@@ -597,12 +605,12 @@ li {
   }
 }
 @media (min-width: 700px) {
-  button.settings { 
+  button.settings {
     border-radius: 15px;
   }
 }
 @media (min-width: 650px) {
-  #cog { 
+  #cog {
     margin-top: -1px;
   }
 }
@@ -614,22 +622,16 @@ li {
   }
 }
 
-
 /******** MEDIA QUERIES REFACTORED ********/
 
 /* Mobile: Portrait and Landscape */
-@media only screen and (min-width: 320px) and (max-width: 767px){
-
+@media only screen and (min-width: 320px) and (max-width: 767px) {
 }
 /* Tablet */
-@media only screen and (min-width: 768px) and (max-width: 979px){
-
+@media only screen and (min-width: 768px) and (max-width: 979px) {
 }
 footer > img {
   width: 50px;
   float: right;
   border-radius: 10px;
 }
-
-
-
