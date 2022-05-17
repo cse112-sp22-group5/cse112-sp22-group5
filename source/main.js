@@ -1,6 +1,6 @@
 // Import modules
 
-import { onStart, onReset, checkState, updateState, timer, setCustomTime, keyboardShortcut, revealSettings, hideSettings, customizeStartKey, customizeVolumeUpKey, customizeVolumeDownKey, customizeKey} from './modules/timer.js';
+import { onStart, onReset, checkState, updateState, timer, setCustomTime, keyboardShortcut, revealSettings, hideSettings, customizeKey} from './modules/timer.js';
 import { revealHelp, hideHelp } from './modules/help.js';
 import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
 import { colorChange } from './modules/color-change.js';

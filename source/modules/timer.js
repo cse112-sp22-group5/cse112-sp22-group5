@@ -362,12 +362,10 @@ function keyboardShortcut(event) {
         if(event.code === volumeUpKey) {
             let curVol = document.getElementById('alarm-volume').value
             document.getElementById('alarm-volume').value = parseInt(curVol) + 10;
-            console.log(document.getElementById('alarm-volume').value)
         }
         if(event.code === volumneDownKey) {
             let curVol = document.getElementById('alarm-volume').value
             document.getElementById('alarm-volume').value = parseInt(curVol) - 10;
-            console.log(document.getElementById('alarm-volume').value)
         }
 
         event.preventDefault();
