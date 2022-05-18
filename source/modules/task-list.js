@@ -17,14 +17,8 @@ let TASK_CONTENT = null;
  * @description Opens or closes add-task form
  */
 function addTaskButton() {
-    let button = document.getElementById('add-task-form');
-    if (button.classList.contains('hidden') === true) {
-        button.classList.remove('hidden');
-        document.getElementById('task-name').focus();
-    }
-    else {
-        button.classList.add('hidden');
-    }
+    const taskModal = document.getElementById('task-add-modal');
+    taskModal.showModal();
 }
 
 /**
@@ -34,9 +28,9 @@ function addTaskButton() {
  */
 function cancelTask() {
     document.getElementById('task-name').value = '';
-    document.getElementById('add-task-form').classList.add('hidden');
     setSaveFlag(SAVE_ON);
     setTaskContent(null);
+    document.getElementById('task-add-modal').close();
 }
 
 /**
@@ -71,7 +65,7 @@ function saveTask() {
  * @function 
  * @description Display selected task at top of task list
  */
-function selectTask(taskName) {
+function selectTask() {
     let currentTask = document.getElementById('current-task');
     const tasks = document.querySelectorAll('input[name="task-option"]');
     for (let task of tasks) {
@@ -104,7 +98,7 @@ function createCustomTaskTag(taskName) {
     taskButton.setAttribute('id', taskName);
     taskButton.setAttribute('class', 'task-button');
     taskButton.setAttribute('name', 'task-option');
-    taskButton.addEventListener('click', function(e) {
+    taskButton.addEventListener('click', function() {
         let currentTask = document.getElementById('current-task');
             if (this.checked) {
                 currentTask.innerText = taskLabel.innerText;
@@ -158,11 +152,11 @@ function setEditTask(taskLabel, editButton) {
  */
 function loadForm(content){
     let taskName = document.getElementById('task-name');
-    document.getElementById('add-task-form').classList.remove('hidden');
     taskName.value = content.innerText;
-    taskName.focus();
+    document.getElementById('task-add-modal').showModal();
     setTaskContent(content);
     setSaveFlag(EDIT_ON);
+
 }
 
 /**
@@ -190,18 +184,6 @@ function clearCompletedTasks() {
         } 
     }
 }
-
-/**
- * @name 
- * @function
- * @description 
- */
-
-/**
- * @name 
- * @function
- * @description 
- */
 
 /**
  * @name setSaveFlag
@@ -237,4 +219,4 @@ function inputSanitizer(input) {
 
 
  // Export all functions
- export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, clearCompletedTasks };
+ export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, selectTask, clearCompletedTasks };

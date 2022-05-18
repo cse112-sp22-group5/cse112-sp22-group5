@@ -3,11 +3,11 @@
 
 /******** Variables ********/
 :root {
-
   /* Refactor Option */
   --primary-color: #77a4e9;
+
   /* --secondary-color:  #FFFFFF;
-  --primary-font: 'Helvetica Neue', sans-serif; 
+  --primary-font: 'Helvetica Neue', sans-serif;
   --secondary-font: 'Raleway', sans-serif; */
 
   --clr-light: #ffffff;
@@ -48,23 +48,29 @@
 }
 
 /******** GLOBALS ********/
+
 /* Text */
+h1 {
+  text-align: center;
+}
 h1, h2, h3 {
   font-family: var(--ff-primary);
   font-size: var(--fs-title-small);
   margin: auto;
-} 
-a{
-  color: #FFFFFF;
 }
-a:hover{
-  color: #DDDDDD;
-  text-decoration-color: #DDDDDD;
+
+a {
+  color: #FFF;
 }
+
+a:hover {
+  color: #DDD;
+  text-decoration-color: #DDD;
+}
+
 b {
   font-weight: var(--fw-bold);
 }
-
 
 /* Body */
 body {
@@ -73,40 +79,28 @@ body {
   transition-property: background-color;
   transition-duration: var(--transition-time);
 }
-body[state="pomo"] {
+body[data-state="pomo"] {
   background-color: var(--primary-color);
 }
-body[state="short"] {
+body[data-state="short"] {
   background-color: #eaa478;
 }
-body[state="long"] {
+body[data-state="long"] {
   background-color: #88b9ae;
 }
-
-/* REFACTOR OPTION: Classes for different state? */
-/* .pomo{
-  background-color: var(--primary-color);
-}
-.short{
-  background-color: #eaa478;
-}
-.long{
-  background-color: #88b9ae;
-} */
 
 /* Interaction */
 button {
-  margin: auto;
   font-size: var(--fs-mode-button-small);
   color: var(--clr-dark);
   border-radius: 10px;
   border: none;
-  position: absolute;
 }
 
 form {
   padding-top: 15px;
 }
+
 select {
   width: 50px;
   height: 30px;
@@ -124,31 +118,19 @@ footer {
 
 /******** Counter ********/
 #counter-container {
+  background: center / contain url("./img/tomato.png") no-repeat;
   font-size: var(--fs-counter-small);
   color: var(--clr-light);
   height: auto;
-  width: 23vw;
-  max-width: 250px;
-  min-width: 160px;
-  position: absolute;
-  right: -15px;
-  top: 10px;
-  text-align: center;
-}
+  width: auto;
 
-#counter-container > img {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-}
-#streak-counter, #total-counter {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
   position: absolute;
-  top: 34%;
-  left: 17%;
-  width: 65%;
-}
-#total-counter {
-  top: 48%;
+  top: 0;
+  right: 0;
 }
 
 /******** break reminders ********/
@@ -164,22 +146,14 @@ footer {
 }
 
 /******** State, progress bar, timer ********/
-.container {
-  width: 100%;
-  margin-bottom: 50px;
-}
 
 /******** Progress Bar ********/
 .circle {
   background-color: var(--clr-light);
   border-radius: 50%;
   border: 3px solid;
-  height: 25px;
-  width: 25px;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  
+  height: 20px;
+  width: 20px;
 }
 .circle.pomo {
   border-color: var(--clr-circle-pomo);
@@ -229,14 +203,57 @@ footer {
   transition-duration: var(--transition-time);
 }
 
-#timer-display[state="pomo"] {
+#timer-display[data-state="pomo"] {
   border-color: var(--clr-accent-pomo);
 }
-#timer-display[state="short"] {
+#timer-display[data-state="short"] {
   border-color: var(--clr-accent-short);
 }
-#timer-display[state="long"] {
+#timer-display[data-state="long"] {
   border-color: var(--clr-accent-long);
+}
+
+/********** Modals *************/
+
+/* Help Modal  */
+#help-modal {
+  width: 80%;
+  height: 70%;
+  font-family: var(--ff-secondary);
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+#help-modal > h3:first-of-type {
+  padding-top: 20px;
+}
+
+/* Settings Modal */
+#settings-dialog {
+  background-color: var(--clr-light);
+  font-size: var(--fs-instructions-large);
+  text-align: center;
+  padding: 20px;
+  border: var(--clr-dark) 10px solid;
+  border-radius: 15px;
+  width: 30%;
+  min-width: 300px;
+  max-width: 450px;
+}
+
+fieldset {
+  border:none;
+}
+
+fieldset span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-modal-btn {
+  float: left;
+  font-size: 50px;
 }
 
 /******** Buttons ********/
@@ -248,21 +265,15 @@ footer {
   min-height: 40px;
   max-height: 60px;
   height: 10vw;
+  margin: 0 10px;
 }
-#start-button { 
-  right: 52%;
+
+#button-container {
+  display: flex;
+  justify-content: center;
 }
-#reset-button {
-  left: 52%;
-}
-.button-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  height: 100px;
-  width: 100%;
-}
-#help-button, #setting-container, #settings-button, #cog {
+
+#help-button, #settings-button, #cog {
   min-width: 40px;
   max-width: 60px;
   width: 7vw;
@@ -271,65 +282,10 @@ footer {
   height: 7vw;
 }
 
-/******** Help ********/
-button.help-button { 
-  position: absolute;
-  left: 8%;
-  top: 5%;
-  margin: auto;
-  font-size: var(--fs-mode-button-small);
-  border-radius: 10px;
-  border: none;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  background-color: var(--clr-faded-black);
-}
-.help-content {
-  background-color: var(--clr-light);
-  font-family: var(--ff-secondary);
-  font-size: 20px;
-  text-align: center;
-  padding: 20px;
-  margin: auto;
-  border: var(--clr-dark) 10px solid;
-  border-radius: 15px;
-  height: 70%;
-  width: 80%;
-  overflow-y: auto;
-}
-.help-content > h3 {
-    font-size: var(--fs-instructions-title-small);
-}
-
-#close-modal {
-  float: left;
-  font-size: 50px;
-}
-
-#help-modal {
-  display: none;
-}
-
-/******** Settings ********/
-button.settings { 
-  position: absolute;
-  left: 8%;
-  top: 12%;
-  margin: auto;
-  font-family: var(--ff-secondary);
-  font-size: var(--fs-mode-button-small);
-  border-radius: 10px;
-  border: none;
+#options-btn-container {
+  display: flex;
+  margin-left: 20px;
+  gap: 4vw;
 }
 
 #cog { 
@@ -338,41 +294,6 @@ button.settings {
   margin-top: -1px;
   border-radius: 15px;
   border: none;
-}
-
-.settings-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: var(--clr-faded-black);
-}
-.settings-content {
-  background-color: var(--clr-light);
-  font-size: var(--fs-instructions-large);
-  text-align: center;
-  padding: 20px;
-  margin: auto;
-  border: var(--clr-dark) 10px solid;
-  border-radius: 15px;
-  width: 30%;
-  min-width: 300px;
-  max-width: 450px;
-}
-
-
-#form-enabler {
-  border: 0;
-}
-
-#close-settings {
-  float: left;
-  font-size: 40px;
 }
 
 /******** Switches ********/
@@ -460,6 +381,10 @@ li {
 
 } */
 
+.hidden {
+  display: none;
+}
+
 #current-task-container {
   display: block;
   text-align: center;
@@ -467,46 +392,27 @@ li {
   padding: 1em;
 }
 
-#tasks-button-container {
-}
+/* #tasks-button-container {
+} */
 
 #tasks-button-container > button {
   position: relative;
   margin-right: 10px;
 }
 
-#add-tasks-button {
+/* #add-tasks-button {
 }
 
 #clear-tasks-button {
 }
 
 #clear-completed-tasks-button {
-}
-
-#cancel-button {
-  margin-left: -80px;
-}
-
-#add-task-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 200px;
-  z-index: 100;
-}
+} */
 
 #add-task-form div{
   margin-top: 10px;
 }
 
-<<<<<<< HEAD
-/* #google-translate-element {
-  position: absolute;
-  top: 0%;
-} */
-=======
 .task-label, .task-button {
   text-align: left;
   background-color: white;
@@ -519,106 +425,69 @@ li {
   color:gray;
 }
 
-
-/******** MEDIA QUERIES ORGANIZED ********/
-/** Title **/
-@media(min-width: 400px) {
+@media screen and (min-width: 500px) {
   h1 {font-size: var(--fs-title-medium);}
-}
-@media(min-width: 755px) {
-  h1 {font-size: var(--fs-title-large);}
-}
 
-/** Counter **/
-@media (min-width: 500px) {
-  #counter-container {
+  #counterContainer {
     right: 0px;
     font-size: var(--fs-counter-small);
   }
-}
-@media (min-width: 800px) {
-  #counter-container {
-    right: 3%;
-    font-size: var(--fs-counter-medium);
-  }
-}
-@media (min-width: 980px) {
-  #counter-container {
-    right: 7%;
-    font-size: var(--fs-counter-large);
-  }
-}
 
-/**  Timer Mode **/
-@media (min-width: 755px) {
-  #state {
-    font-size: var(--fs-mode-button-large);
-  }
-}
-
-@media (min-width: 768px) {
-  #timer-display {
-    font-size: var(--fs-timer-large);
-  }
-}
-
-/** Buttons **/
-@media (min-width: 755px) {
-  #start-button, #reset-button {
-    font-size: var(--fs-mode-button-large);
-    border-radius: 15px;
-  }
-}
-
-/** Help **/
-@media (min-width: 500px) {
   button.help-button { 
     left: 5%;
     top: 10%;
     font-size: var(--fs-mode-button-large);
     border-radius: 12px;
   }
-}
-@media (min-width: 700px) {
-  button.help-button { 
-    border-radius: 15px;
-  }
-}
-@media (min-width: 700px) {
-  .help-content{
-    font-size: var(--fs-instructions-large);
-  }
-  .help-content > h3 {
-    font-size: var(--fs-instructions-title-large);
-  }
-}
 
-/** Button Settings**/
-@media (min-width: 500px) {
   button.settings { 
     font-size: var(--fs-mode-button-large);
     border-radius: 12px;
-    margin-left: 50px;
     top: 10%;
   }
-}
-@media (min-width: 700px) {
-  button.settings { 
-    border-radius: 15px;
+
+  .switches li::before {
+    display: none;
   }
 }
-@media (min-width: 650px) {
+
+@media screen and (min-width: 700px) {
+  h1 {font-size: var(--fs-title-large);}
+
+  #counterContainer {
+    right: 3%;
+    font-size: var(--fs-counter-medium);
+  }
+
+  #state {
+    font-size: var(--fs-mode-button-large);
+  }
+
+  #timer-display {
+    font-size: var(--fs-timer-large);
+  }
+
+  #startButton, #resetButton {
+    font-size: var(--fs-mode-button-large);
+    border-radius: 15px;
+  }
+
+  button.help-button, button.settings { 
+    border-radius: 15px;
+  }
+
   #cog { 
     margin-top: -1px;
   }
 }
 
-/** Switches **/
-@media screen and (max-width: 600px) {
-  .switches li::before {
-    display: none;
+@media (min-width: 980px) {
+  #counterContainer {
+    right: 7%;
+    font-size: var(--fs-counter-large);
   }
 }
+
 
 
 /******** MEDIA QUERIES REFACTORED ********/
@@ -636,7 +505,3 @@ footer > img {
   float: right;
   border-radius: 10px;
 }
-
-
-
->>>>>>> 13382d79c8070293a9a486683f6887d1fe8d9191

@@ -4,32 +4,36 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
     <link rel='stylesheet' href='styles.css'>
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
     <script type="module" src="./main.js"></script>
     <title>Productoro</title>
 </head>
-<body state='pomo'>
+<body data-state='pomo'>
     <header> 
          <!-- Help Modal, Settings Modal, Title, Counter?  -->
-        <h1 class='text-center'>Productoro</h1>
-        <div class='container' id='counter-container'>
+        <h1>Productoro</h1>
+        <!-- <div id='counter-container'>
             <img src='img/tomato.png' alt='tomato'>
             <div id='streak-counter'><b>Streak:</b> <span id='streak'>0</span></div>
             <div id='total-counter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
+        </div> -->
+
+        <div id="options-btn-container">
+            <button type=button class='help-button' id='help-button'>?</button>
+            <button type=button class='settings' id='settings-button'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
         </div>
         
-        <div id='breakReminder' style='color:#464646; visibility: hidden'></div>
+        <div id='break-reminder' style='color:#464646; visibility: hidden'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></div>   <!--ensures divs are hidden on init load -->
     </header>
     <main>
         <!-- Break Reminder, Timer, Buttons? -->
     </main>
-    <div class='container' id='timerContainer'>
+    <div id='timer-container'>
         <h2 class='text-center' id='state'>Work State</h2> <!-- mode name changes based on state of timer -->
-        <div class='progress-container container'>
+        <div class='progress-container'>
             <div class='circle pomo'></div>
             <div class='circle short'></div>
             <div class='circle pomo'></div>
@@ -39,97 +43,105 @@
             <div class='circle pomo'></div>
             <div class='circle long'></div>
         </div>
-        <div class='container' id='timer-display' state='pomo'>25:00</div> <!-- displays the timer countdown -->
+        <div id='timer-display' data-state='pomo'>25:00</div> <!-- displays the timer countdown -->
     </div>
-    <div class='button-container'> <!-- container for start and reset buttons-->
+    <div id='button-container'> <!-- container for start and reset buttons-->
         <button type=button class='timer-button' id='start-button'>Start</button>
         <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
     </div>
-    <div id='help-container'> <!-- container for non-static instructions-->
-        <button type=button class='help-button' id='help-button'>?</button>
-        <div id='help-modal' class='modal'>
-            <div class='help-content'>
-                <!-- Modal content -->
-                <span id='close-modal'>&times;</span>
-                    <h3>What is a Pomodoro Timer?</h3>
-                    <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
-                        Work intervals are typically 25 minutes long with five minute breaks between each interval. 
-                        A longer 15 minute break occurs between every fourth and fifth interval.</p>
-                    <p>The Pomodoro technique increases productivity, enhances focus while working, and can be used by anyone!</p>
-                    <h3>How to use Productoro:</h3>
-                    <ol>
-                        <li>Press <b>Start</b> to begin your pomodoro timer. Your first work state will begin and the timer will begin counting down from 25 minutes.</li>
-                        <li>After 25 minutes, the timer will stop, play an audio alarm will sound and transition you into your short, five minute break. The audio alarm can be disabled in settings. You must click <b>Start</b> to begin the five minute break. At the end of the break, the timer will transition back into showing a countdown from 25 minutes.</li>
-                        <li>The pomos and breaks will continue to automatically transition with a long break occurring after every fourth pomo. During a pomo, <b>Reset</b> can be pressed to restart the current pomo. After pressing reset, <b>Start</b> must be pressed again to begin the countdown on the timer.</li>
-                        <li>You can change the length of a break and pomo in the settings tab.</li>
-                        <li>Keyboard control preferences can also be set in the settings. Simply press the spacebar while the clock is idle to start the timer. Pressing the space bar again will reset the current timer, but resetting is only allowed during a work session.</li>
-                    </ol>
-            </div>
-            
-        </div>
-    </div>
-    
 
-    <div id='setting-container'>
-        <button type=button class='settings' id='settings-button'><img id='cog' src='img/settings-icon.png' alt='settings-icon'/></button>
-        <div id='settings-modal' class='modal'>
-            <div class='settings-content'>
-            <span id='close-settings'>&times;</span>
-            <form id='time-limits'>
-                <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
-                <p><b>Select lengths for </b></p>
+    <!-- Help Dialog  -->
+    <dialog id="help-modal">
+        <span id='close-modal-x' class="close-modal-btn">&times;</span>
+        <h3>What is a Pomodoro Timer?</h3>
+            <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
+                Work intervals are typically 25 minutes long with five minute breaks between each interval. 
+                A longer 15 minute break occurs between every fourth and fifth interval.</p>
+            <p>The Pomodoro technique increases productivity, enhances focus while working, and can be used by anyone!</p>
+            <h3>How to use Productoro:</h3>
+            <ol>
+                <li>Press <b>Start</b> to begin your pomodoro timer. Your first work state will begin and the timer will begin counting down from 25 minutes.</li>
+                <li>After 25 minutes, the timer will stop, play an audio alarm will sound and transition you into your short, five minute break. The audio alarm can be disabled in settings. You must click <b>Start</b> to begin the five minute break. At the end of the break, the timer will transition back into showing a countdown from 25 minutes.</li>
+                <li>The pomos and breaks will continue to automatically transition with a long break occurring after every fourth pomo. During a pomo, <b>Reset</b> can be pressed to restart the current pomo. After pressing reset, <b>Start</b> must be pressed again to begin the countdown on the timer.</li>
+                <li>You can change the length of a break and pomo in the settings tab.</li>
+                <li>Keyboard control preferences can also be set in the settings. Simply press the spacebar while the clock is idle to start the timer. Pressing the space bar again will reset the current timer, but resetting is only allowed during a work session.</li>
+            </ol>
+    </dialog>
+
+    <!-- Custom settings dialog -->
+    <dialog id="settings-dialog">
+        <span id='close-settings-btn' class="close-modal-btn">&times;</span>
+
+        <form id='timeLimits'>
+            <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
+            <p><b>Select lengths for </b></p>
+            
+            <fieldset id='form-enabler'>
+                <span>
+                    <label id='workLabel'>Work Session</label> 
+                    <select name='workTime' id='workTime'>
+                        <option id='workOption25' value='25' selected>25</option>
+                        <option id='workOption30' value='30'>30</option>
+                        <option id='workOption45' value='45'>45</option>
+                        <option id='workOption60' value='60'>60</option>
+                    </select>
+                </span>
                 
-                <fieldset id='form-enabler'>
-                    <label id='work-label'>Work Session</label> 
-                    <select name='work-time' id='work-time'>
-                        <option id='work-option25' value='25' selected>25</option>
-                        <option id='work-option30' value='30'>30</option>
-                        <option id='work-option45' value='45'>45</option>
-                        <option id='work-option60' value='60'>60</option>
-                    </select>
-                    <br>
-            
-                    <label id='short-break-time'>Short Break</label>
-                    <select name='short-break-time' id='short-break-time'>
-                        <option id='sb-option5' value='5' selected>5</option>
-                        <option id='sb-option10' value='10'>10</option>
-                        <option id='sb-option15' value='15'>15</option>
-                    </select>
-                    <br>
-            
-                    <label id='long-break-time'>Long Break</label>
-                    <select name='long-break-time' id='long-break-time'>
-                        <option id='lb-option15' value='15' selected>15</option>
-                        <option id='lb-option20' value='20'>20</option>
-                        <option id='lb-option25' value='25'>25</option>
-                        <option id='lb-option30' value='30'>30</option>
-                    </select>
-                    <br>
-                </fieldset>  
-                <div id='notif-reminder'> Remember to have system notifications enabled!</div>
+                <span>
+                <label id='shortBreakLabel'>Short Break</label>
+                <select name='shortBreakTime' id='shortBreakTime'>
+                    <option id='sbOption5' value='5' selected>5</option>
+                    <option id='sbOption10' value='10'>10</option>
+                    <option id='sbOption15' value='15'>15</option>
+                </select>
+                </span>
+                
+                <span>
+                <label id='longBreakLabel'>Long Break</label>
+                <select name='longBreakTime' id='longBreakTime'>
+                    <option id='lbOption15' value='15' selected>15</option>
+                    <option id='lbOption20' value='20'>20</option>
+                    <option id='lbOption25' value='25'>25</option>
+                    <option id='lbOption30' value='30'>30</option>
+                </select>
+                </span>
+            </fieldset>  
 
-                <ul class='switches'>
-                    <li>
-                      <input type='checkbox' id='notif-toggle' name="notif-toggle" checked>
-                      <label for='notif-toggle'>
-                        <span>Audio Alarm</span>
-                        <span></span>
-                      </label>
-                    </li>
-                    <li>
-                        <input type='checkbox' id='keyboard-toggle' name="keyboard-toggle" checked>
-                        <label for='keyboard-toggle'>
-                          <span>Keyboard Shortcuts</span>
-                          <span></span>
-                        </label>
-                      </li>
-                </ul>
-            </form>    
-            </div>
-            
-        </div>
-    </div>
+            <div id='notifReminder'> Remember to have system notifications enabled!</div>
 
+            <label id='bg-music-label'>Background Music</label>
+                <select name='bg-music' id='bg-music'>
+                    <option id='bg-music-option-none' value='None' selected>None</option>
+                    <option id='bg-music-option-lofi' value='Lofi'>Lofi</option>
+                    <option id='bg-music-option-classical' value='Classical'>Classical</option>
+                </select>
+                <div id='current-mix' style='display: none;'>
+                    <p id='track-name'></p>
+                    <button type=button id='prevTrackButton' style='position: relative;'>Prev</button>
+                    <button type=button id='nxtTrackButton'  style='position: relative;'>Nxt</button>
+                </div>
+                <br>
+                <audio id='background-audio' controls></audio>
+
+            <ul class='switches'>
+                <li>
+                  <input type='checkbox' id='notifToggle' checked>
+                  <label for='notifToggle'>
+                    <span>Audio Alarm</span>
+                    <span></span>
+                  </label>
+                </li>
+                <li>
+                    <input type='checkbox' id='keyboardToggle' checked>
+                    <label for='keyboardToggle'>
+                      <span>Keyboard Shortcuts</span>
+                      <span></span>
+                    </label>
+                  </li>
+            </ul>
+        </form>    
+    </dialog>
+        
     <!-- Task List -->
     <h3 id="current-task-container">Current Task: <span id="current-task"></span></h3>
 
@@ -139,9 +151,9 @@
         <button type="button" id="clear-tasks-button">Clear Tasks</button>
         <button type="button" id="clear-completed-tasks-button">Clear Completed Tasks</button>
     </div>
-    <div id="task-list-container">
-        
-        <form onsubmit="return false;" id="add-task-form" class="hidden settings-content">
+
+    <dialog id="task-add-modal">
+        <form onsubmit="return false;" id="add-task-form">
             <label for="taskName">Task:</label><br>
             <input type="text" id="task-name" name="taskName" placeholder="What are you doing?"><br>
             <div class="form-buttons">
@@ -149,12 +161,10 @@
                 <button id="save-button">Save</button>
             </div>
         </form>
-          <br><br><br>
-        <ol id="task-list">
+    </dialog>
+    
+    <ol id="task-list"></ol>
 
-        </ol>
-    </div>
-        
     <footer>
         <p>Made by the <a href="../index.html">Dream Team</a></p>
         <p>Taken by the 10x Racoons</p>

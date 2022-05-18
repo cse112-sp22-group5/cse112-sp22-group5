@@ -1,5 +1,5 @@
-/** @constant @type {Audio} **/ 
-const alarm = new Audio('./audio/notification-alert.wav');
+/** @constant @type {Audio} need to change from const to var **/ 
+let alarm = new Audio('./audio/notification-alert-1.wav');
 
 /**
  * @name getAlarm
@@ -17,6 +17,11 @@ function getAlarm(){
  * @description Plays the alarm three times to notfiy the user that the break or pomo has ended 
  */
 function playSound(){
+    // Set alarm sound
+    let soundIdx = document.getElementById('alarm-sounds').value;
+    alarm = new Audio('./audio/notification-alert-' + soundIdx + '.wav');
+    // Set alarm volume
+    alarm.volume = document.getElementById('alarm-volume').value / 100;
     //Play the alarm once
     alarm.play();
     //Wait 2 seconds then play it again

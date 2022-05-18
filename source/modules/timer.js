@@ -233,28 +233,37 @@ function setCustomTime() {
     let sbTime = document.getElementById('short-break-time');
     let lbTime = document.getElementById('long-break-time');
     let warning = document.getElementById('warning');
+    let wTimeOutput = document.getElementById('work-time-val');
+    let sbTimeOutput = document.getElementById('short-break-time-val');
+    let lbTimeOutput = document.getElementById('long-break-time-val');
 
-    // check if the pomo duration is longer than the break durations
-    if(Number(wTime.options[wTime.selectedIndex].text) <= Number(sbTime.options[sbTime.selectedIndex].text) ||
-        Number(wTime.options[wTime.selectedIndex].text) <= Number(lbTime.options[lbTime.selectedIndex].text)) {
-            // enable a warning
-            warning.innerText = 'Work Periods must be greater than Break Periods';
-            warning.style.display = 'block';
-              
-            // keep the drop down values the same as the current timer settings
-            wTime.value = POMO_MINS.toString();
-            sbTime.value = SHORT_MINS.toString();
-            lbTime.value = LONG_MINS.toString();
-            return;
-    }
+    wTimeOutput.innerHTML = wTime.value;
+    sbTimeOutput.innerHTML = sbTime.value;
+    lbTimeOutput.innerHTML = lbTime.value;
+
+    if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
+      // enable a warning
+      warning.innerText = 'Work Periods must be greater than Break Periods';
+      warning.style.display = 'block';
+
+      // keep the drop down values the same as the current timer settings
+      wTime.value = POMO_MINS.toString();
+      sbTime.value = SHORT_MINS.toString();
+      lbTime.value = LONG_MINS.toString();
+      wTimeOutput.innerHTML = wTime.value;
+      sbTimeOutput.innerHTML = sbTime.value;
+      lbTimeOutput.innerHTML = lbTime.value;
+      return;
+  }
+
     // otherwise do not display a warning
     warning.style.display = 'none';
 
     // set the new time preferences
-    POMO_MINS = wTime.options[wTime.selectedIndex].text;
+    POMO_MINS = Number(wTime.value);
     document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-    SHORT_MINS = sbTime.options[sbTime.selectedIndex].text;
-    LONG_MINS = lbTime.options[lbTime.selectedIndex].text;  
+    SHORT_MINS = Number(sbTime.value);
+    LONG_MINS = Number(lbTime.value);
 }
 
 /**
@@ -300,10 +309,8 @@ function onReset() {
  * @description Opens the settings modal when the settings button is clicked
  */
 function revealSettings() {
-    let settingsModal = document.getElementById('settings-modal');
-    settingsModal.style.display = 'block';
-    let settingsBtn = document.getElementById('settings-button');
-    settingsBtn.disabled = true; 
+    const settingsModal = document.getElementById('settings-dialog');
+    settingsModal.showModal();
 }
 
 /**
@@ -311,12 +318,11 @@ function revealSettings() {
  * @description Closes the settings modal when the 'x' inside the modal or anywhere outside of the modal is clicked
  */
 function hideSettings() {
-    let settingsModal = document.getElementById('settings-modal');
-    settingsModal.style.display = 'none';
+    const settingsModal = document.getElementById('settings-dialog');
+    settingsModal.close();
     if(document.getElementById('warning').innerText === 'Work Periods must be greater than Break Periods'){
         document.getElementById('warning').style.display = 'none';
     }
-    document.getElementById('settings-button').disabled = false; 
 }
 
 /**

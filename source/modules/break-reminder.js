@@ -16,7 +16,7 @@ function breakReminders(){
     let randomIdea = breakIdeas[Math.floor(Math.random() * breakIdeas.length)];
  
     document.getElementById('reminder').style.visibility = 'hidden';
-    document.getElementById('break-eminder').innerHTML = randomIdea;
+    document.getElementById('break-reminder').innerHTML = randomIdea;
     document.getElementById('reminder').innerHTML = '';
       
    
