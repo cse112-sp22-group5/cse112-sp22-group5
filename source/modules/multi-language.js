@@ -8,3 +8,4 @@ export function googleTranslateElementInit() {
     pageLanguage: 'en'
     }, 'google-translate-element');
 }
+// test
