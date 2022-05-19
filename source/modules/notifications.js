@@ -18,10 +18,10 @@ function getAlarm(){
  */
 function playSound(){
     // Set alarm sound
-    let soundIdx = document.getElementById('alarm-sounds').value;
-    alarm = new Audio('./audio/notification-alert-' + soundIdx + '.wav');
-    // Set alarm volume
-    alarm.volume = document.getElementById('alarm-volume').value / 100;
+    // let soundIdx = document.getElementById('alarm-sounds').value;
+    // alarm = new Audio('./audio/notification-alert-' + soundIdx + '.wav');
+    // // Set alarm volume
+    // alarm.volume = document.getElementById('alarm-volume').value / 100;
     //Play the alarm once
     alarm.play();
     //Wait 2 seconds then play it again

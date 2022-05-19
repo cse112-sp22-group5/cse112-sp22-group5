@@ -5,9 +5,9 @@ import { progressBar } from './progress-bar.js';
 
 let 
     /** @type {number} **/ 
-    POMO_MINS = 25, 
+    POMO_MINS = 0.1, 
     /** @type {number} **/ 
-    SHORT_MINS = 5, 
+    SHORT_MINS = 0.05, 
     /** @type {number} **/ 
     LONG_MINS = 15;
 
@@ -209,7 +209,7 @@ function updateTimer(duration) {
             // transition to the next state
             updateState();
             showNotif(timer.currState);
-            if(document.getElementById('notif-toggle').checked) {
+            if(document.getElementById('notifToggle').checked) {
                 playSound();
             }
         }
@@ -229,32 +229,58 @@ function updateTimer(duration) {
  * @description Changes the times for each session based on user input
  */
 function setCustomTime() {
+    // let wTime = document.getElementById('work-time');
+    // let sbTime = document.getElementById('short-break-time');
+    // let lbTime = document.getElementById('long-break-time');
+    // let warning = document.getElementById('warning');
+    // let wTimeOutput = document.getElementById('work-time-val');
+    // let sbTimeOutput = document.getElementById('short-break-time-val');
+    // let lbTimeOutput = document.getElementById('long-break-time-val');
     let wTime = document.getElementById('work-time');
-    let sbTime = document.getElementById('short-break-time');
-    let lbTime = document.getElementById('long-break-time');
+    let sbTime = document.getElementById('shortBreakTime');
+    let lbTime = document.getElementById('longBreakTime');
     let warning = document.getElementById('warning');
-    let wTimeOutput = document.getElementById('work-time-val');
-    let sbTimeOutput = document.getElementById('short-break-time-val');
-    let lbTimeOutput = document.getElementById('long-break-time-val');
 
-    wTimeOutput.innerHTML = wTime.value;
-    sbTimeOutput.innerHTML = sbTime.value;
-    lbTimeOutput.innerHTML = lbTime.value;
+//     wTimeOutput.innerHTML = wTime.value;
+//     sbTimeOutput.innerHTML = sbTime.value;
+//     lbTimeOutput.innerHTML = lbTime.value;
 
-    if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
-      // enable a warning
-      warning.innerText = 'Work Periods must be greater than Break Periods';
-      warning.style.display = 'block';
+//     if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
+//       // enable a warning
+//       warning.innerText = 'Work Periods must be greater than Break Periods';
+//       warning.style.display = 'block';
 
-      // keep the drop down values the same as the current timer settings
-      wTime.value = POMO_MINS.toString();
-      sbTime.value = SHORT_MINS.toString();
-      lbTime.value = LONG_MINS.toString();
-      wTimeOutput.innerHTML = wTime.value;
-      sbTimeOutput.innerHTML = sbTime.value;
-      lbTimeOutput.innerHTML = lbTime.value;
-      return;
-  }
+//       // keep the drop down values the same as the current timer settings
+//       wTime.value = POMO_MINS.toString();
+//       sbTime.value = SHORT_MINS.toString();
+//       lbTime.value = LONG_MINS.toString();
+//       wTimeOutput.innerHTML = wTime.value;
+//       sbTimeOutput.innerHTML = sbTime.value;
+//       lbTimeOutput.innerHTML = lbTime.value;
+//       return;
+
+    // check if the pomo duration is longer than the break durations
+    if(Number(wTime.options[wTime.selectedIndex].text) <= Number(sbTime.options[sbTime.selectedIndex].text) ||
+        Number(wTime.options[wTime.selectedIndex].text) <= Number(lbTime.options[lbTime.selectedIndex].text)) {
+            // enable a warning
+            warning.innerText = 'Work Periods must be greater than Break Periods';
+            warning.style.display = 'block';
+            
+            // keep the drop down values the same as the current timer settings
+            wTime.value = POMO_MINS.toString();
+            sbTime.value = SHORT_MINS.toString();
+            lbTime.value = LONG_MINS.toString();
+            return;
+    }
+    // otherwise do not display a warning
+    warning.style.display = 'none';
+
+    // set the new time preferences
+    POMO_MINS = wTime.options[wTime.selectedIndex].text;
+    document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
+    SHORT_MINS = sbTime.options[sbTime.selectedIndex].text;
+    LONG_MINS = lbTime.options[lbTime.selectedIndex].text;  
+//   }
 
     // otherwise do not display a warning
     warning.style.display = 'none';

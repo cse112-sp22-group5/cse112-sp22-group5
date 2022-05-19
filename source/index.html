@@ -41,7 +41,7 @@
 
         <!-- Timer -->
         <div class='timer'>
-            <p id="timer-display" data-state='pomo'>25:00</p>
+            <p id="timer-display" data-state='pomo'>00:06</p>
             <p>Streak: <span id="streak">0</span></p>
             <p>Completed: <span id="total">0</span></p>
         </div>
@@ -59,7 +59,7 @@
         </section>
         
         <!-- Task List -->
-        <section class="tasks" id="tasks">
+        <section class="tasks" id="tasks" data-state="pomo">
             <h2>Tasks</h2>
 
             <!-- List Options -->
@@ -107,14 +107,14 @@
             <fieldset id='form-enabler'>
                 <label id='workLabel'>Work Session</label> 
                 <select name='workTime' id='work-time'>
-                    <option id='workOption25' value='25' selected>25</option>
+                    <option id='workOption25' value='2' selected>2</option>
                     <option id='workOption30' value='30'>30</option>
                     <option id='workOption45' value='45'>45</option>
                     <option id='workOption60' value='60'>60</option>
                 </select>
                 <label id='shortBreakLabel'>Short Break</label>
                 <select name='shortBreakTime' id='shortBreakTime'>
-                    <option id='sbOption5' value='5' selected>5</option>
+                    <option id='sbOption5' value='1' selected>1</option>
                     <option id='sbOption10' value='10'>10</option>
                     <option id='sbOption15' value='15'>15</option>
                 </select>

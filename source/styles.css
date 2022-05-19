@@ -291,6 +291,20 @@ fieldset select {
   transition: opacity 1s, height 1s, padding 1s;
   overflow: hidden;
   background: var(--primary-color);
+  transition: background 1s;
+}
+
+.tasks[data-state="pomo"] {
+  /* background: #fff; */
+  background: var(--primary-color);
+}
+
+.tasks[data-state="short"] {
+  background-color: #eaa478;
+}
+
+.tasks[data-state="long"] {
+  background-color: #88b9ae;
 }
 
 .counting {
