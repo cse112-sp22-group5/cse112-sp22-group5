@@ -8,7 +8,7 @@ import { revealHelp, hideHelp } from './modules/help.js';
 // import { breakReminders } from './modules/break-reminder.js';
 import { setBackgroundMusic } from './modules/background-music.js';
 import { addTaskButton, cancelTask, saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
-import {googleTranslateElementInit} from './modules/muli-language.js';
+import {googleTranslateElementInit} from './modules/multi-language.js';
 googleTranslateElementInit();
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
