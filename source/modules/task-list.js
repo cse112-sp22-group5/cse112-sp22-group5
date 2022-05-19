@@ -16,13 +16,8 @@ let TASK_CONTENT = null;
  * @description Opens or closes add-task form
  */
 function addTaskButton() {
-  let button = document.getElementById("add-task-form");
-  if (button.classList.contains("hidden") === true) {
-    button.classList.remove("hidden");
-    document.getElementById("task-name").focus();
-  } else {
-    button.classList.add("hidden");
-  }
+    const taskModal = document.getElementById('task-add-modal');
+    taskModal.showModal();
 }
 
 /**
@@ -31,10 +26,10 @@ function addTaskButton() {
  * @description Closes add-task form
  */
 function cancelTask() {
-  document.getElementById("task-name").value = "";
-  document.getElementById("add-task-form").classList.add("hidden");
-  setSaveFlag(SAVE_ON);
-  setTaskContent(null);
+    document.getElementById('task-name').value = '';
+    setSaveFlag(SAVE_ON);
+    setTaskContent(null);
+    document.getElementById('task-add-modal').close();
 }
 
 /**
@@ -43,16 +38,21 @@ function cancelTask() {
  * @description Adds new task to task list
  */
 function saveTask() {
-  let taskNameInput = document.getElementById("task-name");
-  let taskList = document.getElementById("task-list");
+    let taskNameInput = document.getElementById('task-name');
+    let taskList = document.getElementById('task-list');
 
-  if (SAVE_FLAG === SAVE_ON) {
-    // Save new task
-    if (inputSanitizer(taskNameInput.value)) {
-      // check for input
-      alert("Please enter something!!");
-      taskNameInput.focus();
-      return;
+    if (SAVE_FLAG === SAVE_ON) { // Save new task
+        if (inputSanitizer(taskNameInput.value)){ // check for input
+            alert('Please enter something!!');
+            taskNameInput.focus();
+            return;
+        }
+        
+        let newTask = createCustomTaskTag(taskNameInput.value);
+        taskList.appendChild(newTask);
+    }
+    else { // edit old task
+        TASK_CONTENT.innerText = taskNameInput.value;
     }
 
     let newTask = createCustomTaskTag(taskNameInput.value);
@@ -69,13 +69,14 @@ function saveTask() {
  * @function
  * @description Display selected task at top of task list
  */
-function selectTask(taskName) {
-  let currentTask = document.getElementById("current-task");
-  const tasks = document.querySelectorAll('input[name="task-option"]');
-  for (let task of tasks) {
-    if (task.checked) {
-      currentTask.innerText = task.value;
-      break;
+function selectTask() {
+    let currentTask = document.getElementById('current-task');
+    const tasks = document.querySelectorAll('input[name="task-option"]');
+    for (let task of tasks) {
+        if (task.checked) {
+            currentTask.innerText = task.value;
+            break;
+        }
     }
   }
 }
@@ -88,50 +89,49 @@ function selectTask(taskName) {
  * @returns {HTMLLIElement} returns a HTML li tag
  */
 function createCustomTaskTag(taskName) {
-  let taskContainer = document.createElement("li");
-  let taskLabel = document.createElement("label");
-  let taskButton = document.createElement("input");
-  let editButton = document.createElement("button");
-  let doneButton = document.createElement("button");
+    let taskContainer = document.createElement('li');
+    let taskLabel = document.createElement('label');
+    let taskButton = document.createElement('input');
+    let editButton = document.createElement('button');
+    let doneButton = document.createElement('button');
 
-  taskContainer.setAttribute("class", "task");
-  taskContainer.style.border = "3px solid black";
+    taskContainer.setAttribute('class', 'task');
+    
+    // When user clicks on the task, it gets crossed off
+    taskButton.setAttribute('type', 'radio');
+    taskButton.setAttribute('id', taskName);
+    taskButton.setAttribute('class', 'task-button');
+    taskButton.setAttribute('name', 'task-option');
+    taskButton.addEventListener('click', function() {
+        let currentTask = document.getElementById('current-task');
+            if (this.checked) {
+                currentTask.innerText = taskLabel.innerText;
+            }
+    });
 
-  // When user clicks on the task, it gets crossed off
-  taskButton.setAttribute("type", "radio");
-  taskButton.setAttribute("id", taskName);
-  taskButton.setAttribute("class", "task-button");
-  taskButton.setAttribute("name", "task-option");
-  taskButton.addEventListener("click", function (e) {
-    let currentTask = document.getElementById("current-task");
-    if (this.checked) {
-      currentTask.innerText = taskLabel.innerText;
-    }
-  });
+    taskLabel.setAttribute('class', 'task-label');
+    taskLabel.setAttribute('for', taskName);
+    taskLabel.innerText = taskName;
 
-  taskLabel.setAttribute("class", "task-label");
-  taskLabel.setAttribute("for", taskName);
-  taskLabel.innerText = taskName;
+    editButton.innerText = 'Edit';
+    doneButton.innerText = 'Done';
 
-  editButton.innerText = "Edit";
-  doneButton.innerText = "Done";
-  doneButton.style = "margin-left:50px";
+    // Check off task when complete
+    doneButton.addEventListener('click', () => {
+        if (taskButton.getAttribute('done') != 'true') {
+            taskButton.setAttribute('done', 'true');
+        } else {
+            taskButton.setAttribute('done', 'false');
+        }
+        
+    });
 
-  // Check off task when complete
-  doneButton.addEventListener("click", () => {
-    if (taskButton.getAttribute("done") != "true") {
-      taskButton.setAttribute("done", "true");
-    } else {
-      taskButton.setAttribute("done", "false");
-    }
-  });
-
-  taskContainer.appendChild(taskButton);
-  taskContainer.appendChild(taskLabel);
-  taskContainer.appendChild(editButton);
-  taskContainer.appendChild(doneButton);
-  setEditTask(taskLabel, editButton);
-  return taskContainer;
+    taskContainer.appendChild(taskButton);
+    taskContainer.appendChild(taskLabel);
+    taskContainer.appendChild(doneButton);
+    taskContainer.appendChild(editButton);
+    setEditTask(taskLabel, editButton);
+    return taskContainer;
 }
 
 /**
@@ -153,13 +153,13 @@ function setEditTask(taskLabel, editButton) {
  * @description Load content form a task to task form
  * @param content the content of the task
  */
-function loadForm(content) {
-  let taskName = document.getElementById("task-name");
-  document.getElementById("add-task-form").classList.remove("hidden");
-  taskName.value = content.innerText;
-  taskName.focus();
-  setTaskContent(content);
-  setSaveFlag(EDIT_ON);
+function loadForm(content){
+    let taskName = document.getElementById('task-name');
+    taskName.value = content.innerText;
+    document.getElementById('task-add-modal').showModal();
+    setTaskContent(content);
+    setSaveFlag(EDIT_ON);
+
 }
 
 /**
@@ -168,8 +168,8 @@ function loadForm(content) {
  * @description Clears Task List
  */
 function clearAllTasks() {
-  let taskList = document.getElementById("task-list");
-  taskList.innerHTML = "";
+    let taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
 }
 
 /**
@@ -178,27 +178,16 @@ function clearAllTasks() {
  * @description Clears Completed Tasks
  */
 function clearCompletedTasks() {
-  let taskList = document.getElementById("task-list");
-  let children = taskList.children;
-  for (let i = 0; i < children.length; i++) {
-    if (children[i].children[0].getAttribute("done") == "true") {
-      taskList.removeChild(children[i]);
-      i--;
+    let taskList = document.getElementById('task-list');
+    let children = taskList.children;
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].children[0].getAttribute('done') == 'true') {
+            taskList.removeChild(children[i]);
+            i--;
+        } 
     }
   }
 }
-
-/**
- * @name
- * @function
- * @description
- */
-
-/**
- * @name
- * @function
- * @description
- */
 
 /**
  * @name setSaveFlag
@@ -227,16 +216,11 @@ function setTaskContent(content) {
  * @param content is the task container
  */
 function inputSanitizer(input) {
-  if (input == "") return true;
-  return false;
+    if (input == '')
+        return true;
+    return false;
 }
 
-// Export all functions
-export {
-  addTaskButton,
-  cancelTask,
-  saveTask,
-  createCustomTaskTag,
-  clearAllTasks,
-  clearCompletedTasks,
-};
+
+ // Export all functions
+ export { addTaskButton, cancelTask, saveTask, createCustomTaskTag, clearAllTasks, selectTask, clearCompletedTasks };

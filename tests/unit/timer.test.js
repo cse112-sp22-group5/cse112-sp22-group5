@@ -218,15 +218,16 @@ describe("Test onReset function", () => {
                 <div id='breakReminder' style='color:#464646;'></div>
                 <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
         `;
-    timer.currState = "Work State";
-    onReset();
-    let timerDisplay = document.getElementById("timer-display").innerText;
-    let state = document.getElementById("state").innerText;
-    expect(timerDisplay).toBe("25:00");
-    expect(state).toBe("Work State");
-  }),
-    test("enables the start button", () => {
-      document.body.innerHTML = `
+        timer.currState = 'Work State';
+        onReset();
+        let timerdisplay = document.getElementById('timer-display').innerText;
+        let state = document.getElementById('state').innerText;
+        expect(timerdisplay).toBe('25:00');
+        expect(state).toBe('Work State');
+    }),
+
+    test('enables the start button', () => {
+        document.body.innerHTML = `
             <div id = 'timer-display'>14:00</div>
             <button type=button class='timer-button' id='start-button'>Start</button>
             <button type=button class='timer-button' id='reset-button'>Reset</button>
@@ -583,9 +584,9 @@ describe("Test settings modal", () => {
                 </div>
             </div>
         `;
-      let settingsModal = document.getElementById("settings-modal");
-      let display = settingsModal.style.display;
-      expect(display).toBe("");
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
+        expect(display).toBe('');
     }),
     test("settings button is disabled when modal open", () => {
       document.body.innerHTML = `
@@ -610,10 +611,10 @@ describe("Test settings modal", () => {
                 </div>
             </div>
         `;
-      revealSettings();
-      let settingsModal = document.getElementById("settings-modal");
-      let display = settingsModal.style.display;
-      expect(display).toBe("block");
+        revealSettings();
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
+        expect(display).toBe('block');
     }),
     test("closing modal enables settings button", () => {
       document.body.innerHTML = `
@@ -640,15 +641,15 @@ describe("Test settings modal", () => {
                 </div>
             </div>
         `;
-      revealSettings();
-      let settingsModal = document.getElementById("settings-modal");
-      let display = settingsModal.style.display;
-      expect(display).toBe("block");
+        revealSettings();
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
+        expect(display).toBe('block');
 
-      hideSettings();
-      settingsModal = document.getElementById("settings-modal");
-      display = settingsModal.style.display;
-      expect(display).toBe("none");
+        hideSettings();
+        settingsmodal = document.getElementById('settings-modal');
+        display = settingsmodal.style.display;
+        expect(display).toBe('none');
     }),
     test("calls revealSettings function when modal is opened", () => {
       document.body.innerHTML = `
@@ -672,9 +673,9 @@ describe("Test settings modal", () => {
                 </div>
             </div>
         `;
-      let closeSettingsBtn = document.getElementById("close-settings");
-      closeSettingsBtn.click();
-      expect(hideSettings).toBeCalled;
+        let closesettingsBtn = document.getElementById('close-settings');
+        closesettingsBtn.click();
+        expect(hideSettings).toBeCalled;
     });
 });
 
