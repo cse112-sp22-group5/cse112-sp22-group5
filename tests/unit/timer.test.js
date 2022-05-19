@@ -210,9 +210,9 @@ describe('Test onReset function', () => {
         `;
         timer.currState = 'Work State';
         onReset();
-        let timer-display = document.getElementById('timer-display').innerText;
+        let timerdisplay = document.getElementById('timer-display').innerText;
         let state = document.getElementById('state').innerText;
-        expect(timer-display).toBe('25:00');
+        expect(timerdisplay).toBe('25:00');
         expect(state).toBe('Work State');
     }),
 
@@ -581,8 +581,8 @@ describe('Test settings modal', () => {
                 </div>
             </div>
         `;
-        let settings-modal = document.getElementById('settings-modal');
-        let display = settings-modal.style.display;
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
         expect(display).toBe('');
     }),
 
@@ -611,8 +611,8 @@ describe('Test settings modal', () => {
             </div>
         `;
         revealSettings();
-        let settings-modal = document.getElementById('settings-modal');
-        let display = settings-modal.style.display;
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
         expect(display).toBe('block');
     }),
 
@@ -643,13 +643,13 @@ describe('Test settings modal', () => {
             </div>
         `;
         revealSettings();
-        let settings-modal = document.getElementById('settings-modal');
-        let display = settings-modal.style.display;
+        let settingsmodal = document.getElementById('settings-modal');
+        let display = settingsmodal.style.display;
         expect(display).toBe('block');
 
         hideSettings();
-        settings-modal = document.getElementById('settings-modal');
-        display = settings-modal.style.display;
+        settingsmodal = document.getElementById('settings-modal');
+        display = settingsmodal.style.display;
         expect(display).toBe('none');
     }),
 
@@ -676,8 +676,8 @@ describe('Test settings modal', () => {
                 </div>
             </div>
         `;
-        let close-settingsBtn = document.getElementById('close-settings');
-        close-settingsBtn.click();
+        let closesettingsBtn = document.getElementById('close-settings');
+        closesettingsBtn.click();
         expect(hideSettings).toBeCalled;
     });
 });

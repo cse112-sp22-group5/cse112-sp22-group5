@@ -91,7 +91,6 @@ function createCustomTaskTag(taskName) {
     let doneButton = document.createElement('button');
 
     taskContainer.setAttribute('class', 'task');
-    taskContainer.style.border = '3px solid black';
     
     // When user clicks on the task, it gets crossed off
     taskButton.setAttribute('type', 'radio');
@@ -111,7 +110,6 @@ function createCustomTaskTag(taskName) {
 
     editButton.innerText = 'Edit';
     doneButton.innerText = 'Done';
-    doneButton.style = 'margin-left:50px';
 
     // Check off task when complete
     doneButton.addEventListener('click', () => {
@@ -125,8 +123,8 @@ function createCustomTaskTag(taskName) {
 
     taskContainer.appendChild(taskButton);
     taskContainer.appendChild(taskLabel);
-    taskContainer.appendChild(editButton);
     taskContainer.appendChild(doneButton);
+    taskContainer.appendChild(editButton);
     setEditTask(taskLabel, editButton);
     return taskContainer;
 }

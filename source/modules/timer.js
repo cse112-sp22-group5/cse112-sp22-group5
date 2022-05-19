@@ -78,6 +78,7 @@ function checkState() {
         timer.currDuration = NUM_SEC * POMO_MINS;
         document.getElementById('state').innerText = WORK_STATE;
         document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
+        document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
     } 
     else {
         // long break state
@@ -115,6 +116,7 @@ function checkState() {
 function updateState() {
     // if the current state is a work state, next state a break
     if(timer.currState === WORK_STATE) {
+        document.getElementById('tasks').className = 'tasks'; 
         // next state is a long break 
         if(timer.counter.totalPomos % LONG_MOD === 0) {
             timer.currState = LONG_STATE;
@@ -192,12 +194,10 @@ function updateTimer(duration) {
             // if curr state is work state, update the streak and total pomo count
             if(timer.currState === WORK_STATE) {                
                 timer.counter.streak++;
-                document.getElementById('streak').innerText = 
-                    timer.counter.streak;
+                document.getElementById('streak').innerText = timer.counter.streak;
         
                 timer.counter.totalPomos++;
-                document.getElementById('total').innerText = 
-                    timer.counter.totalPomos;
+                document.getElementById('total').innerText = timer.counter.totalPomos;
             } else {
                 document.querySelector('#form-enabler').removeAttribute('disabled');
             }
@@ -301,6 +301,8 @@ function onReset() {
                     timer.counter.streak;
     clearInterval(timerId);
     checkState();
+    document.getElementById('tasks').className = 'tasks';
+
 }
 
 /**
@@ -309,8 +311,7 @@ function onReset() {
  * @description Opens the settings modal when the settings button is clicked
  */
 function revealSettings() {
-    const settingsModal = document.getElementById('settings-dialog');
-    settingsModal.showModal();
+    document.getElementById('settings-modal').showModal();
 }
 
 /**
@@ -318,11 +319,12 @@ function revealSettings() {
  * @description Closes the settings modal when the 'x' inside the modal or anywhere outside of the modal is clicked
  */
 function hideSettings() {
-    const settingsModal = document.getElementById('settings-dialog');
-    settingsModal.close();
+    document.getElementById('settings-modal').close();
+
     if(document.getElementById('warning').innerText === 'Work Periods must be greater than Break Periods'){
         document.getElementById('warning').style.display = 'none';
     }
+    document.getElementById('settings-button').disabled = false; 
 }
 
 /**
