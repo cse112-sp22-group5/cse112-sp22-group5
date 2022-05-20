@@ -4,16 +4,20 @@ let
     /** @type {string[]} */
     CURRENT_TRACKS = [];
 
-    // TO-DO: Find a better place to store the audio files
 const
     /** @type {string[][]} */
     LOFI_TRACKS = [
-        ['./audio/HoliznaCC0-Letting-Go-Of-The-Past.mp3', 'Letting Go of the Past by HoliznaCC0'],
-        ['./audio/HoliznaCC0-Ghosts.mp3', 'Ghosts by HoliznaCC0'] // 1st track played
+        ['./audio/HoliznaCC0-Nowhere-To-Be-Nothing-To-Do.mp3', 'Nowhere To Be, Nothing To Do by HoliznaCC0'],
+        ['./audio/Audiobinger-City-Lights.mp3', 'City Lights by Audiobinger'], // 1st track played
+        ['./audio/HoliznaCC0-Sense-Of-Purpose.mp3', 'Sense Of Purpose by HoliznaCC0'],
+        ['./audio/HoliznaCC0-Ghosts.mp3', 'Ghosts by HoliznaCC0'],
+        ['./audio/HoliznaCC0-Letting-Go-Of-The-Past.mp3', 'Letting Go Of The Past by HoliznaCC0']
     ],
     /** @type {string[][]} */
     CLASSICAL_TRACKS = [
-        ['./audio/Waltz-Tchaikovsky-Op40.mp3', 'Waltz (Tchaikovsky Op. 40) by Kevin MacLeod'] // 1st track played
+        ['./audio/Erik-Satie-Gymnopedie-No1.mp3', 'Satie - Gymnopedie No. 1 by MacLeod'],
+        ['./audio/Tchaikovsky-Waltz-No9-Op40.mp3', 'Tchaikovsky - Waltz No. 9 Op. 40 by MacLeod'], // 1st track played
+        ['./audio/Mozart-Piano-Sonata-in-B-flat major-III-Allegretto-Grazioso.mp3', 'Mozart - Piano Sonata No. 13, K. 333 III. by Kinsella']
     ];
 
 /**
@@ -61,8 +65,16 @@ function setTrackToNext() {
     bgAudio.pause();
     CURRENT_TRACK_INDX = (CURRENT_TRACK_INDX + 1) % CURRENT_TRACKS.length;
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]); 
-    bgAudio.play();
-    currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+    let playSuccess = bgAudio.play();
+    if (playSuccess !== undefined) {
+        playSuccess.then(_ => {
+            // Autoplay started!
+            currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+        }).catch(error => {
+            // Autoplay was prevented.
+            currentTrackName.innerHTML = 'Error playing track'; // display error
+        });
+    }
 }
 
 /**
@@ -79,8 +91,16 @@ function setTrackToPrev() {
         CURRENT_TRACK_INDX = CURRENT_TRACKS.length - 1;
     }
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]);  
-    bgAudio.play();
-    currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+    let playSuccess = bgAudio.play();
+    if (playSuccess !== undefined) {
+        playSuccess.then(_ => {
+            // Autoplay started!
+            currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+        }).catch(error => {
+            // Autoplay was prevented.
+            currentTrackName.innerHTML = 'Error playing track'; // display error
+        });
+    }
 }
 
 // export functions and variables for testing
