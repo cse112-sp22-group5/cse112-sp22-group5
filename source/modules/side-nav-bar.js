@@ -1,24 +1,53 @@
+/********************* NOTE *******************
+ * ********************************************
+ * To add more side content to the side bar:
+ * Under side-nav-bar add:
+ *  - add  <i class="menu-icon" id="<new-content-go-herer-icon>" data-associated-div="<new-content-go-here-div>" title="<optional>">
+ *  - add <img class="icon" src="link/to/your/icon" >
+ * Add new side bar content div:
+ *  - <div class="sidebar-content" id="<new-content-gohere-div">
+ * Update global variables
+ * */
+
+const CONTENT_DIV = {
+  "help-div": false,
+  "setting-div": false,
+  "tasks-div": false,
+};
+const CONTENT_ICONS = {
+  "help-icon": false,
+  "setting-icon": false,
+  "tasks-icon": false,
+};
+/**
+ * @name setdivWidth
+ * @function
+ * @description Calculate sidebar content based on window width
+ * @param {integer} windowWidth
+ * @returns width of sidebar content in percent
+ */
 function setdivWidth(windowWidth) {
-  windowWidth < 500 ? 100 : 35; // window size
   if (windowWidth > 1500) return 30;
   else if (windowWidth > 1200) return 45;
   else if (windowWidth > 700) return 50;
   else return 100;
 }
 
+/**
+ * @name toggleMenu
+ * @function
+ * @description toggle side content
+ * @param {string} divID id of the content
+ */
 function toggleMenu(divID) {
-  let obj = {
-    "help-div": false,
-    "setting-div": false,
-    "tasks-div": false,
-  };
-  if (obj.hasOwnProperty(divID)) obj[divID] = true;
-  for (const key in obj) {
-    if (obj[key] === true) {
+  let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
+  if (content_div.hasOwnProperty(divID)) content_div[divID] = true;
+  for (const key in content_div) {
+    if (content_div[key] === true) {
       const sideBarWidth = 70; // px
       let divWidth = 100; // %
       let windowWidth = window.innerWidth;
-      //
+
       let sideBarWidthPercentage = Math.round(
         (sideBarWidth / windowWidth) * 100
       );
@@ -29,7 +58,7 @@ function toggleMenu(divID) {
       }%`;
       document.getElementById(
         key
-      ).style.padding = `60px 0% 0px ${sideBarWidthPercentage}%`;
+      ).style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
     } else {
       document.getElementById(key).style.width = "0";
       document.getElementById(key).style.padding = "0";
@@ -37,15 +66,17 @@ function toggleMenu(divID) {
   }
 }
 
-function setButtons(btnID) {
-  let buttons = {
-    "help-icon": false,
-    "setting-icon": false,
-    "tasks-icon": false,
-  };
-  if (buttons.hasOwnProperty(btnID)) buttons[btnID] = true;
-  for (const key in buttons) {
-    if (buttons[key])
+/**
+ * @name setIconBackGround
+ * @function
+ * @description Set background of the icon when it is clicked
+ * @param {string} btnID button id
+ */
+function setIconBackGround(btnID) {
+  let content_icons = JSON.parse(JSON.stringify(CONTENT_ICONS));
+  if (content_icons.hasOwnProperty(btnID)) content_icons[btnID] = true;
+  for (const key in content_icons) {
+    if (content_icons[key])
       document.getElementById(key).classList.add("button-clicked");
     else document.getElementById(key).classList.remove("button-clicked");
   }
@@ -54,13 +85,13 @@ function setButtons(btnID) {
 document.querySelectorAll(".menu-icon").forEach((elem) => {
   elem.addEventListener("click", (event) => {
     const id = elem.getAttribute("data-associated-div");
-    let side = document.getElementById(id).offsetWidth;
+    const side = document.getElementById(id).offsetWidth;
     if (side === 0) {
       toggleMenu(id);
-      setButtons(elem.getAttribute("id"));
+      setIconBackGround(elem.getAttribute("id"));
     } else {
       toggleMenu(null);
-      setButtons(null);
+      setIconBackGround(null);
     }
   });
 });
