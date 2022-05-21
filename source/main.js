@@ -25,9 +25,9 @@ document.addEventListener('keydown', (event) => {
 
 // Modals
 document.getElementById('help-button').addEventListener('click', revealHelp);
-document.getElementById('close-modal-x').addEventListener('click', hideHelp);
+// document.getElementById('close-modal-x').addEventListener('click', hideHelp);
 document.getElementById('settings-button').addEventListener('click', revealSettings);
-document.getElementById('close-settings-btn').addEventListener('click', hideSettings);
+// document.getElementById('close-settings-btn').addEventListener('click', hideSettings);
 
 document.getElementById('bg-music').addEventListener('change', setBackgroundMusic);
 

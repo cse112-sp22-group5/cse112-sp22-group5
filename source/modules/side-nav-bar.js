@@ -12,10 +12,10 @@ function setdivWidth (windowWidth) {
 
 function toggleMenu(divID) {
     let obj = {
-      "help-div": false,
-      "setting-div" : false,
-      "tasks-div"   : false,
-    }
+      'help-div': false,
+      'setting-div' : false,
+      'tasks-div'   : false,
+    };
     if (obj.hasOwnProperty(divID))
       obj[divID] = true;
     for(const key in obj) {
@@ -32,43 +32,43 @@ function toggleMenu(divID) {
         document.getElementById(key).style.padding = `60px 0% 0px ${sideBarWidthPercentage}%`;
       }
       else {
-        document.getElementById(key).style.width = "0"; 
-        document.getElementById(key).style.padding = "0";
+        document.getElementById(key).style.width = '0'; 
+        document.getElementById(key).style.padding = '0';
       }
     }
     
   }
   
 function setButtons (btnID) {
-let buttons = {
-    "help-icon": false,
-    "setting-icon" : false,
-    "tasks-icon"   : false,
-}
-    if (buttons.hasOwnProperty(btnID))
-    buttons[btnID] = true;
-for(const key in buttons) {
-    if (buttons[key])
-        document.getElementById(key).classList.add("button-clicked");
-    else
-        document.getElementById(key).classList.remove("button-clicked");
-}
+  let buttons = {
+      'help-icon': false,
+      'setting-icon' : false,
+      'tasks-icon'   : false,
+  };
+      if (buttons.hasOwnProperty(btnID))
+      buttons[btnID] = true;
+  for(const key in buttons) {
+      if (buttons[key])
+          document.getElementById(key).classList.add('button-clicked');
+      else
+          document.getElementById(key).classList.remove('button-clicked');
+  }
 }
   
   
-document.querySelectorAll(".menu-icon").forEach((elem) => {
-elem.addEventListener("click", (event) => {
-    const id = elem.getAttribute("data-associated-div");
+document.querySelectorAll('.menu-icon').forEach((elem) => {
+elem.addEventListener('click', (event) => {
+    const id = elem.getAttribute('data-associated-div');
     let side = document.getElementById(id).offsetWidth;
     if (side === 0) {
     toggleMenu(id);
-    setButtons(elem.getAttribute("id"));
+    setButtons(elem.getAttribute('id'));
     }
     else {
     toggleMenu(null);
-    setButtons(null)
+    setButtons(null);
     }
-})
-})
+});
+});
   
   
