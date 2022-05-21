@@ -1,0 +1,52 @@
+:root {
+    --side-bar-width: 70px;
+}
+  
+.side-nav-bar {
+    height: 100%;
+    width: var(--side-bar-width);
+    position: fixed;
+    z-index: 2; 
+    top: 0;
+    left: 0;
+    background-color: rgb(28,42,71);
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.side-nav-bar a {
+    padding: 20px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    /*   border-radius: 50%; */  
+}
+
+.side-nav-bar a:hover {
+    background-color: #f1f1f1;
+}
+
+.icon {
+    width: 30px;
+}
+
+.sidebar-content {
+    height: 100%;
+    width: 0%;
+    position: fixed; 
+    z-index: 1; /* Stay on top */
+    top: 0; 
+    left: 0;
+    background-color: #f1f1f1; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+   /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  /*   outline: black solid 1px; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.button-clicked {
+    background-color: #f1f1f1;
+}

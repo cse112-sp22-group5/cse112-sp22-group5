@@ -9,6 +9,8 @@ import { revealHelp, hideHelp } from './modules/help.js';
 import { setBackgroundMusic } from './modules/background-music.js';
 import { addTaskButton, cancelTask, saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
 
+import './modules/side-nav-bar.js';
+
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
 document.getElementById('start-button').addEventListener('click', onStart);
