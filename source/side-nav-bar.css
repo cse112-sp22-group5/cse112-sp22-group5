@@ -15,12 +15,13 @@
 }
 
 .side-nav-bar a {
-    padding: 20px;
+    margin: 10px;
+    padding: 10px 5px 10px 15px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-    /*   border-radius: 50%; */  
+    border-radius: 50%;  
 }
 
 .side-nav-bar a:hover {
@@ -28,7 +29,7 @@
 }
 
 .icon {
-    width: 30px;
+    width: 20px;
 }
 
 .sidebar-content {
