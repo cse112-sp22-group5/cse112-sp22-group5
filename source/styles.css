@@ -283,7 +283,7 @@ fieldset select {
 }
 
 /******** TASK LIST ********/
-.tasks {
+/* .tasks {
   width: 60%;
   height: 40vh;
   margin: 0 auto;
@@ -367,7 +367,7 @@ fieldset select {
   margin: 0 6px;
   padding: 6px 24px;
   font-size: 24px;
-}
+} */
 
 /********** MODALS *************/
 

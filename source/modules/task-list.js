@@ -30,7 +30,7 @@ function cancelTask() {
     document.getElementById('task-name').value = '';
     setSaveFlag(SAVE_ON);
     setTaskContent(null);
-    document.getElementById('task-add-modal').close();
+    //document.getElementById('task-add-modal').close();
 }
 
 /**
@@ -87,45 +87,71 @@ function createCustomTaskTag(taskName) {
     let taskContainer = document.createElement('li');
     let taskLabel = document.createElement('label');
     let taskButton = document.createElement('input');
-    let editButton = document.createElement('button');
-    let doneButton = document.createElement('button');
+    let editButton = document.createElement('i');
+    let removeButton = document.createElement('i');
+    let threeDots = document.createElement('i');
+    let circleIcon = document.createElement('img');
 
     taskContainer.setAttribute('class', 'task');
     
     // When user clicks on the task, it gets crossed off
-    taskButton.setAttribute('type', 'radio');
+    taskButton.setAttribute('type', 'checkbox');
     taskButton.setAttribute('id', taskName);
     taskButton.setAttribute('class', 'task-button');
+    taskButton.setAttribute('visibility', 'hidden');
     taskButton.setAttribute('name', 'task-option');
-    taskButton.addEventListener('click', function() {
+    taskContainer.addEventListener('click', function() {
         let currentTask = document.getElementById('current-task');
-            if (this.checked) {
                 currentTask.innerText = taskLabel.innerText;
-            }
+
     });
 
     taskLabel.setAttribute('class', 'task-label');
     taskLabel.setAttribute('for', taskName);
     taskLabel.innerText = taskName;
+    taskLabel.contentEditable = false;
 
-    editButton.innerText = 'Edit';
-    doneButton.innerText = 'Done';
-
+    editButton.innerHTML = '<img class="icon" src="./img/icons/edit-icon.svg" >'
+    removeButton.innerHTML = '<img class="icon" src="./img/icons/delete-icon.svg" >';
+    threeDots.innerHTML  = '<img class="icon" src="./img/icons/three-dots-icon.svg" >';
+    circleIcon.src       = './img/icons/blank-check-circle-icon.svg';
+    circleIcon.style.width= '15px';
+    
     // Check off task when complete
-    doneButton.addEventListener('click', () => {
+    circleIcon.addEventListener('click', () => {
         if (taskButton.getAttribute('done') != 'true') {
             taskButton.setAttribute('done', 'true');
+            circleIcon.src = './img/icons/check-circle-icon.svg';
+
         } else {
             taskButton.setAttribute('done', 'false');
+            circleIcon.src = './img/icons/blank-check-circle-icon.svg';
         }
-        
     });
-
+    taskContainer.appendChild(circleIcon);
     taskContainer.appendChild(taskButton);
     taskContainer.appendChild(taskLabel);
-    taskContainer.appendChild(doneButton);
+    taskContainer.appendChild(threeDots);
+    taskContainer.appendChild(removeButton);
     taskContainer.appendChild(editButton);
-    setEditTask(taskLabel, editButton);
+  
+    // edit task label
+    editButton.addEventListener('click', () => {
+        taskLabel.contentEditable = true;
+        taskLabel.focus();
+        taskLabel.addEventListener('keypress', (event) => {
+            if (event.key == 'Enter') {
+                taskLabel.contentEditable = false;
+                taskLabel.classList.remove('edit-label');
+            }
+
+        });
+    });
+
+    // remove task
+    removeButton.addEventListener('click', () => {
+        taskContainer.remove();
+    });
     return taskContainer;
 }
 
@@ -151,7 +177,7 @@ function setEditTask(taskLabel, editButton) {
 function loadForm(content){
     let taskName = document.getElementById('task-name');
     taskName.value = content.innerText;
-    document.getElementById('task-add-modal').showModal();
+//    document.getElementById('task-add-modal').showModal();
     setTaskContent(content);
     setSaveFlag(EDIT_ON);
 
@@ -176,7 +202,7 @@ function clearCompletedTasks() {
     let taskList = document.getElementById('task-list');
     let children = taskList.children;
     for (let i = 0; i < children.length; i++) {
-        if (children[i].children[0].getAttribute('done') == 'true') {
+        if (children[i].children[1].getAttribute('done') == 'true') {
             taskList.removeChild(children[i]);
             i--;
         } 
