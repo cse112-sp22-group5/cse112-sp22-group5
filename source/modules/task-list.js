@@ -114,18 +114,16 @@ function createCustomTaskTag(taskName) {
     editButton.innerHTML = '<img class="icon" src="./img/icons/edit-icon.svg" >'
     removeButton.innerHTML = '<img class="icon" src="./img/icons/delete-icon.svg" >';
     threeDots.innerHTML  = '<img class="icon" src="./img/icons/three-dots-icon.svg" >';
-    circleIcon.src       = './img/icons/blank-check-circle-icon.svg';
-    circleIcon.style.width= '15px';
-    
+    circleIcon.src       = './img/icons/check-circle-icon-white.svg';
     // Check off task when complete
     circleIcon.addEventListener('click', () => {
         if (taskButton.getAttribute('done') != 'true') {
             taskButton.setAttribute('done', 'true');
-            circleIcon.src = './img/icons/check-circle-icon.svg';
+            circleIcon.src = './img/icons/check-circle-icon-black.svg';
 
         } else {
             taskButton.setAttribute('done', 'false');
-            circleIcon.src = './img/icons/blank-check-circle-icon.svg';
+            circleIcon.src = './img/icons/check-circle-icon-white.svg';;
         }
     });
     taskContainer.appendChild(circleIcon);
