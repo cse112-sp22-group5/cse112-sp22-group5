@@ -1,5 +1,6 @@
 :root {
     --side-bar-width: 70px;
+    --clr-icon-highlight: #12769d;
 }
   
 .side-nav-bar {
@@ -19,13 +20,13 @@
     padding: 10px 5px 10px 15px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: white;
     display: block;
     border-radius: 50%;  
 }
 
 .side-nav-bar >*:hover {
-    background-color: #f1f1f1;
+    background-color: var(--clr-icon-highlight);
     cursor: pointer;
 }
 
@@ -50,13 +51,13 @@
 }
 
 .button-clicked {
-    background-color: #f1f1f1;
+    background-color: var(--clr-icon-highlight);
 }
 
 
 /*===================== task list================================= */
 .button-clicked {
-    background-color: #f1f1f1;
+    background-color: var(--clr-icon-highlight);
 }
 
 #tasks-div,#bottom{
@@ -74,7 +75,7 @@
   border-radius: 5px 5px 0 0;
   padding-left: 10px;
   text-align: left;
-  font-family: Arial, Helvetica, sans-serif;;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
 

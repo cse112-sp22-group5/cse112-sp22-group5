@@ -272,7 +272,7 @@ fieldset select {
 
 .settings-label {
   background-color: var(--clr-gray);
-  height: 50px;
+  padding: 20px;
   
 }
 
