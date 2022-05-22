@@ -95,3 +95,18 @@ document.querySelectorAll(".menu-icon").forEach((elem) => {
     }
   });
 });
+
+window.addEventListener('resize', () => {
+  toggleMenu(null);
+  setIconBackGround(null);
+});
+
+window.addEventListener('click', (event) => {
+  const windowWidth = window.innerWidth
+  const divWidth = setdivWidth(windowWidth);
+  if ((event.clientX/windowWidth * 100) >= divWidth)
+  {
+    toggleMenu(null);
+    setIconBackGround(null);
+  }
+});
