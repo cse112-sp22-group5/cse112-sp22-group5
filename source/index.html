@@ -112,7 +112,7 @@
     </div>
     <div class="sidebar-content" id="setting-div">
         <h2 >Timer Settings</h2>
-        <h3 id='settings-label'>Time (minutes)</h3>
+        <h3 class='settings-label'>Time (minutes)</h3>
             <form id='time-limits'>
                 <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
                 <fieldset id='form-enabler'>
@@ -140,7 +140,7 @@
     
                 <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                 <fieldset>
-                    <h3 id='settings-label'>Background Music</h3>
+                    <h3 class='settings-label'>Background Music</h3><br>
                     <select name='bg-music' id='bg-music'>
                         <option id='bg-music-option-none' value='None' selected>None</option>
                         <option id='bg-music-option-lofi' value='Lofi'>Lofi</option>
@@ -155,22 +155,17 @@
                     <button type=button id='nxtTrackButton'  style='position: relative;'>Next</button>
                 </div>
     
-                <ul class='switches'>
-                    <li>
-                        <h3 id='settings-label'>Keyboard Shortcuts</h3>
-                        <input type='radio' id='keyboard-toggle' name="keyboard-on" checked>
-                        <label for='keyboard-on'>On</label>
-                        <input type='radio' id='keyboard-toggle' name="keyboard-off">
-                        <label for='keyboard-off'>Off</label>
-                    </li>
-                    <li>
-                        <h3 id='settings-label'>Audio Alarm</h3>
-                        <input type='radio' id='notif-toggle' name="notif-on" checked>
-                        <label for='notif-on'>On</label>
-                        <input type='radio' id='notif-toggle' name="notif-off">
-                        <label for='notif-off'>Off</label>
-                    </li>
-                </ul>
+                    <h3 class='settings-label'>Keyboard Shortcuts</h3>
+                    <input type='radio' id='keyboard-on' name="keyboard-toggle" checked>
+                    <label for='keyboard-on'>On</label><br>
+                    <input type='radio' id='keyboard-off' name="keyboard-toggle">
+                    <label for='keyboard-off'>Off</label>
+
+                    <h3 class='settings-label'>Audio Alarm</h3>
+                    <input type='radio' id='notif-on' name="notif-toggle" checked>
+                    <label for='notif-on'>On</label><br>
+                    <input type='radio' id='notif-off' name="notif-toggle">
+                    <label for='notif-off'>Off</label>
             </form>    
     </div>
     <div class="sidebar-content" id="tasks-div">

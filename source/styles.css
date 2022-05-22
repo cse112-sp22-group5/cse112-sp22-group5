@@ -270,6 +270,12 @@ fieldset select {
   background: #efefef;
 }
 
+.settings-label {
+  background-color: var(--clr-gray);
+  height: 50px;
+  
+}
+
 
 /******** CURRENT TASK ********/
 .current-task * {
