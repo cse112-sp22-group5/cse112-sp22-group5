@@ -7,7 +7,7 @@ import { revealHelp, hideHelp } from './modules/help.js';
 // import { colorChange } from './modules/color-change.js';
 // import { breakReminders } from './modules/break-reminder.js';
 import { setBackgroundMusic } from './modules/background-music.js';
-import { addTaskButton, cancelTask, saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
+import { saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
 
 import './modules/side-nav-bar.js';
 
@@ -32,12 +32,10 @@ document.getElementById('settings-button').addEventListener('click', revealSetti
 document.getElementById('bg-music').addEventListener('change', setBackgroundMusic);
 
 // Task List
-//document.getElementById('add-tasks-button').addEventListener('click', addTaskButton);
 document.getElementById('task-name').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') // allow user to hit enter to save task
         saveTask();
 });
 document.getElementById('save-button').addEventListener('click', saveTask);
-//document.getElementById('cancel-button').addEventListener('click', cancelTask);
 document.getElementById('clear-tasks-button').addEventListener('click', clearAllTasks);
 document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
