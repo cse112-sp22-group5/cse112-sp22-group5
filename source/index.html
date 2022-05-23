@@ -63,25 +63,28 @@
     <footer>
         <p>Made by the <a href="../index.html">Dream Team</a></p>
         <p>Taken by the 10x Racoons</p>
+        <a href="https://www.flaticon.com/free-icons/question-mark" title="question mark icons">Question mark icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Freepik - Flaticon</a>
     </footer>
 
 
     <!-- Side navigation bar -->
     <div class="side-nav-bar">
         <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help">
-            <img class="icon" src="./img/icons/question-mark-icon.svg" >
+            <img class="icon" src="./img/icons/question-mark.svg" >
         </i>
         <i class="menu-icon" id="setting-icon" data-associated-div="setting-div" title="setting">
-            <img  class="icon" src="./img/icons/icons8-setting-48.svg" >
+            <img  class="icon" src="./img/icons/settings.svg" >
+            
         </i>
-        <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="task list">
-            <img  class="icon" src="./img/icons/icons8-todo-list-64.svg" >
+        <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="tasks list">
+            <img  class="icon" src="./img/icons/task-list.svg" >
         </i>
     </div>
 
     <!-- Side bar contents-->
     <div class="sidebar-content" id="help-div">
-        <h3>What is a Pomodoro Timer?<span class="close-modal-btn" id='close-modal-x' name="question-div" onclick="toggleMenu(this.name)" >&times;</span></h3>
+        <h3>What is a Pomodoro Timer?</h3>
               <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                   Work intervals are typically 25 minutes long with five minute breaks between each interval. 
                   A longer 15 minute break occurs between every fourth and fifth interval.</p>
@@ -96,69 +99,63 @@
               </ol>
     </div>
     <div class="sidebar-content" id="setting-div">
-        <h3>Select lengths for <span  class="close-modal-btn" id='close-settings-btn' name="setting-div" onclick="toggleMenu(this.name)">&times;</span></h3>
-              
-              <form id='time-limits'>
-                  <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
-                  <fieldset id='form-enabler'>
-                      <label id='workLabel'>Work Session</label> 
-                      <select name='workTime' id='work-time'>
-                          <option id='workOption25' value='25' selected>25</option>
-                          <option id='workOption30' value='30'>30</option>
-                          <option id='workOption45' value='45'>45</option>
-                          <option id='workOption60' value='60'>60</option>
-                      </select>
-                      <label id='shortBreakLabel'>Short Break</label>
-                      <select name='shortBreakTime' id='shortBreakTime'>
-                          <option id='sbOption5' value='5' selected>5</option>
-                          <option id='sbOption10' value='10'>10</option>
-                          <option id='sbOption15' value='15'>15</option>
-                      </select>
-                      <label id='longBreakLabel'>Long Break</label>
-                      <select name='longBreakTime' id='longBreakTime'>
-                          <option id='lbOption15' value='15' selected>15</option>
-                          <option id='lbOption20' value='20'>20</option>
-                          <option id='lbOption25' value='25'>25</option>
-                          <option id='lbOption30' value='30'>30</option>
-                      </select>
-                  </fieldset>  
-      
-                  <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
-                  <fieldset>
-                      <label id='bg-music-label'>Background Music</label>
-                      <select name='bg-music' id='bg-music'>
-                          <option id='bg-music-option-none' value='None' selected>None</option>
-                          <option id='bg-music-option-lofi' value='Lofi'>Lofi</option>
-                          <option id='bg-music-option-classical' value='Classical'>Classical</option>
-                      </select>
-                  </fieldset>
-                  
-                  <div id='current-mix' style='display: none;'>
-                      <p id='track-name'></p>
-                      <audio id='background-audio' controls></audio>
-                      <button type=button id='prevTrackButton' style='position: relative;'>Prev</button>
-                      <button type=button id='nxtTrackButton'  style='position: relative;'>Nxt</button>
-                  </div>
-      
-                  
-      
-                  <ul class='switches'>
-                      <li>
-                        <input type='checkbox' id='notifToggle' checked>
-                        <label for='notifToggle'>
-                          <span>Audio Alarm</span>
-                          <span></span>
-                        </label>
-                      </li>
-                      <li>
-                          <input type='checkbox' id='keyboardToggle' checked>
-                          <label for='keyboardToggle'>
-                            <span>Keyboard Shortcuts</span>
-                            <span></span>
-                          </label>
-                        </li>
-                  </ul>
-              </form>    
+        <h2 >Timer Settings</h2>
+        <h3 class='settings-label'>Time (minutes)</h3>
+            <form id='time-limits'>
+                <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
+                <fieldset id='form-enabler'>
+                    <label id='workLabel'>Work Session</label> 
+                    <select name='workTime' id='work-time'>
+                        <option id='workOption25' value='25' selected>25</option>
+                        <option id='workOption30' value='30'>30</option>
+                        <option id='workOption45' value='45'>45</option>
+                        <option id='workOption60' value='60'>60</option>
+                    </select>
+                    <label id='shortBreakLabel'>Short Break</label>
+                    <select name='shortBreakTime' id='shortBreakTime'>
+                        <option id='sbOption5' value='5' selected>5</option>
+                        <option id='sbOption10' value='10'>10</option>
+                        <option id='sbOption15' value='15'>15</option>
+                    </select>
+                    <label id='longBreakLabel'>Long Break</label>
+                    <select name='longBreakTime' id='longBreakTime'>
+                        <option id='lbOption15' value='15' selected>15</option>
+                        <option id='lbOption20' value='20'>20</option>
+                        <option id='lbOption25' value='25'>25</option>
+                        <option id='lbOption30' value='30'>30</option>
+                    </select>
+                </fieldset>  
+    
+                <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
+                <h3 class='settings-label'>Background Music</h3><br>
+                <fieldset>
+                    
+                    <select name='bg-music' id='bg-music'>
+                        <option id='bg-music-option-none' value='None' selected>None</option>
+                        <option id='bg-music-option-lofi' value='Lofi'>Lofi</option>
+                        <option id='bg-music-option-classical' value='Classical'>Classical</option>
+                    </select>
+                </fieldset>
+                
+                <div id='current-mix' style='display: none;'>
+                    <p id='track-name'></p>
+                    <audio id='background-audio' controls></audio>
+                    <button type=button id='prevTrackButton' style='position: relative;'>Prev</button>
+                    <button type=button id='nxtTrackButton'  style='position: relative;'>Next</button>
+                </div>
+    
+                    <h3 class='settings-label'>Keyboard Shortcuts</h3>
+                    <input type='radio' id='keyboard-on' name="keyboard-toggle" checked>
+                    <label for='keyboard-on'>On</label><br>
+                    <input type='radio' id='keyboard-off' name="keyboard-toggle">
+                    <label for='keyboard-off'>Off</label>
+
+                    <h3 class='settings-label'>Audio Alarm</h3>
+                    <input type='radio' id='notif-on' name="notif-toggle" checked>
+                    <label for='notif-on'>On</label><br>
+                    <input type='radio' id='notif-off' name="notif-toggle">
+                    <label for='notif-off'>Off</label>
+            </form>    
     </div>
     <div class="sidebar-content" id="tasks-div">
         <h2>Tasks</h2>
