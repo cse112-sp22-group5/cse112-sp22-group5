@@ -67,10 +67,10 @@ function setBackgroundMusic() {
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]); 
     let playSuccess = bgAudio.play();
     if (playSuccess !== undefined) {
-        playSuccess.then(_ => {
+        playSuccess.then(() => {
             // Autoplay started!
             currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
-        }).catch(error => {
+        }).catch(() => {
             // Autoplay was prevented.
             currentTrackName.innerHTML = 'Error playing track'; // display error
         });
@@ -93,10 +93,10 @@ function setBackgroundMusic() {
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]);  
     let playSuccess = bgAudio.play();
     if (playSuccess !== undefined) {
-        playSuccess.then(_ => {
+        playSuccess.then(() => {
             // Autoplay started!
             currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
-        }).catch(error => {
+        }).catch(() => {
             // Autoplay was prevented.
             currentTrackName.innerHTML = 'Error playing track'; // display error
         });
