@@ -11,6 +11,16 @@ let
     /** @type {number} **/ 
     LONG_MINS = 15;
 
+let
+    /** @type {string} **/
+    startKey = 'Space',
+    /** @type {string} **/
+    volumeUpKey = 'ArrowUp',
+    /** @type {string} **/
+    volumneDownKey = 'ArrowDown',
+    /** @type {boolean} **/
+    isCustomizingKey = false;
+
 const 
     /** @constant @type {string} **/ 
     WORK_STATE = 'Work State', 
@@ -334,8 +344,8 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 function keyboardShortcut(event) {
-    if (document.getElementById('keyboard-toggle').checked){
-        if(event.code === 'Space') {
+    if (document.getElementById('keyboard-toggle').checked && !isCustomizingKey){
+        if(event.code === startKey) {
             // if the timer is static, start timer
             if(document.getElementById('start-button').disabled == false ) {
                 onStart();
@@ -347,10 +357,53 @@ function keyboardShortcut(event) {
                 }
             }
         }
+
+        if(event.code === volumeUpKey) {
+            let curVol = document.getElementById('alarm-volume').value
+            document.getElementById('alarm-volume').value = parseInt(curVol) + 10;
+        }
+        if(event.code === volumneDownKey) {
+            let curVol = document.getElementById('alarm-volume').value
+            document.getElementById('alarm-volume').value = parseInt(curVol) - 10;
+        }
+
+        event.preventDefault();
+    }
+}
+
+/**
+ * @name customizeKey
+ * @description Allows for keyboard shortcuts to be customized
+ */
+function customizeKey() {
+    // check to see which keyboard customization button was pressed
+    if(document.getElementById('keyboard-toggle').checked) {
+        isCustomizingKey = true;
+        this.blur();
+        this.innerHTML = 'Press a key';
+
+        // take user input for key customization
+        document.addEventListener('keydown', event => {
+            this.innerHTML = event.code;
+            isCustomizingKey = false;
+            switch(this.id) {
+                case 'customize-start':
+                    startKey = event.code;
+                    break;
+                case 'customize-volume-up':
+                    volumeUpKey = event.code;
+                    break;
+                case 'customize-volume-down':
+                    volumneDownKey = event.code;
+                    break;
+                default:
+                    this.innerHTML = 'Press a key';
+            }
+        }, {once: true});
     }
 }
 
 // export functions and variables for testing
 export {onStart, onReset, checkState,updateState, timer, setCustomTime, 
-    keyboardShortcut, revealSettings, hideSettings, SHORT_STATE, LONG_STATE, 
-    WORK_STATE, POMO_MINS, SHORT_MINS, LONG_MINS}; 
+    keyboardShortcut, revealSettings, hideSettings, customizeKey,
+    SHORT_STATE, LONG_STATE, WORK_STATE, POMO_MINS, SHORT_MINS, LONG_MINS}; 

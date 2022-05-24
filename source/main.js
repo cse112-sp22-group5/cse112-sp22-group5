@@ -1,6 +1,6 @@
 // Import modules
 
-import { onStart, onReset, setCustomTime, keyboardShortcut, revealSettings, hideSettings} from './modules/timer.js';
+import { onStart, onReset, checkState, updateState, timer, setCustomTime, keyboardShortcut, revealSettings, hideSettings, customizeKey} from './modules/timer.js';
 import { revealHelp, hideHelp } from './modules/help.js';
 // imports not used, so commented out
 // import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
@@ -20,6 +20,9 @@ document.addEventListener('keydown', (event) => {
     if (document.getElementById('add-task-form').classList.contains('hidden'))
         keyboardShortcut(event);
 });
+document.getElementById('customize-start').addEventListener('click', customizeKey);
+document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
+document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
 
 // Modals
 document.getElementById('help-button').addEventListener('click', revealHelp);

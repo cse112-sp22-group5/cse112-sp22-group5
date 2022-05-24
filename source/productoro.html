@@ -142,6 +142,29 @@
                 <audio id='background-audio' controls></audio>
                 <button type=button id='prevTrackButton' style='position: relative;'>Prev</button>
                 <button type=button id='nxtTrackButton'  style='position: relative;'>Nxt</button>
+                
+                <menu id='shortcut-customization'>
+                    <li><button type='button' id='customize-start'>Space</button></li>
+                    <li><button type='button' id='customize-volume-up'>ArrowUp</button></li>
+                    <li><button type='button' id='customize-volume-down'>ArrowDown</button></li>
+                </menu>
+
+                <ul class='alarm-settings'>
+                    <li>
+                        <label for='alarm-volume'>Alarm Volume</label>
+                        <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
+                    </li>
+                    <li>
+                      <label id='alarm-sounds-label'>Alarm Sounds</label>
+                      <select name='alarm-sounds' id='alarm-sounds'>
+                        <option id='alarm-sound-option1' value='1' selected>Default</option>
+                        <option id='alarm-sound-option2' value='2'>Sound 2</option>
+                        <option id='alarm-sound-option3' value='3'>Sound 3</option>
+                      </select>
+                      <br>
+                    </li>
+                </ul>
+            </form>    
             </div>
 
             
