@@ -1,9 +1,9 @@
 {
     "name": "Productoro",
     "short_name": "Productoro",
-    "start_url": "./source/index.html",
+    "start_url": "/",
     "display": "standalone",
-    "id": "./source/index.html",
+    "id": "/",
     "icons": [
       {
         "src": "./source/img/tomato.png",
@@ -11,7 +11,7 @@
       },
       {
         "src": "./source/img/tomato.ico",
-        "type": "image/ico", "sizes": "16x16"
+        "type": "image/x-icon", "sizes": "16x16"
       },
       {
         "src": "./source/img/settings-icon.png",
