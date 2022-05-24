@@ -6,8 +6,6 @@
 
 #arrow-down {
   visibility: collapse;
-  border-radius: 0 0 5px 5px;
-  height: 20px;
 }
 
 .side-nav-bar {
@@ -19,7 +17,7 @@
   left: 0;
   background-color: var(--side-bar-background);
   overflow: hidden;
-  padding-top: 20px;
+  padding-top: 30px;
   transition: 0.5s;
 }
 @media only screen and (max-width: 700px)  {
@@ -30,12 +28,14 @@
     visibility: visible;
     z-index: 3;
     position: fixed;
-    top: 0;
     left: 0;
+    top: 0;
+    padding-top:10px;
     width: var(--side-bar-width);
-    height: 20px;
+    height: 30px;
     background-color: var(--side-bar-background);
     cursor: pointer;
+    border-radius: 0 0 5px 5px;
   }
   #arrow-down > img {
     margin-left: 25px;
