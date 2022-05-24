@@ -16,15 +16,6 @@ const assets = [
   "./source/audio/notification-alert-2.wav",
   "./source/audio/notification-alert-3.wav",
   "./source/audio/Waltz-Tchaikovsky-Op40.mp3",
-  "./source/modules/timer.js",
-  "./source/modules/task-list.js",
-  "./source/modules/progress-bar.js",
-  "./source/modules/notifications.js",
-  "./source/modules/help.js",
-  "./source/modules/color-change.js",
-  "./source/modules/breakReminder.js",
-  "./source/modules/break-reminder.js",
-  "./source/modules/background-music.js",
 ];
 
 self.addEventListener("install", (installEvent) => {

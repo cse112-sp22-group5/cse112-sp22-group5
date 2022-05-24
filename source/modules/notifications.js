@@ -1,5 +1,5 @@
 /** @constant @type {Audio} need to change from const to var **/
-let alarm = new Audio("../../source/audio/notification-alert-1.wav");
+let alarm = new Audio("../audio/notification-alert-1.wav");
 
 /**
  * @name getAlarm
@@ -19,9 +19,7 @@ function getAlarm() {
 function playSound() {
   // Set alarm sound
   let soundIdx = document.getElementById("alarm-sounds").value;
-  alarm = new Audio(
-    "../../source/audio/notification-alert-" + soundIdx + ".wav"
-  );
+  alarm = new Audio("../audio/notification-alert-" + soundIdx + ".wav");
   // Set alarm volume
   alarm.volume = document.getElementById("alarm-volume").value / 100;
   //Play the alarm once
