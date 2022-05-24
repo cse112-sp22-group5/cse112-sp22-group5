@@ -1,13 +1,13 @@
 const staticProductoro = "productoroProd";
 const assets = [
-  "./source/index.html",
-  "./source/styles.css",
-  "./source/main.js",
-  "./source/img/tomato.png",
-  "./source/img/tomato.ico",
-  "./source/img/settings-icon.png",
-  "./source/img/dream-team-logo.png",
-  "./source/img/icons/delete.png",
+  "./index.html",
+  "./styles.css",
+  "./main.js",
+  "./img/tomato.png",
+  "./img/tomato.ico",
+  "./img/settings-icon.png",
+  "./img/dream-team-logo.png",
+  "./img/icons/delete.png",
 ];
 
 self.addEventListener("install", (installEvent) => {

@@ -1,28 +1,28 @@
 {
     "name": "Productoro",
     "short_name": "Productoro",
-    "start_url": "./source/index.html",
+    "start_url": "/",
     "display": "standalone",
-    "id": "./source/index.html",
+    "id": "/",
     "icons": [
       {
-        "src": "./source/img/tomato.png",
+        "src": "./img/tomato.png",
         "type": "image/png", "sizes": "300x298"
       },
       {
-        "src": "./source/img/tomato.ico",
+        "src": "./img/tomato.ico",
         "type": "image/ico", "sizes": "16x16"
       },
       {
-        "src": "./source/img/settings-icon.png",
+        "src": "./img/settings-icon.png",
         "type": "image/png","sizes": "2295x2295"
       },
       {
-        "src": "./source/img/dream-team-logo.png",
+        "src": "./img/dream-team-logo.png",
         "type": "image/png", "sizes": "200x200"
       },
       {
-        "src": "./source/img/icons/delete.png",
+        "src": "./img/icons/delete.png",
         "type": "image/png", "sizes": "32x32"
       }
     ]
