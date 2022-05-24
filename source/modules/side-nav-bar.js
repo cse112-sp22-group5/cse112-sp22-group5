@@ -1,13 +1,13 @@
-/********************* NOTE *******************
- * ********************************************
+/*************************** NOTE **********************************************
  * To add more side content to the side bar:
  * Under side-nav-bar add:
- *  - add  <i class="menu-icon" id="<new-content-go-herer-icon>" data-associated-div="<new-content-go-here-div>" title="<optional>">
- *  - add <img class="icon" src="link/to/your/icon" >
+ *  - add  <i class='menu-icon' id='<new-content-go-herer-icon>' 
+ *         data-associated-div='<new-content-go-here-div>' title='<optional>'>
+ *  - add <img class='icon' src='link/to/your/icon' >
  * Add new side bar content div:
- *  - <div class="sidebar-content" id="<new-content-gohere-div">
- * Update global variables
- * */
+ *  - <div class='sidebar-content' id='<new-content-gohere-div'>
+ * Update global variables accordingly
+ ******************************************************************************/
 
 const CONTENT_DIV = {
   'help-div': false,
@@ -19,6 +19,8 @@ const CONTENT_ICONS = {
   'setting-icon': false,
   'tasks-icon': false,
 };
+
+const SCREEN_SIZE = 700;
 /**
  * @name setdivWidth
  * @function
@@ -60,7 +62,7 @@ function toggleMenu(divID) {
         key
       ).style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
     } else {
-      document.getElementById(key).style.width = '0';
+      document.getElementById(key).style.width = '';
       document.getElementById(key).style.padding = '0';
     }
   }
@@ -82,6 +84,53 @@ function setIconBackGround(btnID) {
   }
 }
 
+/**
+ * @name expandSideBar
+ * @function
+ * @description expands the side navigation bar and set the arrow icon up
+ */
+function expandSideBar() {
+  document.querySelector('.side-nav-bar').style.height = '100%';
+  document.querySelector('#arrow-down > img').
+    src = './img/icons/arrow-up-icon.svg';
+}
+
+/**
+ * @name minimizeSideBar
+ * @function
+ * @description minimizes the side navigation bar and set the arrow icon down
+ */
+function minimizeSideBar() {
+  document.querySelector('.side-nav-bar').style.height = '';
+  document.querySelector('#arrow-down > img').
+    src = './img/icons/arrow-down-icon.svg';
+
+  toggleMenu(null);
+}
+
+/**
+ * @name setSideBar
+ * @function
+ * @description depends on window side, expand or minimize the side bar
+ */
+function setSideBar() {
+  if (window.innerWidth > SCREEN_SIZE)
+    expandSideBar();
+  else
+    minimizeSideBar();
+}
+
+document.querySelector('#arrow-down').addEventListener('click', (event) => {
+  const menuStyle = document.querySelector('.side-nav-bar').style;
+  if (parseInt(menuStyle.height) == 0 || menuStyle.height == '' ) {
+    expandSideBar();
+  }
+  else {
+    minimizeSideBar();
+  }
+  
+})
+
 document.querySelectorAll('.menu-icon').forEach((elem) => {
   elem.addEventListener('click', (event) => {
     const id = elem.getAttribute('data-associated-div');
@@ -99,15 +148,31 @@ document.querySelectorAll('.menu-icon').forEach((elem) => {
 window.addEventListener('resize', () => {
   toggleMenu(null);
   setIconBackGround(null);
+  setSideBar();
 });
 
 window.addEventListener('click', (event) => {
   const windowWidth = window.innerWidth;
   const divWidth = setdivWidth(windowWidth);
+  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue('--side-bar-width');
+
   if ((event.clientX/windowWidth * 100) >= divWidth)
   {
     toggleMenu(null);
     setIconBackGround(null);
+  }
+
+  function menuIcon () {
+    const content = document.querySelectorAll('.sidebar-content');
+
+    for (let i = 0; i < content.length; i++)
+      if (content[i].style.width != '')
+        return false;
+    return true;
+  }
+  if (event.clientX >= parseInt(menuWidth) && menuIcon())
+  {
+    setSideBar();
   }
 });
 
@@ -127,5 +192,32 @@ function setDefaultSettings() {
   var defaultAudio = document.getElementById('notif-on');
   defaultAudio.checked = true;
 }
+
+// For touch screen devices
+window.addEventListener('touchstart', (event) => {
+  const windowWidth = window.innerWidth
+  const divWidth = setdivWidth(windowWidth);
+  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue('--side-bar-width');
+  if ((event.touches[0].clientX/windowWidth * 100) >= divWidth)
+  {
+    toggleMenu(null);
+    setIconBackGround(null);
+    setSideBar();
+  }
+
+  function menuIcon () {
+    const content = document.querySelectorAll('.sidebar-content');
+
+    for (let i = 0; i < content.length; i++)
+      if (content[i].style.width != '')
+        return false;
+    return true;
+  }
+
+  if (event.touches[0].clientX >= parseInt(menuWidth) && menuIcon ())
+  {
+    setSideBar();
+  }
+});
 
  export { setDefaultSettings };
