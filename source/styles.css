@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 
 /******** Variables ********/
 :root {
@@ -22,11 +21,12 @@
   --clr-circle-long: #03e6b4;
   --clr-dark: #424242;
   --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0,0,0,0.4);
+  --clr-faded-black: rgba(0, 0, 0, 0.4);
 
-  --ff-timer: 'Helvetica Neue', sans-serif; 
-  --ff-primary: 'Raleway', sans-serif;
-  --ff-secondary: 'Roboto', sans-serif;
+  /* sans-serif was secondary fallback font, but cant have this in variable */
+  --ff-timer: "Helvetica Neue";
+  --ff-primary: "Raleway";
+  --ff-secondary: "Roboto";
 
   --fs-timer-large: 160px;
   --fs-timer-small: 100px;
@@ -45,7 +45,7 @@
   --fs-footer: 15px;
 
   --fw-bold: 700;
-  
+
   --transition-time: 1s;
 }
 
@@ -69,7 +69,6 @@ body[data-state="short"] {
 body[data-state="long"] {
   background-color: #88b9ae;
 }
-
 
 /* Header Main Footer Layout */
 header {
@@ -97,18 +96,18 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
-  font: 400 48px 'Roboto', sans-serif;
+  font: 400 48px "Roboto", sans-serif;
   color: #323232;
 }
 
 p,
 a,
 li {
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 /* Interaction */
@@ -127,16 +126,15 @@ button:active {
   background: rgba(50, 50, 50, 0.4);
 }
 
-
 /******** HELP AND SETTINGS ********/
 #options-btn-container {
   display: flex;
 }
 
-
 /******** BREAK REMINDERS ********/
-#break-reminder, #reminder {
-  display : block;
+#break-reminder,
+#reminder {
+  display: block;
   position: relative;
   text-align: center;
   padding-top: 10px;
@@ -183,7 +181,8 @@ button:active {
 }
 
 /******** TIMER ********/
-#state, #timer-display {
+#state,
+#timer-display {
   text-align: center;
   margin: auto;
 }
@@ -206,7 +205,7 @@ button:active {
 }
 
 .timer * {
-  font: 16px 'Helvetica Neue', sans-serif;
+  font: 16px "Helvetica Neue", sans-serif;
   color: #424242;
   padding: 24px 16px;
 }
@@ -252,7 +251,7 @@ button:active {
 
 /* SETTINGS MODAL */
 fieldset {
-  border:none;
+  border: none;
   padding: 0;
   display: flex;
   justify-content: space-between;
@@ -270,7 +269,6 @@ fieldset select {
   padding: 12px;
   background: #efefef;
 }
-
 
 /******** CURRENT TASK ********/
 .current-task * {
@@ -292,6 +290,19 @@ fieldset select {
   overflow: hidden;
   background: var(--primary-color);
   transition: background 1s;
+}
+
+.tasks[data-state="pomo"] {
+  /* background: #fff; */
+  background: var(--primary-color);
+}
+
+.tasks[data-state="short"] {
+  background-color: #eaa478;
+}
+
+.tasks[data-state="long"] {
+  background-color: #88b9ae;
 }
 
 .tasks[data-state="pomo"] {
@@ -352,7 +363,7 @@ fieldset select {
 }
 
 .task p {
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
   width: 90%;
   display: inline-block;
   margin: 0;
@@ -368,7 +379,7 @@ fieldset select {
 
 .task-button[done="true"] + label {
   text-decoration: line-through;
-  color:gray;
+  color: gray;
 }
 
 #options-btn-container button {
@@ -468,8 +479,8 @@ fieldset select {
   left: 4px;
   bottom: 4px;
   background-color: black;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 .switches span:last-child::after {
@@ -482,7 +493,7 @@ fieldset select {
   background-size: 12px 12px;
 }
 .switches [type="checkbox"]:checked + label span:last-child {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 .switches [type="checkbox"]:checked + label span:last-child::before {
   -webkit-transform: translateX(26px);
@@ -500,26 +511,23 @@ li {
   margin: 5px;
 }
 
-
 .hidden {
   display: none;
 }
 
-#add-task-form div{
+#add-task-form div {
   margin-top: 10px;
 }
 
-
-
 @media screen and (min-width: 500px) {
-
   .switches li::before {
     display: none;
   }
 }
 
 @media screen and (min-width: 700px) {
-  button.help-button, button.settings { 
+  button.help-button,
+  button.settings {
     border-radius: 15px;
   }
 }
@@ -527,7 +535,6 @@ li {
 /* @media (min-width: 980px) {
   
 } */
-
 
 /******** MEDIA QUERIES ********/
 
@@ -543,7 +550,6 @@ li {
     width: 80%;
   }
 
-  
   /******** PROGRESS BAR ********/
   .progress-container {
     justify-content: space-around;

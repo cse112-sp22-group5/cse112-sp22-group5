@@ -105,26 +105,20 @@
         <form id='time-limits'>
             <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
             <fieldset id='form-enabler'>
-                <label id='workLabel'>Work Session</label> 
-                <select name='workTime' id='work-time'>
-                    <option id='workOption25' value='25' selected>25</option>
-                    <option id='workOption30' value='30'>30</option>
-                    <option id='workOption45' value='45'>45</option>
-                    <option id='workOption60' value='60'>60</option>
-                </select>
-                <label id='shortBreakLabel'>Short Break</label>
-                <select name='shortBreakTime' id='shortBreakTime'>
-                    <option id='sbOption5' value='5' selected>5</option>
-                    <option id='sbOption10' value='10'>10</option>
-                    <option id='sbOption15' value='15'>15</option>
-                </select>
-                <label id='longBreakLabel'>Long Break</label>
-                <select name='longBreakTime' id='longBreakTime'>
-                    <option id='lbOption15' value='15' selected>15</option>
-                    <option id='lbOption20' value='20'>20</option>
-                    <option id='lbOption25' value='25'>25</option>
-                    <option id='lbOption30' value='30'>30</option>
-                </select>
+                <label id='work-label'>Work Session</label>
+                <input name='work-time' id='work-time' type='range' min='25' max='100' value='25'>
+                <p><span id='work-time-val'>25</span> minutes</p>
+                <br>
+        
+                <label id='short-break-label'>Short Break</label>
+                <input name='short-break-time' id='short-break-time' type='range' min='5' max='15' value='5'>
+                <p><span id='short-break-time-val'>5</span> minutes</p>
+                <br>
+        
+                <label id='long-break-label'>Long Break</label>
+                <input name='long-break-time' id='long-break-time' type='range' min='15' max='30' value='15'>
+                <p><span id='long-break-time-val'>15</span> minutes</p>
+                <br>
             </fieldset>  
 
             <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
@@ -148,8 +142,8 @@
 
             <ul class='switches'>
                 <li>
-                  <input type='checkbox' id='notifToggle' checked>
-                  <label for='notifToggle'>
+                  <input type='checkbox' id='notif-toggle' checked>
+                  <label for='notif-toggle'>
                     <span>Audio Alarm</span>
                     <span></span>
                   </label>
@@ -161,6 +155,27 @@
                       <span></span>
                     </label>
                   </li>
+            </ul>
+            <menu id='shortcut-customization'>
+                <li><button type='button' id='customize-start'>Space</button></li>
+                <li><button type='button' id='customize-volume-up'>ArrowUp</button></li>
+                <li><button type='button' id='customize-volume-down'>ArrowDown</button></li>
+            </menu>
+
+            <ul class='alarm-settings'>
+                <li>
+                    <label for='alarm-volume'>Alarm Volume</label>
+                    <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
+                </li>
+                <li>
+                  <label id='alarm-sounds-label'>Alarm Sounds</label>
+                  <select name='alarm-sounds' id='alarm-sounds'>
+                    <option id='alarm-sound-option1' value='1' selected>Default</option>
+                    <option id='alarm-sound-option2' value='2'>Sound 2</option>
+                    <option id='alarm-sound-option3' value='3'>Sound 3</option>
+                  </select>
+                  <br>
+                </li>
             </ul>
         </form>    
     </dialog>

@@ -649,6 +649,20 @@ describe("Test checkState function", () => {
             </div>
             <div id='break-reminder' style='color:#464646;'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
+        <section class="tasks" id="tasks">
+            <h2>Tasks</h2>
+
+            <!-- List Options -->
+            <div id="task-options">
+                <button type="button" id="add-tasks-button">Add</button>
+                <button type="button" id="clear-tasks-button">Clear</button>
+                <button type="button" id="clear-completed-tasks-button">Completed</button>
+            </div>
+
+            <hr />
+
+            <ul id="task-list"></ul>
+        </section>
         `;
       timer.counter.totalPomos = 1;
       timer.counter.stateCtr = 1;
@@ -677,6 +691,21 @@ describe("Test checkState function", () => {
             </div>
             <div id='break-reminder' style='color:#464646;'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
+
+        <section class="tasks" id="tasks">
+            <h2>Tasks</h2>
+
+            <!-- List Options -->
+            <div id="task-options">
+                <button type="button" id="add-tasks-button">Add</button>
+                <button type="button" id="clear-tasks-button">Clear</button>
+                <button type="button" id="clear-completed-tasks-button">Completed</button>
+            </div>
+
+            <hr />
+
+            <ul id="task-list"></ul>
+        </section>
         `;
       timer.counter.totalPomos = 4;
       timer.counter.stateCtr = 7;
@@ -732,6 +761,21 @@ describe("Test updateState function", () => {
             </div>
             <div id='break-reminder' style='color:#464646;'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
+
+        <section class="tasks" id="tasks">
+            <h2>Tasks</h2>
+
+            <!-- List Options -->
+            <div id="task-options">
+                <button type="button" id="add-tasks-button">Add</button>
+                <button type="button" id="clear-tasks-button">Clear</button>
+                <button type="button" id="clear-completed-tasks-button">Completed</button>
+            </div>
+
+            <hr />
+
+            <ul id="task-list"></ul>
+        </section>
         `;
     timer.currState = "Short Break State";
     updateState();
@@ -750,7 +794,7 @@ describe("Test updateState function", () => {
             <h2 id='state'>Work State</h2>
             <div id='totalCounter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
             <button type=button class='timer-button' id='reset-button'>Reset</button>
-            <div class='progress-container' state='pomo'>
+            <div class='progress-container' data-state='pomo'>
                 <div class='circle pomo'></div>
                 <div class='circle short'></div>
                 <div class='circle pomo'></div>
@@ -762,6 +806,20 @@ describe("Test updateState function", () => {
             </div>
             <div id='break-reminder' style='color:#464646;'></div>
             <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
+            <section class="tasks" id="tasks">
+                <h2>Tasks</h2>
+
+                <!-- List Options -->
+                <div id="task-options">
+                    <button type="button" id="add-tasks-button">Add</button>
+                    <button type="button" id="clear-tasks-button">Clear</button>
+                    <button type="button" id="clear-completed-tasks-button">Completed</button>
+                </div>
+
+                <hr />
+
+                <ul id="task-list"></ul>
+            </section>
         `;
       timer.currState = "Long Break State";
       updateState();
