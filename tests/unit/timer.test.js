@@ -18,7 +18,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -26,7 +26,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -71,7 +71,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -79,7 +79,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -123,7 +123,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -131,7 +131,7 @@ describe('Test onStart function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -178,7 +178,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -186,7 +186,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -234,7 +234,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -242,7 +242,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -287,7 +287,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option value='5' selected>5</option>
                         <option value='10'>10</option>
@@ -295,7 +295,7 @@ describe('Test onReset function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option value='15' selected>15</option>
                         <option value='20'>20</option>
@@ -709,7 +709,7 @@ describe('Test setCustomTime function', () => {
                     </select>
                     <br>
             
-                    <label id='shortBreakLabel'>Select length for Short Break</label>
+                    <label id='short-break-label'>Select length for Short Break</label>
                     <select name='short-break-time' id='short-break-time'>
                         <option id='sb-option5'  value='5' selected>5</option>
                         <option id='sb-option10' value='10'>10</option>
@@ -717,7 +717,7 @@ describe('Test setCustomTime function', () => {
                     </select>
                     <br>
             
-                    <label id='longBreakLabel'>Select length for Long Break</label>
+                    <label id='long-break-label'>Select length for Long Break</label>
                     <select name='long-break-time' id='long-break-time'>
                         <option id='lb-option15' value='15' selected>15</option>
                         <option id='lb-option20' value='20'>20</option>

@@ -10,6 +10,7 @@ import { setBackgroundMusic } from './modules/background-music.js';
 import { addTaskButton, cancelTask, saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
 
 import './modules/side-nav-bar.js';
+import { setDefaultSettings } from './modules/side-nav-bar.js';
 
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
@@ -23,10 +24,13 @@ document.addEventListener('keydown', (event) => {
         keyboardShortcut(event);
 });
 
+// Default button
+document.getElementById('default-settings').addEventListener('click', setDefaultSettings);
+
 // Modals
-document.getElementById('help-button').addEventListener('click', revealHelp);
+// document.getElementById('help-button').addEventListener('click', revealHelp);
 // document.getElementById('close-modal-x').addEventListener('click', hideHelp);
-document.getElementById('settings-button').addEventListener('click', revealSettings);
+// document.getElementById('settings-button').addEventListener('click', revealSettings);
 // document.getElementById('close-settings-btn').addEventListener('click', hideSettings);
 
 document.getElementById('bg-music').addEventListener('change', setBackgroundMusic);

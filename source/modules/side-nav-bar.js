@@ -10,14 +10,14 @@
  * */
 
 const CONTENT_DIV = {
-  "help-div": false,
-  "setting-div": false,
-  "tasks-div": false,
+  'help-div': false,
+  'setting-div': false,
+  'tasks-div': false,
 };
 const CONTENT_ICONS = {
-  "help-icon": false,
-  "setting-icon": false,
-  "tasks-icon": false,
+  'help-icon': false,
+  'setting-icon': false,
+  'tasks-icon': false,
 };
 /**
  * @name setdivWidth
@@ -60,8 +60,8 @@ function toggleMenu(divID) {
         key
       ).style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
     } else {
-      document.getElementById(key).style.width = "0";
-      document.getElementById(key).style.padding = "0";
+      document.getElementById(key).style.width = '0';
+      document.getElementById(key).style.padding = '0';
     }
   }
 }
@@ -77,18 +77,18 @@ function setIconBackGround(btnID) {
   if (content_icons.hasOwnProperty(btnID)) content_icons[btnID] = true;
   for (const key in content_icons) {
     if (content_icons[key])
-      document.getElementById(key).classList.add("button-clicked");
-    else document.getElementById(key).classList.remove("button-clicked");
+      document.getElementById(key).classList.add('button-clicked');
+    else document.getElementById(key).classList.remove('button-clicked');
   }
 }
 
-document.querySelectorAll(".menu-icon").forEach((elem) => {
-  elem.addEventListener("click", (event) => {
-    const id = elem.getAttribute("data-associated-div");
+document.querySelectorAll('.menu-icon').forEach((elem) => {
+  elem.addEventListener('click', (event) => {
+    const id = elem.getAttribute('data-associated-div');
     const side = document.getElementById(id).offsetWidth;
     if (side === 0) {
       toggleMenu(id);
-      setIconBackGround(elem.getAttribute("id"));
+      setIconBackGround(elem.getAttribute('id'));
     } else {
       toggleMenu(null);
       setIconBackGround(null);
@@ -102,7 +102,7 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('click', (event) => {
-  const windowWidth = window.innerWidth
+  const windowWidth = window.innerWidth;
   const divWidth = setdivWidth(windowWidth);
   if ((event.clientX/windowWidth * 100) >= divWidth)
   {
@@ -110,3 +110,22 @@ window.addEventListener('click', (event) => {
     setIconBackGround(null);
   }
 });
+
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer settings to default values
+ * @returns 
+ */
+function setDefaultSettings() {
+  var defaultTime = document.getElementById('work-option25');
+  defaultTime.checked = true;
+
+  var defaultKeyboard = document.getElementById('keyboard-on');
+  defaultKeyboard.checked = true;
+
+  var defaultAudio = document.getElementById('notif-on');
+  defaultAudio.checked = true;
+}
+
+ export { setDefaultSettings };
