@@ -16,35 +16,35 @@ function breakReminders(){
     let randomIdea = breakIdeas[Math.floor(Math.random() * breakIdeas.length)];
  
     document.getElementById('reminder').style.visibility = 'hidden';
-    document.getElementById('breakReminder').innerHTML = randomIdea;
+    document.getElementById('break-reminder').innerHTML = randomIdea;
     document.getElementById('reminder').innerHTML = '';
       
    
     switch(timer.currState) {
  
         case WORK_STATE:
-            document.getElementById('breakReminder').innerHTML = '';
-            document.getElementById('breakReminder').style.visibility = 'hidden';
+            document.getElementById('break-reminder').innerHTML = '';
+            document.getElementById('break-reminder').style.visibility = 'hidden';
             document.getElementById('reminder').style.visibility = 'hidden';
             break;
  
         case SHORT_STATE:
-            document.getElementById('breakReminder').innerHTML = 'An idea for how to spend your break:';
-            document.getElementById('breakReminder').style.visibility = 'visible';
+            document.getElementById('break-reminder').innerHTML = 'An idea for how to spend your break:';
+            document.getElementById('break-reminder').style.visibility = 'visible';
             document.getElementById('reminder').style.visibility = 'visible'; 
            document.getElementById('reminder').innerHTML = randomIdea;
             break;
         
         case LONG_STATE:
-            document.getElementById('breakReminder').innerHTML = 'An idea for how to spend your break:';
-            document.getElementById('breakReminder').style.visibility = 'visible';
+            document.getElementById('break-reminder').innerHTML = 'An idea for how to spend your break:';
+            document.getElementById('break-reminder').style.visibility = 'visible';
             document.getElementById('reminder').style.visibility = 'visible';
             document.getElementById('reminder').innerHTML = randomIdea;
             break;
         
         default:
-            document.getElementById('breakReminder').innerHTML = '';
-            document.getElementById('breakReminder').style.visibility = 'hidden';
+            document.getElementById('break-reminder').innerHTML = '';
+            document.getElementById('break-reminder').style.visibility = 'hidden';
             document.getElementById('reminder').style.visibility = 'hidden';
             break;    
     
