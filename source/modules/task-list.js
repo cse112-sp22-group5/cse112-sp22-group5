@@ -93,7 +93,7 @@ function createCustomTaskTag(taskName) {
         taskLabel.addEventListener('keypress', (event) => {
             if (event.key == 'Enter') {
                 taskLabel.setAttribute('readonly', '');
-                //taskLabel.classList.remove('edit-label');
+                taskLabel.blur();
             }
 
         });
