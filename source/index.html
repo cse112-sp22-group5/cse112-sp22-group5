@@ -149,12 +149,33 @@
                     <label for='keyboard-on'>On</label><br>
                     <input type='radio' id='keyboard-off' name="keyboard-toggle">
                     <label for='keyboard-off'>Off</label>
+                    <menu id='shortcut-customization'>
+                        <li><button type='button' id='customize-start'>Space</button></li>
+                        <li><button type='button' id='customize-volume-up'>ArrowUp</button></li>
+                        <li><button type='button' id='customize-volume-down'>ArrowDown</button></li>
+                    </menu>
 
                     <h3 class='settings-label'>Audio Alarm</h3>
                     <input type='radio' id='notif-on' name="notif-toggle" checked>
                     <label for='notif-on'>On</label><br>
                     <input type='radio' id='notif-off' name="notif-toggle">
                     <label for='notif-off'>Off</label>
+
+            <ul class='alarm-settings'>
+                <li>
+                    <label for='alarm-volume'>Alarm Volume</label>
+                    <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
+                </li>
+                <li>
+                  <label id='alarm-sounds-label'>Alarm Sounds</label>
+                  <select name='alarm-sounds' id='alarm-sounds'>
+                    <option id='alarm-sound-option1' value='1' selected>Default</option>
+                    <option id='alarm-sound-option2' value='2'>Sound 2</option>
+                    <option id='alarm-sound-option3' value='3'>Sound 3</option>
+                  </select>
+                  <br>
+                </li>
+            </ul>
             </form>    
             <div id="bottom">
                 <i type="button" id="default-settings">Set to Default</i>
