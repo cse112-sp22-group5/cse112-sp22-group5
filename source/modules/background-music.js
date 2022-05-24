@@ -7,15 +7,15 @@ let /** @type {number} **/
 const /** @type {string[][]} */
   LOFI_TRACKS = [
     [
-      "./source/audio/HoliznaCC0-Letting-Go-Of-The-Past.mp3",
+      "../../source/audio/HoliznaCC0-Letting-Go-Of-The-Past.mp3",
       "Letting Go of the Past by HoliznaCC0",
     ],
-    ["./source/audio/HoliznaCC0-Ghosts.mp3", "Ghosts by HoliznaCC0"], // 1st track played
+    ["../../source/audio/HoliznaCC0-Ghosts.mp3", "Ghosts by HoliznaCC0"], // 1st track played
   ],
   /** @type {string[][]} */
   CLASSICAL_TRACKS = [
     [
-      "./source/audio/Waltz-Tchaikovsky-Op40.mp3",
+      "../../source/audio/Waltz-Tchaikovsky-Op40.mp3",
       "Waltz (Tchaikovsky Op. 40) by Kevin MacLeod",
     ], // 1st track played
   ];
