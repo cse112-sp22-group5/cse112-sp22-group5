@@ -147,11 +147,6 @@
   box-shadow: 0px 0px 5px rgb(125, 125, 125);
 }
 
-#bottom {
-  position: relative;
-  transform: translateY(100%);
-}
-
 #bottom>i {
   font-size: 15px;
   font-style: normal;
@@ -174,6 +169,8 @@
 #task-list {
   padding: 0;
   margin: 0;
+  height: 80%;
+  overflow: auto;
   list-style-type: none;
 }
 
@@ -181,6 +178,8 @@
   display: flex;
   flex-direction: row;
   padding: 10px;
+  border-bottom: 0.5px solid #818181;
+  margin: 0;
 }
 
 .task>img:hover {
@@ -215,6 +214,5 @@
 }
 
 #task-list>li:hover {
-  /* padding: 10px; */
   box-shadow: 0px 0px 7px rgb(200, 200, 200);
 }

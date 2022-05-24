@@ -300,7 +300,7 @@ fieldset select {
 }
 
 .tasks[data-state="pomo"] {
-  /* background: #fff; */
+  /* background: #fff; 
   background: var(--primary-color);
 }
 
