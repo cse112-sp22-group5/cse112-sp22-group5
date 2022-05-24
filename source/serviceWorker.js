@@ -1,5 +1,6 @@
 const staticProductoro = "productoroProd";
 const assets = [
+  "/",
   "./index.html",
   "./styles.css",
   "./main.js",
