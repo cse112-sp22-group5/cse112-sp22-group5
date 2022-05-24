@@ -1,5 +1,13 @@
 :root {
   --side-bar-width: 70px;
+  --side-bar-background: rgb(28, 42, 71)
+}
+
+
+#arrow-down {
+  visibility: collapse;
+  border-radius: 0 0 5px 5px;
+  height: 20px;
 }
 
 .side-nav-bar {
@@ -9,9 +17,35 @@
   z-index: 2;
   top: 0;
   left: 0;
-  background-color: rgb(28, 42, 71);
-  overflow-x: hidden;
+  background-color: var(--side-bar-background);
+  overflow: hidden;
   padding-top: 20px;
+  transition: 0.5s;
+}
+@media only screen and (max-width: 700px)  {
+  .side-nav-bar {
+    height: 0%;
+  }
+  #arrow-down {
+    visibility: visible;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--side-bar-width);
+    height: 20px;
+    background-color: var(--side-bar-background);
+    cursor: pointer;
+  }
+  #arrow-down > img {
+    margin-left: 25px;
+    
+  }
+  #arrow-down > img:hover {
+    cursor: pointer;
+    filter: contrast(100%);
+  }
+  
 }
 
 .side-nav-bar>* {

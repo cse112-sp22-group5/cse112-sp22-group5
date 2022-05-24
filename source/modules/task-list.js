@@ -14,7 +14,7 @@ function saveTask() {
     }
     let newTask = createCustomTaskTag(taskNameInput.value);
     taskList.appendChild(newTask);
-    
+
     taskNameInput.value = '';
 }
 
@@ -76,7 +76,7 @@ function createCustomTaskTag(taskName) {
             circleIcon.src = './img/icons/check-circle-icon-black.svg';
 
         } else {
-            taskButton.setAttribute('done', 'false');
+            taskContainer.setAttribute('done', 'false');
             circleIcon.src = './img/icons/check-circle-icon-white.svg';;
         }
     });
