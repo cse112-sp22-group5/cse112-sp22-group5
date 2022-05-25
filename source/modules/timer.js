@@ -5,9 +5,9 @@ import { progressBar } from './progress-bar.js';
 
 let 
     /** @type {number} **/ 
-    POMO_MINS = 25, 
+    POMO_MINS = 0.05, 
     /** @type {number} **/ 
-    SHORT_MINS = 5, 
+    SHORT_MINS = 0.05, 
     /** @type {number} **/ 
     LONG_MINS = 15;
 
@@ -209,7 +209,8 @@ function updateTimer(duration) {
             // transition to the next state
             updateState();
             showNotif(timer.currState);
-            if(document.getElementById('notif-toggle').checked) {
+            let alarm = document.getElementById('notif-toggle').value;
+            if(alarm == 'on') {
                 playSound();
             }
         }
@@ -334,7 +335,7 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 function keyboardShortcut(event) {  
-    if (document.getElementById('keyboard-toggle').checked){
+    if (document.getElementById('keyboard-toggle').value == 'on'){
         if(event.code === 'Space') {
             // if the timer is static, start timer
             if(document.getElementById('start-button').disabled == false ) {

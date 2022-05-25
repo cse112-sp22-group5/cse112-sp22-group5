@@ -182,6 +182,7 @@
   padding: 10px;
   border-bottom: 0.5px solid #818181;
   margin: 0;
+  transition: 1s;
 }
 
 .task>img:hover {
@@ -203,6 +204,13 @@
 .task>input:hover {
   text-decoration: underline;
   cursor:pointer;
+}
+
+.task:active {
+  text-decoration: underline;
+  cursor:pointer;
+  transition: 0.2s;
+  background-color: #818181;
 }
 
 .task > i {
@@ -250,6 +258,9 @@
   margin: 0;
 }
 
+#time-limits > ul {
+  list-style-type: none;
+}
 
 
 .setting-flex-container {
@@ -282,4 +293,14 @@
   width: 25%;
   padding-left: 10px;
   text-align: left;
+}
+
+
+#background-audio {
+  margin: auto;
+}
+
+#alarm-volume {
+  color:#818181;
+  width: 24.5%;
 }

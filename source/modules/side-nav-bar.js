@@ -20,6 +20,7 @@ const CONTENT_ICONS = {
   'tasks-icon': false,
 };
 
+
 const SCREEN_SIZE = 700;
 /**
  * @name setdivWidth
@@ -183,14 +184,20 @@ window.addEventListener('click', (event) => {
  * @returns 
  */
 function setDefaultSettings() {
-  var defaultTime = document.getElementById('work-option25');
-  defaultTime.checked = true;
+  const defaultSetting = {
+    'work-time'        : '25',
+    'short-break-time' : '5',
+    'long-break-time'  : '15',
+    'bg-music'         : 'None',
+    'keyboard-toggle'  : 'on',
+    'notif-toggle'     : 'on',
+    'alarm-volume'     : '100',
+    'alarm-sounds'     : '1'
+  };
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
 
-  var defaultKeyboard = document.getElementById('keyboard-on');
-  defaultKeyboard.checked = true;
-
-  var defaultAudio = document.getElementById('notif-on');
-  defaultAudio.checked = true;
 }
 
 // For touch screen devices
