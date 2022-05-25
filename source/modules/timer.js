@@ -78,7 +78,7 @@ function checkState() {
         timer.currDuration = NUM_SEC * POMO_MINS;
         document.getElementById('state').innerText = WORK_STATE;
         document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-        document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
+        //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
     } 
     else {
         // long break state
@@ -301,7 +301,7 @@ function onReset() {
                     timer.counter.streak;
     clearInterval(timerId);
     checkState();
-    document.getElementById('tasks').className = 'tasks';
+//    document.getElementById('tasks').className = 'tasks';
 
 }
 
@@ -333,7 +333,7 @@ function hideSettings() {
  * @description Starts and resets timer when the space bar is clicked
  * @param {*} event The keyboard button that is clicked
  */
-function keyboardShortcut(event) {
+function keyboardShortcut(event) {  
     if (document.getElementById('keyboard-toggle').checked){
         if(event.code === 'Space') {
             // if the timer is static, start timer

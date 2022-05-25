@@ -2,6 +2,8 @@
   --side-bar-width: 70px;
   --side-bar-background: #1C2A47;
   --side-bar-icon-hover-bg: #2471a6;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --button-background: #7D7D7D,
 }
 
 
@@ -93,7 +95,7 @@
 /*===================== task list================================= */
 
 #tasks-div,
-#bottom {
+.bottom {
   display: flex;
   flex-direction: column;
 }
@@ -147,7 +149,7 @@
   box-shadow: 0px 0px 5px rgb(125, 125, 125);
 }
 
-#bottom>i {
+.bottom>i {
   font-size: 15px;
   font-style: normal;
   font-weight: bold;
@@ -160,7 +162,7 @@
   text-align: center;
 }
 
-#bottom>i:hover {
+.bottom>i:hover {
   cursor: pointer;
   box-shadow: 0px 0px 10px rgb(200, 200, 200);
   color: rgb(42, 56, 67);
@@ -215,4 +217,69 @@
 
 #task-list>li:hover {
   box-shadow: 0px 0px 7px rgb(200, 200, 200);
+}
+
+
+
+/* setting tab */
+
+#setting-div {
+  display:flex;
+  flex-direction: column;
+}
+
+#setting-div {
+  font-family: var(--side-bar-font-family);
+}
+
+
+#setting-div > h2 {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0 10px 0;
+}
+
+#time-limits > h3 {
+  background-color: rgb(220, 220, 220);
+  border-radius: 5px 5px 0 0;
+  padding: 10px 0 10px 10px;
+  text-align: left;
+  font-family: var(--side-bar-font-family);
+  font-size: 12px;
+  font-weight: lighter;
+  margin: 0;
+}
+
+
+
+.setting-flex-container {
+  padding: 0px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-flex-item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 0.5px solid #bebebe;
+}
+
+.setting-flex-item > label {
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  text-align: left;
+  font-size: 12px;
+
+  margin: 0;
+  background-color: #FFFFFF;
+}
+
+.setting-flex-item > select {
+  border: 0;
+  
+  background-color: var(--button-background);
+  width: 25%;
+  padding-left: 10px;
+  text-align: left;
 }

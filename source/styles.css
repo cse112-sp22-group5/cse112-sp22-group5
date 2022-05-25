@@ -251,7 +251,7 @@ button:active {
 }
 
 /* SETTINGS MODAL */
-fieldset {
+/* fieldset {
   border: none;
   padding: 0;
   display: flex;
@@ -275,7 +275,7 @@ fieldset select {
   background-color: var(--clr-gray);
   padding: 20px;
   
-}
+} */
 
 
 /******** CURRENT TASK ********/
