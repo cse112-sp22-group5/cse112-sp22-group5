@@ -116,7 +116,7 @@ function checkState() {
 function updateState() {
     // if the current state is a work state, next state a break
     if(timer.currState === WORK_STATE) {
-        document.getElementById('tasks').className = 'tasks'; 
+      //  document.getElementById('tasks').className = 'tasks'; 
         // next state is a long break 
         if(timer.counter.totalPomos % LONG_MOD === 0) {
             timer.currState = LONG_STATE;
@@ -233,13 +233,13 @@ function setCustomTime() {
     let sbTime = document.getElementById('short-break-time');
     let lbTime = document.getElementById('long-break-time');
     let warning = document.getElementById('warning');
-    let wTimeOutput = document.getElementById('work-time-val');
-    let sbTimeOutput = document.getElementById('short-break-time-val');
-    let lbTimeOutput = document.getElementById('long-break-time-val');
+    // let wTimeOutput = document.getElementById('work-time-val');
+    // let sbTimeOutput = document.getElementById('short-break-time-val');
+    // let lbTimeOutput = document.getElementById('long-break-time-val');
 
-    wTimeOutput.innerHTML = wTime.value;
-    sbTimeOutput.innerHTML = sbTime.value;
-    lbTimeOutput.innerHTML = lbTime.value;
+    // wTimeOutput.innerHTML = wTime.value;
+    // sbTimeOutput.innerHTML = sbTime.value;
+    // lbTimeOutput.innerHTML = lbTime.value;
 
     if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
       // enable a warning
