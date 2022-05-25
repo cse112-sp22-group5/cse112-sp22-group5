@@ -56,13 +56,13 @@ function toggleMenu(divID) {
       );
       divWidth = setdivWidth(windowWidth);
 
-      document.getElementById(key).style.width = `${
-        divWidth - sideBarWidthPercentage
-      }%`;
-      document.getElementById(
-        key
-      ).style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
-    } else {
+      document.getElementById(key).style
+        .width = `${divWidth - sideBarWidthPercentage}%`;
+
+      document.getElementById(key).style
+        .padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
+    } 
+    else {
       document.getElementById(key).style.width = '';
       document.getElementById(key).style.padding = '0';
     }
@@ -197,7 +197,6 @@ function setDefaultSettings() {
   for (const key in defaultSetting) {
     document.getElementById(key).value = defaultSetting[key];
   }
-
 }
 
 // For touch screen devices
