@@ -121,6 +121,29 @@ function setSideBar() {
     minimizeSideBar();
 }
 
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ * @returns 
+ */
+ function setDefaultSettings() {
+  const defaultSetting = {
+    'work-time'        : '25',
+    'short-break-time' : '5',
+    'long-break-time'  : '15',
+    'bg-music'         : 'None',
+    'keyboard-toggle'  : 'on',
+    'notif-toggle'     : 'on',
+    'alarm-volume'     : '100',
+    'alarm-sounds'     : '1'
+  };
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+}
+
+// Expands sidebar based on window width
 document.querySelector('#arrow-down').addEventListener('click', (event) => {
   const menuStyle = document.querySelector('.side-nav-bar').style;
   if (parseInt(menuStyle.height) == 0 || menuStyle.height == '' ) {
@@ -132,6 +155,7 @@ document.querySelector('#arrow-down').addEventListener('click', (event) => {
   
 })
 
+// Set background color for menu icons
 document.querySelectorAll('.menu-icon').forEach((elem) => {
   elem.addEventListener('click', (event) => {
     const id = elem.getAttribute('data-associated-div');
@@ -146,12 +170,16 @@ document.querySelectorAll('.menu-icon').forEach((elem) => {
   });
 });
 
+// closes side bar or panels when resizing the window
 window.addEventListener('resize', () => {
   toggleMenu(null);
   setIconBackGround(null);
   setSideBar();
 });
 
+/**
+ * If user clicks on areas that are outside menu and panels, it closes
+ */
 window.addEventListener('click', (event) => {
   const windowWidth = window.innerWidth;
   const divWidth = setdivWidth(windowWidth);
@@ -177,27 +205,6 @@ window.addEventListener('click', (event) => {
   }
 });
 
-/**
- * @name setDefaultSettings
- * @function
- * @description Set timer settings to default values
- * @returns 
- */
-function setDefaultSettings() {
-  const defaultSetting = {
-    'work-time'        : '25',
-    'short-break-time' : '5',
-    'long-break-time'  : '15',
-    'bg-music'         : 'None',
-    'keyboard-toggle'  : 'on',
-    'notif-toggle'     : 'on',
-    'alarm-volume'     : '100',
-    'alarm-sounds'     : '1'
-  };
-  for (const key in defaultSetting) {
-    document.getElementById(key).value = defaultSetting[key];
-  }
-}
 
 // For touch screen devices
 window.addEventListener('touchstart', (event) => {
