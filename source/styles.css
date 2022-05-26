@@ -6,23 +6,12 @@
 /******** Variables ********/
 :root {
   /* Refactor Option */
-  --primary-color: #77a4e9;
+  
 
   /* --secondary-color:  #FFFFFF;
   --primary-font: 'Helvetica Neue', sans-serif;
   --secondary-font: 'Raleway', sans-serif; */
 
-  --clr-light: #ffffff;
-  --clr-accent-pomo: #032e77;
-  --clr-accent-short: #923201;
-  --clr-accent-long: #01795f;
-  --clr-circle-pomo: #0084ff;
-
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
 
   /* sans-serif was secondary fallback font, but cant have this in variable */
   --ff-timer: "Helvetica Neue";
@@ -50,11 +39,51 @@
   --transition-time: 1s;
 }
 
-/******** GLOBALS ********/
+.theme-default {
+  --primary-color: #77a4e9;
+  --clr-light: #ffffff;
+  --clr-accent-pomo: #032e77;
+  --clr-accent-short: #923201;
+  --clr-accent-long: #01795f;
+  --clr-circle-pomo: #0084ff;
 
+  --clr-circle-short: #ff7300;
+  --clr-circle-long: #03e6b4;
+  --clr-dark: #424242;
+  --clr-gray: #a8a8a8;
+  --clr-faded-black: rgba(0, 0, 0, 0.4);
+  --clr-text: #000000;
+  --clr-background: #FFFFFF;
+  --clr-logo: #323232;
+  --clr-sidebar-content-bg: #f1f1f1;
+
+}
+.theme-new {
+  --primary-color: #414141;
+  --clr-light: #7f7f7f;
+  --clr-accent-pomo: #050709;
+  --clr-accent-short: #2f2118;
+  --clr-accent-long: #0a231e;
+  --clr-circle-pomo: #212d38;
+
+  --clr-circle-short: #ff7300;
+  --clr-circle-long: #03e6b4;
+  --clr-dark: #424242;
+  --clr-gray: #a8a8a8;
+  --clr-faded-black: rgba(0, 0, 0, 0.4);
+  --clr-text: #FFFFFF;
+  --clr-background: #000000;
+  --clr-logo: #ffffff;
+  --clr-sidebar-content-bg: #181818;
+}
+
+/******** GLOBALS ********/
+* {
+  color: var(--clr-text);
+}
 /* Body */
 body {
-  color: var(--clr-dark);
+  /* color: var(--clr-dark); */
   transition: background 1s;
 }
 
@@ -102,7 +131,7 @@ h6 {
 
 h1 {
   font: 400 48px "Roboto", sans-serif;
-  color: #323232;
+  color: var(--clr-logo);
 }
 
 p,
@@ -186,6 +215,8 @@ button:active {
 #timer-display {
   text-align: center;
   margin: auto;
+  color: var(--clr-text);
+  background-color: var(--clr-background);
 }
 
 #state {
@@ -194,7 +225,7 @@ button:active {
 }
 
 .timer {
-  background: #fff;
+  background: var(--clr-background);
   border-radius: 5px;
   border: 2px solid #323232;
   display: flex;

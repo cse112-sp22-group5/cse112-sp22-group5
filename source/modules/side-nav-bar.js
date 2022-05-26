@@ -154,6 +154,7 @@ function setSideBar() {
   }
 }
 
+
 // Expands sidebar based on window width
 document.querySelector('#arrow-down').addEventListener('click', (event) => {
   const menuStyle = document.querySelector('.side-nav-bar').style;

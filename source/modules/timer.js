@@ -5,11 +5,11 @@ import { progressBar } from './progress-bar.js';
 
 let 
     /** @type {number} **/ 
-    POMO_MINS = 25, 
+    POMO_MINS = 0.05, 
     /** @type {number} **/ 
-    SHORT_MINS = 5, 
+    SHORT_MINS = 0.05, 
     /** @type {number} **/ 
-    LONG_MINS = 15;
+    LONG_MINS = 0.05;
 
 const 
     /** @constant @type {string} **/ 

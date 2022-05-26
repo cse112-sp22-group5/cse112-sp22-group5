@@ -45,4 +45,18 @@ document.getElementById('clear-tasks-button').addEventListener('click', clearAll
 document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
 
 // load task list from local storage
-window.addEventListener('load', loadTaskListFromLocal);
+window.addEventListener('load', () => {
+    loadTaskListFromLocal();
+    document.documentElement.className = 'theme-default';
+});
+
+document.getElementById('theme').addEventListener('change', () => {
+    const htmlDoc = document.documentElement;
+    const theme   = document.getElementById('theme').value;
+    if (theme == 1) {
+        htmlDoc.className = 'theme-default';
+    }
+    else if (theme == 2) {
+        htmlDoc.className = 'theme-new';
+    }
+})
