@@ -46,6 +46,7 @@ function toggleMenu(divID) {
   let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
   if (content_div.hasOwnProperty(divID)) content_div[divID] = true;
   for (const key in content_div) {
+    let sideContent = document.getElementById(key);
     if (content_div[key] === true) {
       const sideBarWidth = 70; // px
       let divWidth = 100; // %
@@ -55,16 +56,14 @@ function toggleMenu(divID) {
         (sideBarWidth / windowWidth) * 100
       );
       divWidth = setdivWidth(windowWidth);
+      sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
 
-      document.getElementById(key).style
-        .width = `${divWidth - sideBarWidthPercentage}%`;
+      sideContent.style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
 
-      document.getElementById(key).style
-        .padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
     } 
     else {
-      document.getElementById(key).style.width = '';
-      document.getElementById(key).style.padding = '0';
+      sideContent.style.width = '';
+      sideContent.style.padding = '0';
     }
   }
 }
