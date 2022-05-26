@@ -9,6 +9,8 @@ import { revealHelp, hideHelp } from './modules/help.js';
 import { setBackgroundMusic } from './modules/background-music.js';
 import { addTaskButton, cancelTask, saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
 
+import { startWalkthrough } from './modules/walkthrough.js';
+
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
 document.getElementById('start-button').addEventListener('click', onStart);
@@ -42,3 +44,7 @@ document.getElementById('save-button').addEventListener('click', saveTask);
 document.getElementById('cancel-button').addEventListener('click', cancelTask);
 document.getElementById('clear-tasks-button').addEventListener('click', clearAllTasks);
 document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
+
+// Walkthrough
+window.addEventListener('load', startWalkthrough);
+document.getElementById('help-icon').addEventListener('click', startWalkthrough);
