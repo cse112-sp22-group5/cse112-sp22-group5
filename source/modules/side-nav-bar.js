@@ -36,6 +36,9 @@ function setdivWidth(windowWidth) {
   else return 100;
 }
 
+// Let the sidebar panel stop toggling between switching panels
+// potential overlay sidebar if Z_INDEX >= 99
+let Z_INDEX = 0;
 /**
  * @name toggleMenu
  * @function
@@ -45,28 +48,37 @@ function setdivWidth(windowWidth) {
 function toggleMenu(divID) {
   let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
   if (content_div.hasOwnProperty(divID)) content_div[divID] = true;
+  if (divID == null) Z_INDEX = 0; // reset when all panels collapse
+  
+  if (divID != null) {
+    let sideContent = document.getElementById(divID);
+    const sideBarWidth = 70; // px
+    let divWidth = 100; // %
+    let windowWidth = window.innerWidth;
+    let sideBarWidthPercentage = Math.round((sideBarWidth / windowWidth) * 100);
+    divWidth = setdivWidth(windowWidth);
+    
+    // Only the first panel has transition
+    if (Z_INDEX >=1) sideContent.style.transition = '0s';
+    sideContent.style.visibility = 'visible';
+    sideContent.style.zIndex = Z_INDEX; // the choosen panel always appear on top
+    sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
+
+    sideContent.style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
+    Z_INDEX ++;
+  } 
   for (const key in content_div) {
+    if (key == divID) continue;
     let sideContent = document.getElementById(key);
-    if (content_div[key] === true) {
-      const sideBarWidth = 70; // px
-      let divWidth = 100; // %
-      let windowWidth = window.innerWidth;
-
-      let sideBarWidthPercentage = Math.round(
-        (sideBarWidth / windowWidth) * 100
-      );
-      divWidth = setdivWidth(windowWidth);
-      sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
-
-      sideContent.style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
-
-    } 
-    else {
-      sideContent.style.width = '';
-      sideContent.style.padding = '0';
-    }
+    sideContent.style.visibility = 'hidden';
+    sideContent.style.transition = '0.5s';
+    sideContent.style.width = '';
+    sideContent.style.padding = '0';
   }
+
 }
+
+
 
 /**
  * @name setIconBackGround

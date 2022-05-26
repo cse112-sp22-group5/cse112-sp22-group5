@@ -15,7 +15,7 @@
   height: 100%;
   width: var(--side-bar-width);
   position: fixed;
-  z-index: 5;
+  z-index: 99;
   top: 0;
   left: 0;
   background-color: var(--side-bar-background);
@@ -30,7 +30,7 @@
   }
   #arrow-down {
     visibility: visible;
-    z-index: 3;
+    z-index: 100;
     position: fixed;
     left: 0;
     top: 0;
@@ -90,6 +90,7 @@
   /*   outline: black solid 1px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
+  visibility: collapse;
 }
 
 /*===================== task list================================= */
