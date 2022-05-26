@@ -1,0 +1,221 @@
+:root {
+  --side-bar-width: 70px;
+  --side-bar-background: rgb(28, 42, 71)
+}
+
+
+#arrow-down {
+  visibility: collapse;
+}
+
+.side-nav-bar {
+  height: 100%;
+  width: var(--side-bar-width);
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: var(--side-bar-background);
+  overflow: hidden;
+  padding-top: 30px;
+  transition: 0.5s;
+}
+@media only screen and (max-width: 700px)  {
+  .side-nav-bar {
+    height: 0%;
+  }
+  #arrow-down {
+    visibility: visible;
+    z-index: 3;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top:10px;
+    width: var(--side-bar-width);
+    height: 30px;
+    background-color: var(--side-bar-background);
+    cursor: pointer;
+    border-radius: 0 0 5px 5px;
+  }
+  #arrow-down > img {
+    margin-left: 25px;
+    
+  }
+  #arrow-down > img:hover {
+    cursor: pointer;
+    filter: contrast(100%);
+  }
+  
+}
+
+.side-nav-bar>* {
+  margin: 10px;
+  padding: 10px 5px 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  border-radius: 50%;
+}
+
+.side-nav-bar>*:hover,
+.button-clicked {
+  background-color: #2471a6;
+  cursor: pointer;
+}
+
+.icon {
+  width: 20px;
+}
+
+.sidebar-content {
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #f1f1f1;
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  /* Place content 60px from the top */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in the sidenav */
+  /*   outline: black solid 1px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+/*===================== task list================================= */
+
+#tasks-div,
+#bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+#tasks-div>* {
+  padding: 10px 0 10px 0px;
+}
+
+#tasks-div>label {
+  background-color: rgb(220, 220, 220);
+  border-radius: 5px 5px 0 0;
+  padding-left: 10px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  ;
+  font-size: 12px;
+}
+
+#tasks-div>button {
+  text-align: left;
+}
+
+#tasks-div>h2 {
+  text-align: center;
+  font-size: 20px;
+}
+
+#input-container {
+  display: flex;
+  width: 100%;
+
+}
+
+#input-container {
+  padding: 0px;
+}
+
+#task-name {
+  width: 100%;
+  border: none;
+  padding: 10px;
+}
+
+#save-button {
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  border: none;
+}
+
+#save-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgb(125, 125, 125);
+}
+
+#bottom {
+  position: relative;
+  bottom:0px;
+  padding:0px;
+  margin: 10px;
+}
+
+#bottom>i {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  color: rgb(45, 100, 146);
+  padding: 10px;
+  box-shadow: 0px -5px 5px rgb(226, 226, 226);
+  transition: 0.5s;
+  text-align: center;
+}
+
+#bottom>i:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgb(200, 200, 200);
+  color: rgb(42, 56, 67);
+}
+
+#task-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.task {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.task>img:hover {
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 2px rgba(90, 87, 87, 0.4));
+}
+
+.task>input {
+  flex-grow: 7;
+  text-align: left;
+  padding-left: 5px;
+  border: none;
+  resize: none;
+  background: inherit;
+  outline: none;
+  overflow: hidden;
+}
+
+.task>input:hover {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+.task > i {
+  margin-right: 10px;
+}
+
+.task >i:hover {
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 2px rgba(0, 0, 0, 0.4));
+  transition: ease-out;
+}
+
+#task-list>li:hover {
+  /* padding: 10px; */
+  box-shadow: 0px 0px 7px rgb(200, 200, 200);
+}
