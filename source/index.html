@@ -10,13 +10,12 @@
 
     <!--Intro.js-->
     <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
-    <link href="https://unpkg.com/intro.js/minified/introjs.min.css">
-    
+
     <title>Productoro</title>
 </head>
 <body data-state='pomo'>
     <header> 
-        <h1>Productoro</h1>
+        <h1 id="title">Productoro</h1>
         <nav id="options-btn-container">
             <button type=button class='help-button' id='help-button' hidden>?</button>
             <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
@@ -108,7 +107,7 @@
         <h3 class='settings-label'>Time (minutes)</h3>
             <form id='time-limits'>
                 <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
-                <fieldset id='form-enabler'>
+                <fieldset id='time-customization'>
                     <label id='work-label'>Work Session</label> 
                     <select name='work-time' id='work-time'>
                         <option id='work-option25' value='25' selected>25</option>
@@ -150,10 +149,13 @@
                 </div>
     
                     <h3 class='settings-label'>Keyboard Shortcuts</h3>
-                    <input type='radio' id='keyboard-on' name="keyboard-toggle" checked>
-                    <label for='keyboard-on'>On</label><br>
-                    <input type='radio' id='keyboard-off' name="keyboard-toggle">
-                    <label for='keyboard-off'>Off</label>
+                    <fieldset id="keybord-shortcuts">
+                        <input type='radio' id='keyboard-on' name="keyboard-toggle" checked>
+                        <label for='keyboard-on'>On</label><br>
+                        <input type='radio' id='keyboard-off' name="keyboard-toggle">
+                        <label for='keyboard-off'>Off</label>
+                    </fieldset>
+                    
                     <menu id='shortcut-customization'>
                         <li><button type='button' id='customize-start'>Space</button></li>
                         <li><button type='button' id='customize-volume-up'>ArrowUp</button></li>
@@ -161,10 +163,13 @@
                     </menu>
 
                     <h3 class='settings-label'>Audio Alarm</h3>
-                    <input type='radio' id='notif-on' name="notif-toggle" checked>
-                    <label for='notif-on'>On</label><br>
-                    <input type='radio' id='notif-off' name="notif-toggle">
-                    <label for='notif-off'>Off</label>
+                    <fieldset id="audio-enabler">
+                        <input type='radio' id='notif-on' name="notif-toggle" checked>
+                        <label for='notif-on'>On</label><br>
+                        <input type='radio' id='notif-off' name="notif-toggle">
+                        <label for='notif-off'>Off</label>
+                    </fieldset>
+                    
 
             <ul class='alarm-settings'>
                 <li>

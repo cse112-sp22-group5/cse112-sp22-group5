@@ -209,7 +209,7 @@ function updateTimer(duration) {
                 timer.counter.totalPomos++;
                 document.getElementById('total').innerText = timer.counter.totalPomos;
             } else {
-                document.querySelector('#form-enabler').removeAttribute('disabled');
+                document.querySelector('#time-customization').removeAttribute('disabled');
             }
 
             // enable start button when timer ends
@@ -283,7 +283,7 @@ function setCustomTime() {
  */
 function onStart() {
     getNotificationStatus();
-    document.querySelector('#form-enabler').disabled = 'disabled';
+    document.querySelector('#time-customization').disabled = 'disabled';
 
     // enable a warning if the user tries changing the time limits during a pomo
     document.getElementById('warning').innerText = 'Wait until the end of your next break to change the times!';
@@ -305,7 +305,7 @@ function onReset() {
     document.getElementById('reset-button').disabled = true;
     document.getElementById('start-button').disabled = false;
     document.getElementById('warning').style.display = 'none';
-    document.getElementById('form-enabler').removeAttribute('disabled');
+    document.getElementById('time-customization').removeAttribute('disabled');
     timer.counter.streak = 0;
     document.getElementById('streak').innerText = 
                     timer.counter.streak;

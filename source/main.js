@@ -15,7 +15,7 @@ import { setDefaultSettings } from './modules/side-nav-bar.js';
 import { startWalkthrough } from './modules/walkthrough.js';
 
 // Timer
-document.getElementById('form-enabler').addEventListener('change', setCustomTime);
+document.getElementById('time-customization').addEventListener('change', setCustomTime);
 document.getElementById('start-button').addEventListener('click', onStart);
 document.getElementById('reset-button').addEventListener('click', onReset);
 
@@ -51,4 +51,4 @@ document.getElementById('clear-completed-tasks-button').addEventListener('click'
 
 // Walkthrough
 window.addEventListener('load', startWalkthrough);
-document.getElementById('help-icon').addEventListener('click', startWalkthrough);
+// document.getElementById('help-icon').addEventListener('click', startWalkthrough);

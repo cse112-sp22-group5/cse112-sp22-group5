@@ -69,7 +69,7 @@ describe("Test onStart function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -157,7 +157,7 @@ describe("Test onStart function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -244,7 +244,7 @@ describe("Test onStart function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -334,7 +334,7 @@ describe("Test onReset function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -424,7 +424,7 @@ describe("Test onReset function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -511,7 +511,7 @@ describe("Test onReset function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -601,7 +601,7 @@ describe("Test checkState function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -892,7 +892,7 @@ describe("Test updateState function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -985,7 +985,7 @@ describe("Test updateState function", () => {
 
         </main>
         <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>
-        <fieldset id='form-enabler'>
+        <fieldset id='time-customization'>
             <label id='workLabel'>Work Session</label> 
             <select name='workTime' id='work-time'>
                 <option id='workOption25' value='25' selected>25</option>
@@ -1162,7 +1162,7 @@ describe("Test settings modal", () => {
 //                 <div class='circle long'></div>
 //             </div>
 //             <div id='warning' style='display:none'>Wait until the end of your next break to change the times!</div>
-//             <fieldset id='form-enabler'>
+//             <fieldset id='time-customization'>
 //                     <label id='work-label'>Select length for Work Session</label>
 //                     <select name='work-time' id='work-time'>
 //                         <option id='work-option25' value='25' selected>25</option>
