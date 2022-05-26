@@ -1,9 +1,7 @@
 :root {
   --side-bar-width: 70px;
-  --side-bar-background: #1C2A47;
-  --side-bar-icon-hover-bg: #2471a6;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --button-background: #7D7D7D,
+
 }
 
 
@@ -156,17 +154,17 @@
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   border: none;
-  color: rgb(45, 100, 146);
+  color: var(--side-bar-bottom-text);
   padding: 10px;
-  box-shadow: 0px -5px 5px rgb(226, 226, 226);
+  box-shadow: 0px -5px 5px var(--side-bar-bottom-box-shadow);
   transition: 0.5s;
   text-align: center;
 }
 
 .bottom>i:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 10px rgb(200, 200, 200);
-  color: rgb(42, 56, 67);
+  box-shadow: 0px 0px 10px var(--side-bar-bottom-hover-box-shadow);
+  color: var(--side-bar-bottom-hover-text);
 }
 
 #task-list {
@@ -289,7 +287,7 @@
 
 .setting-flex-item > select {
   border: 0;
-  background-color: var(--button-background);
+  background-color: var(--select-input-background);
   width: 25%;
   padding-left: 10px;
   text-align: left;

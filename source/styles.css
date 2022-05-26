@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
-@import url("side-nav-bar.css");
-
+@import url('side-nav-bar.css');
+@import url('styles-themes.css');
 /******** Variables ********/
 :root {
   /* Refactor Option */
@@ -39,57 +39,19 @@
   --transition-time: 1s;
 }
 
-.theme-default {
-  --primary-color: #77a4e9;
-  --clr-light: #ffffff;
-  --clr-accent-pomo: #032e77;
-  --clr-accent-short: #923201;
-  --clr-accent-long: #01795f;
-  --clr-circle-pomo: #0084ff;
 
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-text: #000000;
-  --clr-background: #FFFFFF;
-  --clr-logo: #323232;
-  --clr-sidebar-content-bg: #f1f1f1;
-
-}
-.theme-new {
-  --primary-color: #414141;
-  --clr-light: #7f7f7f;
-  --clr-accent-pomo: #050709;
-  --clr-accent-short: #2f2118;
-  --clr-accent-long: #0a231e;
-  --clr-circle-pomo: #212d38;
-
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-text: #FFFFFF;
-  --clr-background: #000000;
-  --clr-logo: #ffffff;
-  --clr-sidebar-content-bg: #181818;
-}
 
 /******** GLOBALS ********/
-* {
-  color: var(--clr-text);
-}
 /* Body */
 body {
-  /* color: var(--clr-dark); */
+  /* color: var(--clr-body-dark); */
   transition: background 1s;
 }
 
 body[data-state="pomo"] {
   /* background: #fff; */
-  background: var(--primary-color);
+  background: var(--main-background);
+  background-image: var(--background-img);
 }
 
 body[data-state="short"] {
@@ -177,7 +139,7 @@ button:active {
 
 /******** PROGRESS BAR ********/
 .circle {
-  background-color: var(--clr-light);
+  background-color: var(--clr-innerCircle-light);
   border-radius: 50%;
   border: 3px solid;
   height: 20px;
@@ -215,7 +177,7 @@ button:active {
 #timer-display {
   text-align: center;
   margin: auto;
-  color: var(--clr-text);
+  color: var(--clr-state-timer-text);
   background-color: var(--clr-background);
 }
 
@@ -225,7 +187,7 @@ button:active {
 }
 
 .timer {
-  background: var(--clr-background);
+  background: var(--clr-timer-background);
   border-radius: 5px;
   border: 2px solid #323232;
   display: flex;
@@ -312,8 +274,16 @@ fieldset select {
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
+  color: var(--clr-state-timer-text);
 }
 
+footer {
+  color: var(--clr-state-timer-text);
+}
+
+#start-reset button {
+  color: var(--clr-state-timer-text);
+}
 /******** TASK LIST ********/
 /* .tasks {
   width: 60%;

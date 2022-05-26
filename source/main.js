@@ -12,6 +12,7 @@ import { saveTask, clearAllTasks, clearCompletedTasks, loadTaskListFromLocal } f
 import './modules/side-nav-bar.js';
 import { setDefaultSettings } from './modules/side-nav-bar.js';
 
+import {setTheme} from './modules/skins-themes.js';
 // Timer
 document.getElementById('form-enabler').addEventListener('change', setCustomTime);
 document.getElementById('start-button').addEventListener('click', onStart);
@@ -53,10 +54,5 @@ window.addEventListener('load', () => {
 document.getElementById('theme').addEventListener('change', () => {
     const htmlDoc = document.documentElement;
     const theme   = document.getElementById('theme').value;
-    if (theme == 1) {
-        htmlDoc.className = 'theme-default';
-    }
-    else if (theme == 2) {
-        htmlDoc.className = 'theme-new';
-    }
+    setTheme(htmlDoc, theme);
 })
