@@ -77,6 +77,7 @@
 
 .theme-white {
     /*Main color background*/
+    --main-background:'';
     --background-img: url('https://wallpaperaccess.com/full/274198.jpg');
     /* I don't know what it is*/
     --clr-innerCircle-light: #ffffff;
