@@ -187,6 +187,7 @@ function updateTimer(duration) {
         document.getElementById('timer-display').innerText= 
             `${minutes}:${seconds}`;
 
+        document.title = `Productoro - ${minutes}:${seconds}`;
         // stop timer when minutes and seconds reach 0
         if(minutes == 0 && seconds == 0) {
             clearInterval(timerId);
@@ -234,13 +235,6 @@ function setCustomTime() {
     let sbTime = document.getElementById('short-break-time');
     let lbTime = document.getElementById('long-break-time');
     let warning = document.getElementById('warning');
-    // let wTimeOutput = document.getElementById('work-time-val');
-    // let sbTimeOutput = document.getElementById('short-break-time-val');
-    // let lbTimeOutput = document.getElementById('long-break-time-val');
-
-    // wTimeOutput.innerHTML = wTime.value;
-    // sbTimeOutput.innerHTML = sbTime.value;
-    // lbTimeOutput.innerHTML = lbTime.value;
 
     if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
       // enable a warning
@@ -251,9 +245,6 @@ function setCustomTime() {
       wTime.value = POMO_MINS.toString();
       sbTime.value = SHORT_MINS.toString();
       lbTime.value = LONG_MINS.toString();
-      wTimeOutput.innerHTML = wTime.value;
-      sbTimeOutput.innerHTML = sbTime.value;
-      lbTimeOutput.innerHTML = lbTime.value;
       return;
   }
 

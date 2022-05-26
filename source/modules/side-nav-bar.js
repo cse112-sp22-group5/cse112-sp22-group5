@@ -37,8 +37,8 @@ function setdivWidth(windowWidth) {
 }
 
 // Let the sidebar panel stop toggling between switching panels
-// potential overlay sidebar if Z_INDEX >= 99
-let Z_INDEX = 0;
+// potential overlay sidebar if PANEL_Z_INDEX >= 99
+let PANEL_Z_INDEX = 0;
 /**
  * @name toggleMenu
  * @function
@@ -47,33 +47,31 @@ let Z_INDEX = 0;
  */
 function toggleMenu(divID) {
   let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
-  if (content_div.hasOwnProperty(divID)) content_div[divID] = true;
-  if (divID == null) Z_INDEX = 0; // reset when all panels collapse
+  if (divID == null) PANEL_Z_INDEX = 0; // reset when all panels collapse
   
   if (divID != null) {
-    let sideContent = document.getElementById(divID);
+    let sideContent    = document.getElementById(divID);
     const sideBarWidth = 70; // px
-    let divWidth = 100; // %
-    let windowWidth = window.innerWidth;
+    let divWidth       = 100; // %
+    let windowWidth    = window.innerWidth;
     let sideBarWidthPercentage = Math.round((sideBarWidth / windowWidth) * 100);
     divWidth = setdivWidth(windowWidth);
     
     // Only the first panel has transition
-    if (Z_INDEX >=1) sideContent.style.transition = '0s';
+    if (PANEL_Z_INDEX >=1) sideContent.style.transition = '0s';
     sideContent.style.visibility = 'visible';
-    sideContent.style.zIndex = Z_INDEX; // the choosen panel always appear on top
-    sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
-
+    sideContent.style.zIndex  = PANEL_Z_INDEX; // the choosen panel always appear on top
+    sideContent.style.width   = `${divWidth - sideBarWidthPercentage}%`;
     sideContent.style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
-    Z_INDEX ++;
+    PANEL_Z_INDEX ++;
   } 
   for (const key in content_div) {
     if (key == divID) continue;
     let sideContent = document.getElementById(key);
     sideContent.style.visibility = 'hidden';
     sideContent.style.transition = '0.5s';
-    sideContent.style.width = '';
-    sideContent.style.padding = '0';
+    sideContent.style.width      = '';
+    sideContent.style.padding    = '0';
   }
 
 }
@@ -202,15 +200,8 @@ window.addEventListener('click', (event) => {
     setIconBackGround(null);
   }
 
-  function menuIcon () {
-    const content = document.querySelectorAll('.sidebar-content');
-
-    for (let i = 0; i < content.length; i++)
-      if (content[i].style.width != '')
-        return false;
-    return true;
-  }
-  if (event.clientX >= parseInt(menuWidth) && menuIcon())
+  // the click coordinate must greater than sidebar width and no panels are open
+  if (event.clientX >= parseInt(menuWidth) && PANEL_Z_INDEX == 0)
   {
     setSideBar();
   }
@@ -229,16 +220,8 @@ window.addEventListener('touchstart', (event) => {
     setSideBar();
   }
 
-  function menuIcon () {
-    const content = document.querySelectorAll('.sidebar-content');
-
-    for (let i = 0; i < content.length; i++)
-      if (content[i].style.width != '')
-        return false;
-    return true;
-  }
-
-  if (event.touches[0].clientX >= parseInt(menuWidth) && menuIcon ())
+  // the click coordinate must greater than sidebar width and no panels are open
+  if (event.touches[0].clientX >= parseInt(menuWidth) && PANEL_Z_INDEX == 0)
   {
     setSideBar();
   }
