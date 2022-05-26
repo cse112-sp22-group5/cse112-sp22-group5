@@ -7,7 +7,7 @@ import { revealHelp, hideHelp } from './modules/help.js';
 // import { colorChange } from './modules/color-change.js';
 // import { breakReminders } from './modules/break-reminder.js';
 import { setBackgroundMusic } from './modules/background-music.js';
-import { saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
+import { saveTask, clearAllTasks, clearCompletedTasks, loadTaskListFromLocal } from './modules/task-list.js';
 
 import './modules/side-nav-bar.js';
 import { setDefaultSettings } from './modules/side-nav-bar.js';
@@ -43,3 +43,6 @@ document.getElementById('task-name').addEventListener('keypress', (event) => {
 document.getElementById('save-button').addEventListener('click', saveTask);
 document.getElementById('clear-tasks-button').addEventListener('click', clearAllTasks);
 document.getElementById('clear-completed-tasks-button').addEventListener('click', clearCompletedTasks);
+
+// load task list from local storage
+window.addEventListener('load', loadTaskListFromLocal);
