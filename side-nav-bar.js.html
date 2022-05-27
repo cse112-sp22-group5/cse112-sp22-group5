@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>breakReminder.js - Documentation</title>
+    <title>side-nav-bar.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">breakReminder.js</h1>
+    <h1 class="page-title">side-nav-bar.js</h1>
     
 
     
@@ -39,62 +39,231 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {timer, WORK_STATE, SHORT_STATE, LONG_STATE} from './timer.js';
+            <pre class="prettyprint source linenums"><code>/*************************** NOTE **********************************************
+ * To add more side content to the side bar:
+ * Under side-nav-bar add:
+ *  - add  &lt;i class='menu-icon' id='&lt;new-content-go-herer-icon>'
+ *         data-associated-div='&lt;new-content-go-here-div>' title='&lt;optional>'>
+ *  - add &lt;img class='icon' src='link/to/your/icon' >
+ * Add new side bar content div:
+ *  - &lt;div class='sidebar-content' id='&lt;new-content-gohere-div'>
+ * Update global variables accordingly
+ ******************************************************************************/
 
+const CONTENT_DIV = {
+  "help-div": false,
+  "setting-div": false,
+  "tasks-div": false,
+};
+const CONTENT_ICONS = {
+  "help-icon": false,
+  "setting-icon": false,
+  "tasks-icon": false,
+};
+
+const SCREEN_SIZE = 700;
 /**
- * @name breakReminders
+ * @name setdivWidth
  * @function
- * @description Displays ideas for breaks during short and long break states
+ * @description Calculate sidebar content based on window width
+ * @param {integer} windowWidth
+ * @returns width of sidebar content in percent
  */
-function breakReminders(){
-    
-    let breakIdeas = ['Create a 5-minute stretch routine', 'Take a short walk', 'Do breathing exercises', 'Do a quick 5-minute clean-up', 
-    'Make yourself a snack', 'Go outside and soak in the sun', 'Create a quick yoga routine', 'Do some calisthenics', 'Listen to a motivational song', 'Juggle',
-    'Work on a fun hobby', 'Do a quick sprint', 'Do some meal preparation', 'Declutter your space', 'Organize your space', 'Take out the trash', 
-    'Change that lightbulb that needs changing', 'Meditate', 'Clean your junk drawer', 'Do your laundry', 'Empty or fill the dishwasher', 'Put out bird food', 
-    'Water your plants', 'Clean your glasses', 'Go to the bathroom', 'Do some jumping jacks', 'Stretch your back', 'Stretch your arms', 'Do some push-ups', 'Find a new podcast'];
-    
-    let randomIdea = breakIdeas[Math.floor(Math.random() * breakIdeas.length)];
- 
-    document.getElementById('reminder').style.visibility = 'hidden';
-    document.getElementById('break-reminder').innerHTML = randomIdea;
-    document.getElementById('reminder').innerHTML = '';
-      
-   
-    switch(timer.currState) {
- 
-        case WORK_STATE:
-            document.getElementById('break-reminder').innerHTML = '';
-            document.getElementById('break-reminder').style.visibility = 'hidden';
-            document.getElementById('reminder').style.visibility = 'hidden';
-            break;
- 
-        case SHORT_STATE:
-            document.getElementById('break-reminder').innerHTML = 'An idea for how to spend your break:';
-            document.getElementById('break-reminder').style.visibility = 'visible';
-            document.getElementById('reminder').style.visibility = 'visible'; 
-           document.getElementById('reminder').innerHTML = randomIdea;
-            break;
-        
-        case LONG_STATE:
-            document.getElementById('break-reminder').innerHTML = 'An idea for how to spend your break:';
-            document.getElementById('break-reminder').style.visibility = 'visible';
-            document.getElementById('reminder').style.visibility = 'visible';
-            document.getElementById('reminder').innerHTML = randomIdea;
-            break;
-        
-        default:
-            document.getElementById('break-reminder').innerHTML = '';
-            document.getElementById('break-reminder').style.visibility = 'hidden';
-            document.getElementById('reminder').style.visibility = 'hidden';
-            break;    
-    
-    }
-  
+function setdivWidth(windowWidth) {
+  if (windowWidth > 1500) return 30;
+  else if (windowWidth > 1200) return 45;
+  else if (windowWidth > 700) return 50;
+  else return 100;
 }
 
-// export functions for testing
-export { breakReminders };</code></pre>
+// Let the sidebar panel stop toggling between switching panels
+// potential overlay sidebar if PANEL_Z_INDEX >= 99
+let PANEL_Z_INDEX = 0;
+/**
+ * @name toggleMenu
+ * @function
+ * @description toggle side content
+ * @param {string} divID id of the content
+ */
+function toggleMenu(divID) {
+  let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
+  if (divID == null) PANEL_Z_INDEX = 0; // reset when all panels collapse
+
+  if (divID != null) {
+    let sideContent = document.getElementById(divID);
+    const sideBarWidth = 70; // px
+    let divWidth = 100; // %
+    let windowWidth = window.innerWidth;
+    let sideBarWidthPercentage = Math.round((sideBarWidth / windowWidth) * 100);
+    divWidth = setdivWidth(windowWidth);
+
+    // Only the first panel has transition
+    if (PANEL_Z_INDEX >= 1) sideContent.style.transition = "0s";
+    sideContent.style.visibility = "visible";
+    sideContent.style.zIndex = PANEL_Z_INDEX; // the choosen panel always appear on top
+    sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
+    sideContent.style.padding = `0px 0% 0px ${sideBarWidthPercentage}%`;
+    PANEL_Z_INDEX++;
+  }
+  for (const key in content_div) {
+    if (key == divID) continue;
+    let sideContent = document.getElementById(key);
+    sideContent.style.visibility = "hidden";
+    sideContent.style.transition = "0.5s";
+    sideContent.style.width = "";
+    sideContent.style.padding = "0";
+  }
+}
+
+/**
+ * @name setIconBackGround
+ * @function
+ * @description Set background of the icon when it is clicked
+ * @param {string} btnID button id
+ */
+function setIconBackGround(btnID) {
+  let content_icons = JSON.parse(JSON.stringify(CONTENT_ICONS));
+  if (Object.prototype.hasOwnProperty.call(content_icons, btnID))
+    content_icons[btnID] = true;
+  for (const key in content_icons) {
+    if (content_icons[key])
+      document.getElementById(key).classList.add("button-clicked");
+    else document.getElementById(key).classList.remove("button-clicked");
+  }
+}
+
+/**
+ * @name expandSideBar
+ * @function
+ * @description expands the side navigation bar and set the arrow icon up
+ */
+function expandSideBar() {
+  document.querySelector(".side-nav-bar").style.height = "100%";
+  document.querySelector("#arrow-down > img").src =
+    "./img/icons/arrow-up-icon.svg";
+}
+
+/**
+ * @name minimizeSideBar
+ * @function
+ * @description minimizes the side navigation bar and set the arrow icon down
+ */
+function minimizeSideBar() {
+  document.querySelector(".side-nav-bar").style.height = "";
+  document.querySelector("#arrow-down > img").src =
+    "./img/icons/arrow-down-icon.svg";
+
+  toggleMenu(null);
+}
+
+/**
+ * @name setSideBar
+ * @function
+ * @description depends on window side, expand or minimize the side bar
+ */
+function setSideBar() {
+  if (window.innerWidth > SCREEN_SIZE) expandSideBar();
+  else minimizeSideBar();
+}
+
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ */
+function setDefaultSettings() {
+  const defaultSetting = {
+    "work-time": "25",
+    "short-break-time": "5",
+    "long-break-time": "15",
+    "bg-music": "None",
+    "keyboard-toggle": "on",
+    "notif-toggle": "on",
+    "alarm-volume": "100",
+    "alarm-sounds": "1",
+  };
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+}
+
+// Expands sidebar based on window width
+document.querySelector("#arrow-down").addEventListener("click", () => {
+  const menuStyle = document.querySelector(".side-nav-bar").style;
+  if (parseInt(menuStyle.height, 10) === 0 || menuStyle.height === "") {
+    expandSideBar();
+  } else {
+    minimizeSideBar();
+  }
+});
+
+// Set background color for menu icons
+document.querySelectorAll(".menu-icon").forEach((elem) => {
+  elem.addEventListener("click", () => {
+    const id = elem.getAttribute("data-associated-div");
+    const side = document.getElementById(id).offsetWidth;
+    if (side === 0) {
+      toggleMenu(id);
+      setIconBackGround(elem.getAttribute("id"));
+    } else {
+      toggleMenu(null);
+      setIconBackGround(null);
+    }
+  });
+});
+
+// closes side bar or panels when resizing the window
+window.addEventListener("resize", () => {
+  toggleMenu(null);
+  setIconBackGround(null);
+  setSideBar();
+});
+
+/**
+ * If user clicks on areas that are outside menu and panels, it closes
+ */
+window.addEventListener("click", (event) => {
+  const windowWidth = window.innerWidth;
+  const divWidth = setdivWidth(windowWidth);
+  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
+    "--side-bar-width"
+  );
+
+  if ((event.clientX / windowWidth) * 100 >= divWidth) {
+    toggleMenu(null);
+    setIconBackGround(null);
+  }
+
+  // the click coordinate must greater than sidebar width and no panels are open
+  if (event.clientX >= parseInt(menuWidth, 10) &amp;&amp; PANEL_Z_INDEX === 0) {
+    setSideBar();
+  }
+});
+
+// For touch screen devices
+window.addEventListener("touchstart", (event) => {
+  const windowWidth = window.innerWidth;
+  const divWidth = setdivWidth(windowWidth);
+  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
+    "--side-bar-width"
+  );
+  if ((event.touches[0].clientX / windowWidth) * 100 >= divWidth) {
+    toggleMenu(null);
+    setIconBackGround(null);
+    setSideBar();
+  }
+
+  // the click coordinate must greater than sidebar width and no panels are open
+  if (
+    event.touches[0].clientX >= parseInt(menuWidth, 10) &amp;&amp;
+    PANEL_Z_INDEX === 0
+  ) {
+    setSideBar();
+  }
+});
+
+export { setDefaultSettings };
+</code></pre>
         </article>
     </section>
 
