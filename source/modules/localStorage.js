@@ -4,8 +4,8 @@ let objName = '';
 /**
  * @name setObj
  * @function 
- * @description Must call set Object or Key in localStorage before user any other functions
- * @param {string} string key or object name in localStorage
+ * @description Must call set Object/Key in localStorage before using any other functions
+ * @param {string} string object/key name in localStorage
  */
 function setObj(string) {
     objName = string;
