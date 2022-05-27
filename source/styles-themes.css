@@ -25,6 +25,7 @@
 
 
     /* Side Bar */
+    --side-bar-content-text: #000000;
     --clr-sidebar-content-bg: #f1f1f1; 
     --side-bar-background: #1C2A47;    /*side bar background*/
     --side-bar-icon-hover-bg: #2471a6; /*icon background when hovered */
@@ -63,6 +64,7 @@
 
 
     /* Side Bar */
+    --side-bar-content-text: #000000;
     --clr-sidebar-content-bg: #6f6f6f;          /*side bar panels */
     --side-bar-background: #424242;             /*side bar background*/
     --side-bar-icon-hover-bg: #b7b7b7;          /*icon background when hovered */
@@ -102,6 +104,7 @@
 
 
     /* Side Bar */
+    --side-bar-content-text: #000000;
     --clr-sidebar-content-bg: #f1f1f1; 
     --side-bar-background: #1C2A47;    /*side bar background*/
     --side-bar-icon-hover-bg: #2471a6; /*icon background when hovered */
