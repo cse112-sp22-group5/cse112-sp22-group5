@@ -194,7 +194,7 @@ window.addEventListener("click", (event) => {
   }
 
   // the click coordinate must greater than sidebar width and no panels are open
-  if (event.clientX >= parseInt(menuWidth) && PANEL_Z_INDEX === 0) {
+  if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 0) {
     setSideBar();
   }
 });
@@ -213,7 +213,10 @@ window.addEventListener("touchstart", (event) => {
   }
 
   // the click coordinate must greater than sidebar width and no panels are open
-  if (event.touches[0].clientX >= parseInt(menuWidth) && PANEL_Z_INDEX === 0) {
+  if (
+    event.touches[0].clientX >= parseInt(menuWidth, 10) &&
+    PANEL_Z_INDEX === 0
+  ) {
     setSideBar();
   }
 });
