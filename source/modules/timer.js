@@ -407,5 +407,5 @@ function keyboardShortcut(event) {
 
 // export functions and variables for testing
 export {onStart, onReset, checkState,updateState, timer, setCustomTime, 
-    keyboardShortcut, revealSettings, hideSettings, updateTimer, SHORT_STATE, LONG_STATE, 
+    keyboardShortcut, revealSettings, hideSettings, SHORT_STATE, LONG_STATE, 
     WORK_STATE, POMO_MINS, SHORT_MINS, LONG_MINS}; 

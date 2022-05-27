@@ -24,7 +24,7 @@ onmessage = function(e) {
          * @description Calculates time remaining for updating the timer display
          */
         function calcTimer() {
-            // get the number of seconds that have elapsed since updateTimer() was called
+            // get the number of seconds that have elapsed since timer's updateTimer() was called
             diff = duration - (((Date.now() - start) / MS) | 0);
             // truncates the float
             minutes = (diff / NUM_SEC) | 0;
