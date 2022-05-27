@@ -78,7 +78,7 @@ function checkState() {
         timer.currDuration = NUM_SEC * POMO_MINS;
         document.getElementById('state').innerText = WORK_STATE;
         document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-        document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
+        //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
     } 
     else {
         // long break state
@@ -116,7 +116,7 @@ function checkState() {
 function updateState() {
     // if the current state is a work state, next state a break
     if(timer.currState === WORK_STATE) {
-        document.getElementById('tasks').className = 'tasks'; 
+      //  document.getElementById('tasks').className = 'tasks'; 
         // next state is a long break 
         if(timer.counter.totalPomos % LONG_MOD === 0) {
             timer.currState = LONG_STATE;
@@ -187,6 +187,7 @@ function updateTimer(duration) {
         document.getElementById('timer-display').innerText= 
             `${minutes}:${seconds}`;
 
+        document.title = `Productoro - ${minutes}:${seconds}`;
         // stop timer when minutes and seconds reach 0
         if(minutes == 0 && seconds == 0) {
             clearInterval(timerId);
@@ -209,7 +210,8 @@ function updateTimer(duration) {
             // transition to the next state
             updateState();
             showNotif(timer.currState);
-            if(document.getElementById('notif-toggle').checked) {
+            let alarm = document.getElementById('notif-toggle').value;
+            if(alarm == 'on') {
                 playSound();
             }
         }
@@ -233,13 +235,6 @@ function setCustomTime() {
     let sbTime = document.getElementById('short-break-time');
     let lbTime = document.getElementById('long-break-time');
     let warning = document.getElementById('warning');
-    let wTimeOutput = document.getElementById('work-time-val');
-    let sbTimeOutput = document.getElementById('short-break-time-val');
-    let lbTimeOutput = document.getElementById('long-break-time-val');
-
-    wTimeOutput.innerHTML = wTime.value;
-    sbTimeOutput.innerHTML = sbTime.value;
-    lbTimeOutput.innerHTML = lbTime.value;
 
     if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
       // enable a warning
@@ -250,9 +245,6 @@ function setCustomTime() {
       wTime.value = POMO_MINS.toString();
       sbTime.value = SHORT_MINS.toString();
       lbTime.value = LONG_MINS.toString();
-      wTimeOutput.innerHTML = wTime.value;
-      sbTimeOutput.innerHTML = sbTime.value;
-      lbTimeOutput.innerHTML = lbTime.value;
       return;
   }
 
@@ -301,7 +293,7 @@ function onReset() {
                     timer.counter.streak;
     clearInterval(timerId);
     checkState();
-    document.getElementById('tasks').className = 'tasks';
+//    document.getElementById('tasks').className = 'tasks';
 
 }
 
@@ -333,8 +325,8 @@ function hideSettings() {
  * @description Starts and resets timer when the space bar is clicked
  * @param {*} event The keyboard button that is clicked
  */
-function keyboardShortcut(event) {
-    if (document.getElementById('keyboard-toggle').checked){
+function keyboardShortcut(event) {  
+    if (document.getElementById('keyboard-toggle').value == 'on'){
         if(event.code === 'Space') {
             // if the timer is static, start timer
             if(document.getElementById('start-button').disabled == false ) {
