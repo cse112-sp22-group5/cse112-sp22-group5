@@ -1,25 +1,19 @@
-/**
- * Test name:  Add task button 
- * What scenario is being tested?: on click
- * What is the expected output?:  Add task form should appear
- */
-
  /**
   * Test name:  Save task button
-  * What scenario is being tested?: add-task form is shown and 2 scenarios on click: 1 - Save new task; 2 - Save edited task
-  * What is the expected output?: 1- new task is added to task list; 2- Task's name is changed
+  * What scenario is being tested?: save new task
+  * What is the expected output?: new task is added to task list;
   */
 
  /**
-  * Test name:  cancel task button
-  * What scenario is being tested?: when add-task form is displayed and on click,
-  * What is the expected output?:  add-task form is hidden, and task-name input should be cleared
+  * Test name: Delete task
+  * What scenario is being tested?: task list panel is open, and delete icon is clicked
+  * What is the expected output?:  the associated task should be removed from task list
   */
 
  /**
   * Test name:  Edit task button
   * What scenario is being tested?: on click
-  * What is the expected output?: add-task form is open, and the task name of which was chosen should be displayed task-name input field.
+  * What is the expected output?: task name should be able to edit
   */
 
 /**
@@ -31,17 +25,17 @@
 /**
  * Test name: TestDoneButton
  * What scenario is being tested?: Click on done button
- * What is the expected output?: The label corresponding to that done button should be crossed off.
+ * What is the expected output?: The check icon should change from white to black
  */
 
  /**
- * Test name:  
- * What scenario is being tested?: 
- * What is the expected output?: 
+ * Test name: Check task list in localStorage
+ * What scenario is being tested?: add new task
+ * What is the expected output?: check 'taskList' in local storage
  */
 
  /**
- * Test name:  
+ * Test name: 
  * What scenario is being tested?: 
  * What is the expected output?: 
  */
