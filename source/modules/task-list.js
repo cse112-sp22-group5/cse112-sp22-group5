@@ -1,3 +1,9 @@
+import {setObj, storeToLocal, removeDataFromStorage, retrieveDataFromStorage, deleteFromLocal}
+from './localStorage.js';
+
+// Set Object name in localStorage
+setObj('taskList');
+
 /**
  * @name saveTask
  * @function
@@ -139,7 +145,7 @@ function clearCompletedTasks() {
     let children = taskList.children;
     for (let i = 0; i < children.length; i++) {
         if (children[i].getAttribute('done') == 'true') {
-            deleteTaskFromLocal(children[i].children[1].value);
+            deleteFromLocal(children[i].children[1].value);
             taskList.removeChild(children[i]);
             i--;
         } 
@@ -158,67 +164,6 @@ function inputSanitizer(input) {
     return false;
 }
 
-// Local Storage object
-const objName = 'taskList';
-
-/**
- * @name storeToLocal
- * @function 
- * @description Store task to local storage and whether it is done or not
- * @param {string} task task name
- * @param {boolean} done true if task is completed, otherwise false
- */
-function storeToLocal(task, done)
-{
-    const taskList = retrieveDataFromStorage(objName);
-    taskList[task] = done;
-    saveToStorage(objName, taskList);
-}
-
-/**
- * @name deleteTaskFromLocal
- * @function
- * @description remove a task from local storage
- * @param {string} task task name
- */
-function deleteTaskFromLocal(task) {
-
-    const taskList = retrieveDataFromStorage(objName);
-    delete taskList[task];
-    saveToStorage(objName, taskList);
-}
-
-/**
- * @name saveToStorage
- * @function
- * @description save a task to local storage
- * @param {string} key local storage keyword to store task list
- * @param {string} obj the task list
- */
-function saveToStorage(key, obj) {
-    localStorage.setItem(key, JSON.stringify(obj));
-}
-
-/**
- * @name retrieveDataFromStorage
- * @function
- * @description retrieve a task from local storage
- * @param {string} key local storage keyword to retrieve task list
- * @returns {object} task list
- */
-function retrieveDataFromStorage(key) {
-    return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {};
-}
-
-/**
- * @name removeDataFromStorage
- * @function
- * @description remove the whole task list from local storage
- * @param {string} key local storage keyword to retrieve task list
- */
-function removeDataFromStorage() {
-    localStorage.removeItem(objName);
-}
 
 /**
  * @name loadTaskListFromLocal
@@ -226,7 +171,7 @@ function removeDataFromStorage() {
  * @description load task list from local storage
  */
 function loadTaskListFromLocal() {
-    const taskListLocal = retrieveDataFromStorage(objName);
+    const taskListLocal = retrieveDataFromStorage();
     const taskList = document.getElementById('task-list');
     for(const taskName in taskListLocal) {
         let newTask = createCustomTaskTag(taskName, taskListLocal[taskName]);
