@@ -35,25 +35,31 @@ var steps = [
     step: 5
   },
   {
-    element: document.getElementById('time-customization'),
+    element: document.getElementById('form-enabler'),
     intro: 'Use the up and down arrows to adjust the length of your work sessions and breaks.',
     position: 'bottom',
     step: 6
   },
   {
-    element: document.getElementById('bg-music'),
+    element: document.getElementById('bg-music-container'),
     intro: 'Want some background music while you work? Choose your tunes here.',
     position: 'top',
     step: 7
   },
   {
-    element: document.getElementById('shortcut-customization'),
-    intro: 'Customize your keyboard shortcuts by clicking button next to the action you want to change and then hit the key that you want to change it to.',
+    element: document.getElementById('shortcut-enabler'),
+    intro: 'Enable or disable keyboard shortcuts',
     position: 'top',
-    step: 8
+    step: 7
   },
+  // {
+  //   element: document.getElementById('shortcut-customization'),
+  //   intro: 'Customize your keyboard shortcuts by clicking button next to the action you want to change and then hit the key that you want to change it to.',
+  //   position: 'top',
+  //   step: 8
+  // },
   {
-    element: document.getElementById('alarm-settings'),
+    element: document.getElementById('alarm-enabler'),
     intro: 'Change the volume or the sound of the alarm that goes off after each session.',
     position: 'top',
     step: 9

@@ -37,9 +37,9 @@ document.addEventListener("keydown", (event) => {
   if (document.getElementById("tasks-div").style.width === 0)
     keyboardShortcut(event);
 });
-document.getElementById('customize-start').addEventListener('click', customizeKey);
-document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
-document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
+// document.getElementById('customize-start').addEventListener('click', customizeKey);
+// document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
+// document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
 
 // Default button
 document
