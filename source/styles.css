@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 @import url("side-nav-bar.css");
 @import url('https://unpkg.com/intro.js/minified/introjs.min.css');
 
@@ -49,6 +49,13 @@
   --fw-bold: 700;
 
   --transition-time: 1s;
+
+  /* Side bar*/
+  --side-bar-width: 70px;
+  --side-bar-background: #1c2a47;
+  --side-bar-icon-hover-bg: #2471a6;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --button-background: #f1f1f1;
 }
 
 /******** GLOBALS ********/
@@ -252,7 +259,8 @@ button:active {
 }
 
 /* SETTINGS MODAL */
-fieldset {
+
+/* fieldset {
   border: none;
   padding: 0;
   display: flex;
@@ -276,8 +284,7 @@ fieldset select {
   background-color: var(--clr-gray);
   padding: 20px;
   
-}
-
+} */
 
 /******** CURRENT TASK ********/
 .current-task * {
@@ -301,7 +308,8 @@ fieldset select {
 }
 
 .tasks[data-state="pomo"] {
-  /* background: #fff; */
+
+  /* background: #fff; 
   background: var(--primary-color);
 }
 
@@ -426,6 +434,7 @@ fieldset select {
 } */
 
 /******** Switches ********/
+
 /* [type="checkbox"] {
   position: absolute;
   left: -9999px;

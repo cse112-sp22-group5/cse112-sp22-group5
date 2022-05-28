@@ -58,9 +58,9 @@ function createCustomTaskTag(taskName) {
     taskLabel.setAttribute('readonly', '');
     taskLabel.value = taskName;
 
-    editButton.innerHTML   = '<img class="icon" src="./img/icons/edit-icon.svg" >'
-    removeButton.innerHTML = '<img class="icon" src="./img/icons/delete-icon.svg" >';
-    threeDots.innerHTML    = '<img class="icon" src="./img/icons/three-dots-icon.svg" >';
+    editButton.innerHTML   = '<img class="icon" src="./img/icons/edit-icon.svg" title="edit" alt="edit">'
+    removeButton.innerHTML = '<img class="icon" src="./img/icons/delete-icon.svg" title="delete" alt="delete">';
+    threeDots.innerHTML    = '<img class="icon" src="./img/icons/three-dots-icon.svg" title="something else" alt="something else">';
     circleIcon.src         = './img/icons/check-circle-icon-white.svg';
     circleIcon.style.width = '15px';
 
