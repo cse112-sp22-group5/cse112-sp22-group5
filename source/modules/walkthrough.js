@@ -127,10 +127,17 @@ function startWalkthrough() {
 function isReturningUser() {
   storage.setObj('returningUser');
   const obj = storage.retrieveDataFromStorage();
-  if (Object.prototype.hasOwnProperty.call(obj,'returningUser') === true)
-    return true;
+  if (Object.prototype.hasOwnProperty.call(obj,'date') === true)
+  {
+    const currentDate = new Date().getTime();
+    const initialDate = obj['date'];
+    const is30        = (currentDate - initialDate) / (1000 * 3600 * 24);
+    console.log(is30);
+    if (is30 <= 30)
+      return true;
+  }
   
-  storage.storeToLocal('returningUser', 'true');
+  storage.storeToLocal('date', new Date().getTime());
   return false;
 }
 
