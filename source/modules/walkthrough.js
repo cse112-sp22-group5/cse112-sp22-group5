@@ -1,5 +1,6 @@
 // import introJs from '../../node_modules/intro.js';
 import { toggleMenu } from './side-nav-bar.js';
+import * as storage from './localStorage.js';
 // var introJs = require('../../node_modules/intro.js');
 // const intro = introJs.introJs();
 
@@ -117,6 +118,21 @@ function startWalkthrough() {
   });
 }
 
+/**
+ * @name isReturningUser
+ * @function
+ * @description check if user has recently visted the page or not
+ * @returns true if user already visited, false otherwise
+ */
+function isReturningUser() {
+  storage.setObj('returningUser');
+  const obj = storage.retrieveDataFromStorage();
+  if (Object.prototype.hasOwnProperty.call(obj,'returningUser') === true)
+    return true;
+  
+  storage.storeToLocal('returningUser', 'true');
+  return false;
+}
 
 
-export { startWalkthrough };
+export { startWalkthrough, isReturningUser };

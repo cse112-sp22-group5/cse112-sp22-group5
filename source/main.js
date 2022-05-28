@@ -4,8 +4,7 @@ import {
   onStart,
   onReset,
   setCustomTime,
-  keyboardShortcut,
-  customizeKey
+  keyboardShortcut
 } from "./modules/timer.js";
 // import { revealHelp, hideHelp } from './modules/help.js';
 // imports not used, so commented out
@@ -22,7 +21,7 @@ import {
 import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
-import { startWalkthrough } from './modules/walkthrough.js';
+import { startWalkthrough, isReturningUser } from './modules/walkthrough.js';
 
 // Timer
 document
@@ -72,5 +71,8 @@ document
   .addEventListener("click", clearCompletedTasks);
 
 // Walkthrough
-window.addEventListener('load', startWalkthrough);
+window.addEventListener('load', () => {
+  if (!isReturningUser())
+    startWalkthrough();
+});
 document.getElementById('help-icon').addEventListener('click', startWalkthrough);
