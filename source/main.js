@@ -9,7 +9,6 @@ import { revealHelp, hideHelp } from './modules/help.js';
 import { setBackgroundMusic } from './modules/background-music.js';
 import { saveTask, clearAllTasks, clearCompletedTasks } from './modules/task-list.js';
 
-import './modules/side-nav-bar.js';
 import { setDefaultSettings } from './modules/side-nav-bar.js';
 
 import { startWalkthrough } from './modules/walkthrough.js';
@@ -51,4 +50,4 @@ document.getElementById('clear-completed-tasks-button').addEventListener('click'
 
 // Walkthrough
 window.addEventListener('load', startWalkthrough);
-// document.getElementById('help-icon').addEventListener('click', startWalkthrough);
+document.getElementById('help-icon').addEventListener('click', startWalkthrough);
