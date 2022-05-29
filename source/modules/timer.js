@@ -80,18 +80,28 @@ function checkState() {
     document.getElementById("timer-display").innerText = `${POMO_MINS}:00`;
     //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`;
   } else {
-    timer.currState = SHORT_STATE;
-    timer.currDuration = NUM_SEC * SHORT_MINS;
-    document.getElementById("state").innerText = SHORT_STATE;
-    document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
-
-    if (SHORT_MINS < 10) {
-      let time = document.getElementById("timer-display").innerText;
-      document.getElementById("timer-display").innerText = "0" + time;
+    // long break state
+    if (timer.counter.totalPomos % LONG_MOD === 0) {
+      timer.currState = LONG_STATE;
+      timer.currDuration = NUM_SEC * LONG_MINS;
+      document.getElementById("state").innerText = LONG_STATE;
+      document.getElementById("timer-display").innerText = `${LONG_MINS}:00`;
+      document.getElementById("reset-button").disabled = true; // disable reset button
     }
-    document.getElementById("reset-button").disabled = true; // disable reset button
-  }
+    // short break state
+    else {
+      timer.currState = SHORT_STATE;
+      timer.currDuration = NUM_SEC * SHORT_MINS;
+      document.getElementById("state").innerText = SHORT_STATE;
+      document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
 
+      if (SHORT_MINS < 10) {
+        let time = document.getElementById("timer-display").innerText;
+        document.getElementById("timer-display").innerText = "0" + time;
+      }
+      document.getElementById("reset-button").disabled = true; // disable reset button
+    }
+  }
   colorChange();
 }
 
