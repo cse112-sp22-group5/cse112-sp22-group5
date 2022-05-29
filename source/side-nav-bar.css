@@ -275,9 +275,13 @@ h3 {
   margin: auto;
 }
 
+#range-container {
+  display: flex;
+  background-color: var(--select-input-background);
+  width: 26%;
+}
 #alarm-volume {
-  color: #818181;
-  width: 24.5%;
+  width: 100%;
 }
 
 .empty-box {
