@@ -8,11 +8,11 @@ import { breakReminders } from "./break-reminder.js";
 import { updateProgress } from "./progress-bar.js";
 
 let /** @type {number} **/
-  POMO_MINS = 0.02,
+  POMO_MINS = 25,
   /** @type {number} **/
-  SHORT_MINS = 0.02,
+  SHORT_MINS = 5,
   /** @type {number} **/
-  LONG_MINS = 0.02;
+  LONG_MINS = 15;
 
 const /** @constant @type {string} **/
   WORK_STATE = "Work State",
