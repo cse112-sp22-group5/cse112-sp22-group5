@@ -81,10 +81,15 @@
         <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="task list">
             <img  class="icon" src="./img/icons/task-list.svg" >
         </i>
+
+        <i class="menu-icon" id="theme-icon" data-associated-div="theme-div" title="styles and themes">
+            <img class="icon" src="./img/icons/painting-icon.svg">
+        </i>
     </div>
 
     <!-- Side bar contents-->
     <div class="sidebar-content" id="help-div">
+        <h2>Productoro</h2>
         <h3>What is a Pomodoro Timer?</h3>
               <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                   Work intervals are typically 25 minutes long with five minute breaks between each interval. 
@@ -196,20 +201,9 @@
                       </select>
                     </div>
                 </fieldset>
-                <h3> Theme</h3>
-                <fieldset class='setting-flex-container'>
-                <div class='setting-flex-item'>
-                    <label for='theme'>Theme</label>
-                    <select name='theme' id='theme'>
-                      <option id='theme-option1' value='1' selected>Default</option>
-                      <option id='theme-option2' value='2'>Dark</option>
-                      <option id='theme-option2' value='3'>Gray</option>
-                    </select>
-                  </div>
-                </fieldset>
             </form> 
            
-            <div id='empty-box'></div>   
+            <div class='empty-box'></div>   
             <div class="bottom">
                 <i type="button" id="default-settings">Set to Default</i>
             </div>
@@ -229,6 +223,41 @@
         <div class="bottom">
           <i type="button" id="clear-completed-tasks-button">Clear Completed Tasks</i>
           <i type="button" id="clear-tasks-button">Clear All</i>
+        </div>
+    </div>
+
+    <div class="sidebar-content" id="theme-div">
+        <h2>Styles and Themes</h2>
+        <h3>Themes</h3>
+        <fieldset class='setting-flex-container'>
+            <div class='setting-flex-item'>
+                <label for='theme'>Theme</label>
+                <select name='theme' id='theme'>
+                  <option id='theme-option1' value='1' selected>Default</option>
+                  <option id='theme-option2' value='2'>Dark</option>
+                  <option id='theme-option2' value='3'>Gray</option>
+                </select>
+              </div>
+        </fieldset>
+
+        <h3>Color Blindness</h3>
+        <fieldset class='setting-flex-container'>
+            <div class='setting-flex-item'>
+                <label for='color-blindness'>Enable Color Blindness</label>
+                <select name='color-blindness' id='color-blindness'>
+                    <option value='on'          >On</option>
+                    <option value='off' selected>Off</option>
+                </select>
+              </div>
+        </fieldset>
+
+        <h3>Background Images: </h3>
+        <fieldset class='setting-flex-container'>
+
+        </fieldset>
+        <div class="empty-box"></div>
+        <div class="bottom">
+            <i type="button" id="theme-dedault">Set Default</i>
         </div>
     </div>
     

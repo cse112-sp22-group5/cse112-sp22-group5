@@ -35,13 +35,6 @@
   --fw-bold: 700;
 
   --transition-time: 1s;
-
-  /* Side bar*/
-  --side-bar-width: 70px;
-  --side-bar-background: #1c2a47;
-  --side-bar-icon-hover-bg: #2471a6;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --button-background: #f1f1f1;
 }
 
 /******** GLOBALS ********/
@@ -87,7 +80,6 @@ footer {
 /* Typography */
 h1,
 h2,
-h3,
 h4,
 h5,
 h6 {

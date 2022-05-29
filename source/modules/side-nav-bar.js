@@ -13,11 +13,13 @@ const CONTENT_DIV = {
   "help-div": false,
   "setting-div": false,
   "tasks-div": false,
+  "theme-div": false,
 };
 const CONTENT_ICONS = {
   "help-icon": false,
   "setting-icon": false,
   "tasks-icon": false,
+  "theme-icon": false,
 };
 
 const SCREEN_SIZE = 700;
