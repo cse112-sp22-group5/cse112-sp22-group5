@@ -1,32 +1,25 @@
 .default-theme {
-  /*Main color background*/
-  --main-background: #77a4e9;
-  --main-background-short-break: #eaa478;
-  --main-background-long-break: #88b9ae;
+  --background-work: rgb(77, 150, 255, 0.75);
+  --background-short: rgba(107, 203, 119, 0.75);
+  --background-long: rgba(255, 217, 61, 0.75);
+  --background-light: #fff;
+  --background-dark: #323232;
+  --pomo-red: #ff6b6b;
+
+  --text-light: #fff;
+  --text-dark: #222;
+
   --background-img: "";
-  /* I don't know what it is*/
-  --clr-innerCircle-light: #ffffff;
 
-  /* the circles*/
-  /* --clr-circle-pomo: #0084ff;
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4; */
-
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8; /* Circle deactive */
-
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-state-timer-text: #000000; /* Timer text color */
-
-  --clr-timer-background: #ffffff; /* timer background */
-  --clr-logo: #323232; /* Logo Pomodoro color */
+  --border-light: #323232;
+  --border-dark: #efefef;
 
   /* Side bar*/
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --side-bar-content-text: #000000;
-  --clr-sidebar-content-bg: #f1f1f1;
+  --side-bar-content-text: #222;
+  --clr-sidebar-content-bg: #efefef;
   --side-bar-background: #1c2a47; /*side bar background*/
   --side-bar-icon-hover-bg: #2471a6; /*icon background when hovered */
   --select-input-background: #efefef; /*select input backgroun*/
@@ -35,20 +28,15 @@
   --side-bar-bottom-box-shadow: rgb(226, 226, 226);
 
   --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
-  --side-bar-bottom-hover-text: rgb(42, 56, 67);
+  --side-bar-bottom-hover-text: rgb(77, 150, 255, 1);
 }
 
 .dark-theme {
   /*Main color background*/
-  --main-background: #242424;
+  --main-background: #232323;
   --background-img: "";
   /* I don't know what it is*/
   --clr-innerCircle-light: #ffffff;
-
-  /* the circles*/
-  --clr-circle-pomo: #0084ff;
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
 
   --clr-dark: #424242;
   --clr-gray: #a8a8a8; /* Circle deactive */
@@ -64,8 +52,8 @@
   --button-background: #f1f1f1;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
   --side-bar-content-text: #000000;
-  --clr-sidebar-content-bg: #6f6f6f; /*side bar panels */
-  --side-bar-background: #424242; /*side bar background*/
+  --clr-sidebar-content-bg: #2c394b; /*side bar panels */
+  --side-bar-background: #082032; /*side bar background*/
   --side-bar-icon-hover-bg: #b7b7b7; /*icon background when hovered */
   --select-input-background: #efefef; /*select input backgroun*/
   --side-bar-box-shadow: rgb(200, 200, 200); /**/
