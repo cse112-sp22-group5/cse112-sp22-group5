@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for progress-bar.js</title>
+    <title>Code coverage report for cse112-sp22-group5/source/help.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> progress-bar.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">cse112-sp22-group5/source</a> help.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -79,7 +79,16 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -87,60 +96,54 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from "./timer.js";
-&nbsp;
-/**
- * @name updateProgress
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @name revealHelp
  * @function
- * @description update the progress bar based on current state and streak count
+ * @description Opens the help modal when the help button is clicked
  */
-function updateProgress() {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (timer.currState == SHORT_STATE) {
-    let gradientstart = <span class="cstat-no" title="statement not covered" >(timer.counter.streak % 4) * 25 - 10;</span>
-    let gradientend = <span class="cstat-no" title="statement not covered" >(timer.counter.streak % 4) * 25;</span>
-<span class="cstat-no" title="statement not covered" >    document.getElementById(</span>
-      "progress-long-break"
-    ).style.background = `linear-gradient(to right, #FFD24C ${gradientstart}%, #fff ${gradientend}%)`;
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (timer.currState == LONG_STATE) {
-<span class="cstat-no" title="statement not covered" >    document.getElementById("progress-long-break").style.background = `#FFD24C`;</span>
-  } else <span class="missing-if-branch" title="else path not taken" >E</span>if (timer.currState == WORK_STATE) {
-    document.getElementById("progress-long-break").style.background = `#fff`;
-  }
+function revealHelp() {
+    let helpModal = document.getElementById('helpModal');
+    helpModal.style.display = 'block';
+    document.getElementById('helpButton').disabled = true; 
 }
 &nbsp;
-export { updateProgress };
-&nbsp;</pre></td></tr></table></pre>
+/**
+ * @name hideHelp
+ * @function
+ * @description Closes the help modal when the 'x' inside the modal or anywhere outside of the modal is clicked
+ */
+function hideHelp() {
+    let helpModal = document.getElementById('helpModal');
+    helpModal.style.display = 'none';
+    document.getElementById('helpButton').disabled = false; 
+}
+&nbsp;
+// export functions for testing
+export { revealHelp, hideHelp }; </pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 26 2022 00:08:44 GMT-0700 (Pacific Daylight Time)
+                at Sat May 28 2022 23:20:31 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
-        <script src="prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     
