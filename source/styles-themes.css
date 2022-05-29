@@ -11,8 +11,8 @@
 
   --background-img: "";
 
-  --border-light: #323232;
-  --border-dark: #efefef;
+  --border-light: #efefef;
+  --border-dark: #323232;
 
   /* Side bar*/
   --side-bar-width: 70px;
@@ -32,20 +32,20 @@
 }
 
 .dark-theme {
-  /*Main color background*/
-  --main-background: #232323;
+  --background-work: #252525;
+  --background-short: #252525;
+  --background-long: #252525;
+  --background-light: #323232;
+  --background-dark: #efefef;
+  --pomo-red: #ed6663;
+
+  --text-light: #222;
+  --text-dark: #fff;
+
   --background-img: "";
-  /* I don't know what it is*/
-  --clr-innerCircle-light: #ffffff;
 
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8; /* Circle deactive */
-
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-state-timer-text: #f4f4f4; /* Timer text color */
-
-  --clr-timer-background: #747373; /* timer background */
-  --clr-logo: #ededed; /* Logo Pomodoro color */
+  --border-light: #323232;
+  --border-dark: #efefef;
 
   /* Side Bar */
   --side-bar-width: 70px;
