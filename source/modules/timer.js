@@ -1,39 +1,39 @@
-import { colorChange } from './color-change.js';
-import { showNotif, getNotificationStatus, playSound} from './notifications.js';
-import { breakReminders } from './break-reminder.js';
-import { progressBar } from './progress-bar.js';
+import { colorChange } from "./color-change.js";
+import {
+  showNotif,
+  getNotificationStatus,
+  playSound,
+} from "./notifications.js";
+import { breakReminders } from "./break-reminder.js";
+import { updateProgress } from "./progress-bar.js";
 
-let 
-    /** @type {number} **/ 
-    POMO_MINS = 25, 
-    /** @type {number} **/ 
-    SHORT_MINS = 5, 
-    /** @type {number} **/ 
-    LONG_MINS = 15;
+let /** @type {number} **/
+  POMO_MINS = 25,
+  /** @type {number} **/
+  SHORT_MINS = 5,
+  /** @type {number} **/
+  LONG_MINS = 15;
 
-const 
-    /** @constant @type {string} **/ 
-    WORK_STATE = 'Work State', 
-    /** @constant @type {string} **/ 
-    SHORT_STATE = 'Short Break State', 
-    /** @constant @type {string} **/ 
-    LONG_STATE = 'Long Break State';
+const /** @constant @type {string} **/
+  WORK_STATE = "Work State",
+  /** @constant @type {string} **/
+  SHORT_STATE = "Short Break State",
+  /** @constant @type {string} **/
+  LONG_STATE = "Long Break State";
 
-const 
-    /** @constant @type {number} */
-    MS = 1000,
-    /** @constant @type {number} **/ 
-    NUM_SEC = 60;
+const /** @constant @type {number} */
+  MS = 1000,
+  /** @constant @type {number} **/
+  NUM_SEC = 60;
 
-const 
-    /** @constant @type {number} **/ 
-    STATE_MOD = 2,
-    /** @constant @type {string} **/ 
-    LONG_MOD = 4;
+const /** @constant @type {number} **/
+  STATE_MOD = 2,
+  /** @constant @type {string} **/
+  LONG_MOD = 4;
 
-/** 
+/**
  * Stores the set interval
- * @type {number} 
+ * @type {number}
  */
 let timerId;
 
@@ -52,18 +52,18 @@ let timerId;
  * @property {number} currDuration          - The total number of seconds the timer should run
  */
 let timer = {
-    timerState: {
-        pomoMin: POMO_MINS,
-        shortBrk: SHORT_MINS,
-        longBrk: LONG_MINS
-    },
-    counter: {
-        stateCtr: 0,
-        streak: 0,
-        totalPomos: 0
-    },
-    currState: WORK_STATE,
-    currDuration: POMO_MINS * NUM_SEC,
+  timerState: {
+    pomoMin: POMO_MINS,
+    shortBrk: SHORT_MINS,
+    longBrk: LONG_MINS,
+  },
+  counter: {
+    stateCtr: 0,
+    streak: 0,
+    totalPomos: 0,
+  },
+  currState: WORK_STATE,
+  currDuration: POMO_MINS * NUM_SEC,
 };
 
 /**
@@ -81,31 +81,19 @@ function checkState() {
         //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
     } 
     else {
-        // long break state
-        if (timer.counter.totalPomos % LONG_MOD === 0) {
-            timer.currState = LONG_STATE;
-            timer.currDuration = NUM_SEC * LONG_MINS;
-            document.getElementById('state').innerText = LONG_STATE;
-            document.getElementById('timer-display').innerText = 
-                `${LONG_MINS}:00`;
-            document.getElementById('reset-button').disabled = true; // disable reset button
-        } 
-        // short break state
-        else {
-            timer.currState = SHORT_STATE;
-            timer.currDuration = NUM_SEC * SHORT_MINS;
-            document.getElementById('state').innerText = SHORT_STATE;
-            document.getElementById('timer-display').innerText = 
-                `${SHORT_MINS}:00`;
-            
-            if(SHORT_MINS < 10) {
-                let time = document.getElementById('timer-display').innerText; 
-                document.getElementById('timer-display').innerText = '0' + time;
-            } 
-            document.getElementById('reset-button').disabled = true; // disable reset button
-        }
+      timer.currState = SHORT_STATE;
+      timer.currDuration = NUM_SEC * SHORT_MINS;
+      document.getElementById("state").innerText = SHORT_STATE;
+      document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
+
+      if (SHORT_MINS < 10) {
+        let time = document.getElementById("timer-display").innerText;
+        document.getElementById("timer-display").innerText = "0" + time;
+      }
+      document.getElementById("reset-button").disabled = true; // disable reset button
     }
-    colorChange();         
+  }
+  colorChange();
 }
 
 /**
@@ -138,21 +126,34 @@ function updateState() {
         }
         document.getElementById('reset-button').disabled = true; // disable reset button
     }
-
-    // if the current state is a break state, next state is a work state
+    // next state is a short break
     else {
-        timer.currState = WORK_STATE;
-        document.getElementById('state').innerText = WORK_STATE;
-        document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-        document.getElementById('reset-button').disabled = true; // disable reset button
-        // remove settings warning after 4 pomos
-        if(document.getElementById('total').innerText % 4 == 0) {
-            document.getElementById('warning').style.display = 'none';
-        }
+      timer.currState = SHORT_STATE;
+      document.getElementById("state").innerText = SHORT_STATE;
+      document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
+      let time = document.getElementById("timer-display").innerText;
+      if (SHORT_MINS < 10) {
+        time = "0" + time;
+        document.getElementById("timer-display").innerText = time;
+      }
     }
-    colorChange();
-    breakReminders(); 
-    progressBar();     
+    document.getElementById("reset-button").disabled = true; // disable reset button
+  }
+
+  // if the current state is a break state, next state is a work state
+  else {
+    timer.currState = WORK_STATE;
+    document.getElementById("state").innerText = WORK_STATE;
+    document.getElementById("timer-display").innerText = `${POMO_MINS}:00`;
+    document.getElementById("reset-button").disabled = true; // disable reset button
+    // remove settings warning after 4 pomos
+    if (document.getElementById("total").innerText % 4 == 0) {
+      document.getElementById("warning").style.display = "none";
+    }
+  }
+  colorChange();
+  breakReminders();
+  updateProgress();
 }
 
 /**
@@ -221,9 +222,15 @@ function updateTimer(duration) {
             start = Date.now() + 1000;
         }
     }
+    if (diff <= 0) {
+      // add one second so that the countdown starts at the full duration
+      // example 05:00 not 04:59
+      start = Date.now() + 1000;
+    }
+  }
 
-    timerCountdown(); // don't wait a full second before the timer starts
-    timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  timerCountdown(); // don't wait a full second before the timer starts
+  timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
 }
 
 /**
@@ -248,14 +255,14 @@ function setCustomTime() {
       return;
   }
 
-    // otherwise do not display a warning
-    warning.style.display = 'none';
+  // otherwise do not display a warning
+  warning.style.display = "none";
 
-    // set the new time preferences
-    POMO_MINS = Number(wTime.value);
-    document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-    SHORT_MINS = Number(sbTime.value);
-    LONG_MINS = Number(lbTime.value);
+  // set the new time preferences
+  POMO_MINS = Number(wTime.value);
+  document.getElementById("timer-display").innerText = `${POMO_MINS}:00`;
+  SHORT_MINS = Number(sbTime.value);
+  LONG_MINS = Number(lbTime.value);
 }
 
 /**
@@ -264,18 +271,19 @@ function setCustomTime() {
  * @description Begins the timer when the start button is clicked
  */
 function onStart() {
-    getNotificationStatus();
-    document.querySelector('#form-enabler').disabled = 'disabled';
+  getNotificationStatus();
+  document.querySelector("#form-enabler").disabled = "disabled";
 
-    // enable a warning if the user tries changing the time limits during a pomo
-    document.getElementById('warning').innerText = 'Wait until the end of your next break to change the times!';
-    document.getElementById('warning').style.display = 'block'; 
+  // enable a warning if the user tries changing the time limits during a pomo
+  document.getElementById("warning").innerText =
+    "Wait until the end of your next break to change the times!";
+  document.getElementById("warning").style.display = "block";
 
-    document.getElementById('start-button').disabled = true; // disable start button
-    document.getElementById('reset-button').disabled = false; // enable reset button
+  document.getElementById("start-button").disabled = true; // disable start button
+  document.getElementById("reset-button").disabled = false; // enable reset button
 
-    checkState();
-    updateTimer(timer.currDuration); // update the timer display
+  checkState();
+  updateTimer(timer.currDuration); // update the timer display
 }
 
 /**
@@ -284,6 +292,7 @@ function onStart() {
  * @description Resets the timer to the beginning of its current state when the reset button is clicked
  */
 function onReset() {
+
     document.getElementById('reset-button').disabled = true;
     document.getElementById('start-button').disabled = false;
     document.getElementById('warning').style.display = 'none';
@@ -303,7 +312,7 @@ function onReset() {
  * @description Opens the settings modal when the settings button is clicked
  */
 function revealSettings() {
-    document.getElementById('settings-modal').showModal();
+  document.getElementById("settings-modal").showModal();
 }
 
 /**
@@ -311,12 +320,15 @@ function revealSettings() {
  * @description Closes the settings modal when the 'x' inside the modal or anywhere outside of the modal is clicked
  */
 function hideSettings() {
-    document.getElementById('settings-modal').close();
+  document.getElementById("settings-modal").close();
 
-    if(document.getElementById('warning').innerText === 'Work Periods must be greater than Break Periods'){
-        document.getElementById('warning').style.display = 'none';
-    }
-    document.getElementById('settings-button').disabled = false; 
+  if (
+    document.getElementById("warning").innerText ===
+    "Work Periods must be greater than Break Periods"
+  ) {
+    document.getElementById("warning").style.display = "none";
+  }
+  document.getElementById("settings-button").disabled = false;
 }
 
 /**
@@ -325,6 +337,7 @@ function hideSettings() {
  * @description Starts and resets timer when the space bar is clicked
  * @param {*} event The keyboard button that is clicked
  */
+
 function keyboardShortcut(event) {  
     if (document.getElementById('keyboard-toggle').value == 'on'){
         if(event.code === 'Space') {
@@ -339,10 +352,26 @@ function keyboardShortcut(event) {
                 }
             }
         }
+      }
     }
+  }
 }
 
 // export functions and variables for testing
-export {onStart, onReset, checkState,updateState, timer, setCustomTime, 
-    keyboardShortcut, revealSettings, hideSettings, SHORT_STATE, LONG_STATE, 
-    WORK_STATE, POMO_MINS, SHORT_MINS, LONG_MINS}; 
+export {
+  onStart,
+  onReset,
+  checkState,
+  updateState,
+  timer,
+  setCustomTime,
+  keyboardShortcut,
+  revealSettings,
+  hideSettings,
+  SHORT_STATE,
+  LONG_STATE,
+  WORK_STATE,
+  POMO_MINS,
+  SHORT_MINS,
+  LONG_MINS,
+};

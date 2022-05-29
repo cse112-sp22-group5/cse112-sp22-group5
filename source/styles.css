@@ -154,38 +154,36 @@ button:active {
 }
 
 /******** PROGRESS BAR ********/
-.circle {
-  background-color: var(--clr-light);
-  border-radius: 50%;
-  border: 3px solid;
-  height: 20px;
-  width: 20px;
-}
 
-.circle.pomo {
-  border-color: var(--clr-circle-pomo);
-}
-
-.circle.short {
-  border-color: var(--clr-circle-short);
-}
-
-.circle.long {
-  border-color: var(--clr-circle-long);
-}
-
-.circle.deactive {
-  border-color: var(--clr-gray);
-}
-
-.progress-container {
+.progress-bar {
   display: flex;
   justify-content: space-between;
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  width: 80%;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  width: 30%;
+  height: 32px;
+  background: #fff;
+  border-radius: 5px;
+  border: 2px solid #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar img {
+  height: 24px;
+  width: auto;
+}
+
+body[data-state="pomo"] #progress-pomo {
+  background: #ed6663;
+}
+
+body[data-state="short"] #progress-break {
+  background: #b8f1b0;
 }
 
 /******** TIMER ********/

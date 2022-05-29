@@ -1,4 +1,4 @@
-import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from './timer.js';
+import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from "./timer.js";
 
 /**
  * @name colorChange
@@ -6,7 +6,7 @@ import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from './timer.js';
  * @description Changes the color of the background and border of timer display when state changes
  */
 function colorChange() {
-  switch(timer.currState) {
+  switch (timer.currState) {
     case WORK_STATE:
       document.body.setAttribute('data-state','pomo');
  //     document.getElementById('tasks').setAttribute('data-state','pomo');
@@ -25,7 +25,7 @@ function colorChange() {
   //    document.getElementById('tasks').setAttribute('data-state','long');
       document.getElementById('timer-display').setAttribute('data-state','long');
       break;
-      
+
     default:
       document.body.setAttribute('data-state','pomo');
    //   document.getElementById('tasks').setAttribute('data-state','pomo');

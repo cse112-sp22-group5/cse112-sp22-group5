@@ -109,16 +109,17 @@ describe("Test onStart function", () => {
             <h2 class='text-center' id='state' hidden>Work State</h2> 
 
             <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+            <section class="progress-bar">
+                <div id="progress-pomo">
+                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+                </div>
+                <div id="progress-break">
+                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                </div>
+                <div id="progress-long-break">
+                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                </div>
+            </section>
 
             <!-- Timer -->
             <div class='timer'>
@@ -749,16 +750,18 @@ describe("Test updateState function", () => {
             <h2 id='state'>Work State</h2>
             <div id='totalCounter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
             <button type=button class='timer-button' id='reset-button'>Reset</button>
-            <div class='progress-container' state='pomo'>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+            <!-- Progress Bar -->
+            <section class="progress-bar">
+                <div id="progress-pomo">
+                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+                </div>
+                <div id="progress-break">
+                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                </div>
+                <div id="progress-long-break">
+                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                </div>
+            </section>
             <div id='break-reminder' style='color:#464646;'></div>
         <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
 
@@ -794,16 +797,18 @@ describe("Test updateState function", () => {
             <h2 id='state'>Work State</h2>
             <div id='totalCounter'><b>Total Pomos Completed:</b> <span id='total'>0</span></div>
             <button type=button class='timer-button' id='reset-button'>Reset</button>
-            <div class='progress-container' data-state='pomo'>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+            <!-- Progress Bar -->
+            <section class="progress-bar">
+                <div id="progress-pomo">
+                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+                </div>
+                <div id="progress-break">
+                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                </div>
+                <div id="progress-long-break">
+                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                </div>
+            </section>
             <div id='break-reminder' style='color:#464646;'></div>
             <div id='reminder' onload='breakReminders()' style='color:#464646;'></div>
             <section class="tasks" id="tasks">
@@ -844,16 +849,17 @@ describe("Test updateState function", () => {
             <h2 class='text-center' id='state' hidden>Work State</h2> 
 
             <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+            <section class="progress-bar">
+                <div id="progress-pomo">
+                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+                </div>
+                <div id="progress-break">
+                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                </div>
+                <div id="progress-long-break">
+                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                </div>
+            </section>
 
             <!-- Timer -->
             <div class='timer'>
@@ -937,16 +943,17 @@ describe("Test updateState function", () => {
             <h2 class='text-center' id='state' hidden>Work State</h2> 
 
             <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+            <section class="progress-bar">
+                <div id="progress-pomo">
+                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+                </div>
+                <div id="progress-break">
+                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                </div>
+                <div id="progress-long-break">
+                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                </div>
+            </section>
 
             <!-- Timer -->
             <div class='timer'>
