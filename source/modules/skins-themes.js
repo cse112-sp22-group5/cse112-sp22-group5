@@ -1,5 +1,6 @@
 // import {setObj, storeToLocal, removeDataFromStorage, retrieveDataFromStorage, deleteFromLocal}
 // from './localStorage.js';
+import { updateProgress } from "./progress-bar.js";
 
 const BackgroundImages = [
   "img/icons/no-image-icon.svg",
@@ -17,6 +18,7 @@ const Themes = {
 
 function setTheme(target, theme) {
   target.className = Themes[theme];
+  updateProgress();
 }
 
 function loadThemeFromStorage(target) {
