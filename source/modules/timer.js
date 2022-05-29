@@ -72,27 +72,26 @@ let timer = {
  * @description Checks the current state and updates the timer display and duration accordingly
  */
 function checkState() {
-    // work state
-    if (timer.counter.stateCtr % STATE_MOD === 0) {
-        timer.currState = WORK_STATE;
-        timer.currDuration = NUM_SEC * POMO_MINS;
-        document.getElementById('state').innerText = WORK_STATE;
-        document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
-        //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
-    } 
-    else {
-      timer.currState = SHORT_STATE;
-      timer.currDuration = NUM_SEC * SHORT_MINS;
-      document.getElementById("state").innerText = SHORT_STATE;
-      document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
+  // work state
+  if (timer.counter.stateCtr % STATE_MOD === 0) {
+    timer.currState = WORK_STATE;
+    timer.currDuration = NUM_SEC * POMO_MINS;
+    document.getElementById("state").innerText = WORK_STATE;
+    document.getElementById("timer-display").innerText = `${POMO_MINS}:00`;
+    //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`;
+  } else {
+    timer.currState = SHORT_STATE;
+    timer.currDuration = NUM_SEC * SHORT_MINS;
+    document.getElementById("state").innerText = SHORT_STATE;
+    document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
 
-      if (SHORT_MINS < 10) {
-        let time = document.getElementById("timer-display").innerText;
-        document.getElementById("timer-display").innerText = "0" + time;
-      }
-      document.getElementById("reset-button").disabled = true; // disable reset button
+    if (SHORT_MINS < 10) {
+      let time = document.getElementById("timer-display").innerText;
+      document.getElementById("timer-display").innerText = "0" + time;
     }
+    document.getElementById("reset-button").disabled = true; // disable reset button
   }
+
   colorChange();
 }
 
@@ -102,29 +101,14 @@ function checkState() {
  * @description Updates the state on display after the timer for the current state ends
  */
 function updateState() {
-    // if the current state is a work state, next state a break
-    if(timer.currState === WORK_STATE) {
-      //  document.getElementById('tasks').className = 'tasks'; 
-        // next state is a long break 
-        if(timer.counter.totalPomos % LONG_MOD === 0) {
-            timer.currState = LONG_STATE;
-            document.getElementById('state').innerText = LONG_STATE;
-            document.getElementById('timer-display').innerText = 
-                `${LONG_MINS}:00`;    
-        }
-        // next state is a short break 
-        else {
-            timer.currState = SHORT_STATE;
-            document.getElementById('state').innerText = SHORT_STATE;
-            document.getElementById('timer-display').innerText = 
-                `${SHORT_MINS}:00`;
-            let time = document.getElementById('timer-display').innerText; 
-            if(SHORT_MINS < 10) {
-                time = '0' + time;
-                document.getElementById('timer-display').innerText = time;
-            } 
-        }
-        document.getElementById('reset-button').disabled = true; // disable reset button
+  // if the current state is a work state, next state a break
+  if (timer.currState === WORK_STATE) {
+    //  document.getElementById('tasks').className = 'tasks';
+    // next state is a long break
+    if (timer.counter.totalPomos % LONG_MOD === 0) {
+      timer.currState = LONG_STATE;
+      document.getElementById("state").innerText = LONG_STATE;
+      document.getElementById("timer-display").innerText = `${LONG_MINS}:00`;
     }
     // next state is a short break
     else {
@@ -163,70 +147,70 @@ function updateState() {
  * @param {number} duration The total number of seconds the timer should run
  */
 function updateTimer(duration) {
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
+  var start = Date.now(),
+    diff,
+    minutes,
+    seconds;
 
-    /**
-     * @name timerCountdown
-     * @function
-     * @description Begins the timer countdown and updates the timer display
-     */
-    function timerCountdown() {
-        // get the number of seconds that have elapsed since updateTimer() was called
-        diff = duration - (((Date.now() - start) / MS) | 0);
+  /**
+   * @name timerCountdown
+   * @function
+   * @description Begins the timer countdown and updates the timer display
+   */
+  function timerCountdown() {
+    // get the number of seconds that have elapsed since updateTimer() was called
+    diff = duration - (((Date.now() - start) / MS) | 0);
 
-        // truncates the float
-        minutes = (diff / NUM_SEC) | 0;
-        seconds = (diff % NUM_SEC) | 0;
+    // truncates the float
+    minutes = (diff / NUM_SEC) | 0;
+    seconds = diff % NUM_SEC | 0;
 
-        // add extra 0 to minutes/seconds if they are less than 10
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
+    // add extra 0 to minutes/seconds if they are less than 10
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        document.getElementById('timer-display').innerText= 
-            `${minutes}:${seconds}`;
+    document.getElementById(
+      "timer-display"
+    ).innerText = `${minutes}:${seconds}`;
 
-        document.title = `Productoro - ${minutes}:${seconds}`;
-        // stop timer when minutes and seconds reach 0
-        if(minutes == 0 && seconds == 0) {
-            clearInterval(timerId);
+    document.title = `Productoro - ${minutes}:${seconds}`;
+    // stop timer when minutes and seconds reach 0
+    if (minutes == 0 && seconds == 0) {
+      clearInterval(timerId);
 
-            // if curr state is work state, update the streak and total pomo count
-            if(timer.currState === WORK_STATE) {                
-                timer.counter.streak++;
-                document.getElementById('streak').innerText = timer.counter.streak;
-        
-                timer.counter.totalPomos++;
-                document.getElementById('total').innerText = timer.counter.totalPomos;
-            } else {
-                document.querySelector('#form-enabler').removeAttribute('disabled');
-            }
+      // if curr state is work state, update the streak and total pomo count
+      if (timer.currState === WORK_STATE) {
+        timer.counter.streak++;
+        document.getElementById("streak").innerText = timer.counter.streak;
 
-            // enable start button when timer ends
-            document.getElementById('start-button').disabled = false;
-            timer.counter.stateCtr++; 
+        timer.counter.totalPomos++;
+        document.getElementById("total").innerText = timer.counter.totalPomos;
+      } else {
+        document.querySelector("#form-enabler").removeAttribute("disabled");
+      }
 
-            // transition to the next state
-            updateState();
-            showNotif(timer.currState);
-            let alarm = document.getElementById('notif-toggle').value;
-            if(alarm == 'on') {
-                playSound();
-            }
-        }
-        if (diff <= 0) {
-            // add one second so that the countdown starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
-        }
+      // enable start button when timer ends
+      document.getElementById("start-button").disabled = false;
+      timer.counter.stateCtr++;
+
+      // transition to the next state
+      updateState();
+      showNotif(timer.currState);
+      let alarm = document.getElementById("notif-toggle").value;
+      if (alarm == "on") {
+        playSound();
+      }
     }
     if (diff <= 0) {
       // add one second so that the countdown starts at the full duration
       // example 05:00 not 04:59
       start = Date.now() + 1000;
     }
+  }
+  if (diff <= 0) {
+    // add one second so that the countdown starts at the full duration
+    // example 05:00 not 04:59
+    start = Date.now() + 1000;
   }
 
   timerCountdown(); // don't wait a full second before the timer starts
@@ -238,21 +222,24 @@ function updateTimer(duration) {
  * @description Changes the times for each session based on user input
  */
 function setCustomTime() {
-    let wTime = document.getElementById('work-time');
-    let sbTime = document.getElementById('short-break-time');
-    let lbTime = document.getElementById('long-break-time');
-    let warning = document.getElementById('warning');
+  let wTime = document.getElementById("work-time");
+  let sbTime = document.getElementById("short-break-time");
+  let lbTime = document.getElementById("long-break-time");
+  let warning = document.getElementById("warning");
 
-    if(Number(wTime.value) <= Number(sbTime.value) || Number(wTime.value) <= Number(lbTime.value)) {
-      // enable a warning
-      warning.innerText = 'Work Periods must be greater than Break Periods';
-      warning.style.display = 'block';
+  if (
+    Number(wTime.value) <= Number(sbTime.value) ||
+    Number(wTime.value) <= Number(lbTime.value)
+  ) {
+    // enable a warning
+    warning.innerText = "Work Periods must be greater than Break Periods";
+    warning.style.display = "block";
 
-      // keep the drop down values the same as the current timer settings
-      wTime.value = POMO_MINS.toString();
-      sbTime.value = SHORT_MINS.toString();
-      lbTime.value = LONG_MINS.toString();
-      return;
+    // keep the drop down values the same as the current timer settings
+    wTime.value = POMO_MINS.toString();
+    sbTime.value = SHORT_MINS.toString();
+    lbTime.value = LONG_MINS.toString();
+    return;
   }
 
   // otherwise do not display a warning
@@ -292,18 +279,15 @@ function onStart() {
  * @description Resets the timer to the beginning of its current state when the reset button is clicked
  */
 function onReset() {
-
-    document.getElementById('reset-button').disabled = true;
-    document.getElementById('start-button').disabled = false;
-    document.getElementById('warning').style.display = 'none';
-    document.getElementById('form-enabler').removeAttribute('disabled');
-    timer.counter.streak = 0;
-    document.getElementById('streak').innerText = 
-                    timer.counter.streak;
-    clearInterval(timerId);
-    checkState();
-//    document.getElementById('tasks').className = 'tasks';
-
+  document.getElementById("reset-button").disabled = true;
+  document.getElementById("start-button").disabled = false;
+  document.getElementById("warning").style.display = "none";
+  document.getElementById("form-enabler").removeAttribute("disabled");
+  timer.counter.streak = 0;
+  document.getElementById("streak").innerText = timer.counter.streak;
+  clearInterval(timerId);
+  checkState();
+  //    document.getElementById('tasks').className = 'tasks';
 }
 
 /**
@@ -338,19 +322,17 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 
-function keyboardShortcut(event) {  
-    if (document.getElementById('keyboard-toggle').value == 'on'){
-        if(event.code === 'Space') {
-            // if the timer is static, start timer
-            if(document.getElementById('start-button').disabled == false ) {
-                onStart();
-            }
-            // if timer is running, reset timer
-            else {
-                if(timer.currState === WORK_STATE) {
-                    onReset();
-                }
-            }
+function keyboardShortcut(event) {
+  if (document.getElementById("keyboard-toggle").value == "on") {
+    if (event.code === "Space") {
+      // if the timer is static, start timer
+      if (document.getElementById("start-button").disabled == false) {
+        onStart();
+      }
+      // if timer is running, reset timer
+      else {
+        if (timer.currState === WORK_STATE) {
+          onReset();
         }
       }
     }
