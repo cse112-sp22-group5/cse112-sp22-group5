@@ -9,14 +9,14 @@ const BackgroundImages = [
   "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 ];
 
+const Themes = {
+  1: "default-theme",
+  2: "dark-theme",
+  3: "light-theme",
+};
+
 function setTheme(target, theme) {
-  if (theme == 1) {
-    target.className = "default-theme";
-  } else if (theme == 2) {
-    target.className = "dark-theme";
-  } else if (theme == 3) {
-    target.className = "light-theme";
-  }
+  target.className = Themes[theme];
 }
 
 function loadThemeFromStorage(target) {
