@@ -89,6 +89,13 @@ li {
   font-family: "Helvetica", sans-serif;
 }
 
+a {
+  color: var(--pomo-red);
+}
+a:hover {
+  color: var(--text-dark);
+}
+
 /* Interaction */
 button {
   background: var(--background-light);
@@ -117,11 +124,13 @@ button:active {
   position: relative;
   text-align: center;
   padding-top: 10px;
+  color: var(--text-dark);
 }
 
 #reminder {
   padding-top: 0px;
   padding-bottom: 30px;
+  color: var(--text-dark);
 }
 
 /******** PROGRESS BAR ********/
@@ -217,11 +226,11 @@ body[data-state="short"] #progress-break {
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
-  color: var(--clr-state-timer-text);
+  color: var(--text-dark);
 }
 
 footer {
-  color: var(--clr-state-timer-text);
+  color: var(--text-dark);
 }
 
 /********** MODALS *************/

@@ -98,34 +98,34 @@
 }
 
 .color-blind {
-  --background-work: #252525;
-  --background-short: #252525;
-  --background-long: #252525;
-  --background-light: #323232;
-  --background-dark: #efefef;
+  --background-work: #b2dffb;
+  --background-short: #ffa372;
+  --background-long: #064acb;
+  --background-light: #efefef;
+  --background-dark: #323232;
   --pomo-red: #ed6663;
 
-  --text-light: #222;
-  --text-dark: #fff;
+  --text-light: #fff;
+  --text-dark: #222;
 
   --background-img: "";
 
-  --border-light: #323232;
-  --border-dark: #efefef;
+  --border-light: #efefef;
+  --border-dark: #323232;
 
   /* Side Bar */
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
   --side-bar-content-text: #000000;
-  --clr-sidebar-content-bg: #efefef; /*side bar panels */
-  --side-bar-background: #171717; /*side bar background*/
-  --side-bar-icon-hover-bg: #323232; /*icon background when hovered */
+  --clr-sidebar-content-bg: #f1f1f1;
+  --side-bar-background: #1c2a47; /*side bar background*/
+  --side-bar-icon-hover-bg: #2471a6; /*icon background when hovered */
   --select-input-background: #efefef; /*select input backgroun*/
-  --side-bar-box-shadow: #171717; /**/
-  --side-bar-bottom-text: #252525; /* text at bottom */
-  --side-bar-bottom-box-shadow: rgb(36, 36, 36);
+  --side-bar-box-shadow: rgb(200, 200, 200);
+  --side-bar-bottom-text: rgb(45, 100, 146);
+  --side-bar-bottom-box-shadow: rgb(226, 226, 226);
 
-  --side-bar-bottom-hover-box-shadow: #171717;
-  --side-bar-bottom-hover-text: #323232;
+  --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
+  --side-bar-bottom-hover-text: rgb(42, 56, 67);
 }

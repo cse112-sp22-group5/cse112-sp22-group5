@@ -20,6 +20,11 @@ const Themes = {
 function setTheme(target, theme) {
   target.className = Themes[theme];
   updateProgress();
+
+  if (document.getElementById("color-blindness").value == 4) {
+    target.className = Themes[4];
+    updateProgress();
+  }
 }
 
 function loadThemeFromStorage(target) {
