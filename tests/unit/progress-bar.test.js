@@ -1,241 +1,76 @@
-import { circles, reset } from "../../source/modules/progress-bar.js";
-import { timer, WORK_STATE, updateState } from "../../source/modules/timer.js";
+import { timer, WORK_STATE } from "../../source/modules/timer.js";
 
-describe("Test progress bar", () => {
-  test("all dots are active at beginning of four pomo cycle", () => {
-    document.body.innerText = `
-            <div class='container'>
-            <div class='progress-container'>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
-            <div id='timer-display' state='pomo'>25:00</div> <!-- displays the timer countdown -->
-            </div>        
-        `;
-    reset();
-    circles.forEach((circle) => {
-      expect(circle.classList.contains("deactive")).toBeFalsy();
-    });
-  }),
-    test("first dot is deactivated after one work session is completed", () => {
-      document.body.innerHTML = `
-        <main>
+let html = `<main>
 
-            <!-- Break Reminder -->
-            <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-            <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
+<!-- Break Reminder -->
+<p id='break-reminder' style='color:#464646; visibility: hidden'></p>
+<p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
 
-            <!-- Current State  -->
-            <h2 class='text-center' id='state' hidden>Work State</h2> 
+<!-- Current State  -->
+<h2 class='text-center' id='state' hidden>Work State</h2> 
 
-            <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+<!-- Progress Bar -->
+<section class="progress-bar">
+    <div id="progress-pomo">
+        <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+    </div>
+    <div id="progress-break">
+        <img src="./img/icons/progress-leaf.png" alt="short break time">
+    </div>
+    <div id="progress-long-break">
+        <img src="./img/icons/progress-coffee.png" alt="long break time">
+    </div>
+</section>
 
-            <!-- Timer -->
-            <div class='timer'>
-                <p id="timer-display" data-state='pomo'>25:00</p>
-                <p>Streak: <span id="streak">0</span></p>
-                <p>Completed: <span id="total">0</span></p>
-            </div>
-            
-            <!-- Start Reset Button -->
-            <div id='start-reset'>
-                <button type=button class='timer-button' id='start-button'>Start</button>
-                <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
-            </div>
+<!-- Timer -->
+<div class='timer'>
+    <p id="timer-display" data-state='pomo'>25:00</p>
+    <p>Streak: <span id="streak">0</span></p>
+    <p>Completed: <span id="total">0</span></p>
+</div>
 
-            <!-- Current Task -->
-            <section class="current-task">
-                <h2>Current Task</h2>
-                <p id="current-task"></p>
-            </section>
-            
-            <!-- Task List -->
-            <section class="tasks" id="tasks">
-                <h2>Tasks</h2>
+<!-- Start Reset Button -->
+<div id='start-reset'>
+    <button type=button class='timer-button' id='start-button'>Start</button>
+    <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+</div>
 
-                <!-- List Options -->
-                <div id="task-options">
-                    <button type="button" id="add-tasks-button">Add</button>
-                    <button type="button" id="clear-tasks-button">Clear</button>
-                    <button type="button" id="clear-completed-tasks-button">Completed</button>
-                </div>
+<!-- Current Task -->
+<section class="current-task">
+    <h2>Current Task</h2>
+    <p id="current-task"></p>
+</section>
 
-                <hr />
+<!-- Task List -->
+<section class="tasks" id="tasks">
+    <h2>Tasks</h2>
 
-                <ul id="task-list"></ul>
-            </section>
+    <!-- List Options -->
+    <div id="task-options">
+        <button type="button" id="add-tasks-button">Add</button>
+        <button type="button" id="clear-tasks-button">Clear</button>
+        <button type="button" id="clear-completed-tasks-button">Completed</button>
+    </div>
 
-        </main>      
-        `;
-      timer.currState = WORK_STATE;
-      updateState();
-      circles.forEach((circle, idx) => {
-        if (idx == 0) {
-          expect(circle.classList.contains("deactive")).toBeTruthy();
-        } else {
-          expect(circle.classList.contains("deactive")).toBeFalsy();
-        }
-      });
-    }),
-    test("second dot is deactivated after one short break session is completed", () => {
-      document.body.innerHTML = `
-        <main>
+    <hr />
 
-            <!-- Break Reminder -->
-            <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-            <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
+    <ul id="task-list"></ul>
+</section>
 
-            <!-- Current State  -->
-            <h2 class='text-center' id='state' hidden>Work State</h2> 
+</main>`;
 
-            <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
+describe("Test Progress bar", () => {
+  document.body.innerHTML = html;
 
-            <!-- Timer -->
-            <div class='timer'>
-                <p id="timer-display" data-state='pomo'>25:00</p>
-                <p>Streak: <span id="streak">0</span></p>
-                <p>Completed: <span id="total">0</span></p>
-            </div>
-            
-            <!-- Start Reset Button -->
-            <div id='start-reset'>
-                <button type=button class='timer-button' id='start-button'>Start</button>
-                <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
-            </div>
+  timer.currState = "Work State";
 
-            <!-- Current Task -->
-            <section class="current-task">
-                <h2>Current Task</h2>
-                <p id="current-task"></p>
-            </section>
-            
-            <!-- Task List -->
-            <section class="tasks" id="tasks">
-                <h2>Tasks</h2>
-
-                <!-- List Options -->
-                <div id="task-options">
-                    <button type="button" id="add-tasks-button">Add</button>
-                    <button type="button" id="clear-tasks-button">Clear</button>
-                    <button type="button" id="clear-completed-tasks-button">Completed</button>
-                </div>
-
-                <hr />
-
-                <ul id="task-list"></ul>
-            </section>
-
-        </main>
-        `;
-      timer.currState = WORK_STATE;
-      updateState();
-      updateState();
-      circles.forEach((circle, idx) => {
-        if (idx === 0 || idx === 1) {
-          expect(circle.classList.contains("deactive")).toBeTruthy();
-        } else {
-          expect(circle.classList.contains("deactive")).toBeFalsy();
-        }
-      });
-    });
-
-  test("all dots are deactivated after long break is completed", () => {
-    document.body.innerHTML = `
-        <main>
-
-            <!-- Break Reminder -->
-            <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-            <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
-
-            <!-- Current State  -->
-            <h2 class='text-center' id='state' hidden>Work State</h2> 
-
-            <!-- Progress Bar -->
-            <div class='progress-container' hidden>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle short'></div>
-                <div class='circle pomo'></div>
-                <div class='circle long'></div>
-            </div>
-
-            <!-- Timer -->
-            <div class='timer'>
-                <p id="timer-display" data-state='pomo'>25:00</p>
-                <p>Streak: <span id="streak">0</span></p>
-                <p>Completed: <span id="total">0</span></p>
-            </div>
-            
-            <!-- Start Reset Button -->
-            <div id='start-reset'>
-                <button type=button class='timer-button' id='start-button'>Start</button>
-                <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
-            </div>
-
-            <!-- Current Task -->
-            <section class="current-task">
-                <h2>Current Task</h2>
-                <p id="current-task"></p>
-            </section>
-            
-            <!-- Task List -->
-            <section class="tasks" id="tasks">
-                <h2>Tasks</h2>
-
-                <!-- List Options -->
-                <div id="task-options">
-                    <button type="button" id="add-tasks-button">Add</button>
-                    <button type="button" id="clear-tasks-button">Clear</button>
-                    <button type="button" id="clear-completed-tasks-button">Completed</button>
-                </div>
-
-                <hr />
-
-                <ul id="task-list"></ul>
-            </section>
-
-        </main>
-        `;
-    timer.currState = WORK_STATE;
-    updateState();
-    updateState();
-    updateState();
-    updateState();
-    updateState();
-    updateState();
-    updateState();
-    updateState(); // long break is completed
-    circles.forEach((circle) => {
-      expect(circle.classList.contains("deactive")).toBeTruthy();
-    });
+  test("beginning state", () => {
+    expect(timer.currState).toBe(WORK_STATE);
+    // let pomo = document.getElementById("progress-pomo");
+    // let short = document.getElementById("progress-break");
+    // let long = document.getElementById("progress-long-break");
+    // expect(getComputedStyle(pomo)).toBe("asdf");
+    // expect(getComputedStyle(short)).toBe("asdf");
+    // expect(getComputedStyle(long)).toBe("asdf");
   });
 });
