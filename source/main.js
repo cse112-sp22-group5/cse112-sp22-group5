@@ -6,11 +6,6 @@ import {
   setCustomTime,
   keyboardShortcut
 } from "./modules/timer.js";
-// import { revealHelp, hideHelp } from './modules/help.js';
-// imports not used, so commented out
-// import { showNotif, getNotificationStatus, playSound, getAlarm } from './modules/notifications.js';
-// import { colorChange } from './modules/color-change.js';
-// import { breakReminders } from './modules/break-reminder.js';
 import { setBackgroundMusic } from "./modules/background-music.js";
 import {
   saveTask,
@@ -44,12 +39,6 @@ document.addEventListener("keydown", (event) => {
 document
   .getElementById("default-settings")
   .addEventListener("click", setDefaultSettings);
-
-// Modals
-// document.getElementById('help-button').addEventListener('click', revealHelp);
-// document.getElementById('close-modal-x').addEventListener('click', hideHelp);
-// document.getElementById('settings-button').addEventListener('click', revealSettings);
-// document.getElementById('close-settings-btn').addEventListener('click', hideSettings);
 
 document
   .getElementById("bg-music")
