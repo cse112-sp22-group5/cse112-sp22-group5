@@ -352,11 +352,11 @@ function keyboardShortcut(event) {
 
         if(event.code === volumeUpKey) {
             let curVol = document.getElementById('alarm-volume').value
-            document.getElementById('alarm-volume').value = parseInt(curVol) + 10;
+            document.getElementById('alarm-volume').value = parseInt(curVol, 10) + 10;
         }
         if(event.code === volumneDownKey) {
             let curVol = document.getElementById('alarm-volume').value
-            document.getElementById('alarm-volume').value = parseInt(curVol) - 10;
+            document.getElementById('alarm-volume').value = parseInt(curVol, 10) - 10;
         }
 
         event.preventDefault();
