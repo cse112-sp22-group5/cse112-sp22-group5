@@ -12,14 +12,14 @@ let
     LONG_MINS = 15;
 
 let
-    /** @type {string} **/
-    startKey = 'Space',
+    // /** @type {string} **/
+    // startKey = 'Space',
     /** @type {string} **/
     volumeUpKey = 'ArrowUp',
     /** @type {string} **/
     volumneDownKey = 'ArrowDown',
-    /** @type {boolean} **/
-    isCustomizingKey = false;
+    // /** @type {boolean} **/
+    // isCustomizingKey = false;
 
 const 
     /** @constant @type {string} **/ 
