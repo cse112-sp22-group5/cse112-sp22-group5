@@ -1,18 +1,16 @@
-.theme-default {
+.default-theme {
   /*Main color background*/
   --main-background: #77a4e9;
+  --main-background-short-break: #eaa478;
+  --main-background-long-break: #88b9ae;
   --background-img: "";
   /* I don't know what it is*/
   --clr-innerCircle-light: #ffffff;
 
-  /* --clr-accent-pomo: #032e77; i don't think these make any changes 
-    --clr-accent-short: #a2a2a2;
-    --clr-accent-long: #01795f; */
-
   /* the circles*/
-  --clr-circle-pomo: #0084ff;
+  /* --clr-circle-pomo: #0084ff;
   --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
+  --clr-circle-long: #03e6b4; */
 
   --clr-dark: #424242;
   --clr-gray: #a8a8a8; /* Circle deactive */
@@ -23,7 +21,6 @@
   --clr-timer-background: #ffffff; /* timer background */
   --clr-logo: #323232; /* Logo Pomodoro color */
 
-  /* Side Bar */
   /* Side bar*/
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
@@ -40,16 +37,13 @@
   --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
   --side-bar-bottom-hover-text: rgb(42, 56, 67);
 }
-.theme-black {
+
+.dark-theme {
   /*Main color background*/
   --main-background: #242424;
-
+  --background-img: "";
   /* I don't know what it is*/
   --clr-innerCircle-light: #ffffff;
-
-  /* --clr-accent-pomo: #032e77; i don't think these make any changes 
-    --clr-accent-short: #a2a2a2;
-    --clr-accent-long: #01795f; */
 
   /* the circles*/
   --clr-circle-pomo: #0084ff;
@@ -66,6 +60,9 @@
   --clr-logo: #ededed; /* Logo Pomodoro color */
 
   /* Side Bar */
+  --side-bar-width: 70px;
+  --button-background: #f1f1f1;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
   --side-bar-content-text: #000000;
   --clr-sidebar-content-bg: #6f6f6f; /*side bar panels */
   --side-bar-background: #424242; /*side bar background*/
@@ -79,16 +76,13 @@
   --side-bar-bottom-hover-text: rgb(255, 255, 255);
 }
 
-.theme-white {
+.light-theme {
   /*Main color background*/
-  --main-background: "";
-  --background-img: url("https://wallpaperaccess.com/full/274198.jpg");
+  --main-background: #ffffff;
+  --background-img: "";
+  /* --background-img: url("https://wallpaperaccess.com/full/274198.jpg"); */
   /* I don't know what it is*/
   --clr-innerCircle-light: #ffffff;
-
-  /* --clr-accent-pomo: #032e77; i don't think these make any changes 
-    --clr-accent-short: #a2a2a2;
-    --clr-accent-long: #01795f; */
 
   /* the circles*/
   --clr-circle-pomo: #0084ff;
@@ -105,6 +99,9 @@
   --clr-logo: #323232; /* Logo Pomodoro color */
 
   /* Side Bar */
+  --side-bar-width: 70px;
+  --button-background: #f1f1f1;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
   --side-bar-content-text: #000000;
   --clr-sidebar-content-bg: #f1f1f1;
   --side-bar-background: #1c2a47; /*side bar background*/

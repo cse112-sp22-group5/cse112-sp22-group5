@@ -48,14 +48,15 @@ body[data-state="pomo"] {
   /* background: #fff; */
   background: var(--main-background);
   background-image: var(--background-img);
+  background-size: 100% 100%;
 }
 
 body[data-state="short"] {
-  background-color: #eaa478;
+  background-color: var(--main-background-short-break);
 }
 
 body[data-state="long"] {
-  background-color: #88b9ae;
+  background-color: var(--main-background-long-break);
 }
 
 /* Header Main Footer Layout */
@@ -157,13 +158,13 @@ button:active {
   width: auto;
 }
 
-body[data-state="pomo"] #progress-pomo {
+/* body[data-state="pomo"] #progress-pomo {
   background: #ed6663;
 }
 
 body[data-state="short"] #progress-break {
   background: #b8f1b0;
-}
+} */
 
 /******** TIMER ********/
 #state,

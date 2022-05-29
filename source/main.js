@@ -22,7 +22,11 @@ import {
 import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
-import { setTheme } from "./modules/skins-themes.js";
+import {
+  setTheme,
+  loadBackgroundImages,
+  setBGImage,
+} from "./modules/skins-themes.js";
 // Timer
 document
   .getElementById("form-enabler")
@@ -60,14 +64,16 @@ document
   .getElementById("clear-completed-tasks-button")
   .addEventListener("click", clearCompletedTasks);
 
-// load task list from local storage
-window.addEventListener("load", () => {
-  loadTaskListFromLocal();
-  document.documentElement.className = "theme-default";
-});
-
 document.getElementById("theme").addEventListener("change", () => {
   const htmlDoc = document.documentElement;
   const theme = document.getElementById("theme").value;
   setTheme(htmlDoc, theme);
+});
+
+// load task list from local storage
+window.addEventListener("load", () => {
+  loadTaskListFromLocal();
+  document.documentElement.className = "default-theme";
+  loadBackgroundImages();
+  setBGImage();
 });
