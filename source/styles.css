@@ -48,7 +48,6 @@ body[data-state="pomo"] {
   /* background: #fff; */
   background: var(--main-background);
   background-image: var(--background-img);
-  background-size: 100% 100%;
 }
 
 body[data-state="short"] {
