@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+@import url("side-nav-bar.css");
 
 /******** Variables ********/
 :root {
@@ -47,6 +48,13 @@
   --fw-bold: 700;
 
   --transition-time: 1s;
+
+  /* Side bar*/
+  --side-bar-width: 70px;
+  --side-bar-background: #1c2a47;
+  --side-bar-icon-hover-bg: #2471a6;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --button-background: #f1f1f1;
 }
 
 /******** GLOBALS ********/
@@ -248,7 +256,8 @@ body[data-state="short"] #progress-break {
 }
 
 /* SETTINGS MODAL */
-fieldset {
+
+/* fieldset {
   border: none;
   padding: 0;
   display: flex;
@@ -268,13 +277,19 @@ fieldset select {
   background: #efefef;
 }
 
+.settings-label {
+  background-color: var(--clr-gray);
+  padding: 20px;
+  
+} */
+
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
 }
 
 /******** TASK LIST ********/
-.tasks {
+/* .tasks {
   width: 60%;
   height: 40vh;
   margin: 0 auto;
@@ -290,7 +305,8 @@ fieldset select {
 }
 
 .tasks[data-state="pomo"] {
-  /* background: #fff; */
+
+  /* background: #fff; 
   background: var(--primary-color);
 }
 
@@ -371,7 +387,7 @@ fieldset select {
   margin: 0 6px;
   padding: 6px 24px;
   font-size: 24px;
-}
+} */
 
 /********** MODALS *************/
 
@@ -415,7 +431,8 @@ fieldset select {
 } */
 
 /******** Switches ********/
-[type="checkbox"] {
+
+/* [type="checkbox"] {
   position: absolute;
   left: -9999px;
 }
@@ -473,7 +490,7 @@ fieldset select {
   width: 12px;
   height: 12px;
   transform: translateY(-50%);
-  /*background: url(uncheck-switcher.svg);*/
+  // background: url(uncheck-switcher.svg);
   background-size: 12px 12px;
 }
 .switches [type="checkbox"]:checked + label span:last-child {
@@ -488,9 +505,10 @@ fieldset select {
   width: 14px;
   height: 14px;
   left: 8px;
-  /*background-image: url(checkmark-switcher.svg);*/
+  // background-image: url(checkmark-switcher.svg);
   background-size: 14px 14px;
-}
+} */
+
 li {
   margin: 5px;
 }
