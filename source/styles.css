@@ -1,17 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
-@import url('side-nav-bar.css');
-@import url('styles-themes.css');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+@import url("side-nav-bar.css");
+@import url("styles-themes.css");
 /******** Variables ********/
 :root {
   /* Refactor Option */
-  
 
   /* --secondary-color:  #FFFFFF;
   --primary-font: 'Helvetica Neue', sans-serif;
   --secondary-font: 'Raleway', sans-serif; */
-
 
   /* sans-serif was secondary fallback font, but cant have this in variable */
   --ff-timer: "Helvetica Neue";
@@ -37,9 +35,14 @@
   --fw-bold: 700;
 
   --transition-time: 1s;
+
+  /* Side bar*/
+  --side-bar-width: 70px;
+  --side-bar-background: #1c2a47;
+  --side-bar-icon-hover-bg: #2471a6;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --button-background: #f1f1f1;
 }
-
-
 
 /******** GLOBALS ********/
 /* Body */
@@ -146,30 +149,35 @@ button:active {
   width: 20px;
 }
 
-.circle.pomo {
-  border-color: var(--clr-circle-pomo);
-}
-
-.circle.short {
-  border-color: var(--clr-circle-short);
-}
-
-.circle.long {
-  border-color: var(--clr-circle-long);
-}
-
-.circle.deactive {
-  border-color: var(--clr-gray);
-}
-
-.progress-container {
+.progress-bar {
   display: flex;
   justify-content: space-between;
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  width: 80%;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  width: 30%;
+  height: 32px;
+  background: #fff;
+  border-radius: 5px;
+  border: 2px solid #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar img {
+  height: 24px;
+  width: auto;
+}
+
+body[data-state="pomo"] #progress-pomo {
+  background: #ed6663;
+}
+
+body[data-state="short"] #progress-break {
+  background: #b8f1b0;
 }
 
 /******** TIMER ********/
@@ -244,6 +252,7 @@ button:active {
 }
 
 /* SETTINGS MODAL */
+
 /* fieldset {
   border: none;
   padding: 0;
@@ -269,7 +278,6 @@ fieldset select {
   padding: 20px;
   
 } */
-
 
 /******** CURRENT TASK ********/
 .current-task * {
@@ -301,6 +309,7 @@ footer {
 }
 
 .tasks[data-state="pomo"] {
+
   /* background: #fff; 
   background: var(--primary-color);
 }
@@ -426,6 +435,7 @@ footer {
 } */
 
 /******** Switches ********/
+
 /* [type="checkbox"] {
   position: absolute;
   left: -9999px;
