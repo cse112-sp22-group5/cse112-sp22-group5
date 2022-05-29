@@ -14,6 +14,7 @@ const Themes = {
   1: "default-theme",
   2: "dark-theme",
   3: "light-theme",
+  4: "color-blind",
 };
 
 function setTheme(target, theme) {
