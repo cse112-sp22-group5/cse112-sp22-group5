@@ -1,5 +1,6 @@
 // import {setObj, storeToLocal, removeDataFromStorage, retrieveDataFromStorage, deleteFromLocal}
 // from './localStorage.js';
+import { updateProgress } from "./progress-bar.js";
 
 const BackgroundImages = [
   "img/icons/no-image-icon.svg",
@@ -13,10 +14,17 @@ const Themes = {
   1: "default-theme",
   2: "dark-theme",
   3: "light-theme",
+  4: "color-blind",
 };
 
 function setTheme(target, theme) {
   target.className = Themes[theme];
+  updateProgress();
+
+  if (document.getElementById("color-blindness").value == 4) {
+    target.className = Themes[4];
+    updateProgress();
+  }
 }
 
 function loadThemeFromStorage(target) {

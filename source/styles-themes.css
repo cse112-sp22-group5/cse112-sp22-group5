@@ -1,27 +1,86 @@
 .default-theme {
-  /*Main color background*/
-  --main-background: #77a4e9;
-  --main-background-short-break: #eaa478;
-  --main-background-long-break: #88b9ae;
+  --background-work: rgb(77, 150, 255, 0.75);
+  --background-short: rgba(107, 203, 119, 0.75);
+  --background-long: rgba(255, 217, 61, 0.75);
+  --background-light: #fff;
+  --background-dark: #323232;
+  --pomo-red: #ff6b6b;
+
+  --text-light: #fff;
+  --text-dark: #222;
+
   --background-img: "";
-  /* I don't know what it is*/
-  --clr-innerCircle-light: #ffffff;
 
-  /* the circles*/
-  /* --clr-circle-pomo: #0084ff;
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4; */
-
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8; /* Circle deactive */
-
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-state-timer-text: #000000; /* Timer text color */
-
-  --clr-timer-background: #ffffff; /* timer background */
-  --clr-logo: #323232; /* Logo Pomodoro color */
+  --border-light: #efefef;
+  --border-dark: #323232;
 
   /* Side bar*/
+  --side-bar-width: 70px;
+  --button-background: #f1f1f1;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --side-bar-content-text: #222;
+  --clr-sidebar-content-bg: #efefef;
+  --side-bar-background: #1c2a47; /*side bar background*/
+  --side-bar-icon-hover-bg: #2471a6; /*icon background when hovered */
+  --select-input-background: #efefef; /*select input backgroun*/
+  --side-bar-box-shadow: rgb(200, 200, 200);
+  --side-bar-bottom-text: rgb(45, 100, 146);
+  --side-bar-bottom-box-shadow: rgb(226, 226, 226);
+
+  --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
+  --side-bar-bottom-hover-text: rgb(77, 150, 255, 1);
+}
+
+.dark-theme {
+  --background-work: #252525;
+  --background-short: #252525;
+  --background-long: #252525;
+  --background-light: #323232;
+  --background-dark: #efefef;
+  --pomo-red: #ed6663;
+
+  --text-light: #222;
+  --text-dark: #fff;
+
+  --background-img: "";
+
+  --border-light: #323232;
+  --border-dark: #efefef;
+
+  /* Side Bar */
+  --side-bar-width: 70px;
+  --button-background: #f1f1f1;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --side-bar-content-text: #000000;
+  --clr-sidebar-content-bg: #efefef; /*side bar panels */
+  --side-bar-background: #171717; /*side bar background*/
+  --side-bar-icon-hover-bg: #323232; /*icon background when hovered */
+  --select-input-background: #efefef; /*select input backgroun*/
+  --side-bar-box-shadow: #171717; /**/
+  --side-bar-bottom-text: #252525; /* text at bottom */
+  --side-bar-bottom-box-shadow: rgb(36, 36, 36);
+
+  --side-bar-bottom-hover-box-shadow: #171717;
+  --side-bar-bottom-hover-text: #323232;
+}
+
+.light-theme {
+  --background-work: #efefef;
+  --background-short: #efefef;
+  --background-long: #efefef;
+  --background-light: #fff;
+  --background-dark: #323232;
+  --pomo-red: #ff6b6b;
+
+  --text-light: #fff;
+  --text-dark: #323232;
+
+  --background-img: "";
+
+  --border-light: #fff;
+  --border-dark: #2e2e2e;
+
+  /* Side Bar */
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
@@ -38,65 +97,21 @@
   --side-bar-bottom-hover-text: rgb(42, 56, 67);
 }
 
-.dark-theme {
-  /*Main color background*/
-  --main-background: #242424;
+.color-blind {
+  --background-work: #b2dffb;
+  --background-short: #ffa372;
+  --background-long: #064acb;
+  --background-light: #efefef;
+  --background-dark: #323232;
+  --pomo-red: #ed6663;
+
+  --text-light: #fff;
+  --text-dark: #222;
+
   --background-img: "";
-  /* I don't know what it is*/
-  --clr-innerCircle-light: #ffffff;
 
-  /* the circles*/
-  --clr-circle-pomo: #0084ff;
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8; /* Circle deactive */
-
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-state-timer-text: #f4f4f4; /* Timer text color */
-
-  --clr-timer-background: #747373; /* timer background */
-  --clr-logo: #ededed; /* Logo Pomodoro color */
-
-  /* Side Bar */
-  --side-bar-width: 70px;
-  --button-background: #f1f1f1;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --side-bar-content-text: #000000;
-  --clr-sidebar-content-bg: #6f6f6f; /*side bar panels */
-  --side-bar-background: #424242; /*side bar background*/
-  --side-bar-icon-hover-bg: #b7b7b7; /*icon background when hovered */
-  --select-input-background: #efefef; /*select input backgroun*/
-  --side-bar-box-shadow: rgb(200, 200, 200); /**/
-  --side-bar-bottom-text: rgb(163, 163, 163); /* text at bottom */
-  --side-bar-bottom-box-shadow: rgb(36, 36, 36);
-
-  --side-bar-bottom-hover-box-shadow: rgb(0, 0, 0);
-  --side-bar-bottom-hover-text: rgb(255, 255, 255);
-}
-
-.light-theme {
-  /*Main color background*/
-  --main-background: #ffffff;
-  --background-img: "";
-  /* --background-img: url("https://wallpaperaccess.com/full/274198.jpg"); */
-  /* I don't know what it is*/
-  --clr-innerCircle-light: #ffffff;
-
-  /* the circles*/
-  --clr-circle-pomo: #0084ff;
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8; /* Circle deactive */
-
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-  --clr-state-timer-text: #000000; /* Timer text color */
-
-  --clr-timer-background: #ffffff; /* timer background */
-  --clr-logo: #323232; /* Logo Pomodoro color */
+  --border-light: #efefef;
+  --border-dark: #323232;
 
   /* Side Bar */
   --side-bar-width: 70px;

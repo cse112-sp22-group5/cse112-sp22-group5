@@ -69,6 +69,11 @@ document.getElementById("theme").addEventListener("change", () => {
   const theme = document.getElementById("theme").value;
   setTheme(htmlDoc, theme);
 });
+document.getElementById("color-blindness").addEventListener("change", () => {
+  const htmlDoc = document.documentElement;
+  const theme = document.getElementById("color-blindness").value;
+  setTheme(htmlDoc, theme);
+});
 
 // load task list from local storage
 window.addEventListener("load", () => {
