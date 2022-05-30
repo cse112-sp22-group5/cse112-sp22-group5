@@ -83,7 +83,7 @@ function toggleMenu(divID) {
 function setIconBackGround(btnID) {
   let content_icons = JSON.parse(JSON.stringify(CONTENT_ICONS));
   if (Object.prototype.hasOwnProperty.call(content_icons, btnID))
-    content_icons[btnID] = true;
+    content_icons[btnID] = true;  
   for (const key in content_icons) {
     if (content_icons[key])
       document.getElementById(key).classList.add("button-clicked");
@@ -221,4 +221,4 @@ window.addEventListener("touchstart", (event) => {
   }
 });
 
- export { setDefaultSettings, toggleMenu };
+ export { setDefaultSettings, toggleMenu, setIconBackGround };

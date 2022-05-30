@@ -1,5 +1,5 @@
 // import introJs from '../../node_modules/intro.js';
-import { toggleMenu } from './side-nav-bar.js';
+import { setIconBackGround, toggleMenu } from './side-nav-bar.js';
 import * as storage from './localStorage.js';
 // var introJs = require('../../node_modules/intro.js');
 // const intro = introJs.introJs();
@@ -100,22 +100,31 @@ function startWalkthrough() {
 
   introjs.onbeforechange(() => {
     switch (introjs.currentStep()) {
+      case 1:
+        document.getElementById('help-icon').style = 'background-color: var(--side-bar-background);';
+        break;
       case 4:
       case 5:
       case 6:
       case 7:
       case 8:
         toggleMenu('setting-div');
+        document.getElementsByClassName('side-nav-bar').style = 'height: 100%;width: var(--side-bar-width);position: fixed;z-index: 99;top: 0;left: 0;background-color: var(--side-bar-background);overflow: hidden;padding-top: 30px;transition: 0.5s;';
+        setIconBackGround('setting-icon');
         break;  
       case 9:
       case 10:
         toggleMenu('tasks-div');
+        document.getElementsByClassName('side-nav-bar').style = 'height: 100%;width: var(--side-bar-width);position: fixed;z-index: 99;top: 0;left: 0;background-color: var(--side-bar-background);overflow: hidden;padding-top: 30px;transition: 0.5s;';
+        setIconBackGround('tasks-icon');
         break;
       default:
         toggleMenu(null);
+        setIconBackGround(null);
         break;
     }
   });
+
 }
 
 /**
