@@ -1,0 +1,91 @@
+name: Pull Request Master
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run-linters-master:
+    name: Run Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
+          continue_on_error: "false"
+          eslint_dir: ./source/
+
+  run-jest-master:
+    name: Run Unit Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Tests
+        run: |
+          npm install
+          npm test timer.test.js
+          npm test notifications.test.js
+          npm test notifications.showNotif.test.js
+          npm test help.test.js
+          npm test color-change.test.js
+          npm test progress-bar.test.js
+
+  # run-cypress-master:
+  #   name: Run E2E Testing
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
+  
+  run-jsdocs-master:
+    name: Deploy JSDocs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./source
+          output_dir: ./specs/documentation/jsdocs/
+          recurse: true
+          template: minami
+          front_page: ./specs/documentation/jsdocs/docHomepage.md
+
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./specs/documentation/jsdocs/
+
+  firebase-deploy:
+    name: Deploy to firebase hostring
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTORO_B340E }}'
+          projectId: productoro-b340e
+          channelId: live

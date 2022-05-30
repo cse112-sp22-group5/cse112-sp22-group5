@@ -1,0 +1,92 @@
+name: Pull Request Dev
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  run-linters-dev:
+    name: Run Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
+          continue_on_error: "false"
+          eslint_dir: ./source/
+
+  run-jest-dev:
+    name: Run Unit Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Tests
+        run: |
+          npm install
+          npm test timer.test.js
+          npm test notifications.test.js
+          npm test notifications.showNotif.test.js
+          npm test help.test.js
+          npm test color-change.test.js
+          npm test progress-bar.test.js
+
+  # cypress-run:
+  #   name: Run E2E Testing
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
+  
+  run-jsdocs-dev:
+    name: Deploy JSDocs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./source
+          output_dir: ./specs/documentation/jsdocs/
+          recurse: true
+          template: minami
+          front_page: ./specs/documentation/jsdocs/docHomepage.md
+
+      - name: Deploy Documentation to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTORO_DOCS }}'
+          projectId: productoro-docs
+          entryPoint: ./specs/documentation/jsdocs
+          channelId: docs
+
+  dev-preview:
+    name: Create a preview
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCTORO_B340E }}'
+          projectId: productoro-b340e
