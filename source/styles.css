@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 @import url("side-nav-bar.css");
+@import url('https://unpkg.com/intro.js/minified/introjs.min.css');
 
 /******** Variables ********/
 :root {
@@ -255,34 +256,6 @@ body[data-state="short"] #progress-break {
   font-size: 16px;
 }
 
-/* SETTINGS MODAL */
-
-/* fieldset {
-  border: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-fieldset label {
-  width: 80%;
-  margin: 5px 0;
-}
-
-fieldset select {
-  border: 0;
-  padding: 12px;
-  background: #efefef;
-}
-
-.settings-label {
-  background-color: var(--clr-gray);
-  padding: 20px;
-  
-} */
-
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
@@ -417,7 +390,7 @@ fieldset select {
   cursor: pointer;
 }
 
-#form-enabler span {
+#time-customization span {
   padding-top: 15px;
 }
 
@@ -425,89 +398,6 @@ fieldset select {
   color: #eb5353;
   text-align: center;
 }
-
-/* #current-mix{
-  
-} */
-
-/******** Switches ********/
-
-/* [type="checkbox"] {
-  position: absolute;
-  left: -9999px;
-}
-
-.switches {
-  max-width: 500px;
-  width: 95%;
-  margin: 50px auto 0;
-  list-style: none;
-}
-
-.switches li::before {
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--pink);
-}
-
-.switches label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.switches span:last-child {
-  position: relative;
-  width: 60px;
-  height: 34px;
-  border-radius: 34px;
-  background: var(--gray);
-  transition: all 0.3s;
-}
-.switches span:last-child::before,
-.switches span:last-child::after {
-  content: "";
-  position: absolute;
-}
-.switches span:last-child::before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: black;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-.switches span:last-child::after {
-  top: 50%;
-  right: 8px;
-  width: 12px;
-  height: 12px;
-  transform: translateY(-50%);
-  // background: url(uncheck-switcher.svg);
-  background-size: 12px 12px;
-}
-.switches [type="checkbox"]:checked + label span:last-child {
-  background-color: #2196f3;
-}
-.switches [type="checkbox"]:checked + label span:last-child::before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-.switches [type="checkbox"]:checked + label span:last-child::after {
-  width: 14px;
-  height: 14px;
-  left: 8px;
-  // background-image: url(checkmark-switcher.svg);
-  background-size: 14px 14px;
-} */
 
 li {
   margin: 5px;

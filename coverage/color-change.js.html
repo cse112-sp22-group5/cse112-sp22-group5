@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
@@ -111,27 +111,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,36 +161,28 @@
 function colorChange() {
   switch (timer.currState) {
     case WORK_STATE:
-      document.body.setAttribute("data-state", "pomo");
-      document.getElementById("tasks").setAttribute("data-state", "pomo");
-      document
-        .getElementById("timer-display")
-        .setAttribute("data-state", "pomo");
-      // document.querySelector('.progress-container').setAttribute('data-state','pomo');
+      document.body.setAttribute('data-state','pomo');
+ //     document.getElementById('tasks').setAttribute('data-state','pomo');
+      document.getElementById('timer-display').setAttribute('data-state','pomo');
+      document.querySelector('.progress-container').setAttribute('data-state','pomo');
       break;
 &nbsp;
 <span class="branch-1 cbranch-no" title="branch not covered" >    case SHORT_STATE:</span>
-<span class="cstat-no" title="statement not covered" >      document.body.setAttribute("data-state", "short");</span>
-<span class="cstat-no" title="statement not covered" >      document.getElementById("tasks").setAttribute("data-state", "short");</span>
-<span class="cstat-no" title="statement not covered" >      document</span>
-        .getElementById("timer-display")
-        .setAttribute("data-state", "short");
+<span class="cstat-no" title="statement not covered" >      document.body.setAttribute('data-state','short');</span>
+  //    document.getElementById('tasks').setAttribute('data-state','short');
+<span class="cstat-no" title="statement not covered" >      document.getElementById('timer-display').setAttribute('data-state','short');</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
-<span class="branch-2 cbranch-no" title="branch not covered" >    case LONG_STATE:</span>
-<span class="cstat-no" title="statement not covered" >      document.body.setAttribute("data-state", "long");</span>
-<span class="cstat-no" title="statement not covered" >      document.getElementById("tasks").setAttribute("data-state", "long");</span>
-<span class="cstat-no" title="statement not covered" >      document</span>
-        .getElementById("timer-display")
-        .setAttribute("data-state", "long");
-<span class="cstat-no" title="statement not covered" >      break;</span>
-&nbsp;
+    case LONG_STATE:
+      document.body.setAttribute('data-state','long');
+  //    document.getElementById('tasks').setAttribute('data-state','long');
+      document.getElementById('timer-display').setAttribute('data-state','long');
+      break;
+      
 <span class="branch-3 cbranch-no" title="branch not covered" >    default:</span>
-<span class="cstat-no" title="statement not covered" >      document.body.setAttribute("data-state", "pomo");</span>
-<span class="cstat-no" title="statement not covered" >      document.getElementById("tasks").setAttribute("data-state", "pomo");</span>
-<span class="cstat-no" title="statement not covered" >      document</span>
-        .getElementById("timer-display")
-        .setAttribute("data-state", "pomo");
+<span class="cstat-no" title="statement not covered" >      document.body.setAttribute('data-state','pomo');</span>
+   //   document.getElementById('tasks').setAttribute('data-state','pomo');
+<span class="cstat-no" title="statement not covered" >      document.getElementById('timer-display').setAttribute('data-state','pomo');</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
   }
 }
@@ -202,7 +196,7 @@ export { colorChange };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 26 2022 00:08:44 GMT-0700 (Pacific Daylight Time)
+                at Fri May 27 2022 20:35:35 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="prettify.js"></script>
