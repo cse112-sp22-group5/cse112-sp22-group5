@@ -1,4 +1,3 @@
-/* eslint no-use-before-define: 0 */
 /*!
  * Intro.js v5.1.0
  * https://introjs.com
