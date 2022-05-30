@@ -37,7 +37,7 @@ function loadBackgroundImages() {
 }
 
 function setBGImage() {
-  document.querySelectorAll("input").forEach((img) => {
+  document.querySelectorAll("input[name='bgImg']").forEach((img) => {
     img.addEventListener("click", (event) => {
       const index = parseInt(event.target.value, 10);
       if (index === 0) document.body.style.backgroundImage = "";
