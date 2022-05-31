@@ -4,7 +4,8 @@ import {
   onStart,
   onReset,
   setCustomTime,
-  keyboardShortcut
+  keyboardShortcut,
+  customizeKey
 } from "./modules/timer.js";
 import { setBackgroundMusic } from "./modules/background-music.js";
 import {
@@ -28,12 +29,12 @@ document.getElementById("reset-button").addEventListener("click", onReset);
 // Keyboard shortcuts
 document.addEventListener("keydown", (event) => {
   // only allow this event to be fired when task form is hidden
-  if (document.getElementById("tasks-div").style.width === 0)
+  if (document.getElementById("tasks-div").style.width === "")
     keyboardShortcut(event);
 });
-// document.getElementById('customize-start').addEventListener('click', customizeKey);
-// document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
-// document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
+document.getElementById('customize-start').addEventListener('click', customizeKey);
+document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
+document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
 
 // Default button
 document

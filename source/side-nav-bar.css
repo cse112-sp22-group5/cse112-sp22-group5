@@ -269,6 +269,14 @@
   text-align: left;
 }
 
+.setting-flex-item > button {
+  border: 0;
+  background-color: var(--button-background);
+  width: 25%;
+  padding-left: 10px;
+  text-align: left;
+}
+
 #background-audio {
   margin: auto;
 }
