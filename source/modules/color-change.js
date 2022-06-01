@@ -1,4 +1,4 @@
-import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from "./timer.js";
+import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from './timer.js';
 
 /**
  * @name colorChange
@@ -8,35 +8,35 @@ import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from "./timer.js";
 function colorChange() {
   switch (timer.currState) {
     case WORK_STATE:
-      document.body.setAttribute("data-state", "pomo");
+      document.body.setAttribute('data-state', 'pomo');
       //     document.getElementById('tasks').setAttribute('data-state','pomo');
       document
-        .getElementById("timer-display")
-        .setAttribute("data-state", "pomo");
+        .getElementById('timer-display')
+        .setAttribute('data-state', 'pomo');
       break;
 
     case SHORT_STATE:
-      document.body.setAttribute("data-state", "short");
+      document.body.setAttribute('data-state', 'short');
       //    document.getElementById('tasks').setAttribute('data-state','short');
       document
-        .getElementById("timer-display")
-        .setAttribute("data-state", "short");
+        .getElementById('timer-display')
+        .setAttribute('data-state', 'short');
       break;
 
     case LONG_STATE:
-      document.body.setAttribute("data-state", "long");
+      document.body.setAttribute('data-state', 'long');
       //    document.getElementById('tasks').setAttribute('data-state','long');
       document
-        .getElementById("timer-display")
-        .setAttribute("data-state", "long");
+        .getElementById('timer-display')
+        .setAttribute('data-state', 'long');
       break;
 
     default:
-      document.body.setAttribute("data-state", "pomo");
+      document.body.setAttribute('data-state', 'pomo');
       //   document.getElementById('tasks').setAttribute('data-state','pomo');
       document
-        .getElementById("timer-display")
-        .setAttribute("data-state", "pomo");
+        .getElementById('timer-display')
+        .setAttribute('data-state', 'pomo');
       break;
   }
 }

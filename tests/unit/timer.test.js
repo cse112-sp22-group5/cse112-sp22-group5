@@ -292,29 +292,29 @@ describe("Test checkState function", () => {
     });
 });
 
-describe("Test start button", () => {
-  test("calls onStart function when clicked", () => {
-    document.body.innerHTML = `
+describe('Test start button', () => {
+    test('calls onStart function when clicked', () => {
+        document.body.innerHTML = `
             <div id = 'timer-display'>25:00</div>
             <button type=button class='timer-button' id='start-button'>Start</button>
         `;
-    let startBtn = document.getElementById("start-button");
-    startBtn.click();
-    expect(onStart).toBeCalled;
-  });
+        let startBtn = document.getElementById('start-button');
+        startBtn.click();
+        expect(onStart).toBeCalled;
+    });
 });
 
-describe("Test reset button", () => {
-  test("calls onReset function when clicked", () => {
-    document.body.innerHTML = `
+describe('Test reset button', () => {
+    test('calls onReset function when clicked', () => {
+        document.body.innerHTML = `
             <div id = 'timer-display'>25:00</div>
             <button type=button class='timer-button' id='start-button'>Start</button>
             <button type=button class='timer-button' id='reset-button'>Reset</button>
         `;
-    let resetBtn = document.getElementById("reset-button");
-    resetBtn.click();
-    expect(onReset).toBeCalled;
-  });
+        let resetBtn = document.getElementById('reset-button');
+        resetBtn.click();
+        expect(onReset).toBeCalled;
+    });
 });
 
 describe("Test updateState function", () => {

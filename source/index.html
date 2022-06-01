@@ -18,8 +18,8 @@
     <header> 
         <h1 id="title">Productoro</h1>
         <nav id="options-btn-container">
-            <button type=button class='help-button' id='help-button' hidden>?</button>
-            <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
+            <button type=button class='help-button' id='help-button'>?</button>
+            <button type=button class='settings' id='settings-button'>&#x2699;</button>
         </nav>
     </header>
 
@@ -62,6 +62,22 @@
         <section class="current-task" id="current-task-section">
             <h2>Current Task</h2>
             <p id="current-task"></p>
+        </section>
+        
+        <!-- Task List -->
+        <section class="tasks" id="tasks">
+            <h2>Tasks</h2>
+
+            <!-- List Options -->
+            <div id="task-options">
+                <button type="button" id="add-tasks-button">Add</button>
+                <button type="button" id="clear-tasks-button">Clear</button>
+                <button type="button" id="clear-completed-tasks-button">Completed</button>
+            </div>
+
+            <hr />
+
+            <ul id="task-list"></ul>
         </section>
 
     </main>
@@ -208,16 +224,6 @@
             <div class="bottom">
                 <i type="button" id="default-settings">Set to Default</i>
             </div>
-             
-    </div>
-    <div class="sidebar-content" id="tasks-div">
-        <h2>Tasks</h2>
-        <label for="taskName">New Task:</label>
-
-        <div id="input-container">
-          <input type="text" id="task-name" name="taskName" placeholder="Type in what you are working on" autocomplete="off">
-          <button id="save-button">submit</button>
-        </div>
 
         <label>Current Tasks:</label>
         <ul id="task-list"></ul>

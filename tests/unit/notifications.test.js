@@ -1,4 +1,4 @@
-import { getNotificationStatus, getAlarm } from '../../source/modules/notifications.js';
+import { getNotificationStatus, getAlarm } from '../modules/notifications';
 
 describe('Alarm Tests', () => {
     test('Check alarm exists', () => {

@@ -50,7 +50,7 @@ describe('Fresh Entry, No Activity Tests', () => {
   });
 
   it('Break Reminders Disabled Onload', () => {
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -323,7 +323,7 @@ describe('Start Button Tests', () => {
 
     it('Start Button Clicked: Check Break Reminders Still Disabled', () => {
       cy.get('#start-button').click();
-      cy.get('#break-reminder').should('have.text', '');
+      cy.get('#breakReminder').should('have.text', '');
       cy.get('#reminder').then(($el) => {
         expect($el).to.be.hidden;
       });
@@ -435,14 +435,14 @@ describe('Reset Button Tests', () => {
 
   it('Reset Button Clicked: Check Break Reminders still Disabled', () => {
     cy.get('#start-button').click();
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
     cy.wait(1000*3);
     cy.get('#reset-button').click();
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -1083,7 +1083,7 @@ describe('Help Button Tests', () => {
 
   it('Help Button Clicked: Check Break Reminders Still Disabled', () => {
     cy.get('#help-button').click();
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -1163,10 +1163,10 @@ describe('Break Reminders Tests', () => {
 
     cy.wait(9*1000);
     //check presense at a break
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).not.to.be.hidden;
     });
-    cy.get('#break-reminder').should('not.be.empty');
+    cy.get('#breakReminder').should('not.be.empty');
 
     cy.get('#reminder').then(($el) => {
       expect($el).not.to.be.hidden;
@@ -1175,10 +1175,10 @@ describe('Break Reminders Tests', () => {
 
     //check break reminders still there after starting break
     cy.get('#start-button').click();
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).not.to.be.hidden;
     });
-    cy.get('#break-reminder').should('not.be.empty');
+    cy.get('#breakReminder').should('not.be.empty');
 
     cy.get('#reminder').then(($el) => {
       expect($el).not.to.be.hidden;
@@ -1191,10 +1191,10 @@ describe('Break Reminders Tests', () => {
 
     //finish pomo
     cy.wait(9*1000);
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).not.to.be.hidden;
     });
-    cy.get('#break-reminder').should('not.be.empty');
+    cy.get('#breakReminder').should('not.be.empty');
 
     cy.get('#reminder').then(($el) => {
       expect($el).not.to.be.hidden;
@@ -1208,7 +1208,7 @@ describe('Break Reminders Tests', () => {
     cy.wait(6*1000);
 
     //now in work state checks the break reminder is gone
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
@@ -1218,7 +1218,7 @@ describe('Break Reminders Tests', () => {
 
     //check they are still gone after starting the work session
     cy.get('#start-button').click();
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
@@ -1261,10 +1261,10 @@ describe('Break Reminders Tests', () => {
     cy.wait(9*1000);
 
     //now in long break state check reminders are there and persist after click
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).not.to.be.hidden;
     });
-    cy.get('#break-reminder').should('not.be.empty');
+    cy.get('#breakReminder').should('not.be.empty');
 
     cy.get('#reminder').then(($el) => {
       expect($el).not.to.be.hidden;
@@ -1273,10 +1273,10 @@ describe('Break Reminders Tests', () => {
 
     cy.get('#start-button').click();
     //check the break reminders persist after starting LB
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).not.to.be.hidden;
     });
-    cy.get('#break-reminder').should('not.be.empty');
+    cy.get('#breakReminder').should('not.be.empty');
 
     cy.get('#reminder').then(($el) => {
       expect($el).not.to.be.hidden;
@@ -1322,7 +1322,7 @@ describe('Break Reminders Tests', () => {
     cy.wait(6*1000);
     
     //now in work state
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
@@ -1332,7 +1332,7 @@ describe('Break Reminders Tests', () => {
 
     //check still disabled after starting work state 
     cy.get('#start-button').click();
-    cy.get('#break-reminder').then(($el) => {
+    cy.get('#breakReminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
@@ -1419,7 +1419,7 @@ describe('KeyBoard Shortcut: Using Space to Start Button', () => {
 
   it('Space Used as Start Button: Check Break Reminders Still Disabled', () => {
     cy.get('body').trigger('keydown', { key: '(Space character)', code: 'Space', which: 32 }); 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -1541,14 +1541,14 @@ describe('Keyboard Shortcut: Using Space as Reset Button', () => {
 
   it('Space Used as Reset Button: Check Break Reminders still Disabled', () => {
     cy.get('body').trigger('keydown', { key: '(Space character)', code: 'Space', which: 32 }); 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
 
     cy.wait(1000*3);
     cy.get('body').trigger('keydown', { key: '(Space character)', code: 'Space', which: 32 }); 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -1669,7 +1669,7 @@ describe('Settings Button Tests (Pressibility)', () => {
       expect($el).to.be.not.hidden
     });
 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -1916,7 +1916,7 @@ describe('Custom Time Limits', () => {
   });
 
   it('Custom Time Limits: Check Break Reminders Disabled Onload', () => {
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -2528,7 +2528,7 @@ describe('Alarm Notifications Tests', () => {
     cy.get('#notif-toggle').invoke('attr', 'checked', false);
     cy.get('#close-settings').click();
 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -2652,7 +2652,7 @@ describe('Keyboard Shortcuts Disabled Tests', () => {
 
   it('Keyboard Shortcuts Disabled: Space Clicked, Check Break Reminders Still Disabled', () => {
     cy.get('body').trigger('keydown', { key: '(Space character)', code: 'Space', which: 32 }); 
-    cy.get('#break-reminder').should('have.text', '');
+    cy.get('#breakReminder').should('have.text', '');
     cy.get('#reminder').then(($el) => {
       expect($el).to.be.hidden;
     });

@@ -39,7 +39,7 @@ All Javascript, CSS and Jest files are located in the [source directory](./sourc
 <pre>
 +-- source/  
 |         +-- timer.js  
-|         +-- break-reminder.js
+|         +-- breakReminder.js
 |         +-- help.js
 |         +-- notifications.js
 |         +-- progress-bar.js

@@ -24,8 +24,8 @@ const
 function setBackgroundMusic() {
     let bgMusic = document.getElementById('bg-music');
     let currentMix = document.getElementById('current-mix');
-    let prevTrackBtn = document.getElementById('prev-track-button');
-    let nxtTrackBtn = document.getElementById('nxt-track-button');
+    let prevTrackBtn = document.getElementById('prevTrackButton');
+    let nxtTrackBtn = document.getElementById('nxtTrackButton');
     let bgAudio = document.getElementById('background-audio');
 
     // No backround music

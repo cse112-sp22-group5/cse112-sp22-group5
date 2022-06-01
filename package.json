@@ -8,19 +8,14 @@
     "babel-jest": "^26.6.3",
     "cypress": "^6.5.0",
     "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jasmine": "^4.1.2",
-    "husky": "^8.0.1",
     "jest": "^26.6.3",
     "jsdoc": "^3.6.6",
-    "lint-staged": "^12.4.1",
-    "minami": "^1.2.3",
-    "prettier": "^2.6.2"
+    "minami": "^1.2.3"
   },
   "scripts": {
     "test": "jest --env=jsdom",
-    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "prepare": "husky install"
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "jest": {
     "collectCoverage": true,

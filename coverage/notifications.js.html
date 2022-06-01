@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.63% </span>
+                <span class="strong">72.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/32</span>
+                <span class='fraction'>21/29</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.86% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>3/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/30</span>
+                <span class='fraction'>21/27</span>
             </div>
         
             
@@ -148,12 +148,7 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,11 +167,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -249,8 +239,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** @constant @type {Audio} need to change from const to var **/ 
-let alarm = new Audio('./audio/notification-alert-1.wav');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** @constant @type {Audio} **/ 
+const alarm = new Audio('./audio/notification-alert.wav');
 &nbsp;
 /**
  * @name getAlarm
@@ -268,11 +258,6 @@ function getAlarm(){
  * @description Plays the alarm three times to notfiy the user that the break or pomo has ended 
  */
 function <span class="fstat-no" title="function not covered" >playSound(</span>){
-    // Set alarm sound
-    let soundIdx = <span class="cstat-no" title="statement not covered" >document.getElementById('alarm-sounds').value;</span>
-<span class="cstat-no" title="statement not covered" >    alarm = new Audio('./audio/notification-alert-' + soundIdx + '.wav');</span>
-    // Set alarm volume
-<span class="cstat-no" title="statement not covered" >    alarm.volume = document.getElementById('alarm-volume').value / 100;</span>
     //Play the alarm once
 <span class="cstat-no" title="statement not covered" >    alarm.play();</span>
     //Wait 2 seconds then play it again
@@ -302,7 +287,7 @@ function showNotif(typeOfNotif){
     else if(typeOfNotif === 'Short Break State'){
         body = 'You have completed a pomo! Your short break begins now :)';
     }
-    else <span class="missing-if-branch" title="else path not taken" >E</span>if(typeOfNotif === 'Work State'){
+    else if(typeOfNotif === 'Work State'){
         body = 'Your break has ended. A new pomo begins now :)';
     }
 &nbsp;
