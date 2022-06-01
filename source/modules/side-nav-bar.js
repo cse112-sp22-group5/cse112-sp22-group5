@@ -223,4 +223,4 @@ window.addEventListener("touchstart", (event) => {
   }
 });
 
-export { setDefaultSettings };
+export { setDefaultSettings, toggleMenu, setIconBackGround };

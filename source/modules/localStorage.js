@@ -1,27 +1,26 @@
 // Local Storage object
-let objName = '';
+let objName = "";
 
 /**
  * @name setObj
- * @function 
- * @description Must call set Object or Key in localStorage before user any other functions
- * @param {string} string key or object name in localStorage
+ * @function
+ * @description Must call set Object/Key in localStorage before using any other functions
+ * @param {string} string object/key name in localStorage
  */
 function setObj(string) {
-    objName = string;
+  objName = string;
 }
 /**
  * @name storeToLocal
- * @function 
+ * @function
  * @description Store task to local storage and whether it is done or not
  * @param {string} key keyword
  * @param {boolean} value value of the key
  */
-function storeToLocal(key, value)
-{
-    const obj = retrieveDataFromStorage(objName);
-    obj[key] = value;
-    saveToStorage(objName, obj);
+function storeToLocal(key, value) {
+  const obj = retrieveDataFromStorage(objName);
+  obj[key] = value;
+  saveToStorage(objName, obj);
 }
 
 /**
@@ -31,10 +30,9 @@ function storeToLocal(key, value)
  * @param {string} key task name
  */
 function deleteFromLocal(key) {
-
-    const obj = retrieveDataFromStorage(objName);
-    delete obj[key];
-    saveToStorage(objName, obj);
+  const obj = retrieveDataFromStorage(objName);
+  delete obj[key];
+  saveToStorage(objName, obj);
 }
 
 /**
@@ -42,10 +40,10 @@ function deleteFromLocal(key) {
  * @function
  * @description save an object to local storage
  * @param {string} key local storage keyword to store
- * @param {string} obj 
+ * @param {string} obj
  */
 function saveToStorage(key, obj) {
-    localStorage.setItem(key, JSON.stringify(obj));
+  localStorage.setItem(key, JSON.stringify(obj));
 }
 
 /**
@@ -56,7 +54,7 @@ function saveToStorage(key, obj) {
  * @returns {object} return the object if found, or empty object
  */
 function retrieveDataFromStorage(key) {
-    return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {};
+  return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : {};
 }
 
 /**
@@ -65,7 +63,13 @@ function retrieveDataFromStorage(key) {
  * @description remove the object from local storage
  */
 function removeDataFromStorage() {
-    localStorage.removeItem(objName);
+  localStorage.removeItem(objName);
 }
 
-export {deleteFromLocal, storeToLocal, removeDataFromStorage, retrieveDataFromStorage, setObj}
+export {
+  deleteFromLocal,
+  storeToLocal,
+  removeDataFromStorage,
+  retrieveDataFromStorage,
+  setObj,
+};

@@ -48,6 +48,7 @@
     "*.{js,css}": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "ansi-escapes": "^5.0.0"
+    "@types/intro.js": "^3.0.2",
+    "intro.js": "^5.1.0"
   }
 }
