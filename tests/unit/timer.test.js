@@ -4,15 +4,15 @@ import {
   checkState,
   updateState,
   timer,
-} from "../../source/modules/timer.js";
+} from '../../source/modules/timer.js';
 
 beforeEach(() => {
   document.body.innerHTML = `
         <!-- IntroJs javascript -->
-        <script src="./third_party/intro.min.js"></script> 
+        <script src='./third_party/intro.min.js'></script> 
         <header> 
-            <h1 id="title">Productoro</h1>
-            <nav id="options-btn-container">
+            <h1 id='title'>Productoro</h1>
+            <nav id='options-btn-container'>
                 <button type=button class='help-button' id='help-button' hidden>?</button>
                 <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
             </nav>
@@ -28,23 +28,23 @@ beforeEach(() => {
             <h2 class='text-center' id='state' hidden>Work State</h2> 
 
             <!-- Progress Bar -->
-            <section class="progress-bar">
-                <div id="progress-pomo">
-                    <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+            <section class='progress-bar'>
+                <div id='progress-pomo'>
+                    <img src='./img/icons/progress-tomato.png' alt='pomodoro time'>
                 </div>
-                <div id="progress-break">
-                    <img src="./img/icons/progress-leaf.png" alt="short break time">
+                <div id='progress-break'>
+                    <img src='./img/icons/progress-leaf.png' alt='short break time'>
                 </div>
-                <div id="progress-long-break">
-                    <img src="./img/icons/progress-coffee.png" alt="long break time">
+                <div id='progress-long-break'>
+                    <img src='./img/icons/progress-coffee.png' alt='long break time'>
                 </div>
             </section>
 
             <!-- Timer -->
             <div class='timer'>
-                <p id="timer-display" data-state='pomo'>25:00</p>
-                <p>Streak: <span id="streak">0</span></p>
-                <p>Completed: <span id="total">0</span></p>
+                <p id='timer-display' data-state='pomo'>25:00</p>
+                <p>Streak: <span id='streak'>0</span></p>
+                <p>Completed: <span id='total'>0</span></p>
             </div>
             
             <!-- Start Reset Button -->
@@ -54,38 +54,38 @@ beforeEach(() => {
             </div>
 
             <!-- Current Task -->
-            <section class="current-task" id="current-task-section">
+            <section class='current-task' id='current-task-section'>
                 <h2>Current Task</h2>
-                <p id="current-task"></p>
+                <p id='current-task'></p>
             </section>
 
         </main>
         
         <footer>
-            <p>Made by the <a href="../index.html">Dream Team</a></p>
+            <p>Made by the <a href='../index.html'>Dream Team</a></p>
             <p>Taken by the 10x Racoons</p>
         </footer>
 
-        <div id="arrow-down">
-            <img class="icon" src="./img/icons/arrow-down-icon.svg" alt="expand menu">
+        <div id='arrow-down'>
+            <img class='icon' src='./img/icons/arrow-down-icon.svg' alt='expand menu'>
         </div>
 
         <!-- Side navigation bar -->
-        <div class="side-nav-bar">
-            <!-- <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help"> -->
-            <i id="help-icon" data-associated-div="help-div" title="help">
-                <img class="icon" src="./img/icons/question-mark.svg" >
+        <div class='side-nav-bar'>
+            <!-- <i class='menu-icon' id='help-icon' data-associated-div='help-div' title='help'> -->
+            <i id='help-icon' data-associated-div='help-div' title='help'>
+                <img class='icon' src='./img/icons/question-mark.svg' >
             </i>
-            <i class="menu-icon" id="setting-icon" data-associated-div="setting-div" title="setting">
-                <img  class="icon" src="./img/icons/settings.svg" >
+            <i class='menu-icon' id='setting-icon' data-associated-div='setting-div' title='setting'>
+                <img  class='icon' src='./img/icons/settings.svg' >
             </i>
-            <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="task list">
-                <img  class="icon" src="./img/icons/task-list.svg" >
+            <i class='menu-icon' id='tasks-icon' data-associated-div='tasks-div' title='task list'>
+                <img  class='icon' src='./img/icons/task-list.svg' >
             </i>
         </div>
 
         <!-- Side bar contents-->
-        <div class="sidebar-content" id="help-div">
+        <div class='sidebar-content' id='help-div'>
             <h3>What is a Pomodoro Timer?</h3>
                 <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                     Work intervals are typically 25 minutes long with five minute breaks between each interval. 
@@ -100,7 +100,7 @@ beforeEach(() => {
                     <li>Keyboard control preferences can also be set in the settings. Simply press the spacebar while the clock is idle to start the timer. Pressing the space bar again will reset the current timer, but resetting is only allowed during a work session.</li>
                 </ol>
         </div>
-        <div class="sidebar-content" id="setting-div">
+        <div class='sidebar-content' id='setting-div'>
             <h2>Settings</h2>
                 <form id='time-limits'>
                     <h3>Time (minutes)</h3>
@@ -139,7 +139,7 @@ beforeEach(() => {
         
                     <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                     <h3 >Background Music</h3>
-                    <fieldset class='setting-flex-container' id="bg-music-container">
+                    <fieldset class='setting-flex-container' id='bg-music-container'>
                         <div class='setting-flex-item'>
                             <label for='bg-music'> Select </label>
                             <select name='bg-music' id='bg-music'>
@@ -157,7 +157,7 @@ beforeEach(() => {
                         <button type=button id='nxt-track-button'  style='position: relative;'>Next</button>
                     </div>
                     <h3>Shortcuts</h3>
-                    <fieldset class='setting-flex-container' id="shortcut-enabler">
+                    <fieldset class='setting-flex-container' id='shortcut-enabler'>
 
                         <div class='setting-flex-item'>
                             <label for='keyboard-toggle'>
@@ -172,7 +172,7 @@ beforeEach(() => {
                     </fieldset>
                             
                     <h3> Alarm</h3>
-                    <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
+                    <fieldset class='setting-flex-container alarm-settings' id='alarm-enabler'>
                         <div class='setting-flex-item'>
                             <label for='notif-toggle'>
                                 <span>Audio Alarm</span>
@@ -200,94 +200,94 @@ beforeEach(() => {
                     
                 </form> 
                 <div id='empty-box'></div>   
-                <div class="bottom">
-                    <i type="button" id="default-settings">Set to Default</i>
+                <div class='bottom'>
+                    <i type='button' id='default-settings'>Set to Default</i>
                 </div>
                 
         </div>
-        <div class="sidebar-content" id="tasks-div">
+        <div class='sidebar-content' id='tasks-div'>
             <h2>Tasks</h2>
-            <label for="taskName">New Task:</label>
+            <label for='taskName'>New Task:</label>
 
-            <div id="input-container">
-            <input type="text" id="task-name" name="taskName" placeholder="Type in what you are working on" autocomplete="off">
-            <button id="save-button">submit</button>
+            <div id='input-container'>
+            <input type='text' id='task-name' name='taskName' placeholder='Type in what you are working on' autocomplete='off'>
+            <button id='save-button'>submit</button>
             </div>
 
             <label>Current Tasks:</label>
-            <ul id="task-list"></ul>
-            <div class="bottom">
-            <i type="button" id="clear-completed-tasks-button">Clear Completed Tasks</i>
-            <i type="button" id="clear-tasks-button">Clear All</i>
+            <ul id='task-list'></ul>
+            <div class='bottom'>
+            <i type='button' id='clear-completed-tasks-button'>Clear Completed Tasks</i>
+            <i type='button' id='clear-tasks-button'>Clear All</i>
             </div>
         </div>
     `;
 });
 
-describe("Test onStart function", () => {
-  test("updates state to work state", () => {
+describe('Test onStart function', () => {
+  test('updates state to work state', () => {
     timer.counter.stateCtr = 0;
     onStart();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
+    let state = document.getElementById('state').innerText;
+    expect(state).toBe('Work State');
   }),
-    test("disables the start button", () => {
+    test('disables the start button', () => {
       onStart();
-      let disabled = document.getElementById("start-button").disabled;
+      let disabled = document.getElementById('start-button').disabled;
       expect(disabled).toBeTruthy();
     }),
-    test("enables the reset button", () => {
+    test('enables the reset button', () => {
       onStart();
-      let disabled = document.getElementById("reset-button").disabled;
+      let disabled = document.getElementById('reset-button').disabled;
       expect(disabled).toBeFalsy();
     });
 });
 
-describe("Test onReset function", () => {
-  test("resets correctly during work state", () => {
-    timer.currState = "Work State";
+describe('Test onReset function', () => {
+  test('resets correctly during work state', () => {
+    timer.currState = 'Work State';
     onReset();
-    let timerdisplay = document.getElementById("timer-display").innerText;
-    let state = document.getElementById("state").innerText;
-    expect(timerdisplay).toBe("25:00");
-    expect(state).toBe("Work State");
+    let timerdisplay = document.getElementById('timer-display').innerText;
+    let state = document.getElementById('state').innerText;
+    expect(timerdisplay).toBe('25:00');
+    expect(state).toBe('Work State');
   }),
-    test("enables the start button", () => {
+    test('enables the start button', () => {
       onReset();
-      let disabled = document.getElementById("start-button").disabled;
+      let disabled = document.getElementById('start-button').disabled;
       expect(disabled).toBeFalsy();
     }),
-    test("disables the reset button", () => {
+    test('disables the reset button', () => {
       onReset();
-      let disabled = document.getElementById("reset-button").disabled;
+      let disabled = document.getElementById('reset-button').disabled;
       expect(disabled).toBeTruthy();
     });
 });
 
-describe("Test checkState function", () => {
-  test("correctly updates to the work state", () => {
+describe('Test checkState function', () => {
+  test('correctly updates to the work state', () => {
     timer.counter.totalPomos = 0;
     timer.counter.stateCtr = 0;
     checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
+    let state = document.getElementById('state').innerText;
+    expect(state).toBe('Work State');
   }),
-    test("correctly updates to the short break state", () => {
+    test('correctly updates to the short break state', () => {
       timer.counter.totalPomos = 1;
       timer.counter.stateCtr = 1;
       checkState();
-      let state = document.getElementById("state").innerText;
-      expect(state).toBe("Short Break State");
-      let disabled = document.getElementById("reset-button").disabled;
+      let state = document.getElementById('state').innerText;
+      expect(state).toBe('Short Break State');
+      let disabled = document.getElementById('reset-button').disabled;
       expect(disabled).toBeTruthy();
     }),
-    test("correctly updates to the long break state", () => {
+    test('correctly updates to the long break state', () => {
       timer.counter.totalPomos = 4;
       timer.counter.stateCtr = 7;
       checkState();
-      let state = document.getElementById("state").innerText;
-      expect(state).toBe("Long Break State");
-      let disabled = document.getElementById("reset-button").disabled;
+      let state = document.getElementById('state').innerText;
+      expect(state).toBe('Long Break State');
+      let disabled = document.getElementById('reset-button').disabled;
       expect(disabled).toBeTruthy();
     });
 });
@@ -317,65 +317,65 @@ describe('Test reset button', () => {
     });
 });
 
-describe("Test updateState function", () => {
-  test("sets state to work state if current state is short break state", () => {
-    timer.currState = "Short Break State";
+describe('Test updateState function', () => {
+  test('sets state to work state if current state is short break state', () => {
+    timer.currState = 'Short Break State';
     updateState();
     let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
+    expect(state).toBe('Work State');
+    let htmlState = document.getElementById('state').innerText;
+    expect(htmlState).toBe('Work State');
+    let htmlTime = document.getElementById('timer-display').innerText;
+    expect(htmlTime).toBe('25:00');
+    let disabled = document.getElementById('reset-button').disabled;
     expect(disabled).toBeTruthy();
   }),
-    test("sets state to work state if current state is long break state", () => {
-      timer.currState = "Long Break State";
+    test('sets state to work state if current state is long break state', () => {
+      timer.currState = 'Long Break State';
       updateState();
       let state = timer.currState;
-      expect(state).toBe("Work State");
-      let htmlState = document.getElementById("state").innerText;
-      expect(htmlState).toBe("Work State");
-      let htmlTime = document.getElementById("timer-display").innerText;
-      expect(htmlTime).toBe("25:00");
-      let disabled = document.getElementById("reset-button").disabled;
+      expect(state).toBe('Work State');
+      let htmlState = document.getElementById('state').innerText;
+      expect(htmlState).toBe('Work State');
+      let htmlTime = document.getElementById('timer-display').innerText;
+      expect(htmlTime).toBe('25:00');
+      let disabled = document.getElementById('reset-button').disabled;
       expect(disabled).toBeTruthy();
     }),
-    test("sets state to short break state if current state is work state", () => {
+    test('sets state to short break state if current state is work state', () => {
       timer.counter.totalPomos = 2;
-      timer.currState = "Work State";
+      timer.currState = 'Work State';
       updateState();
       let state = timer.currState;
-      expect(state).toBe("Short Break State");
-      let htmlState = document.getElementById("state").innerText;
-      expect(htmlState).toBe("Short Break State");
-      let htmlTime = document.getElementById("timer-display").innerText;
-      expect(htmlTime).toBe("05:00");
+      expect(state).toBe('Short Break State');
+      let htmlState = document.getElementById('state').innerText;
+      expect(htmlState).toBe('Short Break State');
+      let htmlTime = document.getElementById('timer-display').innerText;
+      expect(htmlTime).toBe('05:00');
     }),
-    test("sets state to long break state if current state is work state", () => {
+    test('sets state to long break state if current state is work state', () => {
       timer.counter.totalPomos = 2;
-      timer.currState = "Work State";
+      timer.currState = 'Work State';
       updateState();
       let state = timer.currState;
-      expect(state).toBe("Short Break State");
-      let htmlState = document.getElementById("state").innerText;
-      expect(htmlState).toBe("Short Break State");
-      let htmlTime = document.getElementById("timer-display").innerText;
-      expect(htmlTime).toBe("05:00");
+      expect(state).toBe('Short Break State');
+      let htmlState = document.getElementById('state').innerText;
+      expect(htmlState).toBe('Short Break State');
+      let htmlTime = document.getElementById('timer-display').innerText;
+      expect(htmlTime).toBe('05:00');
     });
 });
 
-describe("Test settings modal", () => {
-  test("settings button is enabled when page loads", () => {
-    const settingsBtn = document.getElementById("settings-button");
+describe('Test settings modal', () => {
+  test('settings button is enabled when page loads', () => {
+    const settingsBtn = document.getElementById('settings-button');
     let settingsBtnDisabled = settingsBtn.disabled;
     expect(settingsBtnDisabled).toBeFalsy;
   });
-  // test("settings modal is hidden when page loads", () => {
-  //   let settingsmodal = document.getElementById("settings-modal");
+  // test('settings modal is hidden when page loads', () => {
+  //   let settingsmodal = document.getElementById('settings-modal');
   //   let display = settingsmodal.style.display;
-  //   expect(display).toBe("");
+  //   expect(display).toBe('');
   // })
   // Modal does not work in unit testing
 
@@ -448,13 +448,13 @@ describe("Test settings modal", () => {
 
   // TODO from Ethan - these 2 tests are now uneccessary since modals are no longer being used
   // keep for now in case we go back, but these can be removed eventually
-  //     test("calls revealSettings function when modal is opened", () => {
-  //       let settingsBtn = document.getElementById("settings-button");
+  //     test('calls revealSettings function when modal is opened', () => {
+  //       let settingsBtn = document.getElementById('settings-button');
   //       settingsBtn.click();
   //       expect(revealSettings).toBeCalled;
   //     }),
-  //     test("calls hideSettings function when modal is closed", () => {
-  //       let closesettingsBtn = document.getElementById("close-settings");
+  //     test('calls hideSettings function when modal is closed', () => {
+  //       let closesettingsBtn = document.getElementById('close-settings');
   //       closesettingsBtn.click();
   //       expect(hideSettings).toBeCalled;
   //     });

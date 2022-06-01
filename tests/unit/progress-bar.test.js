@@ -1,4 +1,5 @@
-import { timer, WORK_STATE } from "../../source/modules/timer.js";
+
+import { timer, WORK_STATE } from '../../source/modules/timer.js';
 
 let html = `<main>
 
@@ -59,12 +60,12 @@ let html = `<main>
 
 </main>`;
 
-describe("Test Progress bar", () => {
+describe('Test Progress bar', () => {
   document.body.innerHTML = html;
 
-  timer.currState = "Work State";
+  timer.currState = 'Work State';
 
-  test("beginning state", () => {
+  test('beginning state', () => {
     expect(timer.currState).toBe(WORK_STATE);
     // let pomo = document.getElementById("progress-pomo");
     // let short = document.getElementById("progress-break");
