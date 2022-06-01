@@ -157,7 +157,7 @@
 
 .bottom > i:hover {
   cursor: pointer;
-  box-shadow: 0 0px 10px var(--side-bar-bottom-hover-box-shadow);
+  box-shadow: 0 0 10px var(--side-bar-bottom-hover-box-shadow);
   color: var(--side-bar-bottom-hover-text);
 }
 

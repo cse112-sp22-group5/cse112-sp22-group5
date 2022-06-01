@@ -95,6 +95,7 @@ li {
 a {
   color: var(--pomo-red);
 }
+
 a:hover {
   color: var(--text-dark);
 }
@@ -102,7 +103,6 @@ a:hover {
 /* Interaction */
 button {
   background: var(--background-light);
-  /* border: 2px solid var(--border-dark); */
   border: none;
   outline: none;
   border-radius: 5px;
