@@ -1,5 +1,4 @@
 import {
-  setObj,
   storeToLocal,
   removeDataFromStorage,
   retrieveDataFromStorage,
@@ -7,7 +6,7 @@ import {
 } from "./localStorage.js";
 
 // Set Object name in localStorage
-setObj("taskList");
+const LOCAL_KEY = 'taskList';
 
 /**
  * @name saveTask
@@ -26,7 +25,7 @@ function saveTask() {
   }
   let newTask = createCustomTaskTag(taskNameInput.value);
   taskList.appendChild(newTask);
-  storeToLocal(taskNameInput.value, false);
+  storeToLocal(LOCAL_KEY ,taskNameInput.value, false);
   taskNameInput.value = "";
 }
 
@@ -91,11 +90,11 @@ function createCustomTaskTag(taskName, isDone = false) {
     if (taskContainer.getAttribute("done") != "true") {
       taskContainer.setAttribute("done", "true");
       circleIcon.src = "./img/icons/check-circle-icon-black.svg";
-      storeToLocal(taskLabel.value, true);
+      storeToLocal(LOCAL_KEY, taskLabel.value, true);
     } else {
       taskContainer.setAttribute("done", "false");
       circleIcon.src = "./img/icons/check-circle-icon-white.svg";
-      storeToLocal(taskLabel.value, false);
+      storeToLocal(LOCAL_KEY, taskLabel.value, false);
     }
   });
   // select current task
@@ -105,7 +104,7 @@ function createCustomTaskTag(taskName, isDone = false) {
   });
   // edit task label
   editButton.addEventListener("click", () => {
-    deleteFromLocal(taskLabel.value);
+    deleteFromLocal(LOCAL_KEY, taskLabel.value);
     taskLabel.removeAttribute("readonly");
     taskLabel.focus();
     taskLabel.select();
@@ -113,7 +112,7 @@ function createCustomTaskTag(taskName, isDone = false) {
       if (event.key == "Enter") {
         taskLabel.setAttribute("readonly", "");
         taskLabel.blur();
-        storeToLocal(
+        storeToLocal(LOCAL_KEY,
           taskLabel.value,
           taskContainer.getAttribute("done") == "true" ? true : false
         );
@@ -123,7 +122,7 @@ function createCustomTaskTag(taskName, isDone = false) {
   // remove task
   removeButton.addEventListener("click", () => {
     taskContainer.remove();
-    deleteFromLocal(taskLabel.value);
+    deleteFromLocal(LOCAL_KEY, taskLabel.value);
   });
   return taskContainer;
 }
@@ -136,7 +135,7 @@ function createCustomTaskTag(taskName, isDone = false) {
 function clearAllTasks() {
   let taskList = document.getElementById("task-list");
   taskList.innerHTML = "";
-  removeDataFromStorage();
+  removeDataFromStorage(LOCAL_KEY);
 }
 
 /**
@@ -149,7 +148,7 @@ function clearCompletedTasks() {
   let children = taskList.children;
   for (let i = 0; i < children.length; i++) {
     if (children[i].getAttribute("done") == "true") {
-      deleteFromLocal(children[i].children[1].value);
+      deleteFromLocal(LOCAL_KEY, children[i].children[1].value);
       taskList.removeChild(children[i]);
       i--;
     }
@@ -173,7 +172,7 @@ function inputSanitizer(input) {
  * @description load task list from local storage
  */
 function loadTaskListFromLocal() {
-  const taskListLocal = retrieveDataFromStorage();
+  const taskListLocal = retrieveDataFromStorage(LOCAL_KEY);
   const taskList = document.getElementById("task-list");
   for (const taskName in taskListLocal) {
     let newTask = createCustomTaskTag(taskName, taskListLocal[taskName]);
