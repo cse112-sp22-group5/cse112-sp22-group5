@@ -333,7 +333,6 @@ function hideSettings() {
  * @description Starts and resets timer when the space bar is clicked
  * @param {*} event The keyboard button that is clicked
  */
-
 function keyboardShortcut(event) {
   if (document.getElementById("keyboard-toggle").value == "on") {
     if (event.code === "Space") {
