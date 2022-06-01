@@ -1,9 +1,9 @@
 import { getAlarm } from '../../../source/modules/notifications';
 
 //Inital No Actvity Tests
-describe('Fresh Entry, No Activity Tests', () => {
+describe.only('Fresh Entry, No Activity Tests', () => {
   beforeEach(() => {
-    cy.visit('https://nidhigiridhar.github.io/cse110-w21-group35/source/productoro.html');
+    cy.visit('https://productoro-b340e.web.app/');
   });
 
   it('Timer Display at 25 minutes', () => {
@@ -31,21 +31,15 @@ describe('Fresh Entry, No Activity Tests', () => {
     cy.get('#total').should('have.text','0');
   });
 
-  it('Help Not displayed', () => {
-    cy.get('#help-modal').then(($el) => {
-      expect($el).to.be.hidden
-    });
-  });
-
-  it('Settings Not displayed', () => {
-    cy.get('#settings-modal').then(($el) => {
+  it('Sidebar hidden on start', () => {
+    cy.get('.sidebar-content').then(($el) => {
       expect($el).to.be.hidden
     });
   });
 
   it('Initial Background Color: Blue', () => {
     cy.get('body').then(($el) => {
-      expect($el).to.have.attr('state', 'pomo');
+      expect($el).to.have.attr('data-state', 'pomo');
     });
   });
 
@@ -56,23 +50,12 @@ describe('Fresh Entry, No Activity Tests', () => {
     });
   });
 
-  it('Progress Bar Fully Lit', () =>{
-    cy.get('.circle.pomo').should('have.length', 4);
-    cy.get('.circle.short').should('have.length', 3);
-    cy.get('.circle.long').should('have.length', 1);
-  });
-
-
   it('Audio Alarm: Initally On', () => {
-    cy.get('#notif-toggle').then(($el) => {
-      expect($el).to.have.prop('checked');
-    });
+    cy.get('#notif-toggle').should('have.value', 'on');
   });
 
   it('Keyboard Shortcuts: Initally On', () => {
-    cy.get('#keyboard-toggle').then(($el) => {
-      expect($el).to.have.prop('checked');
-    });
+    cy.get('#keyboard-toggle').should('have.value', 'on');
   });
 });
 
