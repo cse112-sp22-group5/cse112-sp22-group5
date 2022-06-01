@@ -3,7 +3,6 @@
 import { updateProgress } from "./progress-bar.js";
 
 const BackgroundImages = [
-  "img/icons/no-image-icon.svg",
   "https://wallpaperaccess.com/full/274198.jpg",
   "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   "https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -48,11 +47,34 @@ function setBGImage() {
   document.querySelectorAll("input[name='bgImg']").forEach((img) => {
     img.addEventListener("click", (event) => {
       const index = parseInt(event.target.value, 10);
-      if (index === 0) document.body.style.backgroundImage = "";
-      else
-        document.body.style.backgroundImage = `url('${BackgroundImages[index]}')`;
+      document.body.style.backgroundImage = `url('${BackgroundImages[index]}')`;
     });
   });
 }
 
-export { setTheme, loadThemeFromStorage, loadBackgroundImages, setBGImage };
+function setBGFromURL(url) {
+  document.body.style.backgroundImage = `url('${url}')`;
+}
+
+function setDefaultThemes() {
+  const body = document.documentElement;
+  const defaultTheme = {
+    theme: "1",
+    "color-blindness": "1",
+    "bg-url": "",
+  };
+  for (const key in defaultTheme) {
+    document.getElementById(key).value = defaultTheme[key];
+  }
+  document.body.style.backgroundImage = "";
+  setTheme(body, 1);
+}
+
+export {
+  setTheme,
+  loadThemeFromStorage,
+  loadBackgroundImages,
+  setBGImage,
+  setBGFromURL,
+  setDefaultThemes,
+};

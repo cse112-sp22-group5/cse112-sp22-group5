@@ -26,7 +26,10 @@ import {
   setTheme,
   loadBackgroundImages,
   setBGImage,
+  setBGFromURL,
+  setDefaultThemes,
 } from "./modules/skins-themes.js";
+
 // Timer
 document
   .getElementById("form-enabler")
@@ -64,6 +67,7 @@ document
   .getElementById("clear-completed-tasks-button")
   .addEventListener("click", clearCompletedTasks);
 
+// Themes
 document.getElementById("theme").addEventListener("change", () => {
   const htmlDoc = document.documentElement;
   const theme = document.getElementById("theme").value;
@@ -73,6 +77,15 @@ document.getElementById("color-blindness").addEventListener("change", () => {
   const htmlDoc = document.documentElement;
   const theme = document.getElementById("color-blindness").value;
   setTheme(htmlDoc, theme);
+});
+
+document.getElementById("bg-url-submit").addEventListener("click", () => {
+  const url = document.getElementById("bg-url").value;
+  setBGFromURL(url);
+});
+
+document.getElementById("theme-default").addEventListener("click", () => {
+  setDefaultThemes();
 });
 
 // load task list from local storage

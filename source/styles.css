@@ -40,6 +40,8 @@ body {
 body[data-state="pomo"] {
   background: var(--background-work);
   background-image: var(--background-img);
+  border: none;
+  width: 100%;
 }
 
 body[data-state="short"] {
@@ -99,7 +101,9 @@ a:hover {
 /* Interaction */
 button {
   background: var(--background-light);
-  border: 2px solid var(--border-dark);
+  /* border: 2px solid var(--border-dark); */
+  border: none;
+  outline: none;
   border-radius: 5px;
   transition: background 0.5s;
 }
@@ -145,9 +149,9 @@ button:active {
 .progress-bar div {
   width: 30%;
   height: 32px;
-  background: var(--background-light);
+  background-color: var(--background-light);
   border-radius: 5px;
-  border: 2px solid var(--border-dark);
+  /* border: 2px solid var(--border-dark); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,9 +182,11 @@ body[data-state="short"] #progress-break {
 }
 
 .timer {
-  background: var(--background-light);
+  background-color: var(--background-light);
   border-radius: 5px;
-  border: 2px solid var(--border-dark);
+
+  /* border: 2px solid var(--border-dark); */
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

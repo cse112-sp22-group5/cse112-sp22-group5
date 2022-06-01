@@ -116,20 +116,23 @@
   padding: 0;
 }
 
-#task-name {
+#task-name,
+#bg-url {
   width: 100%;
   border: none;
   padding: 10px;
 }
 
-#save-button {
+#save-button,
+#bg-url-submit {
   padding: 5px 10px 5px 10px;
   text-align: center;
   border: none;
   background: #efefef;
 }
 
-#save-button:hover {
+#save-button:hover,
+#bg-url-submit:hover {
   cursor: pointer;
   box-shadow: 0 0 5px rgb(125, 125, 125);
 }
@@ -254,7 +257,8 @@ h3 {
   border-bottom: 0.5px solid #bebebe;
 }
 
-.setting-flex-item > label {
+.setting-flex-item > label,
+#bg-url {
   width: 100%;
   padding: 10px 0 10px 10px;
   text-align: left;
@@ -264,7 +268,8 @@ h3 {
   background-color: #fff;
 }
 
-.setting-flex-item > select {
+.setting-flex-item > select,
+#bg-url-submit {
   border: 0;
   background-color: var(--select-input-background);
   width: 25%;
