@@ -5,7 +5,7 @@ import {
   playSound,
 } from "./notifications.js";
 import { breakReminders } from "./break-reminder.js";
-import { progressBar } from "./progress-bar.js";
+import { updateProgress } from "./progress-bar.js";
 
 let /** @type {number} **/
   POMO_MINS = 25,
@@ -147,7 +147,7 @@ function updateState() {
   }
   colorChange();
   breakReminders();
-  progressBar();
+  updateProgress();
 }
 
 /**
@@ -216,6 +216,11 @@ function updateTimer(duration) {
       // example 05:00 not 04:59
       start = Date.now() + 1000;
     }
+  }
+  if (diff <= 0) {
+    // add one second so that the countdown starts at the full duration
+    // example 05:00 not 04:59
+    start = Date.now() + 1000;
   }
 
   timerCountdown(); // don't wait a full second before the timer starts

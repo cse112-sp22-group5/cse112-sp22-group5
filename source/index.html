@@ -7,11 +7,15 @@
     <link rel='stylesheet' href='styles.css'>
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
     <script type="module" src="./main.js"></script>
+
     <title>Productoro</title>
 </head>
 <body data-state='pomo'>
+
+    <!-- IntroJs javascript -->
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
     <header> 
-        <h1>Productoro</h1>
+        <h1 id="title">Productoro</h1>
         <nav id="options-btn-container">
             <button type=button class='help-button' id='help-button' hidden>?</button>
             <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
@@ -28,16 +32,17 @@
         <h2 class='text-center' id='state' hidden>Work State</h2> 
 
         <!-- Progress Bar -->
-        <div class='progress-container' hidden>
-            <div class='circle pomo'></div>
-            <div class='circle short'></div>
-            <div class='circle pomo'></div>
-            <div class='circle short'></div>
-            <div class='circle pomo'></div>
-            <div class='circle short'></div>
-            <div class='circle pomo'></div>
-            <div class='circle long'></div>
-        </div>
+        <section class="progress-bar">
+            <div id="progress-pomo">
+                <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
+            </div>
+            <div id="progress-break">
+                <img src="./img/icons/progress-leaf.png" alt="short break time">
+            </div>
+            <div id="progress-long-break">
+                <img src="./img/icons/progress-coffee.png" alt="long break time">
+            </div>
+        </section>
 
         <!-- Timer -->
         <div class='timer'>
@@ -53,7 +58,7 @@
         </div>
 
         <!-- Current Task -->
-        <section class="current-task">
+        <section class="current-task" id="current-task-section">
             <h2>Current Task</h2>
             <p id="current-task"></p>
         </section>
@@ -71,7 +76,8 @@
 
     <!-- Side navigation bar -->
     <div class="side-nav-bar">
-        <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help">
+        <!-- <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help"> -->
+        <i id="help-icon" data-associated-div="help-div" title="help">
             <img class="icon" src="./img/icons/question-mark.svg" >
         </i>
         <i class="menu-icon" id="setting-icon" data-associated-div="setting-div" title="setting">
@@ -137,7 +143,7 @@
     
                 <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                 <h3 >Background Music</h3>
-                <fieldset class='setting-flex-container'>
+                <fieldset class='setting-flex-container' id="bg-music-container">
                     <div class='setting-flex-item'>
                         <label for='bg-music'> Select </label>
                         <select name='bg-music' id='bg-music'>
@@ -155,7 +161,7 @@
                     <button type=button id='nxt-track-button'  style='position: relative;'>Next</button>
                 </div>
                 <h3>Shortcuts</h3>
-                <fieldset class='setting-flex-container'>
+                <fieldset class='setting-flex-container' id="shortcut-enabler">
 
                     <div class='setting-flex-item'>
                         <label for='keyboard-toggle'>
@@ -170,7 +176,7 @@
                 </fieldset>
                         
                 <h3> Alarm</h3>
-                <fieldset class='setting-flex-container alarm-settings'>
+                <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
                     <div class='setting-flex-item'>
                         <label for='notif-toggle'>
                             <span>Audio Alarm</span>

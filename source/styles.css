@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 @import url("side-nav-bar.css");
-@import url("https://unpkg.com/intro.js/minified/introjs.min.css");
+@import url('https://unpkg.com/intro.js/minified/introjs.min.css');
 
 /******** Variables ********/
 :root {
