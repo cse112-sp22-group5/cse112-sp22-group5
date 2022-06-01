@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+@import url("side-nav-bar.css");
 
 /******** Variables ********/
 :root {
@@ -47,6 +48,13 @@
   --fw-bold: 700;
 
   --transition-time: 1s;
+
+  /* Side bar*/
+  --side-bar-width: 70px;
+  --side-bar-background: #1c2a47;
+  --side-bar-icon-hover-bg: #2471a6;
+  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --button-background: #f1f1f1;
 }
 
 /******** GLOBALS ********/
@@ -146,38 +154,36 @@ button:active {
 }
 
 /******** PROGRESS BAR ********/
-.circle {
-  background-color: var(--clr-light);
-  border-radius: 50%;
-  border: 3px solid;
-  height: 20px;
-  width: 20px;
-}
 
-.circle.pomo {
-  border-color: var(--clr-circle-pomo);
-}
-
-.circle.short {
-  border-color: var(--clr-circle-short);
-}
-
-.circle.long {
-  border-color: var(--clr-circle-long);
-}
-
-.circle.deactive {
-  border-color: var(--clr-gray);
-}
-
-.progress-container {
+.progress-bar {
   display: flex;
   justify-content: space-between;
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  width: 80%;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  width: 30%;
+  height: 32px;
+  background: #fff;
+  border-radius: 5px;
+  border: 2px solid #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar img {
+  height: 24px;
+  width: auto;
+}
+
+body[data-state="pomo"] #progress-pomo {
+  background: #ed6663;
+}
+
+body[data-state="short"] #progress-break {
+  background: #b8f1b0;
 }
 
 /******** TIMER ********/
@@ -249,34 +255,13 @@ button:active {
   font-size: 16px;
 }
 
-/* SETTINGS MODAL */
-fieldset {
-  border: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-fieldset label {
-  width: 80%;
-  margin: 5px 0;
-}
-
-fieldset select {
-  border: 0;
-  padding: 12px;
-  background: #efefef;
-}
-
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
 }
 
 /******** TASK LIST ********/
-.tasks {
+/* .tasks {
   width: 60%;
   height: 40vh;
   margin: 0 auto;
@@ -292,7 +277,8 @@ fieldset select {
 }
 
 .tasks[data-state="pomo"] {
-  /* background: #fff; */
+
+  /* background: #fff; 
   background: var(--primary-color);
 }
 
@@ -373,7 +359,7 @@ fieldset select {
   margin: 0 6px;
   padding: 6px 24px;
   font-size: 24px;
-}
+} */
 
 /********** MODALS *************/
 
@@ -403,7 +389,7 @@ fieldset select {
   cursor: pointer;
 }
 
-#form-enabler span {
+#time-customization span {
   padding-top: 15px;
 }
 
@@ -412,87 +398,6 @@ fieldset select {
   text-align: center;
 }
 
-/* #current-mix{
-  
-} */
-
-/******** Switches ********/
-[type="checkbox"] {
-  position: absolute;
-  left: -9999px;
-}
-
-.switches {
-  max-width: 500px;
-  width: 95%;
-  margin: 50px auto 0;
-  list-style: none;
-}
-
-.switches li::before {
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--pink);
-}
-
-.switches label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.switches span:last-child {
-  position: relative;
-  width: 60px;
-  height: 34px;
-  border-radius: 34px;
-  background: var(--gray);
-  transition: all 0.3s;
-}
-.switches span:last-child::before,
-.switches span:last-child::after {
-  content: "";
-  position: absolute;
-}
-.switches span:last-child::before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: black;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-.switches span:last-child::after {
-  top: 50%;
-  right: 8px;
-  width: 12px;
-  height: 12px;
-  transform: translateY(-50%);
-  /*background: url(uncheck-switcher.svg);*/
-  background-size: 12px 12px;
-}
-.switches [type="checkbox"]:checked + label span:last-child {
-  background-color: #2196f3;
-}
-.switches [type="checkbox"]:checked + label span:last-child::before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-.switches [type="checkbox"]:checked + label span:last-child::after {
-  width: 14px;
-  height: 14px;
-  left: 8px;
-  /*background-image: url(checkmark-switcher.svg);*/
-  background-size: 14px 14px;
-}
 li {
   margin: 5px;
 }

@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for timer.js</title>
+    <title>Code coverage report for source/modules/timer.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> timer.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">source/modules</a> timer.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -425,7 +425,11 @@
 <a name='L366'></a><a href='#L366'>366</a>
 <a name='L367'></a><a href='#L367'>367</a>
 <a name='L368'></a><a href='#L368'>368</a>
-<a name='L369'></a><a href='#L369'>369</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -508,11 +512,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -521,6 +527,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -750,6 +757,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -871,33 +879,36 @@ function checkState() {
   if (timer.counter.stateCtr % STATE_MOD === 0) {
     timer.currState = WORK_STATE;
     timer.currDuration = NUM_SEC * POMO_MINS;
-    document.getElementById("state").innerText = WORK_STATE;
-    document.getElementById("timer-display").innerText = `${POMO_MINS}:00`;
-    //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`;
-  } else {
+    document.getElementById('state').innerText = WORK_STATE;
+    document.getElementById('timer-display').innerText = `${POMO_MINS}:00`;
+    //document.getElementById('tasks').className = `${document.getElementById('tasks').className} counting`; 
+} 
+else {
     // long break state
     if (timer.counter.totalPomos % LONG_MOD === 0) {
-      timer.currState = LONG_STATE;
-      timer.currDuration = NUM_SEC * LONG_MINS;
-      document.getElementById("state").innerText = LONG_STATE;
-      document.getElementById("timer-display").innerText = `${LONG_MINS}:00`;
-      document.getElementById("reset-button").disabled = true; // disable reset button
-    }
+        timer.currState = LONG_STATE;
+        timer.currDuration = NUM_SEC * LONG_MINS;
+        document.getElementById('state').innerText = LONG_STATE;
+        document.getElementById('timer-display').innerText = 
+            `${LONG_MINS}:00`;
+        document.getElementById('reset-button').disabled = true; // disable reset button
+    } 
     // short break state
     else {
-      timer.currState = SHORT_STATE;
-      timer.currDuration = NUM_SEC * SHORT_MINS;
-      document.getElementById("state").innerText = SHORT_STATE;
-      document.getElementById("timer-display").innerText = `${SHORT_MINS}:00`;
-&nbsp;
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (SHORT_MINS &lt; 10) {
-        let time = document.getElementById("timer-display").innerText;
-        document.getElementById("timer-display").innerText = "0" + time;
-      }
-      document.getElementById("reset-button").disabled = true; // disable reset button
+        timer.currState = SHORT_STATE;
+        timer.currDuration = NUM_SEC * SHORT_MINS;
+        document.getElementById('state').innerText = SHORT_STATE;
+        document.getElementById('timer-display').innerText = 
+            `${SHORT_MINS}:00`;
+        
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(SHORT_MINS &lt; 10) {
+            let time = document.getElementById('timer-display').innerText; 
+            document.getElementById('timer-display').innerText = '0' + time;
+        } 
+        document.getElementById('reset-button').disabled = true; // disable reset button
     }
-  }
-  colorChange();
+}
+colorChange();         
 }
 &nbsp;
 /**
@@ -1126,6 +1137,7 @@ function <span class="fstat-no" title="function not covered" >hideSettings(</spa
  * @description Starts and resets timer when the space bar is clicked
  * @param {*} event The keyboard button that is clicked
  */
+&nbsp;
 function <span class="fstat-no" title="function not covered" >keyboardShortcut(</span>event) {
 <span class="cstat-no" title="statement not covered" >  if (document.getElementById("keyboard-toggle").value == "on") {</span>
 <span class="cstat-no" title="statement not covered" >    if (event.code === "Space") {</span>
@@ -1168,17 +1180,17 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue May 31 2022 22:59:09 GMT-0700 (Pacific Daylight Time)
+                at Sat May 28 2022 23:20:31 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
-        <script src="prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

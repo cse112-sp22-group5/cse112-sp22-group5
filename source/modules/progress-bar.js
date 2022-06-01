@@ -1,50 +1,22 @@
-const 
-    /** @constant @type {HTMLElement} **/ 
-    progress = document.getElementById('progress'),
-    /** @constant @type {HTMLElement} **/ 
-    circles = document.querySelectorAll('.circle');
-
-/** @type {number} **/ 
-let currentDeactive = 0;
+import { timer, WORK_STATE, SHORT_STATE, LONG_STATE } from "./timer.js";
 
 /**
- * @name progressBar
+ * @name updateProgress
  * @function
- * @description Updates the progress bar depending on the state that most recently finished
+ * @description update the progress bar based on current state and streak count
  */
-function progressBar() {
-  currentDeactive++;
-  update();
-  if(currentDeactive == circles.length) {
-    reset();
+function updateProgress() {
+  if (timer.currState == SHORT_STATE) {
+    let gradientstart = (timer.counter.streak % 4) * 25 - 10;
+    let gradientend = (timer.counter.streak % 4) * 25;
+    document.getElementById(
+      "progress-long-break"
+    ).style.background = `linear-gradient(to right, #FFD24C ${gradientstart}%, #fff ${gradientend}%)`;
+  } else if (timer.currState == LONG_STATE) {
+    document.getElementById("progress-long-break").style.background = `#FFD24C`;
+  } else if (timer.currState == WORK_STATE) {
+    document.getElementById("progress-long-break").style.background = `#fff`;
   }
 }
 
-/**
- * @name update
- * @function
- * @description Deactivates a circle when a state finishes
- */
-function update() {
-  circles.forEach((circle,idx) => {
-    if(idx < currentDeactive) {
-      circle.classList.add('deactive');
-    }
-  });
-}
-
-/**
- * @name reset
- * @function
- * @description Resets the progress bar and reactivates all circle when a long break finishes
- */
-function reset() {
-  circles.forEach((circle) => {
-    circle.classList.remove('deactive');
-  });
-  currentDeactive = 0;
-}
-
-// export functions and variables for testing
-export { progress, circles, currentDeactive, progressBar, update, reset };
-
+export { updateProgress };
