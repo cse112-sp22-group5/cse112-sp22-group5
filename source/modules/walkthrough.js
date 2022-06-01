@@ -145,8 +145,8 @@ function startWalkthrough() {
  * @returns true if user already visited, false otherwise
  */
 function isReturningUser() {
-  storage.setObj("returningUser");
-  const obj = storage.retrieveDataFromStorage();
+  const LOCAL_KEY = "returningUser";
+  const obj = storage.retrieveDataFromStorage(LOCAL_KEY);
   if (Object.prototype.hasOwnProperty.call(obj, "date") === true) {
     const currentDate = new Date().getTime();
     const initialDate = obj["date"];
@@ -155,7 +155,7 @@ function isReturningUser() {
     if (is30 <= 30) return true;
   }
 
-  storage.storeToLocal("date", new Date().getTime());
+  storage.storeToLocal(LOCAL_KEY, "date", new Date().getTime());
   return false;
 }
 

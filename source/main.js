@@ -14,7 +14,6 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
 import {
@@ -95,6 +94,7 @@ window.addEventListener("load", () => {
   loadBackgroundImages();
   setBGImage();
 });
+
 // Walkthrough
 window.addEventListener("load", () => {
   if (!isReturningUser()) startWalkthrough();
@@ -102,3 +102,5 @@ window.addEventListener("load", () => {
 document
   .getElementById("help-icon")
   .addEventListener("click", startWalkthrough);
+// load task list from localStorage if exists
+window.addEventListener("load", loadTaskListFromLocal);
