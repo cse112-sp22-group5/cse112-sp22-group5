@@ -69,6 +69,7 @@ main {
 footer {
   font-size: var(--fs-footer);
   text-align: center;
+  color: var(--text-dark);
 }
 
 /* Typography */
@@ -232,10 +233,6 @@ body[data-state="short"] #progress-break {
 /******** CURRENT TASK ********/
 .current-task * {
   text-align: center;
-  color: var(--text-dark);
-}
-
-footer {
   color: var(--text-dark);
 }
 
