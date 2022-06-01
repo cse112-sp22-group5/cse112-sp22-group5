@@ -95,7 +95,7 @@
 }
 
 #tasks-div > label {
-  background-color: rgb(220, 220, 220);
+  background-color: var(--sidebar-h3-bg-color);
   border-radius: 5px 5px 0 0;
   padding-left: 10px;
   text-align: left;
@@ -123,6 +123,8 @@
   width: 100%;
   border: none;
   padding: 10px;
+  background-color: var(--sidebar-label-bg-color);
+  color: var(--select-input-background);
 }
 
 #save-button,
@@ -130,7 +132,8 @@
   padding: 5px 10px 5px 10px;
   text-align: center;
   border: none;
-  background: #efefef;
+  background: var(--select-input-background);
+  color: var(--side-bar-content-text);
 }
 
 #save-button:hover,
@@ -226,7 +229,7 @@
 }
 
 h3 {
-  background-color: rgb(220, 220, 220); /* var(--h3-bg-color) */
+  background-color: var(--sidebar-h3-bg-color);
   border-radius: 5px 5px 0 0;
   padding: 10px 0 10px 10px;
   text-align: left;
@@ -261,7 +264,7 @@ h3 {
   font-size: 12px;
   font-family: var(--side-bar-font-family);
   margin: 0;
-  background-color: #fff;
+  background-color: var(--sidebar-label-bg-color);
 }
 
 .setting-flex-item > select,
@@ -308,4 +311,9 @@ h3 {
   flex-direction: column;
   align-items: center;
   padding: 10px;
+}
+
+input,
+select {
+  color: var(--side-bar-content-text);
 }
