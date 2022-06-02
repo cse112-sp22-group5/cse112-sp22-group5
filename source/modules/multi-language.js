@@ -1,3 +1,4 @@
+/* eslint no-undef: "off" */
 /**
  * @name googleTranslateElementInit
  * @function

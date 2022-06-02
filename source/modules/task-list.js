@@ -161,9 +161,9 @@ function clearCompletedTasks() {
  * @description helper function - set SAVE_FLAG for saving new task or editing task
  * @param value SAVE_ON or EDIT_ON
  */
-function setSaveFlag(value) {
-    SAVE_FLAG = value;
-}
+// function setSaveFlag(value) {
+//     SAVE_FLAG = value;
+// }
 
 /**
  * @name setTaskContent
@@ -171,9 +171,9 @@ function setSaveFlag(value) {
  * @description helper function - set TASK_CONTENT for editing task
  * @param content is the task container
  */
-function setTaskContent(content) {
-    TASK_CONTENT = content;
-}
+// function setTaskContent(content) {
+//     TASK_CONTENT = content;
+// }
 
 /**
  * @name inputSanitizer

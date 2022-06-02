@@ -489,13 +489,13 @@ li {
 /******** MEDIA QUERIES REFACTORED ********/
 
 /* Mobile: Portrait and Landscape */
-@media only screen and (min-width: 320px) and (max-width: 767px){
+/* @media only screen and (min-width: 320px) and (max-width: 767px){
 
-}
+} */
 /* Tablet */
-@media only screen and (min-width: 768px) and (max-width: 979px){
+/* @media only screen and (min-width: 768px) and (max-width: 979px){
 
-}
+} */
 footer > img {
   width: 50px;
   float: right;
