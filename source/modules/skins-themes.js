@@ -3,9 +3,9 @@ import { updateProgress } from "./progress-bar.js";
 
 const BackgroundImages = [
   "https://wallpaperaccess.com/full/274198.jpg",
-  "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  "https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg",
+  "https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg",
+  "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg",
 ];
 
 const Themes = {
@@ -94,7 +94,7 @@ function loadBackgroundImages() {
   for (let i = 0; i < BackgroundImages.length; i++) {
     let gridItem = `
         <div class='grid-item'>
-            <img src='${BackgroundImages[i]}'>
+            <img src='./img/background/bg-${i}.jpg'>
             <input type='radio' value='${i}' name='bgImg'>
         </div>
         `;
