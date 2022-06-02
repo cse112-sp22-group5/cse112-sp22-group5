@@ -4,7 +4,7 @@ import {
   onStart,
   onReset,
   setCustomTime,
-  keyboardShortcut
+  keyboardShortcut,
 } from "./modules/timer.js";
 import { setBackgroundMusic } from "./modules/background-music.js";
 import {
@@ -16,7 +16,11 @@ import {
 import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
-import { startWalkthrough, isReturningUser } from './modules/walkthrough.js';
+import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
+
+import { googleTranslateElementInit } from "./modules/multi-language.js";
+
+googleTranslateElementInit();
 
 // Timer
 document
@@ -60,8 +64,9 @@ document
   .addEventListener("click", clearCompletedTasks);
 
 // Walkthrough
-window.addEventListener('load', () => {
-  if (!isReturningUser())
-    startWalkthrough();
+window.addEventListener("load", () => {
+  if (!isReturningUser()) startWalkthrough();
 });
-document.getElementById('help-icon').addEventListener('click', startWalkthrough);
+document
+  .getElementById("help-icon")
+  .addEventListener("click", startWalkthrough);
