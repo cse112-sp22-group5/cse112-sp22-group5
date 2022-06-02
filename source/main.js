@@ -19,6 +19,7 @@ import { setDefaultSettings } from "./modules/side-nav-bar.js";
 import {
   setTheme,
   loadBackgroundImages,
+  loadThemeFromStorage,
   setBGImage,
   setBGFromURL,
   setDefaultThemes,
@@ -90,7 +91,8 @@ document.getElementById("theme-default").addEventListener("click", () => {
 // load task list from local storage
 window.addEventListener("load", () => {
   loadTaskListFromLocal();
-  document.documentElement.className = "default-theme";
+  loadThemeFromStorage();
+  //document.documentElement.className = "default-theme";
   loadBackgroundImages();
   setBGImage();
 });
