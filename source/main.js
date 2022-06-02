@@ -26,6 +26,10 @@ import {
 } from "./modules/skins-themes.js";
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
+import { googleTranslateElementInit } from "./modules/multi-language.js";
+
+googleTranslateElementInit();
+
 // Timer
 document
   .getElementById("form-enabler")
@@ -104,5 +108,3 @@ window.addEventListener("load", () => {
 document
   .getElementById("help-icon")
   .addEventListener("click", startWalkthrough);
-// load task list from localStorage if exists
-window.addEventListener("load", loadTaskListFromLocal);
