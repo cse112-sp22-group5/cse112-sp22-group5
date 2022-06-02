@@ -270,7 +270,7 @@ function setCustomTime() {
 function onStart() {
   getNotificationStatus();
   document.querySelector("#form-enabler").disabled = "disabled";
-
+  document.querySelector("#default-settings").disabled = "disabled";
   // enable a warning if the user tries changing the time limits during a pomo
   document.getElementById("warning").innerText =
     "Wait until the end of your next break to change the times!";
@@ -293,6 +293,7 @@ function onReset() {
   document.getElementById("start-button").disabled = false;
   document.getElementById("warning").style.display = "none";
   document.getElementById("form-enabler").removeAttribute("disabled");
+  document.querySelector("#default-settings").removeAttribute("disabled");
   timer.counter.streak = 0;
   document.getElementById("streak").innerText = timer.counter.streak;
   clearInterval(timerId);
