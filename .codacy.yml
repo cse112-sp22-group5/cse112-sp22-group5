@@ -7,3 +7,4 @@ exclude_paths:
   - "node_modules/**"
   - "specs/**"
   - package-lock.json
+  - "source/third_party/**"

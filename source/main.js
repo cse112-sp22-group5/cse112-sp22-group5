@@ -11,6 +11,7 @@ import {
   saveTask,
   clearAllTasks,
   clearCompletedTasks,
+  loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
 import "./modules/side-nav-bar.js";
@@ -63,6 +64,8 @@ document
   .getElementById("clear-completed-tasks-button")
   .addEventListener("click", clearCompletedTasks);
 
+// load task list from localStorage if exists
+window.addEventListener("load", loadTaskListFromLocal);
 // Walkthrough
 window.addEventListener("load", () => {
   if (!isReturningUser()) startWalkthrough();
