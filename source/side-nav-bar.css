@@ -142,7 +142,7 @@
   box-shadow: 0 0 5px rgb(125, 125, 125);
 }
 
-.bottom > i {
+.bottom > input {
   font-size: 15px;
   font-style: normal;
   font-weight: bold;
@@ -153,9 +153,10 @@
   box-shadow: 0 -5px 5px var(--side-bar-bottom-box-shadow);
   transition: 0.5s;
   text-align: center;
+  background-color: var(--button-background);
 }
 
-.bottom > i:hover {
+.bottom > input:hover {
   cursor: pointer;
   box-shadow: 0 0 10px var(--side-bar-bottom-hover-box-shadow);
   color: var(--side-bar-bottom-hover-text);
