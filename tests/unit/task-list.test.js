@@ -1,3 +1,12 @@
+// import {
+//   saveTask,
+//   createCustomTaskTag,
+//   clearAllTasks,
+//   selectTask,
+//   clearCompletedTasks,
+//   loadTaskListFromLocal
+// } from '../modules/color-change.js';
+
 /**
 * Test name:  Save task button
 * What scenario is being tested?: save new task

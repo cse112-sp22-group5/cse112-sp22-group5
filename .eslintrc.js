@@ -4,7 +4,8 @@ module.exports = {
         'browser': true,
         'es2021': true,
         'jasmine': true,
-        'jest': true
+        'jest': true,
+        'node': true,
     },
     'globals': {
         'global': 'writable'
@@ -15,8 +16,6 @@ module.exports = {
         'sourceType': 'module'
     },
     'rules': {
-        'semi': ['error', 'always'],
-        'quotes': ['error', 'single'],
         'no-unused-vars': 'error'
     }
 };

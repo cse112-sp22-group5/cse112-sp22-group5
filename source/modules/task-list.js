@@ -207,5 +207,5 @@ export {
   clearAllTasks,
   selectTask,
   clearCompletedTasks,
-  loadTaskListFromLocal,
+  loadTaskListFromLocal
 };
