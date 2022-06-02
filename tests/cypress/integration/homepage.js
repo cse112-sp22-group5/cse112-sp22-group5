@@ -1,5 +1,5 @@
 // Inital No Actvity Tests
-describe("Fresh Entry, No Activity Tests", () => {
+describe.only("Fresh Entry, No Activity Tests", () => {
   beforeEach(() => {
     cy.visit("https://productoro-b340e.web.app/");
   });
@@ -30,6 +30,12 @@ describe("Fresh Entry, No Activity Tests", () => {
 
   it("Initial State Label", () => {
     cy.get("#state").should("have.text", "Work State");
+  });
+
+  it("Initial Work State Color", () => {
+    cy.get("#progress-pomo")
+      .should("have.css", "background-color")
+      .and("eq", "rgb(237, 102, 99)");
   });
 
   it("Initial Pomo Counters", () => {
@@ -89,7 +95,7 @@ describe.only("Start Button Tests", () => {
   it("Start Button Clicked: Check Reset Button Gets Enabled", () => {
     cy.get("#start-button").click();
     cy.get("#reset-button").then(($el) => {
-      expect($el).to.have.attr("not.be.disabled");
+      expect($el).to.not.have.attr("disabled");
     });
   });
 
@@ -280,62 +286,9 @@ describe.only("Start Button Tests", () => {
 
   it("Start Button Clicked: Check Counters Not Updated", () => {
     cy.get("#start-button").click();
-    //Cypress will wait 5 seconds after the click
-    cy.wait(5000);
+    cy.wait(1000); // Wait 1 second
     cy.get("#streak").should("have.text", "0");
     cy.get("#total").should("have.text", "0");
-  });
-
-  it("Start Button Clicked: Check State is Work State", () => {
-    cy.get("#start-button").click();
-    cy.get("#state").should("have.text", "Work State");
-  });
-
-  it("Start Button Clicked: Check Background Color Unaffected", () => {
-    cy.get("#start-button").click();
-    cy.get("body").then(($el) => {
-      expect($el).to.have.attr("state", "pomo");
-    });
-  });
-
-  it("Start Button Clicked: Check Break Reminders Still Disabled", () => {
-    cy.get("#start-button").click();
-    cy.get("#break-reminder").should("have.text", "");
-    cy.get("#reminder").then(($el) => {
-      expect($el).to.be.hidden;
-    });
-  });
-
-  it("Start Button Clicked: Progress Bar Still Fully Lit", () => {
-    cy.get("#start-button").click();
-    cy.get(".circle.pomo").should("have.length", 4);
-    cy.get(".circle.short").should("have.length", 3);
-    cy.get(".circle.long").should("have.length", 1);
-
-    cy.get("#progress-pomo")
-      .should("have.css", "background-color")
-      .and("eq", "rgb(242, 228, 125)");
-  });
-
-  it("Start Button Clicked: Settings Not displayed", () => {
-    cy.get("#start-button").click();
-    cy.get("#settings-modal").then(($el) => {
-      expect($el).to.be.hidden;
-    });
-  });
-
-  it("Start Button Clicked: Audio Alarm Still On", () => {
-    cy.get("#start-button").click();
-    cy.get("#notif-toggle").then(($el) => {
-      expect($el).to.have.prop("checked");
-    });
-  });
-
-  it("Start Button Clicked: Keyboard Shortcuts Still On", () => {
-    cy.get("#start-button").click();
-    cy.get("#keyboard-toggle").then(($el) => {
-      expect($el).to.have.prop("checked");
-    });
   });
 });
 
