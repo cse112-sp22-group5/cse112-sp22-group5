@@ -6,7 +6,7 @@ import {
 } from "./localStorage.js";
 
 // Set Object name in localStorage
-const LOCAL_KEY = 'taskList';
+const LOCAL_KEY = "taskList";
 
 /**
  * @name saveTask
@@ -25,7 +25,7 @@ function saveTask() {
   }
   let newTask = createCustomTaskTag(taskNameInput.value);
   taskList.appendChild(newTask);
-  storeToLocal(LOCAL_KEY ,taskNameInput.value, false);
+  storeToLocal(LOCAL_KEY, taskNameInput.value, false);
   taskNameInput.value = "";
 }
 
@@ -112,7 +112,8 @@ function createCustomTaskTag(taskName, isDone = false) {
       if (event.key == "Enter") {
         taskLabel.setAttribute("readonly", "");
         taskLabel.blur();
-        storeToLocal(LOCAL_KEY,
+        storeToLocal(
+          LOCAL_KEY,
           taskLabel.value,
           taskContainer.getAttribute("done") == "true" ? true : false
         );
