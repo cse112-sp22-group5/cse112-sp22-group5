@@ -233,8 +233,11 @@ body[data-state="short"] #progress-break {
   margin: 24px 12px;
   padding: 6px 24px;
   font-size: 16px;
-  color: var(--text-dark);
 }
+
+/* button {
+  color: var(--text-dark);
+} */
 
 /******** CURRENT TASK ********/
 .current-task * {

@@ -124,7 +124,7 @@
   border: none;
   padding: 10px;
   background-color: var(--sidebar-label-bg-color);
-  color: var(--select-input-background);
+  color: var(--side-bar-content-text);
 }
 
 #save-button,
@@ -317,4 +317,9 @@ h3 {
 input,
 select {
   color: var(--side-bar-content-text);
+}
+
+/* google translate */
+.goog-te-combo > * {
+  color: black;
 }
