@@ -62,10 +62,12 @@ function createCustomTaskTag(taskName, isDone = false) {
   let circleIcon = document.createElement("img");
 
   taskContainer.setAttribute("class", "task");
+  taskContainer.setAttribute("done", "false");
 
   taskLabel.setAttribute("class", "task-label");
   taskLabel.setAttribute("for", taskName);
   taskLabel.setAttribute("readonly", "");
+  taskLabel.setAttribute("isCurrentTask", "false");
   taskLabel.value = taskName;
 
   editButton.innerHTML =
@@ -87,20 +89,27 @@ function createCustomTaskTag(taskName, isDone = false) {
   taskContainer.appendChild(threeDots);
   // Check off task when complete
   circleIcon.addEventListener("click", () => {
-    if (taskContainer.getAttribute("done") != "true") {
+    if (taskContainer.getAttribute("done") == "false") {
       taskContainer.setAttribute("done", "true");
       circleIcon.src = "./img/icons/check-circle-icon-black.svg";
-      storeToLocal(LOCAL_KEY, taskLabel.value, true);
+      storeToLocal(LOCAL_KEY, taskLabel.value, "true");
     } else {
       taskContainer.setAttribute("done", "false");
       circleIcon.src = "./img/icons/check-circle-icon-white.svg";
-      storeToLocal(LOCAL_KEY, taskLabel.value, false);
+      storeToLocal(LOCAL_KEY, taskLabel.value, "false");
     }
   });
   // select current task
   taskLabel.addEventListener("click", () => {
     let currentTask = document.getElementById("current-task");
     currentTask.innerText = taskLabel.value;
+
+    let taskList = document.getElementById("task-list");
+    let children = taskList.children;
+    for (let i = 0; i < children.length; i++) {
+        if(children[i].getElementsByClassName("task-label")[0].getAttribute("isCurrentTask") == "true") children[i].getElementsByClassName("task-label")[0].setAttribute("isCurrentTask", "false");        
+    }
+    taskLabel.setAttribute("isCurrentTask", "true");
   });
   // edit task label
   editButton.addEventListener("click", () => {
@@ -139,10 +148,13 @@ function createCustomTaskTag(taskName, isDone = false) {
       );
     });
   });
+
   // remove task
   removeButton.addEventListener("click", () => {
     taskContainer.remove();
     deleteFromLocal(LOCAL_KEY, taskLabel.value);
+    let currentTask = document.getElementById("current-task");
+    currentTask.innerText = "";
   });
   return taskContainer;
 }
@@ -168,6 +180,8 @@ function clearCompletedTasks() {
   let children = taskList.children;
   for (let i = 0; i < children.length; i++) {
     if (children[i].getAttribute("done") == "true") {
+      let currentTask = document.getElementById("current-task");
+      if(children[i].getElementsByClassName("task-label")[0].getAttribute("isCurrentTask") == "true") {currentTask.innerText = "";}
       deleteFromLocal(LOCAL_KEY, children[i].children[1].value);
       taskList.removeChild(children[i]);
       i--;
