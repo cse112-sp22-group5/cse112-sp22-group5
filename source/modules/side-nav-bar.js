@@ -8,6 +8,7 @@
  *  - <div class='sidebar-content' id='<new-content-gohere-div'>
  * Update global variables accordingly
  ******************************************************************************/
+import { setCustomTime } from "./timer.js";
 
 const CONTENT_DIV = {
   "help-div": false,
@@ -83,7 +84,7 @@ function toggleMenu(divID) {
 function setIconBackGround(btnID) {
   let content_icons = JSON.parse(JSON.stringify(CONTENT_ICONS));
   if (Object.prototype.hasOwnProperty.call(content_icons, btnID))
-    content_icons[btnID] = true;  
+    content_icons[btnID] = true;
   for (const key in content_icons) {
     if (content_icons[key])
       document.getElementById(key).classList.add("button-clicked");
@@ -144,6 +145,7 @@ function setDefaultSettings() {
   for (const key in defaultSetting) {
     document.getElementById(key).value = defaultSetting[key];
   }
+  setCustomTime();
 }
 
 // Expands sidebar based on window width
@@ -221,4 +223,4 @@ window.addEventListener("touchstart", (event) => {
   }
 });
 
- export { setDefaultSettings, toggleMenu, setIconBackGround };
+export { setDefaultSettings, toggleMenu, setIconBackGround };
