@@ -98,26 +98,45 @@ function createCustomTaskTag(taskName, isDone = false) {
     }
   });
   // select current task
-  taskContainer.addEventListener("click", () => {
+  taskLabel.addEventListener("click", () => {
     let currentTask = document.getElementById("current-task");
     currentTask.innerText = taskLabel.value;
   });
   // edit task label
   editButton.addEventListener("click", () => {
+    let isCurrentTaskEdited = false;
+    let currentTask = document.getElementById("current-task");
+    if (currentTask.innerText == taskLabel.value) isCurrentTaskEdited = true;
+
     deleteFromLocal(LOCAL_KEY, taskLabel.value);
     taskLabel.removeAttribute("readonly");
     taskLabel.focus();
     taskLabel.select();
+
+    // user hits enter
     taskLabel.addEventListener("keypress", (event) => {
       if (event.key == "Enter") {
         taskLabel.setAttribute("readonly", "");
         taskLabel.blur();
+        if (isCurrentTaskEdited) currentTask.innerText = taskLabel.value;
         storeToLocal(
           LOCAL_KEY,
           taskLabel.value,
           taskContainer.getAttribute("done") == "true" ? true : false
         );
       }
+    });
+
+    // user clicks outside the taskLabel
+    taskLabel.addEventListener("focusout", () => {
+      taskLabel.setAttribute("readonly", "");
+      taskLabel.blur();
+      if (isCurrentTaskEdited) currentTask.innerText = taskLabel.value;
+      storeToLocal(
+        LOCAL_KEY,
+        taskLabel.value,
+        taskContainer.getAttribute("done") == "true" ? true : false
+      );
     });
   });
   // remove task
