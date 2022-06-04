@@ -343,3 +343,9 @@ describe(".setDefaultThemes()", () => {
     expect(document.documentElement.className).toBe("default-theme");
   });
 });
+
+// loadThemeFromStorage()
+
+// setBGImage
+
+// tests for setting both background and theme and other cases
