@@ -92,10 +92,12 @@ function createCustomTaskTag(taskName, isDone = false) {
     if (taskContainer.getAttribute("done") == "false") {
       taskContainer.setAttribute("done", "true");
       circleIcon.src = "./img/icons/check-circle-icon-black.svg";
+      taskLabel.style.textDecoration = "line-through";
       storeToLocal(LOCAL_KEY, taskLabel.value, "true");
     } else {
       taskContainer.setAttribute("done", "false");
       circleIcon.src = "./img/icons/check-circle-icon-white.svg";
+      taskLabel.style.textDecoration = "";
       storeToLocal(LOCAL_KEY, taskLabel.value, "false");
     }
   });
@@ -107,7 +109,14 @@ function createCustomTaskTag(taskName, isDone = false) {
     let taskList = document.getElementById("task-list");
     let children = taskList.children;
     for (let i = 0; i < children.length; i++) {
-        if(children[i].getElementsByClassName("task-label")[0].getAttribute("isCurrentTask") == "true") children[i].getElementsByClassName("task-label")[0].setAttribute("isCurrentTask", "false");        
+      if (
+        children[i]
+          .getElementsByClassName("task-label")[0]
+          .getAttribute("isCurrentTask") == "true"
+      )
+        children[i]
+          .getElementsByClassName("task-label")[0]
+          .setAttribute("isCurrentTask", "false");
     }
     taskLabel.setAttribute("isCurrentTask", "true");
   });
@@ -166,7 +175,9 @@ function createCustomTaskTag(taskName, isDone = false) {
  */
 function clearAllTasks() {
   let taskList = document.getElementById("task-list");
+  document.getElementById("current-task").innerText = "";
   taskList.innerHTML = "";
+
   removeDataFromStorage(LOCAL_KEY);
 }
 
@@ -181,7 +192,13 @@ function clearCompletedTasks() {
   for (let i = 0; i < children.length; i++) {
     if (children[i].getAttribute("done") == "true") {
       let currentTask = document.getElementById("current-task");
-      if(children[i].getElementsByClassName("task-label")[0].getAttribute("isCurrentTask") == "true") {currentTask.innerText = "";}
+      if (
+        children[i]
+          .getElementsByClassName("task-label")[0]
+          .getAttribute("isCurrentTask") == "true"
+      ) {
+        currentTask.innerText = "";
+      }
       deleteFromLocal(LOCAL_KEY, children[i].children[1].value);
       taskList.removeChild(children[i]);
       i--;
