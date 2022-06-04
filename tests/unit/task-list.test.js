@@ -332,10 +332,27 @@ describe(".clearCompletedTasks()", () => {
   });
 });
 
-// Edit task
+describe("local storage", () => {
+  test("1 tasks saved locally", () => {
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    window.location.reload();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(1);
+  });
+  test("5 tasks saved locally", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+    }
+    window.location.reload();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(5);
+  });
+});
+
+// Edit tasks
 
 // Delete specific task
-
-// Local storage tests
 
 // Other test scenarios
