@@ -3,7 +3,6 @@ import {
   // selectTask,
   clearAllTasks,
   clearCompletedTasks,
-  // clearCompletedTasks,
 } from "../../source/modules/task-list.js";
 
 // import { saveTask } from "../../source/modules/task-list.js";

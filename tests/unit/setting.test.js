@@ -239,3 +239,11 @@ beforeEach(() => {
     </body>
     </html>`;
 });
+
+describe("Time(minutes)", () => {});
+
+describe("Background Music", () => {});
+
+describe("Keyboard Shortcuts", () => {});
+
+describe("Multi Language", () => {});
