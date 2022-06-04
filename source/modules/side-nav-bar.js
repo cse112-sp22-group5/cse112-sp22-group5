@@ -39,7 +39,7 @@ function setdivWidth(windowWidth) {
 
 // Let the sidebar panel stop toggling between switching panels
 // potential overlay sidebar if PANEL_Z_INDEX >= 99
-let PANEL_Z_INDEX = 0;
+let PANEL_Z_INDEX = 1;
 /**
  * @name toggleMenu
  * @function
@@ -48,8 +48,11 @@ let PANEL_Z_INDEX = 0;
  */
 function toggleMenu(divID) {
   let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
-  if (divID == null) PANEL_Z_INDEX = 0; // reset when all panels collapse
-
+  let blurBackground = document.querySelector("#blur-background");
+  if (divID == null) {
+    PANEL_Z_INDEX = 1; // reset when all panels collapse
+    blurBackground.classList.remove("blur-background");
+  }
   if (divID != null) {
     let sideContent = document.getElementById(divID);
     const sideBarWidth = 70; // px
@@ -58,8 +61,9 @@ function toggleMenu(divID) {
     let sideBarWidthPercentage = Math.round((sideBarWidth / windowWidth) * 100);
     divWidth = setdivWidth(windowWidth);
 
+    blurBackground.classList.add("blur-background");
     // Only the first panel has transition
-    if (PANEL_Z_INDEX >= 1) sideContent.style.transition = "0s";
+    if (PANEL_Z_INDEX >= 2) sideContent.style.transition = "0s";
     sideContent.style.visibility = "visible";
     sideContent.style.zIndex = PANEL_Z_INDEX; // the choosen panel always appear on top
     sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
@@ -196,7 +200,7 @@ window.addEventListener("click", (event) => {
   }
 
   // the click coordinate must greater than sidebar width and no panels are open
-  if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 0) {
+  if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 1) {
     setSideBar();
   }
 });
@@ -217,7 +221,7 @@ window.addEventListener("touchstart", (event) => {
   // the click coordinate must greater than sidebar width and no panels are open
   if (
     event.touches[0].clientX >= parseInt(menuWidth, 10) &&
-    PANEL_Z_INDEX === 0
+    PANEL_Z_INDEX === 1
   ) {
     setSideBar();
   }
