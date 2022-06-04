@@ -242,7 +242,7 @@ beforeEach(() => {
   </html>`;
 });
 
-describe("Test notification body is correct", () => {
+describe(".showNotfif()", () => {
   test("when a long break begins", () => {
     let body = showNotif("Long Break State");
     expect(body).toBe(

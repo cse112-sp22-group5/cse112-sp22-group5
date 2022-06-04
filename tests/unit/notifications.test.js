@@ -3,11 +3,11 @@ import {
   getAlarm,
 } from "../../source/modules/notifications.js";
 
-describe("Alarm Tests", () => {
-  test("Check alarm exists", () => {
+describe(".getAlarm()", () => {
+  test("alarm exists", () => {
     expect(getAlarm()).not.toBeNull();
   });
-  test("Check alarm has a valid url", () => {
+  test("alarm with valid url", () => {
     expect(getAlarm().src).not.toBeNull();
   });
 });
@@ -20,17 +20,17 @@ global.Notification = {
   permission: "granted",
 };
 
-describe("Test that notification permissions", () => {
-  test("are granted", () => {
+describe(".getNotificationStatus()", () => {
+  test("permissions granted", () => {
     let permiss = getNotificationStatus();
     expect(permiss).toBe(true);
   });
-  test("are denied", () => {
+  test("permissions denied", () => {
     Notification.permission = "denied";
     let permiss = getNotificationStatus();
     expect(permiss).toBe(false);
   });
-  test("permissions are received", () => {
+  test("permissions received", () => {
     Notification.permission = "default";
     let permiss = getNotificationStatus();
     expect(permiss).toBeTruthy();
