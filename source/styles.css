@@ -113,6 +113,7 @@ button {
   outline: none;
   border-radius: 5px;
   transition: background 0.5s;
+  color: var(--text-dark);
 }
 
 button:hover {
