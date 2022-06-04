@@ -1,9 +1,11 @@
-// import {
-//     saveTask,
-//     selectTask,
-//     clearAllTasks,
-//     clearCompletedTasks,
-// } from "../../source/modules/task-list.js";
+import {
+  saveTask,
+  // selectTask,
+  // clearAllTasks,
+  // clearCompletedTasks,
+} from "../../source/modules/task-list.js";
+
+// import { saveTask } from "../../source/modules/task-list.js";
 
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
@@ -247,10 +249,39 @@ beforeEach(() => {
     </html>`;
 });
 
-describe(".saveTask()", () => {});
+describe(".saveTask()", () => {
+  test("add 1 task", () => {
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(1);
+  });
+  test("add 5 tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+    }
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(5);
+  });
+  test("add empty string task", () => {
+    document.getElementById("task-name").value = "";
+    saveTask();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+});
 
-describe(".selectTask()", () => {});
+describe(".selectTask()", () => {
+  // This doesn't seem to be used anymore
+});
 
 describe(".clearAllTasks()", () => {});
 
 describe(".clearCompletedTasks()", () => {});
+
+// Edit task tests
+
+// Delete specific task
+
+// Other test scenarios
