@@ -256,21 +256,21 @@ describe(".colorChange()", () => {
     expect(
       document.getElementById("timer-display").getAttribute("data-state")
     ).toBe("short");
-  }),
-    test("background color changes at long break state", () => {
-      timer.currState = LONG_STATE;
-      colorChange();
-      expect(document.body.getAttribute("data-state")).toBe("long");
-      expect(
-        document.getElementById("timer-display").getAttribute("data-state")
-      ).toBe("long");
-    }),
-    test("background color changes at work state", () => {
-      timer.currState = WORK_STATE;
-      colorChange();
-      expect(document.body.getAttribute("data-state")).toBe("pomo");
-      expect(
-        document.getElementById("timer-display").getAttribute("data-state")
-      ).toBe("pomo");
-    });
+  });
+  test("background color changes at long break state", () => {
+    timer.currState = LONG_STATE;
+    colorChange();
+    expect(document.body.getAttribute("data-state")).toBe("long");
+    expect(
+      document.getElementById("timer-display").getAttribute("data-state")
+    ).toBe("long");
+  });
+  test("background color changes at work state", () => {
+    timer.currState = WORK_STATE;
+    colorChange();
+    expect(document.body.getAttribute("data-state")).toBe("pomo");
+    expect(
+      document.getElementById("timer-display").getAttribute("data-state")
+    ).toBe("pomo");
+  });
 });

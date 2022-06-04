@@ -223,11 +223,5 @@ describe("Test Progress bar", () => {
 
   test("beginning state", () => {
     expect(timer.currState).toBe(WORK_STATE);
-    // let pomo = document.getElementById("progress-pomo");
-    // let short = document.getElementById("progress-break");
-    // let long = document.getElementById("progress-long-break");
-    // expect(getComputedStyle(pomo)).toBe("asdf");
-    // expect(getComputedStyle(short)).toBe("asdf");
-    // expect(getComputedStyle(long)).toBe("asdf");
   });
 });
