@@ -1,3 +1,10 @@
+// import {
+//     saveTask,
+//     selectTask,
+//     clearAllTasks,
+//     clearCompletedTasks,
+// } from "../../source/modules/task-list.js";
+
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
     <html lang='en'>
@@ -239,3 +246,11 @@ beforeEach(() => {
     </body>
     </html>`;
 });
+
+describe(".saveTask()", () => {});
+
+describe(".selectTask()", () => {});
+
+describe(".clearAllTasks()", () => {});
+
+describe(".clearCompletedTasks()", () => {});
