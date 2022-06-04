@@ -1,7 +1,8 @@
 import {
   saveTask,
   // selectTask,
-  // clearAllTasks,
+  clearAllTasks,
+  clearCompletedTasks,
   // clearCompletedTasks,
 } from "../../source/modules/task-list.js";
 
@@ -276,12 +277,66 @@ describe(".selectTask()", () => {
   // This doesn't seem to be used anymore
 });
 
-describe(".clearAllTasks()", () => {});
+describe(".clearAllTasks()", () => {
+  test("clear 5 tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+    }
+    clearAllTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+  test("clear 0 tasks", () => {
+    clearAllTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+});
 
-describe(".clearCompletedTasks()", () => {});
+describe(".clearCompletedTasks()", () => {
+  test("clear 1 completed task", () => {
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    document
+      .getElementById("task-list")
+      .children[0].setAttribute("done", "true");
+    clearCompletedTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+  test("clear 5/5 completed tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+      document
+        .getElementById("task-list")
+        .children[i].setAttribute("done", "true");
+    }
+    clearCompletedTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+  test("clear 2/5 completed tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+    }
+    for (let i = 0; i < 2; i++) {
+      document
+        .getElementById("task-list")
+        .children[i].setAttribute("done", "true");
+    }
+    clearCompletedTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(3);
+  });
+});
 
-// Edit task tests
+// Edit task
 
 // Delete specific task
+
+// Local storage tests
 
 // Other test scenarios
