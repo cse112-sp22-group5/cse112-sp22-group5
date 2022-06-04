@@ -240,7 +240,11 @@ beforeEach(() => {
     </html>`;
 });
 
-describe("Time(minutes)", () => {});
+describe("Time(minutes)", () => {
+  test("simple test", () => {
+    expect(1).toBe(1);
+  });
+});
 
 describe("Background Music", () => {});
 
