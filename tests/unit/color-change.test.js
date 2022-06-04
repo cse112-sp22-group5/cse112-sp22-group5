@@ -248,8 +248,8 @@ beforeEach(() => {
   </html>`;
 });
 
-describe("Test colorChange function", () => {
-  test("changes the background color at short break state", () => {
+describe(".colorChange()", () => {
+  test("background color changes at short break state", () => {
     timer.currState = SHORT_STATE;
     colorChange();
     expect(document.body.getAttribute("data-state")).toBe("short");
@@ -257,7 +257,7 @@ describe("Test colorChange function", () => {
       document.getElementById("timer-display").getAttribute("data-state")
     ).toBe("short");
   }),
-    test("changes the background color at long break state", () => {
+    test("background color changes at long break state", () => {
       timer.currState = LONG_STATE;
       colorChange();
       expect(document.body.getAttribute("data-state")).toBe("long");
@@ -265,7 +265,7 @@ describe("Test colorChange function", () => {
         document.getElementById("timer-display").getAttribute("data-state")
       ).toBe("long");
     }),
-    test("changes the background color at work state", () => {
+    test("background color changes at work state", () => {
       timer.currState = WORK_STATE;
       colorChange();
       expect(document.body.getAttribute("data-state")).toBe("pomo");
