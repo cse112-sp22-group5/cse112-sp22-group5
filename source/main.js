@@ -94,10 +94,11 @@ document.getElementById("theme-default").addEventListener("click", () => {
 
 // load task list from local storage
 window.addEventListener("load", () => {
-  loadTaskListFromLocal();
-  loadThemeFromStorage();
-  //document.documentElement.className = "default-theme";
   loadBackgroundImages();
+
+  loadThemeFromStorage();
+  loadTaskListFromLocal();
+  //document.documentElement.className = "default-theme";
   setBGImage();
 });
 

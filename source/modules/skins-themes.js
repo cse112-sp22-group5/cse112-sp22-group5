@@ -53,6 +53,15 @@ function setPromoThemes(type, value) {
  * @param {string} theme the position of theme in the global variable Themes
  */
 function setTheme(target, theme) {
+  // turn off color blind mode
+  if (theme === "0") {
+    // set to seleted theme
+    theme = document.querySelector("#theme").value;
+  }
+
+  // Turn off color blindness if a theme is chosen
+  if (theme !== "4") document.querySelector("#color-blindness").value = "0";
+
   target.className = Themes[theme];
   updateProgress();
   saveToStorage(promoThemes, setPromoThemes("theme", theme));
@@ -66,6 +75,7 @@ function setTheme(target, theme) {
 function loadThemeFromStorage() {
   const target = document.documentElement;
   const loadTheme = retrieveDataFromStorage(promoThemes);
+
   target.className = "default-theme";
   for (const key in loadTheme) {
     if (loadTheme[key]["isOn"])
@@ -80,6 +90,12 @@ function loadThemeFromStorage() {
           break;
         case "backgroundImage":
           document.body.style.backgroundImage = `url('${loadTheme[key]["source"]}')`;
+
+          document.querySelector(
+            `input[value='${BackgroundImages.indexOf(
+              loadTheme[key]["source"]
+            )}']`
+          ).checked = true;
           break;
       }
   }
@@ -127,6 +143,7 @@ function setBGImage() {
  */
 function setBGFromURL(url) {
   document.body.style.backgroundImage = `url('${url}')`;
+  saveToStorage(promoThemes, setPromoThemes("backgroundImage", url));
 }
 
 /**
@@ -134,16 +151,19 @@ function setBGFromURL(url) {
  * @description Reset Syles/Themes setting to default
  */
 function setDefaultThemes() {
+  const inputBGImg = document.querySelector('input[name="bgImg"]:checked');
   const body = document.documentElement;
   const defaultTheme = {
     theme: "1",
-    "color-blindness": "1",
+    "color-blindness": "0",
     "bg-url": "",
   };
   for (const key in defaultTheme) {
     document.getElementById(key).value = defaultTheme[key];
   }
   document.body.style.backgroundImage = "";
+
+  if (inputBGImg !== null) inputBGImg.checked = false;
   setTheme(body, 1);
 }
 
