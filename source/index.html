@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./third_party/intro.min.css">
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
     <script type="module" src="./main.js"></script>
     
     <title>Productoro</title>
@@ -235,5 +235,43 @@
           <i type="button" id="clear-tasks-button">Clear All</i>
         </div>
     </div>
+
+    <!-- testing out new pomo layout -->
+    <section id="circle-timer">
+        <h2>Productoro</h2>
+
+        <div id="break-activity-container">
+            <img src="./img/tomato.png">
+            <div>
+                <p>Hey there! Here's an activity to do during your break: Take a break and do some jumping jacks!</p>
+            </div>
+        </div>
+
+        <div id="timer-container">
+            <svg viewBox=" 0 0 100 100">
+                <circle class="inner__circle" cx="50%" cy="50%" r="48%"></circle>
+            </svg>
+    
+            <div id="timer-content">
+                <p id="timer-state">Short Break</p>
+                <p id="timer-value">25:00</p>
+    
+                <div id="streak-completed-container">
+                    <p>Streak: <span>0</span></p>
+                    <p>Completed: <span>0</span></p>
+                </div>
+    
+                <div id="timer-btn-container">
+                    <button>Start</button>
+                    <button>Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="task-container">
+            <h3>Current Task:</h3>
+            <p>Study for finals</p>
+        </div>
+    </section>
 </body>
 </html>
