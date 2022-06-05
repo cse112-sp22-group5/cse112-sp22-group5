@@ -1,8 +1,8 @@
 import {
   setTheme,
   loadBackgroundImages,
-  // loadThemeFromStorage,
-  // setBGImage,
+  loadThemeFromStorage,
+  setBGImage,
   setBGFromURL,
   setDefaultThemes,
 } from "../../source/modules/skins-themes.js";
@@ -288,7 +288,29 @@ beforeEach(() => {
           </fieldset> 
   
           <h3>Background Images: </h3>
-          <div class='setting-grid' id='background-images'></div>
+          
+          <div class="setting-grid" id="background-images">
+            <div class="grid-item">
+                <img src="./img/background/bg-0.jpg">
+                <input type="radio" value="0" name="bgImg">
+            </div>
+            
+            <div class="grid-item">
+                <img src="./img/background/bg-1.jpg">
+                <input type="radio" value="1" name="bgImg">
+            </div>
+            
+            <div class="grid-item">
+                <img src="./img/background/bg-2.jpg">
+                <input type="radio" value="2" name="bgImg">
+            </div>
+            
+            <div class="grid-item">
+                <img src="./img/background/bg-3.jpg">
+                <input type="radio" value="3" name="bgImg">
+            </div>
+          </div>
+
           <div class='empty-box'></div>
           <div class="bottom">
               <input type="button" id="theme-default" value='Set to Default'>
@@ -345,7 +367,64 @@ describe(".setDefaultThemes()", () => {
 });
 
 // loadThemeFromStorage()
+describe(".loadThemeFromStorage()", () => {
+  test("Load background image saved in storage", () => {
+    const theme = {
+      theme: {
+        isOn: false,
+        source: "",
+      },
+      backgroundImage: {
+        isOn: true,
+        source: "https://wallpaperaccess.com/full/274198.jpg",
+      },
+    };
+    localStorage.setItem("promoThemes", JSON.stringify(theme));
+    loadThemeFromStorage();
+    let styles = getComputedStyle(document.body);
+    expect(styles["background-image"]).toBe(
+      "url(https://wallpaperaccess.com/full/274198.jp)"
+    );
+  });
+});
 
+describe(".loadThemeFromStorage()", () => {
+  test("Load Theme saved in storage", () => {
+    const theme = {
+      theme: {
+        isOn: true,
+        source: "2",
+      },
+      backgroundImage: {
+        isOn: false,
+        source: "https://wallpaperaccess.com/full/274198.jpg",
+      },
+    };
+    localStorage.setItem("promoThemes", JSON.stringify(theme));
+    loadThemeFromStorage();
+    expect(document.documentElement.className).toBe("dark-theme");
+  });
+});
 // setBGImage
+describe(".setBGImage()", () => {
+  test("Set Event Listener for all imgages", () => {
+    const BackgroundImages = [
+      "https://wallpaperaccess.com/full/274198.jpg",
+      "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg",
+      "https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg",
+      "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg",
+    ];
+    let i = 0;
+    setBGImage();
+    const radioList = document.querySelectorAll('input[name="bgImg"]');
+
+    radioList.forEach((radio) => {
+      radio.click();
+      let styles = getComputedStyle(document.body);
+      expect(styles["background-image"]).toBe(`url(${BackgroundImages[i]})`);
+      i++;
+    });
+  });
+});
 
 // tests for setting both background and theme and other cases
