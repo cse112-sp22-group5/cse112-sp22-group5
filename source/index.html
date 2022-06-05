@@ -7,12 +7,14 @@
     <link rel='stylesheet' href='styles.css'>
     <link rel="stylesheet" href="./third_party/intro.min.css">
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
-    <script type="module" src="./main.js"></script>
 
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="module" src="./main.js"></script>
+    
     <title>Productoro</title>
 </head>
 <body data-state='pomo'>
-
+    <div id='blur-background'></div>
     <!-- IntroJs javascript -->
     <script src="./third_party/intro.min.js"></script> 
     <header> 
@@ -202,6 +204,13 @@
                       </select>
                     </div>
                 </fieldset>
+
+                <h3> Multi-language </h3>
+                <div class='setting-flex-item'>
+                    <label> Select your language</label>
+                    <div id="google-translate-element"></div> 
+                  </div>
+               
                 
             </form> 
             <div id='empty-box'></div>   

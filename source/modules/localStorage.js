@@ -2,17 +2,16 @@
 
 /**
  * @name storeToLocal
- * @function 
+ * @function
  * @description Store task to local storage and whether it is done or not
  * @param {string} storageKey local storage key
  * @param {string} key keyword
  * @param {boolean} value value of the key
  */
-function storeToLocal(storageKey, key, value)
-{
-    const obj = retrieveDataFromStorage(storageKey);
-    obj[key] = value;
-    saveToStorage(storageKey, obj);
+function storeToLocal(storageKey, key, value) {
+  const obj = retrieveDataFromStorage(storageKey);
+  obj[key] = value;
+  saveToStorage(storageKey, obj);
 }
 
 /**
@@ -22,11 +21,10 @@ function storeToLocal(storageKey, key, value)
  * @param {string} storageKey local storage key
  * @param {string} key task name
  */
-function deleteFromLocal(storageKey,key) {
-
-    const obj = retrieveDataFromStorage(storageKey);
-    delete obj[key];
-    saveToStorage(storageKey, obj);
+function deleteFromLocal(storageKey, key) {
+  const obj = retrieveDataFromStorage(storageKey);
+  delete obj[key];
+  saveToStorage(storageKey, obj);
 }
 
 /**
@@ -34,10 +32,10 @@ function deleteFromLocal(storageKey,key) {
  * @function
  * @description save an object to local storage
  * @param {string} key local storage keyword to store
- * @param {string} obj 
+ * @param {string} obj
  */
 function saveToStorage(key, obj) {
-    localStorage.setItem(key, JSON.stringify(obj));
+  localStorage.setItem(key, JSON.stringify(obj));
 }
 
 /**
@@ -49,7 +47,9 @@ function saveToStorage(key, obj) {
  * @returns {object} return the object if found, or empty object
  */
 function retrieveDataFromStorage(storageKey) {
-    return localStorage.getItem(storageKey) ? JSON.parse(localStorage.getItem(storageKey)) : {};
+  return localStorage.getItem(storageKey)
+    ? JSON.parse(localStorage.getItem(storageKey))
+    : {};
 }
 
 /**
@@ -59,7 +59,12 @@ function retrieveDataFromStorage(storageKey) {
  * @param {string} storageKey local storage key
  */
 function removeDataFromStorage(storageKey) {
-    localStorage.removeItem(storageKey);
+  localStorage.removeItem(storageKey);
 }
 
-export {deleteFromLocal, storeToLocal, removeDataFromStorage, retrieveDataFromStorage}
+export {
+  deleteFromLocal,
+  storeToLocal,
+  removeDataFromStorage,
+  retrieveDataFromStorage,
+};
