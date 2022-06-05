@@ -294,10 +294,12 @@ function onReset() {
   document.getElementById("warning").style.display = "none";
   document.getElementById("form-enabler").removeAttribute("disabled");
   document.querySelector("#default-settings").removeAttribute("disabled");
+  document.title = "Productoro";
   timer.counter.streak = 0;
   document.getElementById("streak").innerText = timer.counter.streak;
   clearInterval(timerId);
   checkState();
+
   //    document.getElementById('tasks').className = 'tasks';
 }
 
