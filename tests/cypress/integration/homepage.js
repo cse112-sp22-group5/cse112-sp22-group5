@@ -1,5 +1,5 @@
 // Inital No Actvity Tests
-describe.only("Fresh Entry, No Activity Tests", () => {
+describe("Fresh Entry, No Activity Tests", () => {
   beforeEach(() => {
     cy.visit("https://productoro-b340e.web.app/");
   });
@@ -72,7 +72,7 @@ describe.only("Fresh Entry, No Activity Tests", () => {
 });
 
 // Start Button Tests
-describe.only("Start Button Tests", () => {
+describe("Start Button Tests", () => {
   beforeEach(() => {
     cy.visit("https://productoro-b340e.web.app/");
     cy.wait(1000); // wait till the tutorial appears
@@ -292,18 +292,17 @@ describe.only("Start Button Tests", () => {
   });
 });
 
-describe("Reset Button Tests", () => {
+describe.only("Reset Button Tests", () => {
   beforeEach(() => {
-    cy.visit(
-      "https://nidhigiridhar.github.io/cse110-w21-group35/source/productoro.html"
-    );
+    cy.visit("https://productoro-b340e.web.app/");
+    cy.wait(1000); // wait till the tutorial appears
+    cy.get(".introjs-skipbutton").click();
   });
 
   it("Reset Button Clicked: Timer Display Resets", () => {
     cy.get("#start-button").click();
-    //Cypress will wait a 10 seconds after the click
-    cy.wait(10000);
-    cy.get("#timer-display").should("have.text", "24:50");
+    cy.wait(1000); // Wait a 1 second after the click
+    cy.get("#timer-display").should("have.text", "24:59");
     cy.get("#reset-button").click();
     cy.get("#timer-display").should("have.text", "25:00");
   });
@@ -324,22 +323,22 @@ describe("Reset Button Tests", () => {
     });
   });
 
-  it("Reset Button Clicked: Check Only Streak was Killed", () => {
-    cy.get("#start-button").click();
-    //Cypress will wait 5 seconds after the click
-    cy.wait(5000);
-    //Not sure if this is the right way to set the inner html
-    cy.get("#streak").invoke("prop", "innerHTML", "1");
-    cy.get("#total").invoke("prop", "innerHTML", "1");
-    cy.get("#streak").should("have.text", "1");
-    cy.get("#total").should("have.text", "1");
-    cy.wait(5000);
+  // it("Reset Button Clicked: Check Only Streak was Killed", () => {
+  //   cy.get("#start-button").click();
+  //   //Cypress will wait 5 seconds after the click
+  //   cy.wait(5000);
+  //   //Not sure if this is the right way to set the inner html
+  //   cy.get("#streak").invoke("prop", "innerHTML", "1");
+  //   cy.get("#total").invoke("prop", "innerHTML", "1");
+  //   cy.get("#streak").should("have.text", "1");
+  //   cy.get("#total").should("have.text", "1");
+  //   cy.wait(5000);
 
-    //check only streak gets reset
-    cy.get("#reset-button").click();
-    cy.get("#streak").should("have.text", "0");
-    cy.get("#total").should("have.text", "1");
-  });
+  //   //check only streak gets reset
+  //   cy.get("#reset-button").click();
+  //   cy.get("#streak").should("have.text", "0");
+  //   cy.get("#total").should("have.text", "1");
+  // });
 
   it("Reset Button Clicked: Check State is Work State", () => {
     cy.get("#start-button").click();
@@ -411,149 +410,6 @@ describe("Reset Button Tests", () => {
     cy.get("#keyboard-toggle").then(($el) => {
       expect($el).to.have.prop("checked");
     });
-  });
-});
-
-describe("Counters Tests", () => {
-  beforeEach(() => {
-    cy.visit(
-      "https://nidhigiridhar.github.io/cse110-w21-group35/source/productoro.html"
-    );
-
-    //DOM Maninpulation to get short pomo/break times :)
-    cy.get("#settings-button").click();
-    cy.get("#work-option60").invoke("prop", "innerHTML", ".15");
-    cy.get("#work-option60").invoke("prop", "value", ".15");
-
-    cy.get("#sb-option15").invoke("prop", "innerHTML", ".1");
-    cy.get("#sb-option15").invoke("prop", "value", ".1");
-
-    cy.get("#lb-option15").invoke("prop", "innerHTML", ".1");
-    cy.get("#lb-option15").invoke("prop", "value", ".1");
-
-    cy.get("#short-break-time").select(".1");
-    cy.get("#long-break-time").select(".1");
-    cy.get("#work-time").select(".15");
-
-    cy.get("#close-settings").click();
-
-    //Pomo: 9 Seconds
-    //SB: 6 seconds
-    //LB: 6 seconds
-  });
-
-  it("Counters: Streak and Total at 2 After 2 Pomos", () => {
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    cy.get("#streak").should("have.text", "2");
-    cy.get("#total").should("have.text", "2");
-  });
-
-  it("Counters: Streak and Total at 4 After 4 Pomos", () => {
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-
-    cy.get("#streak").should("have.text", "4");
-    cy.get("#total").should("have.text", "4");
-  });
-
-  it("Counters: Streak 0 and Total at 1 After Reset at Second Pomo", () => {
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    cy.get("#reset-button").click();
-
-    cy.get("#streak").should("have.text", "0");
-    cy.get("#total").should("have.text", "1");
-  });
-
-  it("Counters: Streak 2 and Total at 3 After Reset at Second Pomo", () => {
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //reset pomo
-    cy.get("#reset-button").click();
-
-    cy.get("#streak").should("have.text", "0");
-    cy.get("#total").should("have.text", "1");
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-    //start break
-    cy.get("#start-button").click();
-    //finish break
-    cy.wait(6 * 1000);
-
-    //start pomo
-    cy.get("#start-button").click();
-    //finish pomo
-    cy.wait(9 * 1000);
-
-    cy.get("#streak").should("have.text", "2");
-    cy.get("#total").should("have.text", "3");
   });
 });
 
