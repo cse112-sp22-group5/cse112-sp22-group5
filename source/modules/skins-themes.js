@@ -75,7 +75,7 @@ function setTheme(target, theme) {
 function loadThemeFromStorage() {
   const target = document.documentElement;
   const loadTheme = retrieveDataFromStorage(promoThemes);
-
+  let radio = undefined;
   target.className = "default-theme";
   for (const key in loadTheme) {
     if (loadTheme[key]["isOn"])
@@ -90,12 +90,12 @@ function loadThemeFromStorage() {
           break;
         case "backgroundImage":
           document.body.style.backgroundImage = `url('${loadTheme[key]["source"]}')`;
-
-          document.querySelector(
+          radio = document.querySelector(
             `input[value='${BackgroundImages.indexOf(
               loadTheme[key]["source"]
             )}']`
-          ).checked = true;
+          );
+          if (radio !== null) radio.checked = true;
           break;
       }
   }
