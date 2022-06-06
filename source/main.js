@@ -7,11 +7,14 @@ import {
   keyboardShortcut,
   customizeKey
 } from "./modules/timer.js";
+
 import { setBackgroundMusic } from "./modules/background-music.js";
+
 import {
   saveTask,
   clearAllTasks,
   clearCompletedTasks,
+  loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
 import "./modules/side-nav-bar.js";
@@ -19,6 +22,10 @@ import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
 import { startWalkthrough, isReturningUser } from './modules/walkthrough.js';
 import { playSound, setAlarmVolume } from "./modules/notifications.js";
+
+// import { googleTranslateElementInit } from "./modules/multi-language.js";
+
+// googleTranslateElementInit();
 
 // Timer
 document
@@ -67,9 +74,12 @@ document
   .getElementById("clear-completed-tasks-button")
   .addEventListener("click", clearCompletedTasks);
 
+// load task list from localStorage if exists
+window.addEventListener("load", loadTaskListFromLocal);
 // Walkthrough
-window.addEventListener('load', () => {
-  if (!isReturningUser())
-    startWalkthrough();
+window.addEventListener("load", () => {
+  if (!isReturningUser()) startWalkthrough();
 });
-document.getElementById('help-icon').addEventListener('click', startWalkthrough);
+document
+  .getElementById("help-icon")
+  .addEventListener("click", startWalkthrough);
