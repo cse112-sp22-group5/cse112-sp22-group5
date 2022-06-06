@@ -1,5 +1,5 @@
 ## Productoro
-Productoro is a new Pomodoro Timer application. Using the Pomodoro technique, Productoro breaks down work in to intervals called pomos as a means to enhances user time management and increase user productivity and focus. [Here is the link to our app!](https://nidhigiridhar.github.io/cse110-w21-group35/source/productoro.html), and [here is the link to our demo video!](https://youtu.be/HGqff-ElEuk)
+Productoro is a new Pomodoro Timer application. Using the Pomodoro technique, Productoro breaks down work in to intervals called pomos as a means to enhances user time management and increase user productivity and focus. [Here is the link to our app!](https://productoro-b340e.web.app/), and [here is the link to our demo video!](https://youtu.be/HGqff-ElEuk)
 
 ## Purpose
 People are always striving to increase their productivity levels. Therefore, maximizing the amount of work completed within a time frame is the major problem. However, another part of the problem is that a lack of focus leads to lack of productivity. People become distracted and tired while working for a long period without breaks. Thus, Productoro intends to address these related issues regarding productivity and focus together.

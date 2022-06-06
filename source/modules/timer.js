@@ -335,8 +335,7 @@ function onReset() {
     document.getElementById('warning').style.display = 'none';
     document.getElementById('form-enabler').removeAttribute('disabled');
     timer.counter.streak = 0;
-    document.getElementById('streak').innerText = 
-                    timer.counter.streak;
+    document.getElementById('streak').innerText = timer.counter.streak;
     if (window.Worker) {
         worker.postMessage({
             msg: 'resets timer'

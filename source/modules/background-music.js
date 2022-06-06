@@ -61,8 +61,17 @@ function setTrackToNext() {
     bgAudio.pause();
     CURRENT_TRACK_INDX = (CURRENT_TRACK_INDX + 1) % CURRENT_TRACKS.length;
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]); 
-    bgAudio.play();
-    currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+    let playSuccess = bgAudio.play();
+    if (playSuccess !== undefined) {
+        playSuccess.then(() => {
+            // Autoplay started!
+            currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+        }).catch(error => {
+            // Autoplay was prevented.
+            currentTrackName.innerHTML = 'Error playing track'; // display error
+            console.log(error);
+        });
+    }
 }
 
 /**
@@ -79,8 +88,17 @@ function setTrackToPrev() {
         CURRENT_TRACK_INDX = CURRENT_TRACKS.length - 1;
     }
     bgAudio.setAttribute('src', CURRENT_TRACKS[CURRENT_TRACK_INDX][0]);  
-    bgAudio.play();
-    currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+    let playSuccess = bgAudio.play();
+    if (playSuccess !== undefined) {
+        playSuccess.then(() => {
+            // Autoplay started!
+            currentTrackName.innerHTML = CURRENT_TRACKS[CURRENT_TRACK_INDX][1]; // display the track name
+        }).catch(error => {
+            // Autoplay was prevented.
+            currentTrackName.innerHTML = 'Error playing track'; // display error
+            console.log(error);
+        });
+    }
 }
 
 // export functions and variables for testing
