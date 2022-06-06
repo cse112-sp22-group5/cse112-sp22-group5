@@ -237,6 +237,21 @@ function setCustomTime() {
   let lbTime = document.getElementById("long-break-time");
   let warning = document.getElementById("warning");
 
+  // prevent number inputs from showing below the minimum and upating the timer even if it below the min
+  if (Number(wTime.value) < 25) {
+    POMO_MINS = 25;
+    wTime.value = POMO_MINS;
+    return;
+  } else if (Number(sbTime.value) < 5) {
+    SHORT_MINS = 5;
+    sbTime.value = 5;
+    return;
+  } else if (Number(lbTime.value) < 15) {
+    LONG_MINS = 15;
+    lbTime.value = LONG_MINS;
+    return;
+  }
+
   if (
     Number(wTime.value) <= Number(sbTime.value) ||
     Number(wTime.value) <= Number(lbTime.value)
