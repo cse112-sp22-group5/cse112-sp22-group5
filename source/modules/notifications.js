@@ -21,7 +21,7 @@ function playSound(){
     let soundIdx = document.getElementById('alarm-sounds').value;
     alarm = new Audio('./audio/notification-alert-' + soundIdx + '.wav');
     // Set alarm volume
-    alarm.volume = document.getElementById('alarm-volume').value / 100;
+    setAlarmVolume();
     //Play the alarm once
     alarm.play();
     //Wait 2 seconds then play it again
@@ -29,6 +29,15 @@ function playSound(){
     //Wait another 2 seconds to play it a third time
     setTimeout(function(){alarm.play();}, 4000);
     
+}
+
+/**
+ * @name setAlarmVolume
+ * @function
+ * @description Gets current volume from alarm volume slider and sets alarm volume
+ */
+function setAlarmVolume() {
+    alarm.volume = document.getElementById('alarm-volume').value / 100;
 }
  
 /**
@@ -92,5 +101,5 @@ function getNotificationStatus(){
 }
 
 // export functions for testing
-export { showNotif, getNotificationStatus, playSound, getAlarm };
+export { showNotif, getNotificationStatus, playSound, getAlarm, setAlarmVolume };
 

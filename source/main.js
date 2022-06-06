@@ -18,6 +18,7 @@ import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
 import { startWalkthrough, isReturningUser } from './modules/walkthrough.js';
+import { playSound, setAlarmVolume } from "./modules/notifications.js";
 
 // Timer
 document
@@ -25,6 +26,12 @@ document
   .addEventListener("change", setCustomTime);
 document.getElementById("start-button").addEventListener("click", onStart);
 document.getElementById("reset-button").addEventListener("click", onReset);
+
+// Alarm
+document.getElementById('alarm-sounds').addEventListener('change', playSound);
+document.getElementById('alarm-volume').addEventListener('change', setAlarmVolume);
+// Preview alarm sound even if user selects the same one
+document.getElementById('alarm-sounds').addEventListener('focus', function() {this.selectedIndex=-1});
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (event) => {

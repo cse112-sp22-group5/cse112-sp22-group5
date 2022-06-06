@@ -22,7 +22,9 @@ let
   /** @type {string} **/
   volumneDownKey = 'ArrowDown',
   /** @type {boolean} **/
-  isCustomizingKey = false;
+  isCustomizingKey = false,
+  /** @type {set}  **/
+  setKeys = new Set([startKey, volumeUpKey, volumneDownKey]);
 
 const /** @constant @type {string} **/
   WORK_STATE = "Work State",
@@ -374,30 +376,58 @@ function keyboardShortcut(event) {
  * @description Allows for keyboard shortcuts to be customized
  */
  function customizeKey() {
+  const KEY_ERROR = 'Key already in use. Try again.';
+
   // check to see which keyboard customization button was pressed
   if(document.getElementById('keyboard-toggle').value === 'on') {
-      isCustomizingKey = true;
-      this.blur();
-      this.innerHTML = 'Press a key';
+    isCustomizingKey = true;
+    this.blur();
+    // store current set key before replacing with "press key" prompt
+    let currentKey = this.innerHTML
+    this.innerHTML = 'Press a key';
 
-      // take user input for key customization
-      document.addEventListener('keydown', event => {
-          this.innerHTML = event.code;
-          isCustomizingKey = false;
-          switch(this.id) {
-              case 'customize-start':
-                  startKey = event.code;
-                  break;
-              case 'customize-volume-up':
-                  volumeUpKey = event.code;
-                  break;
-              case 'customize-volume-down':
-                  volumneDownKey = event.code;
-                  break;
-              default:
-                  this.innerHTML = 'Press a key';
-          }
-      }, {once: true});
+    setKeys.delete(currentKey)
+
+    // remove respective keyboard shortcut in prep for new one
+    switch(this.id) {
+      case 'customize-start':
+        startKey = null;
+        break;
+      case 'customize-volume-up':
+        volumeUpKey = null;
+        break;
+      case 'customize-volume-down':
+        volumneDownKey = null;
+        break;
+      default:
+        this.innerHTML = 'Press a key';
+    }
+
+    // take user input for key customization
+    document.addEventListener('keydown', event => {
+      isCustomizingKey = false;
+      if(event.code != currentKey && setKeys.has(event.code)) {
+        this.innerHTML = KEY_ERROR;
+        return;
+      }
+      this.innerHTML = event.code;
+      setKeys.add(event.code);
+
+      // customize respective shortcut based on button pressed
+      switch(this.id) {
+        case 'customize-start':
+          startKey = event.code;
+          break;
+        case 'customize-volume-up':
+          volumeUpKey = event.code;
+          break;
+        case 'customize-volume-down':
+          volumneDownKey = event.code;
+          break;
+        default:
+          this.innerHTML = 'Press a key';
+      }
+    }, {once: true});
   }
 }
 
