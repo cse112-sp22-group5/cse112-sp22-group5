@@ -77,7 +77,7 @@ describe("Tutorial Model", () => {
 });
 
 // Settings Modal
-describe.only("Settings Model", () => {
+describe("Settings Model", () => {
     beforeEach(() => {
         cy.visit("https://productoro-b340e.web.app/");
         cy.wait(1000); // wait till the tutorial appears
@@ -120,5 +120,53 @@ describe.only("Settings Model", () => {
   
         cy.wait(500); // wait till the sidebar appears
         cy.get('#notif-toggle').select('Off').should('have.value', 'off');
+    });
+});
+
+// Tasks Modal
+describe("Tasks Model", () => {
+    beforeEach(() => {
+        cy.visit("https://productoro-b340e.web.app/");
+        cy.wait(1000); // wait till the tutorial appears
+        cy.get(".introjs-skipbutton").click();
+    });
+    
+    it("Task button opens tasks", () => {
+      cy.get("#tasks-icon").click();
+
+      cy.wait(500); // wait till the sidebar appears
+      cy.get(".sidebar-content").then(($el) => {
+        expect($el).to.be.visible;
+      });
+      cy.get("#input-container").then(($el) => {
+        expect($el).to.be.visible;
+      });
+    });
+
+    it("Add, done, and delete a task", () => {
+        cy.get("#tasks-icon").click();
+  
+        cy.wait(500); // wait till the sidebar appears
+        cy.get('#task-name').type('hi');
+        cy.get("#save-button").click();
+
+        cy.wait(500); // wait till the task is entered
+        cy.get(".task-label").then(($el) => {
+            expect($el).to.have.attr("for", "hi");
+        });
+
+        // click done for the task
+        cy.get('[src="./img/icons/check-circle-icon-white.svg"]').click();
+
+        cy.wait(500); // wait till the task is rendered as done
+        cy.get(".task").then(($el) => {
+            expect($el).to.have.attr("done", "true");
+        });
+
+        // click done for the task
+        cy.get('[src="./img/icons/delete-icon.svg"]').click();
+
+        cy.wait(500); // wait for the task to get deleted
+        cy.get('.task').should('not.exist');
     });
 });
