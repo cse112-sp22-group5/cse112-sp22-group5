@@ -65,6 +65,7 @@ function removeDataFromStorage(storageKey) {
 export {
   deleteFromLocal,
   storeToLocal,
+  saveToStorage,
   removeDataFromStorage,
   retrieveDataFromStorage,
 };
