@@ -132,7 +132,7 @@
   box-shadow: 0 0 5px rgb(125, 125, 125);
 }
 
-.bottom > i {
+.bottom > input {
   font-size: 15px;
   font-style: normal;
   font-weight: bold;
@@ -145,7 +145,7 @@
   text-align: center;
 }
 
-.bottom > i:hover {
+.bottom > input:hover {
   cursor: pointer;
   box-shadow: 0 0 10px rgb(200, 200, 200);
   color: rgb(42, 56, 67);

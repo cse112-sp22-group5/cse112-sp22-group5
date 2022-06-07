@@ -284,7 +284,8 @@ function setCustomTime() {
  */
 function onStart() {
   getNotificationStatus();
-  document.querySelector("#form-enabler").disabled = "disabled";
+  document.querySelector("#form-enabler").disabled = true;
+  document.getElementById("default-settings").disabled = true; // disable default settings btn
 
   // enable a warning if the user tries changing the time limits during a pomo
   document.getElementById("warning").innerText =
@@ -307,6 +308,7 @@ function onReset() {
   document.getElementById("reset-button").disabled = true;
   document.getElementById("start-button").disabled = false;
   document.getElementById("warning").style.display = "none";
+  document.getElementById("default-settings").disabled = false;
   document.getElementById("form-enabler").removeAttribute("disabled");
   document.title = "Productoro";
   timer.counter.streak = 0;
