@@ -152,79 +152,81 @@ function setDefaultSettings() {
   }
 }
 
-// Expands sidebar based on window width
-document.querySelector("#arrow-down").addEventListener("click", () => {
-  const menuStyle = document.querySelector(".side-nav-bar").style;
-  if (parseInt(menuStyle.height, 10) === 0 || menuStyle.height === "") {
-    expandSideBar();
-  } else {
-    minimizeSideBar();
-  }
-});
-
-// Set background color for menu icons
-document.querySelectorAll(".menu-icon").forEach((elem) => {
-  elem.addEventListener("click", () => {
-    const id = elem.getAttribute("data-associated-div");
-    const side = document.getElementById(id).offsetWidth;
-    if (side === 0) {
-      toggleMenu(id);
-      setIconBackGround(elem.getAttribute("id"));
+function sidebarInit() {
+  // Expands sidebar based on window width
+  document.querySelector("#arrow-down").addEventListener("click", () => {
+    const menuStyle = document.querySelector(".side-nav-bar").style;
+    if (parseInt(menuStyle.height, 10) === 0 || menuStyle.height === "") {
+      expandSideBar();
     } else {
+      minimizeSideBar();
+    }
+  });
+
+  // Set background color for menu icons
+  document.querySelectorAll(".menu-icon").forEach((elem) => {
+    elem.addEventListener("click", () => {
+      const id = elem.getAttribute("data-associated-div");
+      const side = document.getElementById(id).offsetWidth;
+      if (side === 0) {
+        toggleMenu(id);
+        setIconBackGround(elem.getAttribute("id"));
+      } else {
+        toggleMenu(null);
+        setIconBackGround(null);
+      }
+    });
+  });
+
+  // closes side bar or panels when resizing the window
+  window.addEventListener("resize", () => {
+    toggleMenu(null);
+    setIconBackGround(null);
+    setSideBar();
+  });
+
+  /**
+   * If user clicks on areas that are outside menu and panels, it closes
+   */
+  window.addEventListener("click", (event) => {
+    const windowWidth = window.innerWidth;
+    const divWidth = setdivWidth(windowWidth);
+    const menuWidth = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--side-bar-width");
+
+    if ((event.clientX / windowWidth) * 100 >= divWidth) {
       toggleMenu(null);
       setIconBackGround(null);
     }
+
+    // the click coordinate must greater than sidebar width and no panels are open
+    if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 1) {
+      setSideBar();
+    }
   });
-});
 
-// closes side bar or panels when resizing the window
-window.addEventListener("resize", () => {
-  toggleMenu(null);
-  setIconBackGround(null);
-  setSideBar();
-});
+  // For touch screen devices
+  window.addEventListener("touchstart", (event) => {
+    const windowWidth = window.innerWidth;
+    const divWidth = setdivWidth(windowWidth);
+    const menuWidth = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--side-bar-width");
+    if ((event.touches[0].clientX / windowWidth) * 100 >= divWidth) {
+      toggleMenu(null);
+      setIconBackGround(null);
+      setSideBar();
+    }
 
-/**
- * If user clicks on areas that are outside menu and panels, it closes
- */
-window.addEventListener("click", (event) => {
-  const windowWidth = window.innerWidth;
-  const divWidth = setdivWidth(windowWidth);
-  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
-    "--side-bar-width"
-  );
+    // the click coordinate must greater than sidebar width and no panels are open
+    if (
+      event.touches[0].clientX >= parseInt(menuWidth, 10) &&
+      PANEL_Z_INDEX === 1
+    ) {
+      setSideBar();
+    }
+  });
+}
 
-  if ((event.clientX / windowWidth) * 100 >= divWidth) {
-    toggleMenu(null);
-    setIconBackGround(null);
-  }
-
-  // the click coordinate must greater than sidebar width and no panels are open
-  if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 1) {
-    setSideBar();
-  }
-});
-
-// For touch screen devices
-window.addEventListener("touchstart", (event) => {
-  const windowWidth = window.innerWidth;
-  const divWidth = setdivWidth(windowWidth);
-  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
-    "--side-bar-width"
-  );
-  if ((event.touches[0].clientX / windowWidth) * 100 >= divWidth) {
-    toggleMenu(null);
-    setIconBackGround(null);
-    setSideBar();
-  }
-
-  // the click coordinate must greater than sidebar width and no panels are open
-  if (
-    event.touches[0].clientX >= parseInt(menuWidth, 10) &&
-    PANEL_Z_INDEX === 1
-  ) {
-    setSideBar();
-  }
-});
-
-export { setDefaultSettings, toggleMenu, setIconBackGround };
+export { sidebarInit, setDefaultSettings, toggleMenu, setIconBackGround };

@@ -14,7 +14,7 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import { setDefaultSettings } from "./modules/side-nav-bar.js";
+import { sidebarInit, setDefaultSettings } from "./modules/side-nav-bar.js";
 
 import {
   setTheme,
@@ -94,6 +94,7 @@ document.getElementById("theme-default").addEventListener("click", () => {
 
 // load task list from local storage
 window.addEventListener("load", () => {
+  sidebarInit();
   loadBackgroundImages();
 
   loadThemeFromStorage();
