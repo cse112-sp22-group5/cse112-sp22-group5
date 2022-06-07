@@ -5,8 +5,17 @@ import {
   clearCompletedTasks,
 } from "../../source/modules/task-list.js";
 
-// import { saveTask } from "../../source/modules/task-list.js";
+import {
+  // storeToLocal,
+  // removeDataFromStorage,
+  retrieveDataFromStorage,
+  // deleteFromLocal,
+} from "../../source/modules/localStorage.js";
 
+// Set Object name in localStorage
+const LOCAL_KEY = "taskList";
+
+// Load HTML document before each test
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
     <html lang='en'>
@@ -249,20 +258,39 @@ beforeEach(() => {
     </html>`;
 });
 
+// Testing Description: Check that tasks are being saved to the task list properly
 describe(".saveTask()", () => {
   test("add 1 task", () => {
     document.getElementById("task-name").value = "simple task";
     saveTask();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(1);
+    expect(list.children[0].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task"
+    );
   });
   test("add 5 tasks", () => {
     for (let i = 0; i < 5; i++) {
-      document.getElementById("task-name").value = "simple task";
+      document.getElementById("task-name").value = "simple task " + (i + 1);
       saveTask();
     }
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(5);
+    expect(list.children[0].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 1"
+    );
+    expect(list.children[1].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 2"
+    );
+    expect(list.children[2].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 3"
+    );
+    expect(list.children[3].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 4"
+    );
+    expect(list.children[4].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 5"
+    );
   });
   test("add empty string task", () => {
     document.getElementById("task-name").value = "";
@@ -272,10 +300,12 @@ describe(".saveTask()", () => {
   });
 });
 
+// Test Description: Check that selected task is being moved to top of list
 describe(".selectTask()", () => {
   // This doesn't seem to be used anymore
 });
 
+// Test Description: Check that clear all tasks button removes all tasks from the task list and local storage
 describe(".clearAllTasks()", () => {
   test("clear 5 tasks", () => {
     for (let i = 0; i < 5; i++) {
@@ -285,14 +315,17 @@ describe(".clearAllTasks()", () => {
     clearAllTasks();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
   test("clear 0 tasks", () => {
     clearAllTasks();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
 });
 
+// Test Description:
 describe(".clearCompletedTasks()", () => {
   test("clear 1 completed task", () => {
     document.getElementById("task-name").value = "simple task";
@@ -303,6 +336,20 @@ describe(".clearCompletedTasks()", () => {
     clearCompletedTasks();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
+  });
+  test("clear 3/5 completed task", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+      if (i % 2 == 0) {
+        document
+          .getElementById("task-list")
+          .children[i].setAttribute("done", "true");
+      }
+    }
+    clearCompletedTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(2);
   });
   test("clear 5/5 completed tasks", () => {
     for (let i = 0; i < 5; i++) {
@@ -332,6 +379,7 @@ describe(".clearCompletedTasks()", () => {
   });
 });
 
+// Test Description:
 describe("local storage", () => {
   test("1 tasks saved locally", () => {
     document.getElementById("task-name").value = "simple task";
