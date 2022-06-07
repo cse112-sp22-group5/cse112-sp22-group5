@@ -28,8 +28,8 @@
     <main>
 
         <!-- Break Reminder -->
-        <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-        <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
+        <p id='break-reminder' style='visibility: hidden'></p>
+        <p id='reminder' onload='breakReminders()' style='visibility: hidden'></p>  
 
         <!-- Current State  -->
         <h2 class='text-center' id='state' hidden>Work State</h2> 
@@ -89,10 +89,15 @@
         <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="task list">
             <img  class="icon" src="./img/icons/task-list.svg" >
         </i>
+
+        <i class="menu-icon" id="theme-icon" data-associated-div="theme-div" title="styles and themes">
+            <img class="icon" src="./img/icons/painting-icon.svg">
+        </i>
     </div>
 
     <!-- Side bar contents-->
     <div class="sidebar-content" id="help-div">
+        <h2>Productoro</h2>
         <h3>What is a Pomodoro Timer?</h3>
               <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                   Work intervals are typically 25 minutes long with five minute breaks between each interval. 
@@ -208,7 +213,9 @@
                     </div>
                     <div class='setting-flex-item'>
                         <label for='alarm-volume'>Alarm Volume</label>
+                        <div id='range-container'>
                         <input type='range' min='0' max='100' value='50' name='alarm-volume' id='alarm-volume'>
+                        </div>
                     </div>
 
                     <div class='setting-flex-item'>
@@ -229,9 +236,10 @@
                
                 
             </form> 
-            <div id='empty-box'></div>   
+           
+            <div class='empty-box'></div>   
             <div class="bottom">
-                <i type="button" id="default-settings">Set to Default</i>
+                <input type="button" id="default-settings" value='Set to Default'>
             </div>
              
     </div>
@@ -247,9 +255,51 @@
         <label>Current Tasks:</label>
         <ul id="task-list"></ul>
         <div class="bottom">
-          <i type="button" id="clear-completed-tasks-button">Clear Completed Tasks</i>
-          <i type="button" id="clear-tasks-button">Clear All</i>
+          <input type="button" id="clear-completed-tasks-button" value='Clear Completed Tasks'>
+          <input type="button" id="clear-tasks-button" value='Clear All'>
         </div>
     </div>
+
+    <div class="sidebar-content" id="theme-div">
+        <h2>Styles and Themes</h2>
+        <h3>Themes</h3>
+        <fieldset class='setting-flex-container'>
+            <div class='setting-flex-item'>
+                <label for='theme'>Select</label>
+                <select name='theme' id='theme'>
+                  <option id='theme-option1' value='1' selected>Default</option>
+                  <option id='theme-option2' value='2'>Dark</option>
+                  <option id='theme-option2' value='3'>Light</option>
+                </select>
+              </div>
+        </fieldset>
+
+        <h3>Color Blindness</h3>
+        <fieldset class='setting-flex-container'>
+            <div class='setting-flex-item'>
+                <label for='color-blindness'>Enable Color Blindness (default themes only)</label>
+                <select name='color-blindness' id='color-blindness'>
+                    <option value='4'          >On</option>
+                    <option value='0' selected>Off</option>
+                </select>
+              </div>
+        </fieldset>
+        
+        <h3>Upload Your Own Image: (url only)</h3>
+        <fieldset class='setting-flex-container'>
+            <div class='setting-flex-item'>
+                <input type="text" id="bg-url" placeholder="URL">
+                <input type="button" id="bg-url-submit" value="submit">
+              </div>
+        </fieldset> 
+
+        <h3>Background Images: </h3>
+        <div class='setting-grid' id='background-images'></div>
+        <div class='empty-box'></div>
+        <div class="bottom">
+            <input type="button" id="theme-default" value='Set to Default'>
+        </div>
+    </div>
+    
 </body>
 </html>

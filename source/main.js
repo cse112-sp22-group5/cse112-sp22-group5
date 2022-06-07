@@ -17,11 +17,18 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import "./modules/side-nav-bar.js";
 import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
-import { startWalkthrough, isReturningUser } from './modules/walkthrough.js';
 import { playSound, setAlarmVolume } from "./modules/notifications.js";
+import {
+  setTheme,
+  loadBackgroundImages,
+  loadThemeFromStorage,
+  setBGImage,
+  setBGFromURL,
+  setDefaultThemes,
+} from "./modules/skins-themes.js";
+import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
 // import { googleTranslateElementInit } from "./modules/multi-language.js";
 
@@ -74,8 +81,37 @@ document
   .getElementById("clear-completed-tasks-button")
   .addEventListener("click", clearCompletedTasks);
 
-// load task list from localStorage if exists
-window.addEventListener("load", loadTaskListFromLocal);
+// Themes
+document.getElementById("theme").addEventListener("change", () => {
+  const htmlDoc = document.documentElement;
+  const theme = document.getElementById("theme").value;
+  setTheme(htmlDoc, theme);
+});
+document.getElementById("color-blindness").addEventListener("change", () => {
+  const htmlDoc = document.documentElement;
+  const theme = document.getElementById("color-blindness").value;
+  setTheme(htmlDoc, theme);
+});
+
+document.getElementById("bg-url-submit").addEventListener("click", () => {
+  const url = document.getElementById("bg-url").value;
+  setBGFromURL(url);
+});
+
+document.getElementById("theme-default").addEventListener("click", () => {
+  setDefaultThemes();
+});
+
+// load task list from local storage
+window.addEventListener("load", () => {
+  loadBackgroundImages();
+
+  loadThemeFromStorage();
+  loadTaskListFromLocal();
+  //document.documentElement.className = "default-theme";
+  setBGImage();
+});
+
 // Walkthrough
 window.addEventListener("load", () => {
   if (!isReturningUser()) startWalkthrough();
