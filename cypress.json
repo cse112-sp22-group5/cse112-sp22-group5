@@ -5,6 +5,5 @@
   "screenshotsFolder": "./tests/cypress/screenshots",
   "videosFolder": "./tests/cypress/videos",
   "downloadsFolder": "./tests/cypress/downloads",
-  "supportFile": "./tests/cypress/support/index.js",
-  "defaultCommandTimeout": 2000
+  "supportFile": "./tests/cypress/support/index.js"
 }
