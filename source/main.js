@@ -26,9 +26,9 @@ import {
 } from "./modules/skins-themes.js";
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
-import { googleTranslateElementInit } from "./modules/multi-language.js";
+// import { googleTranslateElementInit } from "./modules/multi-language.js";
 
-googleTranslateElementInit();
+// googleTranslateElementInit();
 
 // Timer
 document
