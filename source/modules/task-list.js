@@ -30,22 +30,6 @@ function saveTask() {
 }
 
 /**
- * @name selectTask
- * @function
- * @description Display selected task at top of task list
- */
-function selectTask() {
-  let currentTask = document.getElementById("current-task");
-  const tasks = document.querySelectorAll('input[name="task-option"]');
-  for (let task of tasks) {
-    if (task.checked) {
-      currentTask.innerText = task.value;
-      break;
-    }
-  }
-}
-
-/**
  * @name createCustomTaskTag
  * @function
  * @description Creates a custom tag for a task
@@ -106,7 +90,11 @@ function createCustomTaskTag(taskName, isDone = false) {
     let currentTask = document.getElementById("current-task");
     currentTask.innerText = taskLabel.value;
 
+    // move selected task to top of list
     let taskList = document.getElementById("task-list");
+    let task = taskLabel.parentNode;
+    taskList.prepend(task);
+
     let children = taskList.children;
     for (let i = 0; i < children.length; i++) {
       if (
@@ -236,7 +224,6 @@ export {
   saveTask,
   createCustomTaskTag,
   clearAllTasks,
-  selectTask,
   clearCompletedTasks,
   loadTaskListFromLocal,
 };
