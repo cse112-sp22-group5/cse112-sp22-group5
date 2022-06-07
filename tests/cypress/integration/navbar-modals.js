@@ -74,4 +74,51 @@ describe("Tutorial Model", () => {
         cy.get(".introjs-button.introjs-nextbutton.introjs-donebutton").click();
         cy.get(".introjs-tooltiptext").should('not.exist');
     });
-  });
+});
+
+// Settings Modal
+describe.only("Settings Model", () => {
+    beforeEach(() => {
+        cy.visit("https://productoro-b340e.web.app/");
+        cy.wait(1000); // wait till the tutorial appears
+        cy.get(".introjs-skipbutton").click();
+    });
+    
+    it("Settings button opens settings", () => {
+      cy.get("#setting-icon").click();
+
+      cy.wait(500); // wait till the sidebar appears
+      cy.get(".sidebar-content").then(($el) => {
+        expect($el).to.be.visible;
+      });
+      cy.get("#time-limits").then(($el) => {
+        expect($el).to.be.visible;
+      });
+    });
+
+    it("Changing work time changes work time", () => {
+        cy.get("#setting-icon").click();
+  
+        cy.wait(500); // wait till the sidebar appears
+        cy.get('#work-time').select('30').should('have.value', '30');
+        cy.get('#timer-display').should(
+            "have.text",
+            "30:00"
+          );
+    });
+
+    it("Choosing a music to play", () => {
+        cy.get("#setting-icon").click();
+  
+        cy.wait(500); // wait till the sidebar appears
+        cy.get('#bg-music').select('Lofi').should('have.value', 'Lofi');
+        cy.get("#current-mix").should('be.visible');
+    });
+
+    it("Turning audio alarm off", () => {
+        cy.get("#setting-icon").click();
+  
+        cy.wait(500); // wait till the sidebar appears
+        cy.get('#notif-toggle').select('Off').should('have.value', 'off');
+    });
+});
