@@ -319,7 +319,7 @@ describe(".clearAllTasks()", () => {
   });
 });
 
-// Test Description:
+// Test Description: Check that all completed tasks are removed from task list and localStorage when clearCompletedTasks button is clicked
 describe(".clearCompletedTasks()", () => {
   test("clear 1/1 completed task", () => {
     document.getElementById("task-name").value = "simple task";
@@ -367,7 +367,7 @@ describe(".clearCompletedTasks()", () => {
   });
 });
 
-// Test Description:
+// Test Description: Check that tasks are being stored in local storage
 describe("local storage", () => {
   test("1 tasks saved locally", () => {
     document.getElementById("task-name").value = "simple task";
@@ -387,8 +387,6 @@ describe("local storage", () => {
   });
 });
 
-// Edit tasks
-
-// Delete specific task
+// Edit and delete are covered in Cypress tests
 
 // Other test scenarios
