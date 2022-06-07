@@ -318,6 +318,34 @@ function onReset() {
 }
 
 /**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ */
+function setDefaultSettings() {
+  POMO_MINS = 25;
+  SHORT_MINS = 5;
+  LONG_MINS = 15;
+
+  const defaultSetting = {
+    "work-time": "25",
+    "short-break-time": "5",
+    "long-break-time": "15",
+    "bg-music": "None",
+    "keyboard-toggle": "on",
+    "notif-toggle": "on",
+    "alarm-volume": "100",
+    "alarm-sounds": "1",
+  };
+
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+
+  setCustomTime();
+}
+
+/**
  * @name revealSettings
  * @function
  * @description Opens the settings modal when the settings button is clicked
@@ -376,6 +404,7 @@ export {
   keyboardShortcut,
   revealSettings,
   hideSettings,
+  setDefaultSettings,
   SHORT_STATE,
   LONG_STATE,
   WORK_STATE,

@@ -5,6 +5,7 @@ import {
   onReset,
   setCustomTime,
   keyboardShortcut,
+  setDefaultSettings,
 } from "./modules/timer.js";
 import { setBackgroundMusic } from "./modules/background-music.js";
 import {
@@ -15,7 +16,6 @@ import {
 } from "./modules/task-list.js";
 
 import "./modules/side-nav-bar.js";
-import { setDefaultSettings } from "./modules/side-nav-bar.js";
 
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
