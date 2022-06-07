@@ -40,7 +40,7 @@ document.getElementById("reset-button").addEventListener("click", onReset);
 // Keyboard shortcuts
 document.addEventListener("keydown", (event) => {
   // only allow this event to be fired when task form is hidden
-  if (document.getElementById("tasks-div").style.width === 0)
+  if (document.activeElement !== document.querySelector("#task-name"))
     keyboardShortcut(event);
 });
 // document.getElementById('customize-start').addEventListener('click', customizeKey);
