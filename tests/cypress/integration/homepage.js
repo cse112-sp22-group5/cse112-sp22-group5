@@ -433,3 +433,339 @@ describe("Reset Button Tests", () => {
     .should("have.value", "on");
   });
 });
+
+// Keyboard shortcut for start button
+describe("KeyBoard Shortcut: Using Space to Start Button", () => {
+  beforeEach(() => {
+    cy.visit("https://productoro-b340e.web.app/");
+    cy.wait(1000); // wait till the tutorial appears
+    cy.get(".introjs-skipbutton").click();
+  });
+
+  it("Space Used as Start Button: Check Timer Display 24:59", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    
+    cy.wait(1000); // Cypress will wait a 1 second after the click
+    cy.get("#timer-display").should("have.text", "24:59");
+  });
+
+  it("Space Used as Start Button: Check Start Button Gets Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    //Cypress will wait a second after the click
+    cy.get("#start-button").then(($el) => {
+      expect($el).to.have.attr("disabled");
+    });
+  });
+
+  it("Space Used as Start Button: Check Reset Button Gets Enabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    //Cypress will wait a second after the click
+    cy.get("#reset-button").then(($el) => {
+      expect($el).to.not.have.attr("disabled");
+    });
+  });
+
+  it("Space Used as Start Button: Check Counters Not Updated", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    
+    cy.wait(1000); // Cypress will wait 1 second after the click
+    cy.get("#streak").should("have.text", "0");
+    cy.get("#total").should("have.text", "0");
+  });
+
+  it("Space Used as Start Button: Check State is Work State", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    //States need to be more consistent ... sometimes they have mode as a suffix sometimes not
+    cy.get("#state").should("have.text", "Work State");
+  });
+
+  it("Space Used as Start Button: Check Background Color Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("body").then(($el) => {
+      expect($el).to.have.attr("data-state", "pomo");
+    });
+  });
+
+  it("Space Used as Start Button: Check Break Reminders Still Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#break-reminder").should("have.text", "");
+    cy.get("#reminder").then(($el) => {
+      expect($el).to.be.hidden;
+    });
+  });
+
+  it("Space Used as Start Button: Check Progress Bar Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#progress-pomo")
+      .should("have.css", "background-color")
+      .and("eq", "rgb(237, 102, 99)");
+  });
+});
+
+// Keyboard shortcut for reset button
+describe("Keyboard Shortcut: Using Space as Reset Button", () => {
+  beforeEach(() => {
+    cy.visit("https://productoro-b340e.web.app/");
+    cy.wait(1000); // wait till the tutorial appears
+    cy.get(".introjs-skipbutton").click();
+  });
+
+  it("Space Used as Reset Button: Timer Display Resets", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    
+    cy.wait(1000); // Cypress will wait a 10 seconds after the click
+    cy.get("#timer-display").should("have.text", "24:59");
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#timer-display").should("have.text", "25:00");
+  });
+
+  it("Space Used as Reset Button: Check Reset Button Gets Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#reset-button").then(($el) => {
+      expect($el).to.have.attr("disabled");
+    });
+  });
+
+  it("Space Used as Reset Button: Check Start Button Gets Enabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#start-button").then(($el) => {
+      expect($el).to.not.have.attr("disabled");
+    });
+  });
+
+  it("Space Used as Reset Button: Check State is Work State", () => {
+    //start
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    //reset
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#state").should("have.text", "Work State");
+  });
+
+  it("Space Used as Reset Button: Check Background Color Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("body").then(($el) => {
+      expect($el).to.have.attr("data-state", "pomo");
+    });
+  });
+
+  it("Space Used as Reset Button: Check Break Reminders still Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#break-reminder").should("have.text", "");
+    cy.get("#reminder").then(($el) => {
+      expect($el).to.be.hidden;
+    });
+
+    cy.wait(1000); // Wait 1 second
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#break-reminder").should("have.text", "");
+    cy.get("#reminder").then(($el) => {
+      expect($el).to.be.hidden;
+    });
+  });
+
+  it("Space Used as Reset Button: Check Progress Bar Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#progress-pomo")
+      .should("have.css", "background-color")
+      .and("eq", "rgb(237, 102, 99)");
+  });
+});
+
+// Disabled keyboard shortcuts
+describe("Keyboard Shortcuts Disabled Tests", () => {
+  beforeEach(() => {
+    cy.visit("https://productoro-b340e.web.app/");
+    cy.wait(1000); // wait till the tutorial appears
+    cy.get(".introjs-skipbutton").click();
+
+    // Turn off the keyboard shortcuts
+    cy.get("#setting-icon").click();
+    cy.get("#keyboard-toggle").select('Off').should('have.value', 'off');
+    cy.get("#setting-icon").click();
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Timer Display Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.wait(1000); // Cypress will wait a second after the click
+    cy.get("#timer-display").should("have.text", "25:00");
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Start Button Still Enabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#start-button").then(($el) => {
+      expect($el).to.not.have.attr("disabled");
+    });
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Reset Button Still Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#reset-button").then(($el) => {
+      expect($el).to.have.attr("disabled");
+    });
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Check Counters Not Updated", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    
+    cy.wait(1000); // Cypress will wait a second after the click
+    cy.get("#streak").should("have.text", "0");
+    cy.get("#total").should("have.text", "0");
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Check State is Work State", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#state").should("have.text", "Work State");
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Check Background Color Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("body").then(($el) => {
+      expect($el).to.have.attr("data-state", "pomo");
+    });
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Check Break Reminders Still Disabled", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+    cy.get("#break-reminder").should("have.text", "");
+    cy.get("#reminder").then(($el) => {
+      expect($el).to.be.hidden;
+    });
+  });
+
+  it("Keyboard Shortcuts Disabled: Space Clicked, Progress Bar Unaffected", () => {
+    cy.get("body").trigger("keydown", {
+      key: "(Space character)",
+      code: "Space",
+      which: 32,
+    });
+
+    cy.get("#progress-pomo")
+      .should("have.css", "background-color")
+      .and("eq", "rgb(237, 102, 99)");
+  });
+});
