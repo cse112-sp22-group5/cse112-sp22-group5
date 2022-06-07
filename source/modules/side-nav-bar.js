@@ -144,7 +144,7 @@ function setDefaultSettings() {
     "bg-music": "None",
     "keyboard-toggle": "on",
     "notif-toggle": "on",
-    "alarm-volume": "100",
+    "alarm-volume": "50",
     "alarm-sounds": "1",
   };
   for (const key in defaultSetting) {

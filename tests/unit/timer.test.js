@@ -1,9 +1,13 @@
+// import { doc } from "prettier";
 import {
   onStart,
   onReset,
   checkState,
   updateState,
   timer,
+  //   customizeKey,
+  keyboardShortcut,
+  getSetKeys,
 } from "../../source/modules/timer.js";
 
 beforeEach(() => {
@@ -371,6 +375,35 @@ describe("Test settings modal", () => {
     const settingsBtn = document.getElementById("settings-button");
     let settingsBtnDisabled = settingsBtn.disabled;
     expect(settingsBtnDisabled).toBeFalsy;
+  });
+
+  describe("Keyboard shortcut tests", () => {
+    test("Check default shortcuts exist", () => {
+      expect(getSetKeys()).not.toBeNull();
+    }),
+      test("Check default shortcuts are set", () => {
+        expect(getSetKeys()).toEqual(
+          new Set(["Space", "ArrowUp", "ArrowDown"])
+        );
+      });
+    test("Check keyboard shortcut toggle", () => {
+      const keyboardToggle = document.getElementById("keyboard-toggle");
+      expect(keyboardToggle).toBeTruthy;
+    });
+    test("Check volume up", () => {
+      document.getElementById("alarm-volume").value = 50;
+      const volBefore = parseInt(document.getElementById("alarm-volume").value);
+      keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowUp" }));
+      const volAfter = parseInt(document.getElementById("alarm-volume").value);
+      expect(volAfter).toBeGreaterThan(volBefore);
+    });
+    test("Check volume down", () => {
+      document.getElementById("alarm-volume").value = 50;
+      const volBefore = parseInt(document.getElementById("alarm-volume").value);
+      keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowDown" }));
+      const volAfter = parseInt(document.getElementById("alarm-volume").value);
+      expect(volAfter).toBeLessThan(volBefore);
+    });
   });
   // test("settings modal is hidden when page loads", () => {
   //   let settingsmodal = document.getElementById("settings-modal");

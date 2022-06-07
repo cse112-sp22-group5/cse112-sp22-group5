@@ -14,13 +14,12 @@ let /** @type {number} **/
   /** @type {number} **/
   LONG_MINS = 15;
 
-let
+let /** @type {string} **/
+  startKey = "Space",
   /** @type {string} **/
-  startKey = 'Space',
+  volumeUpKey = "ArrowUp",
   /** @type {string} **/
-  volumeUpKey = 'ArrowUp',
-  /** @type {string} **/
-  volumneDownKey = 'ArrowDown',
+  volumneDownKey = "ArrowDown",
   /** @type {boolean} **/
   isCustomizingKey = false,
   /** @type {set}  **/
@@ -346,30 +345,33 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 function keyboardShortcut(event) {
-  if (document.getElementById('keyboard-toggle').value === 'on' && !isCustomizingKey){
-      if(event.code === startKey) {
-          // if the timer is static, start timer
-          if(document.getElementById('start-button').disabled == false ) {
-              onStart();
-          }
-          // if timer is running, reset timer
-          else {
-              if(timer.currState === WORK_STATE) {
-                  onReset();
-              }
-          }
+  if (
+    document.getElementById("keyboard-toggle").value === "on" &&
+    !isCustomizingKey
+  ) {
+    if (event.code === startKey) {
+      // if the timer is static, start timer
+      if (document.getElementById("start-button").disabled == false) {
+        onStart();
       }
+      // if timer is running, reset timer
+      else {
+        if (timer.currState === WORK_STATE) {
+          onReset();
+        }
+      }
+    }
 
-      if(event.code === volumeUpKey) {
-          let curVol = document.getElementById('alarm-volume').value
-          document.getElementById('alarm-volume').value = parseInt(curVol) + 10;
-      }
-      if(event.code === volumneDownKey) {
-          let curVol = document.getElementById('alarm-volume').value
-          document.getElementById('alarm-volume').value = parseInt(curVol) - 10;
-      }
+    if (event.code === volumeUpKey) {
+      let curVol = document.getElementById("alarm-volume").value;
+      document.getElementById("alarm-volume").value = parseInt(curVol) + 10;
+    }
+    if (event.code === volumneDownKey) {
+      let curVol = document.getElementById("alarm-volume").value;
+      document.getElementById("alarm-volume").value = parseInt(curVol) - 10;
+    }
 
-      event.preventDefault();
+    event.preventDefault();
   }
 }
 
@@ -377,60 +379,74 @@ function keyboardShortcut(event) {
  * @name customizeKey
  * @description Allows for keyboard shortcuts to be customized
  */
- function customizeKey() {
-  const KEY_ERROR = 'Key already in use. Try again.';
+function customizeKey() {
+  const KEY_ERROR = "Key already in use. Try again.";
 
   // check to see which keyboard customization button was pressed
-  if(document.getElementById('keyboard-toggle').value === 'on') {
+  if (document.getElementById("keyboard-toggle").value === "on") {
     isCustomizingKey = true;
     this.blur();
     // store current set key before replacing with "press key" prompt
-    let currentKey = this.innerHTML
-    this.innerHTML = 'Press a key';
+    let currentKey = this.innerHTML;
+    this.innerHTML = "Press a key";
 
-    setKeys.delete(currentKey)
+    setKeys.delete(currentKey);
 
     // remove respective keyboard shortcut in prep for new one
-    switch(this.id) {
-      case 'customize-start':
+    switch (this.id) {
+      case "customize-start":
         startKey = null;
         break;
-      case 'customize-volume-up':
+      case "customize-volume-up":
         volumeUpKey = null;
         break;
-      case 'customize-volume-down':
+      case "customize-volume-down":
         volumneDownKey = null;
         break;
       default:
-        this.innerHTML = 'Press a key';
+        this.innerHTML = "Press a key";
     }
 
     // take user input for key customization
-    document.addEventListener('keydown', event => {
-      isCustomizingKey = false;
-      if(event.code != currentKey && setKeys.has(event.code)) {
-        this.innerHTML = KEY_ERROR;
-        return;
-      }
-      this.innerHTML = event.code;
-      setKeys.add(event.code);
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        isCustomizingKey = false;
+        if (event.code != currentKey && setKeys.has(event.code)) {
+          this.innerHTML = KEY_ERROR;
+          return;
+        }
+        this.innerHTML = event.code;
+        setKeys.add(event.code);
 
-      // customize respective shortcut based on button pressed
-      switch(this.id) {
-        case 'customize-start':
-          startKey = event.code;
-          break;
-        case 'customize-volume-up':
-          volumeUpKey = event.code;
-          break;
-        case 'customize-volume-down':
-          volumneDownKey = event.code;
-          break;
-        default:
-          this.innerHTML = 'Press a key';
-      }
-    }, {once: true});
+        // customize respective shortcut based on button pressed
+        switch (this.id) {
+          case "customize-start":
+            startKey = event.code;
+            break;
+          case "customize-volume-up":
+            volumeUpKey = event.code;
+            break;
+          case "customize-volume-down":
+            volumneDownKey = event.code;
+            break;
+          default:
+            this.innerHTML = "Press a key";
+        }
+      },
+      { once: true }
+    );
   }
+}
+
+/**
+ * @name getSetKeys
+ * @function
+ * @description Gets the currently set keyboard shortcuts object for testing purposes
+ * @return {Set} The Set object containing the shortcuts
+ */
+function getSetKeys() {
+  return setKeys;
 }
 
 // export functions and variables for testing
@@ -445,6 +461,7 @@ export {
   revealSettings,
   hideSettings,
   customizeKey,
+  getSetKeys,
   SHORT_STATE,
   LONG_STATE,
   WORK_STATE,
