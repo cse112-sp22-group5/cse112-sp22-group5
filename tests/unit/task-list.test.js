@@ -1,6 +1,5 @@
 import {
   saveTask,
-  // selectTask,
   clearAllTasks,
   clearCompletedTasks,
 } from "../../source/modules/task-list.js";
@@ -300,11 +299,6 @@ describe(".saveTask()", () => {
   });
 });
 
-// Test Description: Check that selected task is being moved to top of list
-describe(".selectTask()", () => {
-  // This doesn't seem to be used anymore
-});
-
 // Test Description: Check that clear all tasks button removes all tasks from the task list and local storage
 describe(".clearAllTasks()", () => {
   test("clear 5 tasks", () => {
@@ -327,7 +321,7 @@ describe(".clearAllTasks()", () => {
 
 // Test Description:
 describe(".clearCompletedTasks()", () => {
-  test("clear 1 completed task", () => {
+  test("clear 1/1 completed task", () => {
     document.getElementById("task-name").value = "simple task";
     saveTask();
     document
@@ -336,20 +330,7 @@ describe(".clearCompletedTasks()", () => {
     clearCompletedTasks();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
-  });
-  test("clear 3/5 completed task", () => {
-    for (let i = 0; i < 5; i++) {
-      document.getElementById("task-name").value = "simple task";
-      saveTask();
-      if (i % 2 == 0) {
-        document
-          .getElementById("task-list")
-          .children[i].setAttribute("done", "true");
-      }
-    }
-    clearCompletedTasks();
-    let list = document.getElementById("task-list");
-    expect(list.children.length).toBe(2);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
   test("clear 5/5 completed tasks", () => {
     for (let i = 0; i < 5; i++) {
@@ -360,22 +341,29 @@ describe(".clearCompletedTasks()", () => {
         .children[i].setAttribute("done", "true");
     }
     clearCompletedTasks();
+    window.location.reload();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
   test("clear 2/5 completed tasks", () => {
+    let list = document.getElementById("task-list");
     for (let i = 0; i < 5; i++) {
-      document.getElementById("task-name").value = "simple task";
+      document.getElementById("task-name").value = "simple task " + (i + 1);
       saveTask();
     }
-    for (let i = 0; i < 2; i++) {
-      document
-        .getElementById("task-list")
-        .children[i].setAttribute("done", "true");
+
+    for (let j = 0; j < 2; j++) {
+      list.children[j].setAttribute("done", "true");
     }
     clearCompletedTasks();
-    let list = document.getElementById("task-list");
+    window.location.reload();
     expect(list.children.length).toBe(3);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task 3": false,
+      "simple task 4": false,
+      "simple task 5": false,
+    });
   });
 });
 
