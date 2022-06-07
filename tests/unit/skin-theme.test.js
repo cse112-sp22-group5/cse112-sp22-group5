@@ -383,7 +383,7 @@ describe(".loadThemeFromStorage()", () => {
     loadThemeFromStorage();
     let styles = getComputedStyle(document.body);
     expect(styles["background-image"]).toBe(
-      "url(https://wallpaperaccess.com/full/274198.jp)"
+      "url(https://wallpaperaccess.com/full/274198.jpg)"
     );
   });
 });
