@@ -33,7 +33,7 @@ onmessage = function(e) {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
 
-        if(minutes == 0 && seconds == 0) {
+        if(Number(minutes) === 0 && Number(seconds) === 0) {
             clearInterval(timerId);
         }
         // notify the main thread to update timer display

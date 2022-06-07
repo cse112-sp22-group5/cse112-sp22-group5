@@ -162,8 +162,8 @@ function updateState() {
  * @description Decrements the timer down to 0
  * @param {number} duration The total number of seconds the timer should run
  */
-function updateTimer(duration) {
-  var start = Date.now(),
+function updateTimer(duration) { 
+  let start = Date.now(),
   diff,
   minutes,
   seconds;
@@ -189,7 +189,7 @@ function updateTimer(duration) {
       `${minutes}:${seconds}`;
 
     // stop timer when minutes and seconds reach 0
-    if(minutes == 0 && seconds == 0) {
+    if(Number(minutes) === 0 && Number(seconds) === 0) {
       clearInterval(timerId);
 
       // if curr state is work state, update the streak and total pomo count
@@ -228,7 +228,7 @@ function updateTimer(duration) {
     // notify worker to start counting down timer
     worker.postMessage({
       msg: 'counts down timer',
-      payload: timer.currDuration
+      payload: duration
     });
     // handler to handle updating DOM elements whenever a message is received
     worker.onmessage = function(e) {
@@ -248,7 +248,7 @@ function updateTimer(duration) {
         } else {
           document.querySelector('#form-enabler').removeAttribute('disabled');
         }
-        
+
         // enable start button when timer ends
         document.getElementById('start-button').disabled = false;
         timer.counter.stateCtr++; 
