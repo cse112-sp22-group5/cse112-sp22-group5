@@ -119,7 +119,7 @@ function checkState() {
 function updateState() {
   // if the current state is a work state, next state a break
   if (timer.currState === WORK_STATE) {
-    //  document.getElementById('tasks').className = 'tasks';
+    // document.getElementById('tasks').className = 'tasks';
     // next state is a long break
     if (timer.counter.totalPomos % LONG_MOD === 0) {
       timer.currState = LONG_STATE;
@@ -163,109 +163,108 @@ function updateState() {
  * @param {number} duration The total number of seconds the timer should run
  */
 function updateTimer(duration) {
-    if (window.Worker) {
-        worker = new Worker('./modules/worker.js', {
-            type: 'module'
-        });
-        // notify worker to start counting down timer
-        worker.postMessage({
-            msg: 'counts down timer',
-            payload: timer.currDuration
-        });
-        // handler to handle updating DOM elements whenever a message is received
-        worker.onmessage = function(e) {
-            let minutes = e.data.minutes;
-            let seconds = e.data.seconds;
-            document.getElementById('timer-display').innerText = 
-                `${minutes}:${seconds}`;
+  var start = Date.now(),
+  diff,
+  minutes,
+  seconds;
 
-            // stop timer when minutes and seconds reach 0
-            if(minutes == 0 && seconds == 0) {
-                // if curr state is work state, update the streak and total pomo count
-                if(timer.currState === WORK_STATE) {                
-                    timer.counter.streak++;
-                    document.getElementById('streak').innerText = timer.counter.streak;
-            
-                    timer.counter.totalPomos++;
-                    document.getElementById('total').innerText = timer.counter.totalPomos;
-                } else {
-                    document.querySelector('#form-enabler').removeAttribute('disabled');
-                }
+  /**
+   * @name timerCountdown
+   * @function
+   * @description Begins the timer countdown and updates the timer display when web worker isn't supported
+   */
+  function timerCountdown() {
+    // get the number of seconds that have elapsed since updateTimer() was called
+    diff = duration - (((Date.now() - start) / MS) | 0);
 
-                // enable start button when timer ends
-                document.getElementById('start-button').disabled = false;
-                timer.counter.stateCtr++; 
+    // truncates the float
+    minutes = (diff / NUM_SEC) | 0;
+    seconds = (diff % NUM_SEC) | 0;
 
-                // transition to the next state
-                updateState();
-                showNotif(timer.currState);
-                if(document.getElementById('notif-toggle').checked) {
-                    playSound();
-                }
-            }
-        }
-    } else { // when the browser doesn't support web workers
-        var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
+    // add extra 0 to minutes/seconds if they are less than 10
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-        /**
-         * @name timerCountdown
-         * @function
-         * @description Begins the timer countdown and updates the timer display
-         */
-        function timerCountdown() {
-            // get the number of seconds that have elapsed since updateTimer() was called
-            diff = duration - (((Date.now() - start) / MS) | 0);
+    document.getElementById('timer-display').innerText= 
+      `${minutes}:${seconds}`;
 
-            // truncates the float
-            minutes = (diff / NUM_SEC) | 0;
-            seconds = (diff % NUM_SEC) | 0;
+    // stop timer when minutes and seconds reach 0
+    if(minutes == 0 && seconds == 0) {
+      clearInterval(timerId);
 
-            // add extra 0 to minutes/seconds if they are less than 10
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
+      // if curr state is work state, update the streak and total pomo count
+      if(timer.currState === WORK_STATE) {                
+        timer.counter.streak++;
+        document.getElementById('streak').innerText = timer.counter.streak;
+    
+        timer.counter.totalPomos++;
+        document.getElementById('total').innerText = timer.counter.totalPomos;
+      } else {
+        document.querySelector('#form-enabler').removeAttribute('disabled');
+      }
 
-            document.getElementById('timer-display').innerText= 
-                `${minutes}:${seconds}`;
+      // enable start button when timer ends
+      document.getElementById('start-button').disabled = false;
+      timer.counter.stateCtr++; 
 
-            // stop timer when minutes and seconds reach 0
-            if(minutes == 0 && seconds == 0) {
-                clearInterval(timerId);
-
-                // if curr state is work state, update the streak and total pomo count
-                if(timer.currState === WORK_STATE) {                
-                    timer.counter.streak++;
-                    document.getElementById('streak').innerText = timer.counter.streak;
-            
-                    timer.counter.totalPomos++;
-                    document.getElementById('total').innerText = timer.counter.totalPomos;
-                } else {
-                    document.querySelector('#form-enabler').removeAttribute('disabled');
-                }
-
-                // enable start button when timer ends
-                document.getElementById('start-button').disabled = false;
-                timer.counter.stateCtr++; 
-
-                // transition to the next state
-                updateState();
-                showNotif(timer.currState);
-                if(document.getElementById('notif-toggle').checked) {
-                    playSound();
-                }
-            }
-            if (diff <= 0) {
-                // add one second so that the countdown starts at the full duration
-                // example 05:00 not 04:59
-                start = Date.now() + 1000;
-            }
-        }
-
-        timerCountdown(); // don't wait a full second before the timer starts
-        timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+      // transition to the next state
+      updateState();
+      showNotif(timer.currState);
+      if(document.getElementById('notif-toggle').checked) {
+          playSound();
+      }
     }
+    if (diff <= 0) {
+      // add one second so that the countdown starts at the full duration
+      // example 05:00 not 04:59
+      start = Date.now() + 1000;
+    }
+  }
+
+  if (window.Worker) {
+    worker = new Worker('./modules/worker.js', {
+      type: 'module'
+    });
+    // notify worker to start counting down timer
+    worker.postMessage({
+      msg: 'counts down timer',
+      payload: timer.currDuration
+    });
+    // handler to handle updating DOM elements whenever a message is received
+    worker.onmessage = function(e) {
+      let minutes = e.data.minutes;
+      let seconds = e.data.seconds;
+      document.getElementById('timer-display').innerText = `${minutes}:${seconds}`;
+
+      // stop timer when minutes and seconds reach 0
+      if(minutes == 0 && seconds == 0) {
+        // if curr state is work state, update the streak and total pomo count
+        if(timer.currState === WORK_STATE) {                
+          timer.counter.streak++;
+          document.getElementById('streak').innerText = timer.counter.streak;
+        
+          timer.counter.totalPomos++;
+          document.getElementById('total').innerText = timer.counter.totalPomos;
+        } else {
+          document.querySelector('#form-enabler').removeAttribute('disabled');
+        }
+        
+        // enable start button when timer ends
+        document.getElementById('start-button').disabled = false;
+        timer.counter.stateCtr++; 
+
+        // transition to the next state
+        updateState();
+        showNotif(timer.currState);
+        if(document.getElementById('notif-toggle').checked) {
+          playSound();
+        }
+      }
+    }
+  } else { // when the browser doesn't support web workers
+    timerCountdown(); // don't wait a full second before the timer starts
+    timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  }
 }
 
 /**
@@ -330,22 +329,21 @@ function onStart() {
  * @description Resets the timer to the beginning of its current state when the reset button is clicked
  */
 function onReset() {
-    document.getElementById('reset-button').disabled = true;
-    document.getElementById('start-button').disabled = false;
-    document.getElementById('warning').style.display = 'none';
-    document.getElementById('form-enabler').removeAttribute('disabled');
-    timer.counter.streak = 0;
-    document.getElementById('streak').innerText = timer.counter.streak;
-    if (window.Worker) {
-        worker.postMessage({
-            msg: 'resets timer'
-        });
-    } else {
-        clearInterval(timerId);
-    }
-    checkState();
-    // document.getElementById('tasks').className = 'tasks';
-
+  document.getElementById('reset-button').disabled = true;
+  document.getElementById('start-button').disabled = false;
+  document.getElementById('warning').style.display = 'none';
+  document.getElementById('form-enabler').removeAttribute('disabled');
+  timer.counter.streak = 0;
+  document.getElementById('streak').innerText = timer.counter.streak;
+  if (window.Worker) {
+    worker.postMessage({
+      msg: 'resets timer'
+    });
+  } else {
+    clearInterval(timerId);
+  }
+  checkState();
+  // document.getElementById('tasks').className = 'tasks';
 }
 
 /**
