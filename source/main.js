@@ -27,9 +27,7 @@ import {
 } from "./modules/skins-themes.js";
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
-// import { googleTranslateElementInit } from "./modules/multi-language.js";
-
-// googleTranslateElementInit();
+import { googleTranslateElementInit } from "./modules/multi-language.js";
 
 // Timer
 document
@@ -101,6 +99,7 @@ window.addEventListener("load", () => {
   loadTaskListFromLocal();
   //document.documentElement.className = "default-theme";
   setBGImage();
+  googleTranslateElementInit();
 });
 
 // Walkthrough
