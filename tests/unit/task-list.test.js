@@ -2,6 +2,7 @@ import {
   saveTask,
   clearAllTasks,
   clearCompletedTasks,
+  // loadTaskListFromLocal,
 } from "../../source/modules/task-list.js";
 
 import {
@@ -330,7 +331,6 @@ describe(".clearCompletedTasks()", () => {
     clearCompletedTasks();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
-    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
   test("clear 5/5 completed tasks", () => {
     for (let i = 0; i < 5; i++) {
@@ -344,7 +344,6 @@ describe(".clearCompletedTasks()", () => {
     window.location.reload();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(0);
-    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
   test("clear 2/5 completed tasks", () => {
     let list = document.getElementById("task-list");
@@ -359,31 +358,50 @@ describe(".clearCompletedTasks()", () => {
     clearCompletedTasks();
     window.location.reload();
     expect(list.children.length).toBe(3);
-    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
-      "simple task 3": false,
-      "simple task 4": false,
-      "simple task 5": false,
-    });
   });
 });
 
 // Test Description: Check that tasks are being stored in local storage
 describe("local storage", () => {
   test("1 tasks saved locally", () => {
+    clearAllTasks();
     document.getElementById("task-name").value = "simple task";
     saveTask();
-    window.location.reload();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(1);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task": false,
+    });
+    window.location.reload();
+    expect(list.children.length).toBe(1);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task": false,
+    });
   });
   test("5 tasks saved locally", () => {
+    clearAllTasks();
     for (let i = 0; i < 5; i++) {
-      document.getElementById("task-name").value = "simple task";
+      document.getElementById("task-name").value = "simple task " + (i + 1);
       saveTask();
     }
-    window.location.reload();
     let list = document.getElementById("task-list");
     expect(list.children.length).toBe(5);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task 1": false,
+      "simple task 2": false,
+      "simple task 3": false,
+      "simple task 4": false,
+      "simple task 5": false,
+    });
+    window.location.reload();
+    expect(list.children.length).toBe(5);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task 1": false,
+      "simple task 2": false,
+      "simple task 3": false,
+      "simple task 4": false,
+      "simple task 5": false,
+    });
   });
 });
 
