@@ -110,6 +110,7 @@
 #tasks-div > h2 {
   text-align: center;
   font-size: 20px;
+  font-family: var(--side-bar-font-family);
 }
 
 #input-container {
@@ -332,4 +333,12 @@ select {
   width: 100%;
   z-index: 0;
   background: rgba(44, 44, 44, 0.4);
+}
+
+input,
+select,
+option,
+p,
+button {
+  font-family: var(--side-bar-font-family);
 }

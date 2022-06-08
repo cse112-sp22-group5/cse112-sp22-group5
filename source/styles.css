@@ -84,7 +84,7 @@ h2,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Varela Round", sans-serif;
 }
 
 h1 {
@@ -95,7 +95,7 @@ h1 {
 p,
 a,
 li {
-  font-family: "Helvetica", sans-serif;
+  font-family: var(--side-bar-font-family);
 }
 
 a {
