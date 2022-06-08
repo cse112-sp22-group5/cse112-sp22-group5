@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.87% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/23</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.87% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/23</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -147,11 +147,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,25 +180,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -228,10 +228,10 @@
  * @function
  * @description Displays ideas for breaks during short and long break states
  */
-function breakReminders() {
-  const BEGIN_TEXT = "An idea for how to spend your break: ";
+function <span class="fstat-no" title="function not covered" >breakReminders(</span>) {
+  const BEGIN_TEXT = <span class="cstat-no" title="statement not covered" >"An idea for how to spend your break: ";</span>
 &nbsp;
-  let breakIdeas = [
+  let breakIdeas = <span class="cstat-no" title="statement not covered" >[</span>
     "Create a 5-minute stretch routine",
     "Take a short walk",
     "Do breathing exercises",
@@ -264,27 +264,19 @@ function breakReminders() {
     "Find a new podcast",
   ];
 &nbsp;
-  let randomIdea = breakIdeas[Math.floor(Math.random() * breakIdeas.length)];
+  let randomIdea = <span class="cstat-no" title="statement not covered" >breakIdeas[Math.floor(Math.random() * breakIdeas.length)];</span>
 &nbsp;
-  document.getElementById("break-activity-container").style.display = "none";
-  document.getElementById("reminder").innerHTML = "";
+<span class="cstat-no" title="statement not covered" >  document.getElementById("break-activity-container").style.display = "none";</span>
+<span class="cstat-no" title="statement not covered" >  document.getElementById("reminder").innerHTML = "";</span>
 &nbsp;
-  switch (timer.currState) {
+<span class="cstat-no" title="statement not covered" >  switch (timer.currState) {</span>
     case WORK_STATE:
-      document.getElementById("break-activity-container").style.display =
+<span class="cstat-no" title="statement not covered" >      document.getElementById("break-activity-container").style.display =</span>
         "none";
-      document.getElementById("reminder").style.display = "none";
-      break;
+<span class="cstat-no" title="statement not covered" >      document.getElementById("reminder").style.display = "none";</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     case SHORT_STATE:
-      document.getElementById("break-activity-container").style.display =
-        "flex";
-      document.getElementById("mascot").style.display = "block";
-      document.getElementById("reminder").style.display = "block";
-      document.getElementById("reminder").innerHTML = BEGIN_TEXT + randomIdea;
-      break;
-&nbsp;
-<span class="branch-2 cbranch-no" title="branch not covered" >    case LONG_STATE:</span>
 <span class="cstat-no" title="statement not covered" >      document.getElementById("break-activity-container").style.display =</span>
         "flex";
 <span class="cstat-no" title="statement not covered" >      document.getElementById("mascot").style.display = "block";</span>
@@ -292,7 +284,15 @@ function breakReminders() {
 <span class="cstat-no" title="statement not covered" >      document.getElementById("reminder").innerHTML = BEGIN_TEXT + randomIdea;</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
-<span class="branch-3 cbranch-no" title="branch not covered" >    default:</span>
+    case LONG_STATE:
+<span class="cstat-no" title="statement not covered" >      document.getElementById("break-activity-container").style.display =</span>
+        "flex";
+<span class="cstat-no" title="statement not covered" >      document.getElementById("mascot").style.display = "block";</span>
+<span class="cstat-no" title="statement not covered" >      document.getElementById("reminder").style.display = "block";</span>
+<span class="cstat-no" title="statement not covered" >      document.getElementById("reminder").innerHTML = BEGIN_TEXT + randomIdea;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
+&nbsp;
+    default:
 <span class="cstat-no" title="statement not covered" >      document.getElementById("break-reminder-container").style.display =</span>
         "none";
 <span class="cstat-no" title="statement not covered" >      document.getElementById("mascot").style.display = "none";</span>
@@ -310,7 +310,7 @@ export { breakReminders };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jun 08 2022 02:45:47 GMT-0700 (Pacific Daylight Time)
+                at Wed Jun 08 2022 09:21:06 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="prettify.js"></script>
