@@ -14,11 +14,11 @@ beforeEach(() => {
       <meta charset='UTF-8'>
       <meta name='viewport' content='width=device-width, initial-scale=1.0'>
       <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
-      <link rel='stylesheet' href='styles.css'>
+      <link rel='stylesheet' href='./styles/styles.css'>
       <link rel="stylesheet" href="./third_party/intro.min.css">
       <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
   
-      <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
       <script type="module" src="./main.js"></script>
       
       <title>Productoro</title>
@@ -27,24 +27,20 @@ beforeEach(() => {
       <div id='blur-background'></div>
       <!-- IntroJs javascript -->
       <script src="./third_party/intro.min.js"></script> 
-      <header> 
-          <h1 id="title">Productoro</h1>
-          <nav id="options-btn-container">
-              <button type=button class='help-button' id='help-button' hidden>?</button>
-              <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
-          </nav>
+  
+      <header>
+          <h1>Productoro</h1>
       </header>
   
       <main>
   
-          <!-- Break Reminder -->
-          <p id='break-reminder' style='visibility: hidden'></p>
-          <p id='reminder' onload='breakReminders()' style='visibility: hidden'></p>  
+          <div id="break-activity-container">
+              <img id="mascot" src="./img/tomato.png" style="display: none;">
+              <div>
+                  <p id='reminder' onload='breakReminders()' style="display: none;"></p>
+              </div>
+          </div>
   
-          <!-- Current State  -->
-          <h2 class='text-center' id='state' hidden>Work State</h2> 
-  
-          <!-- Progress Bar -->
           <section class="progress-bar">
               <div id="progress-pomo">
                   <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
@@ -57,27 +53,33 @@ beforeEach(() => {
               </div>
           </section>
   
-          <!-- Timer -->
-          <div class='timer'>
-              <p id="timer-display" data-state='pomo'>25:00</p>
-              <p>Streak: <span id="streak">0</span></p>
-              <p>Completed: <span id="total">0</span></p>
-          </div>
-          
-          <!-- Start Reset Button -->
-          <div id='start-reset'>
-              <button type=button class='timer-button' id='start-button'>Start</button>
-              <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
-          </div>
-  
-          <!-- Current Task -->
-          <section class="current-task" id="current-task-section">
-              <h2>Current Task</h2>
-              <p id="current-task"></p>
-          </section>
-  
-      </main>
+          <div id="timer-container">
+              <svg viewBox=" 0 0 100 100">
+                  <circle class="inner__circle" cx="50%" cy="50%" r="48%"></circle>
+              </svg>
       
+              <div id="timer-content">
+                  <p id="state">Work State</p>
+                  <p id="timer-display" data-state="pomo">25:00</p>
+      
+                  <div id="streak-completed-container">
+                      <p>Streak: <span id="streak">0</span></p>
+                      <p>Completed: <span id="total">0</span></p>
+                  </div>
+      
+                  <div id="start-reset">
+                      <button type=button class='timer-button' id='start-button'>Start</button>
+                      <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="current-task" id="current-task-section">
+              <h2>Current Task:</h2>
+              <p id="current-task"></p>
+          </div>
+      </main>
+  
       <footer>
           <p>Made by the <a href="../index.html">Dream Team</a></p>
           <p>Taken by the 10x Racoons</p>
@@ -127,39 +129,24 @@ beforeEach(() => {
               <form id='time-limits'>
                   <h3>Time (minutes)</h3>
                   <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
-                  <fieldset class='setting-flex-container' id='form-enabler'>
                       
-                      <div class='setting-flex-item'>
-                          <label id='work-label'>Work Session</label> 
-                          <select name='work-time' id='work-time'>
-                              <option id='work-option25' value='25' selected>25</option>
-                              <option id='work-option30' value='30'>30</option>
-                              <option id='work-option45' value='45'>45</option>
-                              <option id='work-option60' value='60'>60</option>
-                          </select>
-                      </div>
+                      <fieldset id="form-enabler">
+                          <div>
+                              <label id="work-label">Work Session</label>
+                              <input id="work-time" for="work-label" type="number" step="1" min="25" value="25">
+                          </div>
   
-                      <div class='setting-flex-item'>
-                          <label id='short-break-label'>Short Break</label>
-                          <select name='short-break-time' id='short-break-time'>
-                          <option id='sb-option5' value='5' selected>5</option>
-                          <option id='sb-option10' value='10'>10</option>
-                          <option id='sb-option15' value='15'>15</option>
-                          </select>
-                      </div>
+                          <div>
+                              <label id="short-break-label">Short Break</label>
+                              <input id="short-break-time" for="short-break-label" type="number" min="5" value="5">
+                          </div>
   
-                      <div class='setting-flex-item'>
-                          <label id='long-break-label'>Long Break</label>
-                          <select name='long-break-time' id='long-break-time'>
-                          <option id='lb-option15' value='15' selected>15</option>
-                          <option id='lb-option20' value='20'>20</option>
-                          <option id='lb-option25' value='25'>25</option>
-                          <option id='lb-option30' value='30'>30</option>
-                          </select>
-                      </div>
-                  </fieldset>  
+                          <div>
+                              <label id="long-break-label">Long Break</label>
+                              <input id="long-break-time" for="long-break-label" type="number" min="15" value="15">
+                          </div>
+                      </fieldset>
       
-                  <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                   <h3 >Background Music</h3>
                   <fieldset class='setting-flex-container' id="bg-music-container">
                       <div class='setting-flex-item'>
@@ -174,7 +161,9 @@ beforeEach(() => {
                   
                   <div id='current-mix' style='display: none;'>
                       <p id='track-name'></p>
-                      <audio id='background-audio' controls></audio>
+                      <audio id='background-audio' controls>
+                          Browser does not support audio element.
+                      </audio>
                       <button type=button id='prev-track-button' style='position: relative;'>Prev</button>
                       <button type=button id='nxt-track-button'  style='position: relative;'>Next</button>
                   </div>
@@ -227,13 +216,14 @@ beforeEach(() => {
                       <label> Select your language</label>
                       <div id="google-translate-element"></div> 
                     </div>
-                 
-                  
+              
+              <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
+              
               </form> 
              
               <div class='empty-box'></div>   
               <div class="bottom">
-                  <input type="button" id="default-settings" value='Set to Default'>
+                  <input type="button" id="default-settings" value="Set to Default">
               </div>
                
       </div>
@@ -249,8 +239,8 @@ beforeEach(() => {
           <label>Current Tasks:</label>
           <ul id="task-list"></ul>
           <div class="bottom">
-            <input type="button" id="clear-completed-tasks-button" value='Clear Completed Tasks'>
-            <input type="button" id="clear-tasks-button" value='Clear All'>
+            <input type="button" id="clear-completed-tasks-button" value="Clear Completed Tasks">
+            <input type="button" id="clear-tasks-button" value="Clear All">
           </div>
       </div>
   
@@ -271,14 +261,14 @@ beforeEach(() => {
           <h3>Color Blindness</h3>
           <fieldset class='setting-flex-container'>
               <div class='setting-flex-item'>
-                  <label for='color-blindness'>Enable Color Blindness</label>
+                  <label for='color-blindness'>Enable Color Blindness (default themes only)</label>
                   <select name='color-blindness' id='color-blindness'>
                       <option value='4'          >On</option>
-                      <option value='1' selected>Off</option>
+                      <option value='0' selected>Off</option>
                   </select>
                 </div>
           </fieldset>
-  
+          
           <h3>Upload Your Own Image: (url only)</h3>
           <fieldset class='setting-flex-container'>
               <div class='setting-flex-item'>
@@ -288,35 +278,12 @@ beforeEach(() => {
           </fieldset> 
   
           <h3>Background Images: </h3>
-          
-          <div class="setting-grid" id="background-images">
-            <div class="grid-item">
-                <img src="./img/background/bg-0.jpg">
-                <input type="radio" value="0" name="bgImg">
-            </div>
-            
-            <div class="grid-item">
-                <img src="./img/background/bg-1.jpg">
-                <input type="radio" value="1" name="bgImg">
-            </div>
-            
-            <div class="grid-item">
-                <img src="./img/background/bg-2.jpg">
-                <input type="radio" value="2" name="bgImg">
-            </div>
-            
-            <div class="grid-item">
-                <img src="./img/background/bg-3.jpg">
-                <input type="radio" value="3" name="bgImg">
-            </div>
-          </div>
-
+          <div class='setting-grid' id='background-images'></div>
           <div class='empty-box'></div>
           <div class="bottom">
               <input type="button" id="theme-default" value='Set to Default'>
           </div>
       </div>
-      
   </body>
   </html>`;
 });
@@ -383,7 +350,7 @@ describe(".loadThemeFromStorage()", () => {
     loadThemeFromStorage();
     let styles = getComputedStyle(document.body);
     expect(styles["background-image"]).toBe(
-      "url(https://wallpaperaccess.com/full/274198.jp)"
+      "url(https://wallpaperaccess.com/full/274198.jpg)"
     );
   });
 });
