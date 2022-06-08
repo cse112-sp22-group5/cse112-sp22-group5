@@ -39,7 +39,7 @@ body[data-state="long"] {
 
 header > h1 {
   text-align: center;
-  font-size: 60px;
+  font-size: 55px;
   margin-bottom: 10px;
 }
 
@@ -67,18 +67,18 @@ h2,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--side-bar-font-family);
 }
 
 h1 {
-  font: 400 48px "Roboto", sans-serif;
+  font: 400 48px var(--side-bar-font-family);
   color: var(--text-dark);
 }
 
 p,
 a,
 li {
-  font-family: "Helvetica", sans-serif;
+  font-family: var(--side-bar-font-family);
 }
 
 a {
