@@ -110,4 +110,4 @@ function setTrackToPrev() {
 }
 
 // export functions and variables for testing
-export { setBackgroundMusic };
+export { setBackgroundMusic, CURRENT_TRACKS, CURRENT_TRACK_INDX };

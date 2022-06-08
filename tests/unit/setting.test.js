@@ -1,3 +1,11 @@
+import {
+    setBackgroundMusic,
+    CURRENT_TRACKS,
+    CURRENT_TRACK_INDX
+} from "../../source/modules/background-music.js";
+
+let pauseStub, playStub;
+
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
     <html lang='en'>
@@ -240,13 +248,56 @@ beforeEach(() => {
     </html>`;
 });
 
-describe("Time(minutes)", () => {
-  test("simple test", () => {
-    expect(1).toBe(1);
-  });
+describe("Background Music", () => {
+    test("Check background music is set correctly to None", () => {
+        let pauseStub = jest
+            .spyOn(window.HTMLMediaElement.prototype, 'pause')
+            .mockImplementation(() => {});
+        let bgMusicDropDown = document.getElementById("bg-music");
+        bgMusicDropDown.value = "None";
+        setBackgroundMusic();
+        expect(CURRENT_TRACKS).toEqual([]);
+        expect(pauseStub).toHaveBeenCalled();
+    });
+    test("Check background music is set correctly to Lofi", () => {
+        let playStub = jest
+            .spyOn(window.HTMLMediaElement.prototype, 'play')
+            .mockImplementation(() => {});
+        let bgMusicDropDown = document.getElementById("bg-music");
+        bgMusicDropDown.value = "Lofi";
+        setBackgroundMusic();
+        expect(CURRENT_TRACKS.length).toBeGreaterThan(0);
+        expect(playStub).toHaveBeenCalled();
+    });
+    test("Check background music is set correctly to Classical", () => {
+        let playStub = jest
+            .spyOn(window.HTMLMediaElement.prototype, 'play')
+            .mockImplementation(() => {});
+        let bgMusicDropDown = document.getElementById("bg-music");
+        bgMusicDropDown.value = "Classical";
+        setBackgroundMusic();
+        expect(CURRENT_TRACKS.length).toBeGreaterThan(0);
+        expect(playStub).toHaveBeenCalled();
+    });
+    test("Set previous track", () => {
+        let bgMusicDropDown = document.getElementById("bg-music");
+        let prevBtn = document.getElementById("prev-track-button");
+        bgMusicDropDown.value = "Lofi";
+        setBackgroundMusic();
+        let afterInd = CURRENT_TRACK_INDX < 0 ? CURRENT_TRACKS.length - 1 : CURRENT_TRACK_INDX - 1;
+        prevBtn.click();
+        expect(CURRENT_TRACK_INDX).toEqual(afterInd);   
+    });
+    test("Set next track", () => {
+        let bgMusicDropDown = document.getElementById("bg-music");
+        let nxtBtn = document.getElementById("nxt-track-button");
+        bgMusicDropDown.value = "Lofi";
+        setBackgroundMusic();
+        let afterInd = (CURRENT_TRACK_INDX + 1) % CURRENT_TRACKS.length;
+        nxtBtn.click();
+        expect(CURRENT_TRACK_INDX).toEqual(afterInd);   
+    });
 });
-
-describe("Background Music", () => {});
 
 describe("Keyboard Shortcuts", () => {});
 
