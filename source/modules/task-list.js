@@ -135,6 +135,7 @@ function createCustomTaskTag(taskName, isDone = false) {
     taskLabel.addEventListener("keypress", (event) => {
       if (event.key == "Enter") {
         taskLabel.setAttribute("readonly", "");
+        taskLabel.setAttribute("for", taskLabel.value);
         taskLabel.blur();
         if (isCurrentTaskEdited) currentTask.innerText = taskLabel.value;
         storeToLocal(
