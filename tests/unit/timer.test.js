@@ -473,4 +473,13 @@ describe("Keyboard shortcut tests", () => {
     document.dispatchEvent(new KeyboardEvent("keydown", { code: "KeyS" }));
     expect(getSetKeys()).toContain("KeyS");
   });
+  test("shortcut customization but key is already in use", () => {
+    let volUpShortcutBtn = document.getElementById("customize-volume-up");
+    let volUpTextBefore = volUpShortcutBtn.innerHTML;
+    volUpShortcutBtn.addEventListener("click", customizeKey);
+    volUpShortcutBtn.click();
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "Space" }));
+    let volUpTextAfter = volUpShortcutBtn.innerHTML;
+    expect(volUpTextAfter).not.toEqual(volUpTextBefore);
+  });
 });
