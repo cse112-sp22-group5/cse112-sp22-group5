@@ -1,11 +1,8 @@
 import {
-  onStart,
-  onReset,
-  checkState,
-  updateState,
-  timer,
-} from "../../source/modules/timer.js";
-
+  sidebarInit,
+  toggleMenu,
+  setIconBackGround,
+} from "../../source/modules/side-nav-bar.js";
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
 <html lang='en'>
@@ -271,121 +268,90 @@ beforeEach(() => {
     </div>
 </body>
 </html>`;
+  sidebarInit();
 });
 
-describe(".onStart()", () => {
-  test("updates state to work state", () => {
-    timer.counter.stateCtr = 0;
-    onStart();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
+describe(".toggleMenu()", () => {
+  test("Toggle Menu - Setting", () => {
+    toggleMenu("setting-div");
+    const panel = getComputedStyle(document.querySelector("#setting-div"));
+    expect(panel["width"]).not.toBe("0");
   });
-  test("disables start button", () => {
-    onStart();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("enables reset button", () => {
-    onStart();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeFalsy();
-  });
-});
 
-describe(".onReset()", () => {
-  test("resets during work state", () => {
-    timer.currState = "Work State";
-    onReset();
-    let timerdisplay = document.getElementById("timer-display").innerText;
-    let state = document.getElementById("state").innerText;
-    expect(timerdisplay).toBe("25:00");
-    expect(state).toBe("Work State");
+  test("Toggle Menu - tasks", () => {
+    toggleMenu("tasks-div");
+    const panel = getComputedStyle(document.querySelector("#tasks-div"));
+    expect(panel["width"]).not.toBe("0");
   });
-  test("enables start button", () => {
-    onReset();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeFalsy();
+
+  test("Toggle Menu - theme", () => {
+    toggleMenu("theme-div");
+    const panel = getComputedStyle(document.querySelector("#theme-div"));
+    expect(panel["width"]).not.toBe("0");
   });
-  test("disables reset button", () => {
-    onReset();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
+
+  test("Toggle Menu - close all", () => {
+    toggleMenu(null);
+    const settingPanel = getComputedStyle(
+      document.querySelector("#setting-div")
+    );
+    const themePanel = getComputedStyle(document.querySelector("#theme-div"));
+    const taskPanel = getComputedStyle(document.querySelector("#tasks-div"));
+    expect(settingPanel["width"]).toBe("");
+    expect(themePanel["width"]).toBe("");
+    expect(taskPanel["width"]).toBe("");
   });
 });
 
-describe(".checkState()", () => {
-  test("updates to work state", () => {
-    timer.counter.totalPomos = 0;
-    timer.counter.stateCtr = 0;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
-  });
-  test("updates to short break state", () => {
-    timer.counter.totalPomos = 1;
-    timer.counter.stateCtr = 1;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Short Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("updates to long break state", () => {
-    timer.counter.totalPomos = 4;
-    timer.counter.stateCtr = 7;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Long Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-});
+describe(".setIconBackGround()", () => {
+  test("set setting icon background", () => {
+    setIconBackGround("setting-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(true);
 
-describe(".updateState()", () => {
-  test("short break -> updates -> work state", () => {
-    timer.currState = "Short Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(false);
   });
-  test("long break -> updates -> work state", () => {
-    timer.currState = "Long Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
+
+  test("set task-list icon background", () => {
+    setIconBackGround("tasks-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(true);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(false);
   });
-  test("work state -> updates -> shork break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
-  });
-  test("work state -> updates -> long break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
+
+  test("set theme icon background", () => {
+    setIconBackGround("theme-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(true);
   });
 });

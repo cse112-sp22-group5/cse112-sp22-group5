@@ -17,9 +17,9 @@ let /** @type {number} **/
 const /** @constant @type {string} **/
   WORK_STATE = "Work State",
   /** @constant @type {string} **/
-  SHORT_STATE = "Short Break State",
+  SHORT_STATE = "Short Break",
   /** @constant @type {string} **/
-  LONG_STATE = "Long Break State";
+  LONG_STATE = "Long Break";
 
 const /** @constant @type {number} */
   MS = 1000,
@@ -31,11 +31,16 @@ const /** @constant @type {number} **/
   /** @constant @type {string} **/
   LONG_MOD = 4;
 
-/**
- * Stores the set interval
- * @type {number}
- */
-let timerId;
+let /**
+   * Stores the set interval
+   * @type {number}
+   */
+  timerId,
+  /**
+   * Stores the reference to the web worker
+   * @type {object}
+   */
+  worker;
 
 /**
  * A timer
@@ -113,7 +118,7 @@ function checkState() {
 function updateState() {
   // if the current state is a work state, next state a break
   if (timer.currState === WORK_STATE) {
-    //  document.getElementById('tasks').className = 'tasks';
+    // document.getElementById('tasks').className = 'tasks';
     // next state is a long break
     if (timer.counter.totalPomos % LONG_MOD === 0) {
       timer.currState = LONG_STATE;
@@ -157,7 +162,7 @@ function updateState() {
  * @param {number} duration The total number of seconds the timer should run
  */
 function updateTimer(duration) {
-  var start = Date.now(),
+  let start = Date.now(),
     diff,
     minutes,
     seconds;
@@ -165,7 +170,7 @@ function updateTimer(duration) {
   /**
    * @name timerCountdown
    * @function
-   * @description Begins the timer countdown and updates the timer display
+   * @description Begins the timer countdown and updates the timer display when web worker isn't supported
    */
   function timerCountdown() {
     // get the number of seconds that have elapsed since updateTimer() was called
@@ -183,9 +188,8 @@ function updateTimer(duration) {
       "timer-display"
     ).innerText = `${minutes}:${seconds}`;
 
-    document.title = `Productoro - ${minutes}:${seconds}`;
     // stop timer when minutes and seconds reach 0
-    if (minutes == 0 && seconds == 0) {
+    if (Number(minutes) === 0 && Number(seconds) === 0) {
       clearInterval(timerId);
 
       // if curr state is work state, update the streak and total pomo count
@@ -206,8 +210,7 @@ function updateTimer(duration) {
       // transition to the next state
       updateState();
       showNotif(timer.currState);
-      let alarm = document.getElementById("notif-toggle").value;
-      if (alarm == "on") {
+      if (document.getElementById("notif-toggle").checked) {
         playSound();
       }
     }
@@ -217,14 +220,54 @@ function updateTimer(duration) {
       start = Date.now() + 1000;
     }
   }
-  if (diff <= 0) {
-    // add one second so that the countdown starts at the full duration
-    // example 05:00 not 04:59
-    start = Date.now() + 1000;
-  }
 
-  timerCountdown(); // don't wait a full second before the timer starts
-  timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  if (window.Worker) {
+    worker = new Worker("./modules/worker.js", {
+      type: "module",
+    });
+    // notify worker to start counting down timer
+    worker.postMessage({
+      msg: "counts down timer",
+      payload: duration,
+    });
+    // handler to handle updating DOM elements whenever a message is received
+    worker.onmessage = function (e) {
+      let minutes = e.data.minutes;
+      let seconds = e.data.seconds;
+      document.getElementById(
+        "timer-display"
+      ).innerText = `${minutes}:${seconds}`;
+
+      // stop timer when minutes and seconds reach 0
+      if (minutes == 0 && seconds == 0) {
+        // if curr state is work state, update the streak and total pomo count
+        if (timer.currState === WORK_STATE) {
+          timer.counter.streak++;
+          document.getElementById("streak").innerText = timer.counter.streak;
+
+          timer.counter.totalPomos++;
+          document.getElementById("total").innerText = timer.counter.totalPomos;
+        } else {
+          document.querySelector("#form-enabler").removeAttribute("disabled");
+        }
+
+        // enable start button when timer ends
+        document.getElementById("start-button").disabled = false;
+        timer.counter.stateCtr++;
+
+        // transition to the next state
+        updateState();
+        showNotif(timer.currState);
+        if (document.getElementById("notif-toggle").checked) {
+          playSound();
+        }
+      }
+    };
+  } else {
+    // when the browser doesn't support web workers
+    timerCountdown(); // don't wait a full second before the timer starts
+    timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  }
 }
 
 /**
@@ -313,10 +356,15 @@ function onReset() {
   document.title = "Productoro";
   timer.counter.streak = 0;
   document.getElementById("streak").innerText = timer.counter.streak;
-  clearInterval(timerId);
+  if (window.Worker) {
+    worker.postMessage({
+      msg: "resets timer",
+    });
+  } else {
+    clearInterval(timerId);
+  }
   checkState();
-
-  //    document.getElementById('tasks').className = 'tasks';
+  // document.getElementById('tasks').className = 'tasks';
 }
 
 /**
