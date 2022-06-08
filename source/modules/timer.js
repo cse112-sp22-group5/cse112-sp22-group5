@@ -31,17 +31,16 @@ const /** @constant @type {number} **/
   /** @constant @type {string} **/
   LONG_MOD = 4;
 
-let
-    /** 
-     * Stores the set interval
-     * @type {number} 
-     */
-    timerId,
-    /** 
-     * Stores the reference to the web worker
-     * @type {object} 
-     */
-    worker;    
+let /**
+   * Stores the set interval
+   * @type {number}
+   */
+  timerId,
+  /**
+   * Stores the reference to the web worker
+   * @type {object}
+   */
+  worker;
 
 /**
  * A timer
@@ -162,11 +161,11 @@ function updateState() {
  * @description Decrements the timer down to 0
  * @param {number} duration The total number of seconds the timer should run
  */
-function updateTimer(duration) { 
+function updateTimer(duration) {
   let start = Date.now(),
-  diff,
-  minutes,
-  seconds;
+    diff,
+    minutes,
+    seconds;
 
   /**
    * @name timerCountdown
@@ -179,39 +178,40 @@ function updateTimer(duration) {
 
     // truncates the float
     minutes = (diff / NUM_SEC) | 0;
-    seconds = (diff % NUM_SEC) | 0;
+    seconds = diff % NUM_SEC | 0;
 
     // add extra 0 to minutes/seconds if they are less than 10
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    document.getElementById('timer-display').innerText= 
-      `${minutes}:${seconds}`;
+    document.getElementById(
+      "timer-display"
+    ).innerText = `${minutes}:${seconds}`;
 
     // stop timer when minutes and seconds reach 0
-    if(Number(minutes) === 0 && Number(seconds) === 0) {
+    if (Number(minutes) === 0 && Number(seconds) === 0) {
       clearInterval(timerId);
 
       // if curr state is work state, update the streak and total pomo count
-      if(timer.currState === WORK_STATE) {                
+      if (timer.currState === WORK_STATE) {
         timer.counter.streak++;
-        document.getElementById('streak').innerText = timer.counter.streak;
-    
+        document.getElementById("streak").innerText = timer.counter.streak;
+
         timer.counter.totalPomos++;
-        document.getElementById('total').innerText = timer.counter.totalPomos;
+        document.getElementById("total").innerText = timer.counter.totalPomos;
       } else {
-        document.querySelector('#form-enabler').removeAttribute('disabled');
+        document.querySelector("#form-enabler").removeAttribute("disabled");
       }
 
       // enable start button when timer ends
-      document.getElementById('start-button').disabled = false;
-      timer.counter.stateCtr++; 
+      document.getElementById("start-button").disabled = false;
+      timer.counter.stateCtr++;
 
       // transition to the next state
       updateState();
       showNotif(timer.currState);
-      if(document.getElementById('notif-toggle').checked) {
-          playSound();
+      if (document.getElementById("notif-toggle").checked) {
+        playSound();
       }
     }
     if (diff <= 0) {
@@ -222,46 +222,49 @@ function updateTimer(duration) {
   }
 
   if (window.Worker) {
-    worker = new Worker('./modules/worker.js', {
-      type: 'module'
+    worker = new Worker("./modules/worker.js", {
+      type: "module",
     });
     // notify worker to start counting down timer
     worker.postMessage({
-      msg: 'counts down timer',
-      payload: duration
+      msg: "counts down timer",
+      payload: duration,
     });
     // handler to handle updating DOM elements whenever a message is received
-    worker.onmessage = function(e) {
+    worker.onmessage = function (e) {
       let minutes = e.data.minutes;
       let seconds = e.data.seconds;
-      document.getElementById('timer-display').innerText = `${minutes}:${seconds}`;
+      document.getElementById(
+        "timer-display"
+      ).innerText = `${minutes}:${seconds}`;
 
       // stop timer when minutes and seconds reach 0
-      if(minutes == 0 && seconds == 0) {
+      if (minutes == 0 && seconds == 0) {
         // if curr state is work state, update the streak and total pomo count
-        if(timer.currState === WORK_STATE) {                
+        if (timer.currState === WORK_STATE) {
           timer.counter.streak++;
-          document.getElementById('streak').innerText = timer.counter.streak;
-        
+          document.getElementById("streak").innerText = timer.counter.streak;
+
           timer.counter.totalPomos++;
-          document.getElementById('total').innerText = timer.counter.totalPomos;
+          document.getElementById("total").innerText = timer.counter.totalPomos;
         } else {
-          document.querySelector('#form-enabler').removeAttribute('disabled');
+          document.querySelector("#form-enabler").removeAttribute("disabled");
         }
 
         // enable start button when timer ends
-        document.getElementById('start-button').disabled = false;
-        timer.counter.stateCtr++; 
+        document.getElementById("start-button").disabled = false;
+        timer.counter.stateCtr++;
 
         // transition to the next state
         updateState();
         showNotif(timer.currState);
-        if(document.getElementById('notif-toggle').checked) {
+        if (document.getElementById("notif-toggle").checked) {
           playSound();
         }
       }
-    }
-  } else { // when the browser doesn't support web workers
+    };
+  } else {
+    // when the browser doesn't support web workers
     timerCountdown(); // don't wait a full second before the timer starts
     timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
   }
@@ -276,6 +279,21 @@ function setCustomTime() {
   let sbTime = document.getElementById("short-break-time");
   let lbTime = document.getElementById("long-break-time");
   let warning = document.getElementById("warning");
+
+  // prevent number inputs from showing below the minimum and upating the timer even if it below the min
+  if (Number(wTime.value) < 25) {
+    POMO_MINS = 25;
+    wTime.value = POMO_MINS;
+    return;
+  } else if (Number(sbTime.value) < 5) {
+    SHORT_MINS = 5;
+    sbTime.value = 5;
+    return;
+  } else if (Number(lbTime.value) < 15) {
+    LONG_MINS = 15;
+    lbTime.value = LONG_MINS;
+    return;
+  }
 
   if (
     Number(wTime.value) <= Number(sbTime.value) ||
@@ -309,7 +327,8 @@ function setCustomTime() {
  */
 function onStart() {
   getNotificationStatus();
-  document.querySelector("#form-enabler").disabled = "disabled";
+  document.querySelector("#form-enabler").disabled = true;
+  document.getElementById("default-settings").disabled = true; // disable default settings btn
 
   // enable a warning if the user tries changing the time limits during a pomo
   document.getElementById("warning").innerText =
@@ -329,21 +348,51 @@ function onStart() {
  * @description Resets the timer to the beginning of its current state when the reset button is clicked
  */
 function onReset() {
-  document.getElementById('reset-button').disabled = true;
-  document.getElementById('start-button').disabled = false;
-  document.getElementById('warning').style.display = 'none';
-  document.getElementById('form-enabler').removeAttribute('disabled');
+  document.getElementById("reset-button").disabled = true;
+  document.getElementById("start-button").disabled = false;
+  document.getElementById("warning").style.display = "none";
+  document.getElementById("default-settings").disabled = false;
+  document.getElementById("form-enabler").removeAttribute("disabled");
+  document.title = "Productoro";
   timer.counter.streak = 0;
-  document.getElementById('streak').innerText = timer.counter.streak;
+  document.getElementById("streak").innerText = timer.counter.streak;
   if (window.Worker) {
     worker.postMessage({
-      msg: 'resets timer'
+      msg: "resets timer",
     });
   } else {
     clearInterval(timerId);
   }
   checkState();
   // document.getElementById('tasks').className = 'tasks';
+}
+
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ */
+function setDefaultSettings() {
+  POMO_MINS = 25;
+  SHORT_MINS = 5;
+  LONG_MINS = 15;
+
+  const defaultSetting = {
+    "work-time": "25",
+    "short-break-time": "5",
+    "long-break-time": "15",
+    "bg-music": "None",
+    "keyboard-toggle": "on",
+    "notif-toggle": "on",
+    "alarm-volume": "100",
+    "alarm-sounds": "1",
+  };
+
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+
+  setCustomTime();
 }
 
 /**
@@ -405,6 +454,7 @@ export {
   keyboardShortcut,
   revealSettings,
   hideSettings,
+  setDefaultSettings,
   SHORT_STATE,
   LONG_STATE,
   WORK_STATE,
