@@ -392,16 +392,28 @@ describe("Test settings modal", () => {
     });
     test("Check volume up", () => {
       document.getElementById("alarm-volume").value = 50;
-      const volBefore = parseInt(document.getElementById("alarm-volume").value);
+      const volBefore = parseInt(
+        document.getElementById("alarm-volume").value,
+        10
+      );
       keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowUp" }));
-      const volAfter = parseInt(document.getElementById("alarm-volume").value);
+      const volAfter = parseInt(
+        document.getElementById("alarm-volume").value,
+        10
+      );
       expect(volAfter).toBeGreaterThan(volBefore);
     });
     test("Check volume down", () => {
       document.getElementById("alarm-volume").value = 50;
-      const volBefore = parseInt(document.getElementById("alarm-volume").value);
+      const volBefore = parseInt(
+        document.getElementById("alarm-volume").value,
+        10
+      );
       keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowDown" }));
-      const volAfter = parseInt(document.getElementById("alarm-volume").value);
+      const volAfter = parseInt(
+        document.getElementById("alarm-volume").value,
+        10
+      );
       expect(volAfter).toBeLessThan(volBefore);
     });
   });
