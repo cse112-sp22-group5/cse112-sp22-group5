@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>help.js - Documentation</title>
+    <title>worker.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">help.js</h1>
+    <h1 class="page-title">worker.js</h1>
     
 
     
@@ -39,29 +39,63 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @name revealHelp
- * @function
- * @description Opens the help modal when the help button is clicked
- */
-function revealHelp() {
-  const helpModal = document.getElementById("help-modal");
-  helpModal.showModal();
-}
+            <pre class="prettyprint source linenums"><code>const 
+    /** @constant @type {number} */
+    MS = 1000,
+    /** @constant @type {number} **/ 
+    NUM_SEC = 60;
 
-/**
- * @name hideHelp
- * @function
- * @description Closes the help modal when the 'x' inside the modal or anywhere outside of the modal is clicked
+/** 
+ * Stores the set interval
+ * @type {number} 
  */
-function hideHelp() {
-  const helpModal = document.getElementById("help-modal");
-  helpModal.close();
-}
+let timerId;
 
-// export functions for testing
-export { revealHelp, hideHelp };
-</code></pre>
+onmessage = function(e) {
+    let duration = Number(e.data.payload);
+    let start = Date.now(),
+    diff,
+    minutes,
+    seconds;
+
+    /**
+     * @name calcTimer
+     * @function
+     * @description Calculates time remaining
+     */
+    function calcTimer() {
+        // get the number of seconds that have elapsed since timer's updateTimer() was called
+        diff = duration - (((Date.now() - start) / MS) | 0);
+        // truncates the float
+        minutes = (diff / NUM_SEC) | 0;
+        seconds = (diff % NUM_SEC) | 0;
+
+        // add extra 0 to minutes/seconds if they are less than 10
+        minutes = minutes &lt; 10 ? '0' + minutes : minutes;
+        seconds = seconds &lt; 10 ? '0' + seconds : seconds;
+
+        if(Number(minutes) === 0 &amp;&amp; Number(seconds) === 0) {
+            clearInterval(timerId);
+        }
+        // notify the main thread to update timer display
+        self.postMessage({
+            minutes: minutes,
+            seconds: seconds
+        });
+        if (diff &lt;= 0) {
+            // add one second so that the countdown starts at the full duration
+            // example 05:00 not 04:59
+            start = Date.now() + 1000;
+        }
+    }
+
+    if(e.data.msg === 'counts down timer') {
+        calcTimer(); // don't wait a full second before the timer starts
+        timerId = setInterval(calcTimer, 10); // fires set interval often to give time to update 
+    } else if(e.data.msg === 'resets timer' ) {
+        clearInterval(timerId);
+    }
+}</code></pre>
         </article>
     </section>
 
