@@ -5,9 +5,12 @@ import {
   onReset,
   setCustomTime,
   keyboardShortcut,
+  customizeKey,
   setDefaultSettings,
 } from "./modules/timer.js";
+
 import { setBackgroundMusic } from "./modules/background-music.js";
+
 import {
   saveTask,
   clearAllTasks,
@@ -17,6 +20,7 @@ import {
 
 import { sidebarInit } from "./modules/side-nav-bar.js";
 
+import { playSound, setAlarmVolume } from "./modules/notifications.js";
 import {
   setTheme,
   loadBackgroundImages,
@@ -34,12 +38,31 @@ document
 document.getElementById("start-button").addEventListener("click", onStart);
 document.getElementById("reset-button").addEventListener("click", onReset);
 
+// Alarm
+document.getElementById("alarm-sounds").addEventListener("change", playSound);
+document
+  .getElementById("alarm-volume")
+  .addEventListener("change", setAlarmVolume);
+// Preview alarm sound even if user selects the same one
+document.getElementById("alarm-sounds").addEventListener("focus", function () {
+  this.selectedIndex = -1;
+});
+
 // Keyboard shortcuts
 document.addEventListener("keydown", (event) => {
   // only allow this event to be fired when task form is hidden
   if (document.activeElement !== document.querySelector("#task-name"))
     keyboardShortcut(event);
 });
+document
+  .getElementById("customize-start")
+  .addEventListener("click", customizeKey);
+document
+  .getElementById("customize-volume-up")
+  .addEventListener("click", customizeKey);
+document
+  .getElementById("customize-volume-down")
+  .addEventListener("click", customizeKey);
 
 // Default button
 document
