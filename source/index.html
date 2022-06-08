@@ -4,7 +4,7 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
-    <link rel='stylesheet' href='./styles.css'>
+    <link rel='stylesheet' href='./styles/styles.css'>
     <link rel="stylesheet" href="./third_party/intro.min.css">
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
@@ -17,24 +17,20 @@
     <div id='blur-background'></div>
     <!-- IntroJs javascript -->
     <script src="./third_party/intro.min.js"></script> 
-    <header> 
-        <h1 id="title">Productoro</h1>
-        <nav id="options-btn-container">
-            <button type=button class='help-button' id='help-button' hidden>?</button>
-            <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
-        </nav>
+
+    <header>
+        <h1>Productoro</h1>
     </header>
 
     <main>
 
-        <!-- Break Reminder -->
-        <p id='break-reminder' style='visibility: hidden'></p>
-        <p id='reminder' onload='breakReminders()' style='visibility: hidden'></p>  
+        <div id="break-activity-container">
+            <img id="mascot" src="./img/icons/tomato-mascot.png" style="display: none;">
+            <div>
+                <p id='reminder' onload='breakReminders()' style="display: none;"></p>
+            </div>
+        </div>
 
-        <!-- Current State  -->
-        <h2 class='text-center' id='state' hidden>Work State</h2> 
-
-        <!-- Progress Bar -->
         <section class="progress-bar">
             <div id="progress-pomo">
                 <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
@@ -47,27 +43,33 @@
             </div>
         </section>
 
-        <!-- Timer -->
-        <div class='timer'>
-            <p id="timer-display" data-state='pomo'>25:00</p>
-            <p>Streak: <span id="streak">0</span></p>
-            <p>Completed: <span id="total">0</span></p>
-        </div>
-        
-        <!-- Start Reset Button -->
-        <div id='start-reset'>
-            <button type=button class='timer-button' id='start-button'>Start</button>
-            <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
-        </div>
-
-        <!-- Current Task -->
-        <section class="current-task" id="current-task-section">
-            <h2>Current Task</h2>
-            <p id="current-task"></p>
-        </section>
-
-    </main>
+        <div id="timer-container">
+            <svg viewBox=" 0 0 100 100">
+                <circle class="inner__circle" cx="50%" cy="50%" r="48%"></circle>
+            </svg>
     
+            <div id="timer-content">
+                <p id="state">Work State</p>
+                <p id="timer-display" data-state="pomo">25:00</p>
+    
+                <div id="streak-completed-container">
+                    <p>Streak: <span id="streak">0</span></p>
+                    <p>Completed: <span id="total">0</span></p>
+                </div>
+    
+                <div id="start-reset">
+                    <button type=button class='timer-button' id='start-button'>Start</button>
+                    <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="current-task" id="current-task-section">
+            <h2>Current Task:</h2>
+            <p id="current-task"></p>
+        </div>
+    </main>
+
     <footer>
         <p>Made by the <a href="../index.html">Dream Team</a></p>
         <p>Taken by the 10x Racoons</p>
@@ -79,7 +81,6 @@
 
     <!-- Side navigation bar -->
     <div class="side-nav-bar">
-        <!-- <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help"> -->
         <i id="help-icon" data-associated-div="help-div" title="help">
             <img class="icon" src="./img/icons/question-mark.svg" >
         </i>
@@ -97,20 +98,7 @@
 
     <!-- Side bar contents-->
     <div class="sidebar-content" id="help-div">
-        <h2>Productoro</h2>
-        <h3>What is a Pomodoro Timer?</h3>
-              <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
-                  Work intervals are typically 25 minutes long with five minute breaks between each interval. 
-                  A longer 15 minute break occurs between every fourth and fifth interval.</p>
-              <p>The Pomodoro technique increases productivity, enhances focus while working, and can be used by anyone!</p>
-              <h3>How to use Productoro:</h3>
-              <ol>
-                  <li>Press <b>Start</b> to begin your pomodoro timer. Your first work state will begin and the timer will begin counting down from 25 minutes.</li>
-                  <li>After 25 minutes, the timer will stop, play an audio alarm will sound and transition you into your short, five minute break. The audio alarm can be disabled in settings. You must click <b>Start</b> to begin the five minute break. At the end of the break, the timer will transition back into showing a countdown from 25 minutes.</li>
-                  <li>The pomos and breaks will continue to automatically transition with a long break occurring after every fourth pomo. During a pomo, <b>Reset</b> can be pressed to restart the current pomo. After pressing reset, <b>Start</b> must be pressed again to begin the countdown on the timer.</li>
-                  <li>You can change the length of a break and pomo in the settings tab.</li>
-                  <li>Keyboard control preferences can also be set in the settings. Simply press the spacebar while the clock is idle to start the timer. Pressing the space bar again will reset the current timer, but resetting is only allowed during a work session.</li>
-              </ol>
+        <p>Not used</p>
     </div>
     <div class="sidebar-content" id="setting-div">
         <h2>Settings</h2>
@@ -272,6 +260,5 @@
             <input type="button" id="theme-default" value='Set to Default'>
         </div>
     </div>
-    
 </body>
 </html>

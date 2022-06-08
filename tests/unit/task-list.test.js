@@ -1,11 +1,21 @@
 import {
-  onStart,
-  onReset,
-  checkState,
-  updateState,
-  timer,
-} from "../../source/modules/timer.js";
+  saveTask,
+  clearAllTasks,
+  clearCompletedTasks,
+  // loadTaskListFromLocal,
+} from "../../source/modules/task-list.js";
 
+import {
+  // storeToLocal,
+  // removeDataFromStorage,
+  retrieveDataFromStorage,
+  // deleteFromLocal,
+} from "../../source/modules/localStorage.js";
+
+// Set Object name in localStorage
+const LOCAL_KEY = "taskList";
+
+// Load HTML document before each test
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
 <html lang='en'>
@@ -273,119 +283,153 @@ beforeEach(() => {
 </html>`;
 });
 
-describe(".onStart()", () => {
-  test("updates state to work state", () => {
-    timer.counter.stateCtr = 0;
-    onStart();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
+// Testing Description: Check that tasks are being saved to the task list properly
+describe(".saveTask()", () => {
+  test("add 1 task", () => {
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(1);
+    expect(list.children[0].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task"
+    );
   });
-  test("disables start button", () => {
-    onStart();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeTruthy();
+  test("add 5 tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task " + (i + 1);
+      saveTask();
+    }
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(5);
+    expect(list.children[0].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 1"
+    );
+    expect(list.children[1].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 2"
+    );
+    expect(list.children[2].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 3"
+    );
+    expect(list.children[3].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 4"
+    );
+    expect(list.children[4].getElementsByClassName("task-label")[0].value).toBe(
+      "simple task 5"
+    );
   });
-  test("enables reset button", () => {
-    onStart();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeFalsy();
-  });
-});
-
-describe(".onReset()", () => {
-  test("resets during work state", () => {
-    timer.currState = "Work State";
-    onReset();
-    let timerdisplay = document.getElementById("timer-display").innerText;
-    let state = document.getElementById("state").innerText;
-    expect(timerdisplay).toBe("25:00");
-    expect(state).toBe("Work State");
-  });
-  test("enables start button", () => {
-    onReset();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeFalsy();
-  });
-  test("disables reset button", () => {
-    onReset();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-});
-
-describe(".checkState()", () => {
-  test("updates to work state", () => {
-    timer.counter.totalPomos = 0;
-    timer.counter.stateCtr = 0;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
-  });
-  test("updates to short break state", () => {
-    timer.counter.totalPomos = 1;
-    timer.counter.stateCtr = 1;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Short Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("updates to long break state", () => {
-    timer.counter.totalPomos = 4;
-    timer.counter.stateCtr = 7;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Long Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
+  test("add empty string task", () => {
+    document.getElementById("task-name").value = "";
+    saveTask();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
   });
 });
 
-describe(".updateState()", () => {
-  test("short break -> updates -> work state", () => {
-    timer.currState = "Short Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
+// Test Description: Check that clear all tasks button removes all tasks from the task list and local storage
+describe(".clearAllTasks()", () => {
+  test("clear 5 tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+    }
+    clearAllTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
-  test("long break -> updates -> work state", () => {
-    timer.currState = "Long Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("work state -> updates -> shork break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
-  });
-  test("work state -> updates -> long break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
+  test("clear 0 tasks", () => {
+    clearAllTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({});
   });
 });
+
+// Test Description: Check that all completed tasks are removed from task list and localStorage when clearCompletedTasks button is clicked
+describe(".clearCompletedTasks()", () => {
+  test("clear 1/1 completed task", () => {
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    document
+      .getElementById("task-list")
+      .children[0].setAttribute("done", "true");
+    clearCompletedTasks();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+  test("clear 5/5 completed tasks", () => {
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task";
+      saveTask();
+      document
+        .getElementById("task-list")
+        .children[i].setAttribute("done", "true");
+    }
+    clearCompletedTasks();
+    window.location.reload();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(0);
+  });
+  test("clear 2/5 completed tasks", () => {
+    let list = document.getElementById("task-list");
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task " + (i + 1);
+      saveTask();
+    }
+
+    for (let j = 0; j < 2; j++) {
+      list.children[j].setAttribute("done", "true");
+    }
+    clearCompletedTasks();
+    window.location.reload();
+    expect(list.children.length).toBe(3);
+  });
+});
+
+// Test Description: Check that tasks are being stored in local storage
+describe("local storage", () => {
+  test("1 tasks saved locally", () => {
+    clearAllTasks();
+    document.getElementById("task-name").value = "simple task";
+    saveTask();
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(1);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task": false,
+    });
+    window.location.reload();
+    expect(list.children.length).toBe(1);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task": false,
+    });
+  });
+  test("5 tasks saved locally", () => {
+    clearAllTasks();
+    for (let i = 0; i < 5; i++) {
+      document.getElementById("task-name").value = "simple task " + (i + 1);
+      saveTask();
+    }
+    let list = document.getElementById("task-list");
+    expect(list.children.length).toBe(5);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task 1": false,
+      "simple task 2": false,
+      "simple task 3": false,
+      "simple task 4": false,
+      "simple task 5": false,
+    });
+    window.location.reload();
+    expect(list.children.length).toBe(5);
+    expect(retrieveDataFromStorage(LOCAL_KEY)).toStrictEqual({
+      "simple task 1": false,
+      "simple task 2": false,
+      "simple task 3": false,
+      "simple task 4": false,
+      "simple task 5": false,
+    });
+  });
+});
+
+// Edit and delete are covered in Cypress tests
+
+// Other test scenarios

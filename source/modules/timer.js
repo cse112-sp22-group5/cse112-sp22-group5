@@ -17,9 +17,9 @@ let /** @type {number} **/
 const /** @constant @type {string} **/
   WORK_STATE = "Work State",
   /** @constant @type {string} **/
-  SHORT_STATE = "Short Break State",
+  SHORT_STATE = "Short Break",
   /** @constant @type {string} **/
-  LONG_STATE = "Long Break State";
+  LONG_STATE = "Long Break";
 
 const /** @constant @type {number} */
   MS = 1000,

@@ -30,22 +30,6 @@ function saveTask() {
 }
 
 /**
- * @name selectTask
- * @function
- * @description Display selected task at top of task list
- */
-function selectTask() {
-  let currentTask = document.getElementById("current-task");
-  const tasks = document.querySelectorAll('input[name="task-option"]');
-  for (let task of tasks) {
-    if (task.checked) {
-      currentTask.innerText = task.value;
-      break;
-    }
-  }
-}
-
-/**
  * @name createCustomTaskTag
  * @function
  * @description Creates a custom tag for a task
@@ -105,8 +89,13 @@ function createCustomTaskTag(taskName, isDone = false) {
   taskLabel.addEventListener("click", () => {
     let currentTask = document.getElementById("current-task");
     currentTask.innerText = taskLabel.value;
+    document.getElementById("current-task-section").style.display = "block";
 
+    // move selected task to top of list
     let taskList = document.getElementById("task-list");
+    let task = taskLabel.parentNode;
+    taskList.prepend(task);
+
     let children = taskList.children;
     for (let i = 0; i < children.length; i++) {
       if (
@@ -179,6 +168,7 @@ function clearAllTasks() {
   taskList.innerHTML = "";
 
   removeDataFromStorage(LOCAL_KEY);
+  document.getElementById("current-task-section").style.display = "none";
 }
 
 /**
@@ -203,6 +193,11 @@ function clearCompletedTasks() {
       taskList.removeChild(children[i]);
       i--;
     }
+  }
+
+  // if there are no tasks left, hide the task list div
+  if (Object.keys(retrieveDataFromStorage(LOCAL_KEY)).length === 0) {
+    document.getElementById("current-task-section").style.display = "none";
   }
 }
 
@@ -229,6 +224,10 @@ function loadTaskListFromLocal() {
     let newTask = createCustomTaskTag(taskName, taskListLocal[taskName]);
     taskList.appendChild(newTask);
   }
+
+  if (Object.keys(taskListLocal).length === 0) {
+    document.getElementById("current-task-section").style.display = "none";
+  }
 }
 
 // Export all functions
@@ -236,7 +235,6 @@ export {
   saveTask,
   createCustomTaskTag,
   clearAllTasks,
-  selectTask,
   clearCompletedTasks,
   loadTaskListFromLocal,
 };

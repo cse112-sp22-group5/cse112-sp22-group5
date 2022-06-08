@@ -1,11 +1,3 @@
-import {
-  onStart,
-  onReset,
-  checkState,
-  updateState,
-  timer,
-} from "../../source/modules/timer.js";
-
 beforeEach(() => {
   document.body.innerHTML = `<!DOCTYPE html>
 <html lang='en'>
@@ -273,119 +265,14 @@ beforeEach(() => {
 </html>`;
 });
 
-describe(".onStart()", () => {
-  test("updates state to work state", () => {
-    timer.counter.stateCtr = 0;
-    onStart();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
-  });
-  test("disables start button", () => {
-    onStart();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("enables reset button", () => {
-    onStart();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeFalsy();
+describe("Time(minutes)", () => {
+  test("simple test", () => {
+    expect(1).toBe(1);
   });
 });
 
-describe(".onReset()", () => {
-  test("resets during work state", () => {
-    timer.currState = "Work State";
-    onReset();
-    let timerdisplay = document.getElementById("timer-display").innerText;
-    let state = document.getElementById("state").innerText;
-    expect(timerdisplay).toBe("25:00");
-    expect(state).toBe("Work State");
-  });
-  test("enables start button", () => {
-    onReset();
-    let disabled = document.getElementById("start-button").disabled;
-    expect(disabled).toBeFalsy();
-  });
-  test("disables reset button", () => {
-    onReset();
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-});
+describe("Background Music", () => {});
 
-describe(".checkState()", () => {
-  test("updates to work state", () => {
-    timer.counter.totalPomos = 0;
-    timer.counter.stateCtr = 0;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Work State");
-  });
-  test("updates to short break state", () => {
-    timer.counter.totalPomos = 1;
-    timer.counter.stateCtr = 1;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Short Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("updates to long break state", () => {
-    timer.counter.totalPomos = 4;
-    timer.counter.stateCtr = 7;
-    checkState();
-    let state = document.getElementById("state").innerText;
-    expect(state).toBe("Long Break");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-});
+describe("Keyboard Shortcuts", () => {});
 
-describe(".updateState()", () => {
-  test("short break -> updates -> work state", () => {
-    timer.currState = "Short Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("long break -> updates -> work state", () => {
-    timer.currState = "Long Break";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Work State");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Work State");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("25:00");
-    let disabled = document.getElementById("reset-button").disabled;
-    expect(disabled).toBeTruthy();
-  });
-  test("work state -> updates -> shork break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
-  });
-  test("work state -> updates -> long break", () => {
-    timer.counter.totalPomos = 2;
-    timer.currState = "Work State";
-    updateState();
-    let state = timer.currState;
-    expect(state).toBe("Short Break");
-    let htmlState = document.getElementById("state").innerText;
-    expect(htmlState).toBe("Short Break");
-    let htmlTime = document.getElementById("timer-display").innerText;
-    expect(htmlTime).toBe("05:00");
-  });
-});
+describe("Multi Language", () => {});
