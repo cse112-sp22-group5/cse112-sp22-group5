@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 @import url("side-nav-bar.css");
 @import url("styles-themes.css");
+
 /******** Variables ********/
 :root {
   --ff-timer: "Helvetica Neue";
@@ -117,7 +118,6 @@ button:active {
   height: 32px;
   background-color: var(--background-light);
   border-radius: 5px;
-  /* border: 2px solid var(--border-dark); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,7 +244,7 @@ body[data-state="short"] #progress-break {
 }
 
 /*************** MEDIA QUERIES **********************/
-/* All media queries below adjust the font and size scaling for the content in the 
+/* All media queries below adjust the font and size scaling for the content in the
 timer and the timer itself */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -327,7 +327,6 @@ timer and the timer itself */
 @media only screen and (min-width: 992px) {
   #timer-container {
     width: 70%;
-    /* min-width: 500px; */
   }
 
   #state {
