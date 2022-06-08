@@ -11,6 +11,10 @@
   --ff-secondary: "Roboto";
 }
 
+body {
+  height: 100vh;
+}
+
 /******** GLOBALS ********/
 body[data-state="pomo"] {
   background: var(--background-work);
@@ -244,8 +248,10 @@ body[data-state="short"] #progress-break {
 }
 
 /*************** MEDIA QUERIES **********************/
+
 /* All media queries below adjust the font and size scaling for the content in the
 timer and the timer itself */
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   main {
@@ -278,6 +284,7 @@ timer and the timer itself */
 }
 
 /* Mobile: Portrait and Landscape */
+
 /* Custom media query for the progress bar */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   /******** PROGRESS BAR ********/

@@ -62,7 +62,7 @@
   --sidebar-h3-bg-color: #3b3b3b;
   --sidebar-label-bg-color: #636363;
   --side-bar-bottom-hover-box-shadow: #171717;
-  --side-bar-bottom-hover-text: #ffffff;
+  --side-bar-bottom-hover-text: #fff;
   --side-bar-input-bg-color: #efefef;
 
   /* start and reset buttons */
@@ -123,7 +123,7 @@
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
   --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --side-bar-content-text: #000000;
+  --side-bar-content-text: #000;
   --clr-sidebar-content-bg: #f1f1f1;
   --side-bar-background: #1c2a47; /* side bar background */
   --side-bar-icon-hover-bg: #2471a6; /* icon background when hovered */
@@ -132,7 +132,7 @@
   --side-bar-bottom-text: rgb(45, 100, 146);
   --side-bar-bottom-box-shadow: rgb(226, 226, 226);
   --sidebar-h3-bg-color: #dcdcdc;
-  --sidebar-label-bg-color: #ffffff;
+  --sidebar-label-bg-color: #fff;
   --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
   --side-bar-bottom-hover-text: rgb(42, 56, 67);
   --side-bar-input-bg-color: #efefef;
