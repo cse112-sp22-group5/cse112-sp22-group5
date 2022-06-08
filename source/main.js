@@ -18,7 +18,7 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import "./modules/side-nav-bar.js";
+import { sidebarInit } from "./modules/side-nav-bar.js";
 
 import { playSound, setAlarmVolume } from "./modules/notifications.js";
 import {
@@ -30,10 +30,6 @@ import {
   setDefaultThemes,
 } from "./modules/skins-themes.js";
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
-
-// import { googleTranslateElementInit } from "./modules/multi-language.js";
-
-// googleTranslateElementInit();
 
 // Timer
 document
@@ -115,11 +111,11 @@ document.getElementById("theme-default").addEventListener("click", () => {
 
 // load task list from local storage
 window.addEventListener("load", () => {
+  sidebarInit();
   loadBackgroundImages();
 
   loadThemeFromStorage();
   loadTaskListFromLocal();
-  //document.documentElement.className = "default-theme";
   setBGImage();
 });
 

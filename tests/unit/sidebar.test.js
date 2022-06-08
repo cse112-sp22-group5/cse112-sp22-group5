@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+import {
+  sidebarInit,
+  toggleMenu,
+  setIconBackGround,
+} from "../../source/modules/side-nav-bar.js";
+beforeEach(() => {
+  document.body.innerHTML = `<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -8,10 +14,7 @@
     <link rel="stylesheet" href="./third_party/intro.min.css">
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-    
+    <!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
     <script type="module" src="./main.js"></script>
     
     <title>Productoro</title>
@@ -28,7 +31,7 @@
     <main>
 
         <div id="break-activity-container">
-            <img id="mascot" src="./img/icons/tomato-mascot.png" style="display: none;">
+            <img id="mascot" src="./img/tomato.png" style="display: none;">
             <div>
                 <p id='reminder' onload='breakReminders()' style="display: none;"></p>
             </div>
@@ -84,6 +87,7 @@
 
     <!-- Side navigation bar -->
     <div class="side-nav-bar">
+        <!-- <i class="menu-icon" id="help-icon" data-associated-div="help-div" title="help"> -->
         <i id="help-icon" data-associated-div="help-div" title="help">
             <img class="icon" src="./img/icons/question-mark.svg" >
         </i>
@@ -101,7 +105,6 @@
 
     <!-- Side bar contents-->
     <div class="sidebar-content" id="help-div">
-        <p>Not used</p>
     </div>
     <div class="sidebar-content" id="setting-div">
         <h2>Settings</h2>
@@ -160,21 +163,7 @@
                         </select>
                     </div>
                 </fieldset>
-                <fieldset class='setting-flex-container' id='shortcut-customization' >
-                    <div class='setting-flex-item'>
-                        <label for='customize-start'>Timer Start/Stop</label>
-                        <button type='button' id='customize-start' >Space</button>
-                    </div>
-                    <div class='setting-flex-item'>
-                        <label for='customize-volume-up'>Alarm Volume Up</label>
-                        <button type='button' id='customize-volume-up' >Arrow Up</button>
-                    </div>
-                    <div class='setting-flex-item'>
-                        <label for='customize-volume-down'>Alarm Volume Down</label>
-                        <button type='button' id='customize-volume-down'>Arrow Down</button>
-                    </div>
-                </fieldset>
-                        
+                <p>Press space to start/reset timer</p>
                 <h3> Alarm</h3>
                 <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
                     <div class='setting-flex-item'>
@@ -190,7 +179,7 @@
                     <div class='setting-flex-item'>
                         <label for='alarm-volume'>Alarm Volume</label>
                         <div id='range-container'>
-                        <input type='range' min='0' max='100' value='50' name='alarm-volume' id='alarm-volume'>
+                        <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
                         </div>
                     </div>
 
@@ -198,13 +187,17 @@
                       <label id='alarm-sounds-label'>Alarm Sounds</label>
                       <select name='alarm-sounds' id='alarm-sounds'>
                         <option id='alarm-sound-option1' value='1' selected>Default</option>
-                        <option id='alarm-sound-option2' value='2'>Birds</option>
-                        <option id='alarm-sound-option3' value='3'>Rooster</option>
+                        <option id='alarm-sound-option2' value='2'>Sound 2</option>
+                        <option id='alarm-sound-option3' value='3'>Sound 3</option>
                       </select>
                     </div>
                 </fieldset>
 
-            
+                <h3> Multi-language </h3>
+                <div class='setting-flex-item'>
+                    <label> Select your language</label>
+                    <div id="google-translate-element"></div> 
+                  </div>
             
             <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
             
@@ -274,4 +267,91 @@
         </div>
     </div>
 </body>
-</html>
+</html>`;
+  sidebarInit();
+});
+
+describe(".toggleMenu()", () => {
+  test("Toggle Menu - Setting", () => {
+    toggleMenu("setting-div");
+    const panel = getComputedStyle(document.querySelector("#setting-div"));
+    expect(panel["width"]).not.toBe("0");
+  });
+
+  test("Toggle Menu - tasks", () => {
+    toggleMenu("tasks-div");
+    const panel = getComputedStyle(document.querySelector("#tasks-div"));
+    expect(panel["width"]).not.toBe("0");
+  });
+
+  test("Toggle Menu - theme", () => {
+    toggleMenu("theme-div");
+    const panel = getComputedStyle(document.querySelector("#theme-div"));
+    expect(panel["width"]).not.toBe("0");
+  });
+
+  test("Toggle Menu - close all", () => {
+    toggleMenu(null);
+    const settingPanel = getComputedStyle(
+      document.querySelector("#setting-div")
+    );
+    const themePanel = getComputedStyle(document.querySelector("#theme-div"));
+    const taskPanel = getComputedStyle(document.querySelector("#tasks-div"));
+    expect(settingPanel["width"]).toBe("");
+    expect(themePanel["width"]).toBe("");
+    expect(taskPanel["width"]).toBe("");
+  });
+});
+
+describe(".setIconBackGround()", () => {
+  test("set setting icon background", () => {
+    setIconBackGround("setting-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(true);
+
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(false);
+  });
+
+  test("set task-list icon background", () => {
+    setIconBackGround("tasks-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(true);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(false);
+  });
+
+  test("set theme icon background", () => {
+    setIconBackGround("theme-icon");
+    expect(
+      document
+        .querySelector("#setting-icon")
+        .classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#tasks-icon").classList.contains("button-clicked")
+    ).toBe(false);
+
+    expect(
+      document.querySelector("#theme-icon").classList.contains("button-clicked")
+    ).toBe(true);
+  });
+});

@@ -1,33 +1,37 @@
 .default-theme {
-  --background-work: rgb(77, 150, 255, 0.75);
-  --background-short: rgba(107, 203, 119, 0.75);
-  --background-long: rgba(255, 217, 61, 0.75);
+  --background-work: #212020;
+  --background-short: #173e35;
+  --background-long: #141433;
   --background-light: #fff;
   --background-dark: #323232;
   --pomo-red: #ff6b6b;
   --text-light: #fff;
-  --text-dark: #222;
+  --text-dark: #54d362;
   --background-img: "";
   --border-light: #efefef;
   --border-dark: #323232;
 
   /* Side bar */
   --side-bar-width: 70px;
-  --button-background: #f1f1f1;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --side-bar-content-text: #222;
-  --clr-sidebar-content-bg: #efefef;
-  --side-bar-background: #1c2a47; /* side bar background */
-  --side-bar-icon-hover-bg: #2471a6; /* icon background when hovered */
-  --select-input-background: #efefef; /* select input backgroun */
-  --side-bar-box-shadow: rgb(200, 200, 200);
-  --side-bar-bottom-text: rgb(45, 100, 146);
-  --side-bar-bottom-box-shadow: rgb(226, 226, 226);
-  --sidebar-h3-bg-color: #dcdcdc;
-  --sidebar-label-bg-color: #ffffff;
-  --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
-  --side-bar-bottom-hover-text: rgb(77, 150, 255, 1);
+  --button-background: #2e2e2e;
+  --side-bar-font-family: "Varela Round", sans-serif;
+  --side-bar-content-text: #fafafa;
+  --clr-sidebar-content-bg: #303030;
+  --side-bar-background: #567e5b; /* side bar background */
+  --side-bar-icon-hover-bg: #54d362; /* icon background when hovered */
+  --select-input-background: #4a4a4a; /* select input backgroun */
+  --side-bar-box-shadow: #545454;
+  --side-bar-bottom-text: #cecece;
+  --side-bar-bottom-box-shadow: rgb(36, 36, 36);
+  --sidebar-h3-bg-color: #3b3b3b;
+  --sidebar-label-bg-color: #636363;
+  --side-bar-bottom-hover-box-shadow: #171717;
+  --side-bar-bottom-hover-text: #fff;
   --side-bar-input-bg-color: #efefef;
+
+  /* start and reset buttons */
+  --reset-start-btn-background: #2e2e2e;
+  --reset-start-btn-hover: rgb(68, 68, 68);
 }
 
 .dark-theme {
@@ -46,7 +50,7 @@
   /* Side Bar */
   --side-bar-width: 70px;
   --button-background: #2e2e2e;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --side-bar-font-family: "Varela Round", sans-serif;
   --side-bar-content-text: #fafafa;
   --clr-sidebar-content-bg: #303030; /* side bar panels */
   --side-bar-background: #171717; /* side bar background */
@@ -58,8 +62,12 @@
   --sidebar-h3-bg-color: #3b3b3b;
   --sidebar-label-bg-color: #636363;
   --side-bar-bottom-hover-box-shadow: #171717;
-  --side-bar-bottom-hover-text: #ffffff;
+  --side-bar-bottom-hover-text: #fff;
   --side-bar-input-bg-color: #efefef;
+
+  /* start and reset buttons */
+  --reset-start-btn-background: #323232;
+  --reset-start-btn-hover: rgb(68, 68, 68);
 }
 
 .light-theme {
@@ -78,8 +86,8 @@
   /* Side Bar */
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --side-bar-content-text: #000000;
+  --side-bar-font-family: "Varela Round", sans-serif;
+  --side-bar-content-text: #000;
   --clr-sidebar-content-bg: #f1f1f1;
   --side-bar-background: #1c2a47; /* side bar background */
   --side-bar-icon-hover-bg: #2471a6; /* icon background when hovered */
@@ -88,10 +96,14 @@
   --side-bar-bottom-text: rgb(45, 100, 146);
   --side-bar-bottom-box-shadow: rgb(226, 226, 226);
   --sidebar-h3-bg-color: #dcdcdc;
-  --sidebar-label-bg-color: #ffffff;
+  --sidebar-label-bg-color: #fff;
   --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
   --side-bar-bottom-hover-text: rgb(42, 56, 67);
   --side-bar-input-bg-color: #efefef;
+
+  /* start and reset buttons */
+  --reset-start-btn-background: #fff;
+  --reset-start-btn-hover: rgb(200, 200, 200);
 }
 
 .color-blind {
@@ -110,7 +122,7 @@
   /* Side Bar */
   --side-bar-width: 70px;
   --button-background: #f1f1f1;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
+  --side-bar-font-family: "Varela Round", sans-serif;
   --side-bar-content-text: #000000;
   --clr-sidebar-content-bg: #f1f1f1;
   --side-bar-background: #1c2a47; /* side bar background */
@@ -120,8 +132,12 @@
   --side-bar-bottom-text: rgb(45, 100, 146);
   --side-bar-bottom-box-shadow: rgb(226, 226, 226);
   --sidebar-h3-bg-color: #dcdcdc;
-  --sidebar-label-bg-color: #ffffff;
+  --sidebar-label-bg-color: #fff;
   --side-bar-bottom-hover-box-shadow: rgb(200, 200, 200);
   --side-bar-bottom-hover-text: rgb(42, 56, 67);
   --side-bar-input-bg-color: #efefef;
+
+  /* start and reset buttons */
+  --reset-start-btn-background: #efefef;
+  --reset-start-btn-hover: rgb(200, 200, 200);
 }
