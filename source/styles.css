@@ -84,11 +84,11 @@ h2,
 h4,
 h5,
 h6 {
-  font-family: "Varela Round", sans-serif;
+  font-family: var(--side-bar-font-family);
 }
 
 h1 {
-  font: 400 48px "Roboto", sans-serif;
+  font: 400 48px var(--side-bar-font-family);
   color: var(--text-dark);
 }
 
