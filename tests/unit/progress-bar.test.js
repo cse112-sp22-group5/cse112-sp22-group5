@@ -1,4 +1,5 @@
-import { timer, WORK_STATE } from "../../source/modules/timer.js";
+import { updateProgress } from "../../source/modules/progress-bar.js";
+import { timer, WORK_STATE, LONG_STATE } from "../../source/modules/timer.js";
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -218,10 +219,32 @@ beforeEach(() => {
       `;
 });
 
-describe("Test Progress bar", () => {
-  timer.currState = "Work State";
+describe(".updateProgress()", () => {
+  test("long break progress - white on work state", () => {
+    timer.currState = WORK_STATE;
+    updateProgress();
+    expect(
+      getComputedStyle(document.getElementById("progress-long-break"))
+        .background
+    ).toBe("rgb(255, 255, 255)");
+  });
 
-  test("beginning state", () => {
-    expect(timer.currState).toBe(WORK_STATE);
+  test("long break progress - full yellow on long state", () => {
+    timer.currState = LONG_STATE;
+    updateProgress();
+    expect(
+      getComputedStyle(document.getElementById("progress-long-break"))
+        .background
+    ).toBe("rgb(255, 210, 76)");
+  });
+
+  test("dark mode - make sure white turns to dark", () => {
+    document.documentElement.className = "dark-theme";
+    timer.currState = WORK_STATE;
+    updateProgress();
+    expect(
+      getComputedStyle(document.getElementById("progress-long-break"))
+        .background
+    ).toBe("rgb(50, 50, 50)");
   });
 });
