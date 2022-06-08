@@ -480,7 +480,7 @@ function customizeKey() {
     isCustomizingKey = true;
     this.blur();
     // store current set key before replacing with "press key" prompt
-    let currentKey = this.innerHTML;
+    let currentKey = this.innerHTML.replace(/ /g, "");
     this.innerHTML = "Press a key";
 
     setKeys.delete(currentKey);
