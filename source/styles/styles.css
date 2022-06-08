@@ -2,106 +2,63 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 @import url("side-nav-bar.css");
-
+@import url("styles-themes.css");
 /******** Variables ********/
 :root {
-  /* Refactor Option */
-  --primary-color: #77a4e9;
-
-  /* --secondary-color:  #FFFFFF;
-  --primary-font: 'Helvetica Neue', sans-serif;
-  --secondary-font: 'Raleway', sans-serif; */
-
-  --clr-light: #ffffff;
-  --clr-accent-pomo: #032e77;
-  --clr-accent-short: #923201;
-  --clr-accent-long: #01795f;
-  --clr-circle-pomo: #0084ff;
-
-  --clr-circle-short: #ff7300;
-  --clr-circle-long: #03e6b4;
-  --clr-dark: #424242;
-  --clr-gray: #a8a8a8;
-  --clr-faded-black: rgba(0, 0, 0, 0.4);
-
-  /* sans-serif was secondary fallback font, but cant have this in variable */
   --ff-timer: "Helvetica Neue";
   --ff-primary: "Raleway";
   --ff-secondary: "Roboto";
-
-  --fs-timer-large: 160px;
-  --fs-timer-small: 100px;
-  --fs-title-large: 60px;
-  --fs-title-medium: 40px;
-  --fs-title-small: 30px;
-  --fs-mode-button-large: 30px;
-  --fs-mode-button-small: 20px;
-  --fs-instructions-large: 20px;
-  --fs-instructions-small: 10px;
-  --fs-instructions-title-large: 30px;
-  --fs-instructions-title-small: 15px;
-  --fs-counter-large: 20px;
-  --fs-counter-medium: 16px;
-  --fs-counter-small: 12px;
-  --fs-footer: 15px;
-
-  --fw-bold: 700;
-
-  --transition-time: 1s;
-
-  /* Side bar*/
-  --side-bar-width: 70px;
-  --side-bar-background: #1c2a47;
-  --side-bar-icon-hover-bg: #2471a6;
-  --side-bar-font-family: Arial, Helvetica, sans-serif;
-  --button-background: #f1f1f1;
-
-  /* circle timer layout */
-  --background-color: #212020;
-  --navbar-color: #567e5b;
-  --primary-text-color: #54d362;
-  --navbar-panel-color: #2e2e2e;
-  --contrast-color: #ffffff;
 }
 
 /******** GLOBALS ********/
-
-/* Body */
-body {
-  /* color: var(--clr-dark); */
-  color: var(--primary-text-color);
-  transition: background 1s;
-}
-
 body[data-state="pomo"] {
-  /* background: #fff; */
-  /* background: var(--primary-color); */
-  background-color: var(--background-color);
+  background: var(--background-work);
+  background-image: var(--background-img);
+  border: none;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body[data-state="short"] {
-  background-color: #eaa478;
+  background-color: var(--background-short);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body[data-state="long"] {
-  background-color: #88b9ae;
+  background-color: var(--background-long);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-header > h2 {
+header > h1 {
   text-align: center;
   font-size: 60px;
   margin-bottom: 10px;
 }
 
-footer {
-  font-size: var(--fs-footer);
+main {
+  width: 50%;
+  margin: 0 auto;
   text-align: center;
+}
+
+svg {
+  stroke-width: 2;
+  stroke: var(--text-dark);
+  fill: none;
+}
+
+footer {
+  font-size: 15px;
+  text-align: center;
+  color: var(--text-dark);
 }
 
 /* Typography */
 h1,
 h2,
-h3,
 h4,
 h5,
 h6 {
@@ -110,7 +67,7 @@ h6 {
 
 h1 {
   font: 400 48px "Roboto", sans-serif;
-  color: #323232;
+  color: var(--text-dark);
 }
 
 p,
@@ -119,25 +76,31 @@ li {
   font-family: "Helvetica", sans-serif;
 }
 
-/* Interaction */
-button {
-  background: none;
-  border: 2px solid #323232;
-  border-radius: 5px;
-  transition: background 0.5s;
+a {
+  color: var(--pomo-red);
 }
 
-button:hover {
-  background: rgba(50, 50, 50, 0.2);
+a:hover {
+  color: var(--text-dark);
+}
+
+/* Interaction */
+button {
+  background: var(--reset-start-btn-background);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  transition: background 0.5s;
+  color: var(--text-dark);
+}
+
+button:hover:enabled {
+  background: var(--reset-start-btn-hover);
+  cursor: pointer;
 }
 
 button:active {
   background: rgba(50, 50, 50, 0.4);
-}
-
-/******** HELP AND SETTINGS ********/
-#options-btn-container {
-  display: flex;
 }
 
 /******** PROGRESS BAR ********/
@@ -152,9 +115,9 @@ button:active {
 .progress-bar div {
   width: 30%;
   height: 32px;
-  background: #fff;
+  background-color: var(--background-light);
   border-radius: 5px;
-  border: 2px solid #323232;
+  /* border: 2px solid var(--border-dark); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,45 +145,14 @@ body[data-state="short"] #progress-break {
   display: none;
 }
 
-/******** MEDIA QUERIES ********/
-
-/* Mobile: Portrait and Landscape */
-@media only screen and (min-width: 320px) and (max-width: 767px) {
-  /******** PROGRESS BAR ********/
-  .progress-container {
-    justify-content: space-around;
-  }
-
-  .progress-container div {
-    width: 10px;
-    height: 10px;
-  }
-
-  /******** TIMER ********/
-  #timer-display {
-    font-size: 64px;
-  }
-}
-
-/* testing new circle layout */
-main {
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-svg {
-  stroke-width: 2;
-  stroke: var(--primary-text-color);
-  fill: none;
-}
-
+/******************* TASK LIST **********************/
 #current-task-section {
   margin-top: 10px;
-  border: 2px solid var(--primary-text-color);
+  border: 2px solid var(--text-dark);
+  color: var(--text-dark);
 }
 
-#current-task-section > h3 {
+#current-task-section > h2 {
   margin-top: 8px;
   margin-bottom: 8px;
   font-size: 30px;
@@ -230,7 +162,7 @@ svg {
   font-size: 20px;
 }
 
-/* timer content section */
+/********************* TIMER CONTENT **********************/
 #start-reset {
   display: flex;
   width: 60%;
@@ -242,11 +174,14 @@ svg {
 #start-reset > button {
   flex-grow: 1;
   border: none;
-  background-color: var(--primary-text-color);
-  color: var(--contrast-color);
+  color: var(--text-dark);
   padding: 5px 10px;
   margin: 0 5px;
   font-size: 2vw;
+}
+
+#start-reset > button:hover:enabled {
+  cursor: pointer;
 }
 
 #streak-completed-container {
@@ -272,31 +207,31 @@ svg {
   margin-right: auto;
   width: 70%;
   top: 15%;
+  color: var(--text-dark);
 }
 
 #timer-display {
-  /* font-size: 14vw; */
   margin-top: 0;
   margin-bottom: 0;
 }
 
 #state {
-  /* font-size: 6vw; */
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-/* break activity container */
+/************************  BREAK ACTIVITY *********************/
 #break-activity-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px auto;
+  color: var(--text-dark);
 }
 
 #reminder {
   text-align: left;
-  border: 1px solid var(--primary-text-color);
+  border: 1px solid var(--text-dark);
   border-radius: 15px;
   padding: 15px;
   margin: 0;
@@ -308,7 +243,9 @@ svg {
   height: 100%;
 }
 
-/* testing media queries */
+/*************** MEDIA QUERIES **********************/
+/* All media queries below adjust the font and size scaling for the content in the 
+timer and the timer itself */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   main {
@@ -337,6 +274,25 @@ svg {
 
   #streak-completed-container {
     font-size: 4vw;
+  }
+}
+
+/* Mobile: Portrait and Landscape */
+/* Custom media query for the progress bar */
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  /******** PROGRESS BAR ********/
+  .progress-container {
+    justify-content: space-around;
+  }
+
+  .progress-container div {
+    width: 10px;
+    height: 10px;
+  }
+
+  /******** TIMER ********/
+  #timer-display {
+    font-size: 64px;
   }
 }
 
