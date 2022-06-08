@@ -17,24 +17,12 @@
     <div id='blur-background'></div>
     <!-- IntroJs javascript -->
     <script src="./third_party/intro.min.js"></script> 
-    <header> 
-        <h1 id="title">Productoro</h1>
-        <nav id="options-btn-container">
-            <button type=button class='help-button' id='help-button' hidden>?</button>
-            <button type=button class='settings' id='settings-button' hidden>&#x2699;</button>
-        </nav>
+
+    <header>
+        <h2>Productoro</h2>
     </header>
 
     <main>
-
-        <!-- Break Reminder -->
-        <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-        <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
-
-        <!-- Current State  -->
-        <h2 class='text-center' id='state' hidden>Work State</h2> 
-
-        <!-- Progress Bar -->
         <section class="progress-bar">
             <div id="progress-pomo">
                 <img src="./img/icons/progress-tomato.png" alt="pomodoro time">
@@ -47,27 +35,40 @@
             </div>
         </section>
 
-        <!-- Timer -->
-        <div class='timer'>
-            <p id="timer-display" data-state='pomo'>25:00</p>
-            <p>Streak: <span id="streak">0</span></p>
-            <p>Completed: <span id="total">0</span></p>
-        </div>
-        
-        <!-- Start Reset Button -->
-        <div id='start-reset'>
-            <button type=button class='timer-button' id='start-button'>Start</button>
-            <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+        <div id="break-activity-container">
+            <img id="mascot" src="./img/tomato.png" style="display: none;">
+            <div>
+                <p id='reminder' onload='breakReminders()' style="display: none;"></p>
+            </div>
         </div>
 
-        <!-- Current Task -->
-        <section class="current-task" id="current-task-section">
-            <h2>Current Task</h2>
-            <p id="current-task"></p>
-        </section>
-
-    </main>
+        <div id="timer-container">
+            <svg viewBox=" 0 0 100 100">
+                <circle class="inner__circle" cx="50%" cy="50%" r="48%"></circle>
+            </svg>
     
+            <div id="timer-content">
+                <p id="state">Work State</p>
+                <p id="timer-display" data-state="pomo">25:00</p>
+    
+                <div id="streak-completed-container">
+                    <p>Streak: <span id="streak">0</span></p>
+                    <p>Completed: <span id="total">0</span></p>
+                </div>
+    
+                <div id="start-reset">
+                    <button type=button class='timer-button' id='start-button'>Start</button>
+                    <button type=button class='timer-button' id='reset-button' disabled>Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="current-task" id="current-task-section">
+            <h3>Current Task:</h3>
+            <p id="current-task"></p>
+        </div>
+    </main>
+
     <footer>
         <p>Made by the <a href="../index.html">Dream Team</a></p>
         <p>Taken by the 10x Racoons</p>
@@ -235,43 +236,5 @@
           <i type="button" id="clear-tasks-button">Clear All</i>
         </div>
     </div>
-
-    <!-- testing out new pomo layout -->
-    <section id="circle-timer">
-        <h2>Productoro</h2>
-
-        <div id="break-activity-container">
-            <img src="./img/tomato.png">
-            <div>
-                <p>Hey there! Here's an activity to do during your break: Take a break and do some jumping jacks!</p>
-            </div>
-        </div>
-
-        <div id="timer-container">
-            <svg viewBox=" 0 0 100 100">
-                <circle class="inner__circle" cx="50%" cy="50%" r="48%"></circle>
-            </svg>
-    
-            <div id="timer-content">
-                <p id="timer-state">Short Break</p>
-                <p id="timer-value">25:00</p>
-    
-                <div id="streak-completed-container">
-                    <p>Streak: <span>0</span></p>
-                    <p>Completed: <span>0</span></p>
-                </div>
-    
-                <div id="timer-btn-container">
-                    <button>Start</button>
-                    <button>Reset</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="task-container">
-            <h3>Current Task:</h3>
-            <p>Study for finals</p>
-        </div>
-    </section>
 </body>
 </html>

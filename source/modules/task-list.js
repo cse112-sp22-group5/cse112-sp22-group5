@@ -101,6 +101,7 @@ function createCustomTaskTag(taskName, isDone = false) {
   taskContainer.addEventListener("click", () => {
     let currentTask = document.getElementById("current-task");
     currentTask.innerText = taskLabel.value;
+    document.getElementById("current-task-section").style.display = "block";
   });
   // edit task label
   editButton.addEventListener("click", () => {
@@ -137,6 +138,7 @@ function clearAllTasks() {
   let taskList = document.getElementById("task-list");
   taskList.innerHTML = "";
   removeDataFromStorage(LOCAL_KEY);
+  document.getElementById("current-task-section").style.display = "none";
 }
 
 /**
@@ -153,6 +155,11 @@ function clearCompletedTasks() {
       taskList.removeChild(children[i]);
       i--;
     }
+  }
+
+  // if there are no tasks left, hide the task list div
+  if (Object.keys(retrieveDataFromStorage(LOCAL_KEY)).length === 0) {
+    document.getElementById("current-task-section").style.display = "none";
   }
 }
 
@@ -178,6 +185,10 @@ function loadTaskListFromLocal() {
   for (const taskName in taskListLocal) {
     let newTask = createCustomTaskTag(taskName, taskListLocal[taskName]);
     taskList.appendChild(newTask);
+  }
+
+  if (Object.keys(taskListLocal).length === 0) {
+    document.getElementById("current-task-section").style.display = "none";
   }
 }
 
