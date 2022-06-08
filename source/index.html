@@ -4,11 +4,11 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
-    <link rel='stylesheet' href='styles.css'>
+    <link rel='stylesheet' href='./styles.css'>
     <link rel="stylesheet" href="./third_party/intro.min.css">
     <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
 
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
     <script type="module" src="./main.js"></script>
     
     <title>Productoro</title>
@@ -117,39 +117,24 @@
             <form id='time-limits'>
                 <h3>Time (minutes)</h3>
                 <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
-                <fieldset class='setting-flex-container' id='form-enabler'>
                     
-                    <div class='setting-flex-item'>
-                        <label id='work-label'>Work Session</label> 
-                        <select name='work-time' id='work-time'>
-                            <option id='work-option25' value='25' selected>25</option>
-                            <option id='work-option30' value='30'>30</option>
-                            <option id='work-option45' value='45'>45</option>
-                            <option id='work-option60' value='60'>60</option>
-                        </select>
-                    </div>
+                    <fieldset id="form-enabler">
+                        <div>
+                            <label id="work-label">Work Session</label>
+                            <input id="work-time" for="work-label" type="number" step="1" min="25" value="25">
+                        </div>
 
-                    <div class='setting-flex-item'>
-                        <label id='short-break-label'>Short Break</label>
-                        <select name='short-break-time' id='short-break-time'>
-                        <option id='sb-option5' value='5' selected>5</option>
-                        <option id='sb-option10' value='10'>10</option>
-                        <option id='sb-option15' value='15'>15</option>
-                        </select>
-                    </div>
+                        <div>
+                            <label id="short-break-label">Short Break</label>
+                            <input id="short-break-time" for="short-break-label" type="number" min="5" value="5">
+                        </div>
 
-                    <div class='setting-flex-item'>
-                        <label id='long-break-label'>Long Break</label>
-                        <select name='long-break-time' id='long-break-time'>
-                        <option id='lb-option15' value='15' selected>15</option>
-                        <option id='lb-option20' value='20'>20</option>
-                        <option id='lb-option25' value='25'>25</option>
-                        <option id='lb-option30' value='30'>30</option>
-                        </select>
-                    </div>
-                </fieldset>  
+                        <div>
+                            <label id="long-break-label">Long Break</label>
+                            <input id="long-break-time" for="long-break-label" type="number" min="15" value="15">
+                        </div>
+                    </fieldset>
     
-                <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                 <h3 >Background Music</h3>
                 <fieldset class='setting-flex-container' id="bg-music-container">
                     <div class='setting-flex-item'>
@@ -233,13 +218,14 @@
                     <label> Select your language</label>
                     <div id="google-translate-element"></div> 
                   </div>
-               
-                
+            
+            <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
+            
             </form> 
            
             <div class='empty-box'></div>   
             <div class="bottom">
-                <input type="button" id="default-settings" value='Set to Default'>
+                <input type="button" id="default-settings" value="Set to Default">
             </div>
              
     </div>
@@ -255,8 +241,8 @@
         <label>Current Tasks:</label>
         <ul id="task-list"></ul>
         <div class="bottom">
-          <input type="button" id="clear-completed-tasks-button" value='Clear Completed Tasks'>
-          <input type="button" id="clear-tasks-button" value='Clear All'>
+          <input type="button" id="clear-completed-tasks-button" value="Clear Completed Tasks">
+          <input type="button" id="clear-tasks-button" value="Clear All">
         </div>
     </div>
 

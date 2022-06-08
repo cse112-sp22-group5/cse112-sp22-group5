@@ -131,27 +131,6 @@ function setSideBar() {
   else minimizeSideBar();
 }
 
-/**
- * @name setDefaultSettings
- * @function
- * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
- */
-function setDefaultSettings() {
-  const defaultSetting = {
-    "work-time": "25",
-    "short-break-time": "5",
-    "long-break-time": "15",
-    "bg-music": "None",
-    "keyboard-toggle": "on",
-    "notif-toggle": "on",
-    "alarm-volume": "50",
-    "alarm-sounds": "1",
-  };
-  for (const key in defaultSetting) {
-    document.getElementById(key).value = defaultSetting[key];
-  }
-}
-
 // Expands sidebar based on window width
 document.querySelector("#arrow-down").addEventListener("click", () => {
   const menuStyle = document.querySelector(".side-nav-bar").style;
@@ -227,4 +206,4 @@ window.addEventListener("touchstart", (event) => {
   }
 });
 
-export { setDefaultSettings, toggleMenu, setIconBackGround };
+export { toggleMenu, setIconBackGround };

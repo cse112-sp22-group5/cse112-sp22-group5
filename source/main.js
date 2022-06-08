@@ -5,7 +5,8 @@ import {
   onReset,
   setCustomTime,
   keyboardShortcut,
-  customizeKey
+  customizeKey,
+  setDefaultSettings,
 } from "./modules/timer.js";
 
 import { setBackgroundMusic } from "./modules/background-music.js";
@@ -17,7 +18,7 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import { setDefaultSettings } from "./modules/side-nav-bar.js";
+import "./modules/side-nav-bar.js";
 
 import { playSound, setAlarmVolume } from "./modules/notifications.js";
 import {
@@ -42,10 +43,14 @@ document.getElementById("start-button").addEventListener("click", onStart);
 document.getElementById("reset-button").addEventListener("click", onReset);
 
 // Alarm
-document.getElementById('alarm-sounds').addEventListener('change', playSound);
-document.getElementById('alarm-volume').addEventListener('change', setAlarmVolume);
+document.getElementById("alarm-sounds").addEventListener("change", playSound);
+document
+  .getElementById("alarm-volume")
+  .addEventListener("change", setAlarmVolume);
 // Preview alarm sound even if user selects the same one
-document.getElementById('alarm-sounds').addEventListener('focus', function() {this.selectedIndex=-1});
+document.getElementById("alarm-sounds").addEventListener("focus", function () {
+  this.selectedIndex = -1;
+});
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (event) => {
@@ -53,9 +58,15 @@ document.addEventListener("keydown", (event) => {
   if (document.activeElement !== document.querySelector("#task-name"))
     keyboardShortcut(event);
 });
-document.getElementById('customize-start').addEventListener('click', customizeKey);
-document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
-document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
+document
+  .getElementById("customize-start")
+  .addEventListener("click", customizeKey);
+document
+  .getElementById("customize-volume-up")
+  .addEventListener("click", customizeKey);
+document
+  .getElementById("customize-volume-down")
+  .addEventListener("click", customizeKey);
 
 // Default button
 document
