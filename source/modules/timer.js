@@ -14,6 +14,17 @@ let /** @type {number} **/
   /** @type {number} **/
   LONG_MINS = 15;
 
+let /** @type {string} **/
+  startKey = "Space",
+  /** @type {string} **/
+  volumeUpKey = "ArrowUp",
+  /** @type {string} **/
+  volumneDownKey = "ArrowDown",
+  /** @type {boolean} **/
+  isCustomizingKey = false,
+  /** @type {set}  **/
+  setKeys = new Set([startKey, volumeUpKey, volumneDownKey]);
+
 const /** @constant @type {string} **/
   WORK_STATE = "Work State",
   /** @constant @type {string} **/
@@ -31,11 +42,16 @@ const /** @constant @type {number} **/
   /** @constant @type {string} **/
   LONG_MOD = 4;
 
-/**
- * Stores the set interval
- * @type {number}
- */
-let timerId;
+let /**
+   * Stores the set interval
+   * @type {number}
+   */
+  timerId,
+  /**
+   * Stores the reference to the web worker
+   * @type {object}
+   */
+  worker;
 
 /**
  * A timer
@@ -113,7 +129,7 @@ function checkState() {
 function updateState() {
   // if the current state is a work state, next state a break
   if (timer.currState === WORK_STATE) {
-    //  document.getElementById('tasks').className = 'tasks';
+    // document.getElementById('tasks').className = 'tasks';
     // next state is a long break
     if (timer.counter.totalPomos % LONG_MOD === 0) {
       timer.currState = LONG_STATE;
@@ -157,7 +173,7 @@ function updateState() {
  * @param {number} duration The total number of seconds the timer should run
  */
 function updateTimer(duration) {
-  var start = Date.now(),
+  let start = Date.now(),
     diff,
     minutes,
     seconds;
@@ -165,7 +181,7 @@ function updateTimer(duration) {
   /**
    * @name timerCountdown
    * @function
-   * @description Begins the timer countdown and updates the timer display
+   * @description Begins the timer countdown and updates the timer display when web worker isn't supported
    */
   function timerCountdown() {
     // get the number of seconds that have elapsed since updateTimer() was called
@@ -183,9 +199,8 @@ function updateTimer(duration) {
       "timer-display"
     ).innerText = `${minutes}:${seconds}`;
 
-    document.title = `Productoro - ${minutes}:${seconds}`;
     // stop timer when minutes and seconds reach 0
-    if (minutes == 0 && seconds == 0) {
+    if (Number(minutes) === 0 && Number(seconds) === 0) {
       clearInterval(timerId);
 
       // if curr state is work state, update the streak and total pomo count
@@ -206,8 +221,7 @@ function updateTimer(duration) {
       // transition to the next state
       updateState();
       showNotif(timer.currState);
-      let alarm = document.getElementById("notif-toggle").value;
-      if (alarm == "on") {
+      if (document.getElementById("notif-toggle").checked) {
         playSound();
       }
     }
@@ -217,14 +231,54 @@ function updateTimer(duration) {
       start = Date.now() + 1000;
     }
   }
-  if (diff <= 0) {
-    // add one second so that the countdown starts at the full duration
-    // example 05:00 not 04:59
-    start = Date.now() + 1000;
-  }
 
-  timerCountdown(); // don't wait a full second before the timer starts
-  timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  if (window.Worker) {
+    worker = new Worker("./modules/worker.js", {
+      type: "module",
+    });
+    // notify worker to start counting down timer
+    worker.postMessage({
+      msg: "counts down timer",
+      payload: duration,
+    });
+    // handler to handle updating DOM elements whenever a message is received
+    worker.onmessage = function (e) {
+      let minutes = e.data.minutes;
+      let seconds = e.data.seconds;
+      document.getElementById(
+        "timer-display"
+      ).innerText = `${minutes}:${seconds}`;
+
+      // stop timer when minutes and seconds reach 0
+      if (minutes == 0 && seconds == 0) {
+        // if curr state is work state, update the streak and total pomo count
+        if (timer.currState === WORK_STATE) {
+          timer.counter.streak++;
+          document.getElementById("streak").innerText = timer.counter.streak;
+
+          timer.counter.totalPomos++;
+          document.getElementById("total").innerText = timer.counter.totalPomos;
+        } else {
+          document.querySelector("#form-enabler").removeAttribute("disabled");
+        }
+
+        // enable start button when timer ends
+        document.getElementById("start-button").disabled = false;
+        timer.counter.stateCtr++;
+
+        // transition to the next state
+        updateState();
+        showNotif(timer.currState);
+        if (document.getElementById("notif-toggle").checked) {
+          playSound();
+        }
+      }
+    };
+  } else {
+    // when the browser doesn't support web workers
+    timerCountdown(); // don't wait a full second before the timer starts
+    timerId = setInterval(timerCountdown, 10); // fires set interval often to give time to update
+  }
 }
 
 /**
@@ -236,6 +290,21 @@ function setCustomTime() {
   let sbTime = document.getElementById("short-break-time");
   let lbTime = document.getElementById("long-break-time");
   let warning = document.getElementById("warning");
+
+  // prevent number inputs from showing below the minimum and upating the timer even if it below the min
+  if (Number(wTime.value) < 25) {
+    POMO_MINS = 25;
+    wTime.value = POMO_MINS;
+    return;
+  } else if (Number(sbTime.value) < 5) {
+    SHORT_MINS = 5;
+    sbTime.value = 5;
+    return;
+  } else if (Number(lbTime.value) < 15) {
+    LONG_MINS = 15;
+    lbTime.value = LONG_MINS;
+    return;
+  }
 
   if (
     Number(wTime.value) <= Number(sbTime.value) ||
@@ -269,7 +338,8 @@ function setCustomTime() {
  */
 function onStart() {
   getNotificationStatus();
-  document.querySelector("#form-enabler").disabled = "disabled";
+  document.querySelector("#form-enabler").disabled = true;
+  document.getElementById("default-settings").disabled = true; // disable default settings btn
 
   // enable a warning if the user tries changing the time limits during a pomo
   document.getElementById("warning").innerText =
@@ -292,14 +362,48 @@ function onReset() {
   document.getElementById("reset-button").disabled = true;
   document.getElementById("start-button").disabled = false;
   document.getElementById("warning").style.display = "none";
+  document.getElementById("default-settings").disabled = false;
   document.getElementById("form-enabler").removeAttribute("disabled");
   document.title = "Productoro";
   timer.counter.streak = 0;
   document.getElementById("streak").innerText = timer.counter.streak;
-  clearInterval(timerId);
+  if (window.Worker) {
+    worker.postMessage({
+      msg: "resets timer",
+    });
+  } else {
+    clearInterval(timerId);
+  }
   checkState();
+  // document.getElementById('tasks').className = 'tasks';
+}
 
-  //    document.getElementById('tasks').className = 'tasks';
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ */
+function setDefaultSettings() {
+  POMO_MINS = 25;
+  SHORT_MINS = 5;
+  LONG_MINS = 15;
+
+  const defaultSetting = {
+    "work-time": "25",
+    "short-break-time": "5",
+    "long-break-time": "15",
+    "bg-music": "None",
+    "keyboard-toggle": "on",
+    "notif-toggle": "on",
+    "alarm-volume": "50",
+    "alarm-sounds": "1",
+  };
+
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+
+  setCustomTime();
 }
 
 /**
@@ -334,8 +438,11 @@ function hideSettings() {
  * @param {*} event The keyboard button that is clicked
  */
 function keyboardShortcut(event) {
-  if (document.getElementById("keyboard-toggle").value == "on") {
-    if (event.code === "Space") {
+  if (
+    document.getElementById("keyboard-toggle").value === "on" &&
+    !isCustomizingKey
+  ) {
+    if (event.code === startKey) {
       // if the timer is static, start timer
       if (document.getElementById("start-button").disabled == false) {
         onStart();
@@ -347,7 +454,92 @@ function keyboardShortcut(event) {
         }
       }
     }
+
+    if (event.code === volumeUpKey) {
+      let curVol = document.getElementById("alarm-volume").value;
+      document.getElementById("alarm-volume").value = parseInt(curVol, 10) + 10;
+    }
+    if (event.code === volumneDownKey) {
+      let curVol = document.getElementById("alarm-volume").value;
+      document.getElementById("alarm-volume").value = parseInt(curVol, 10) - 10;
+    }
+
+    event.preventDefault();
   }
+}
+
+/**
+ * @name customizeKey
+ * @description Allows for keyboard shortcuts to be customized
+ */
+function customizeKey() {
+  const KEY_ERROR = "Key already in use. Try again.";
+
+  // check to see which keyboard customization button was pressed
+  if (document.getElementById("keyboard-toggle").value === "on") {
+    isCustomizingKey = true;
+    this.blur();
+    // store current set key before replacing with "press key" prompt
+    let currentKey = this.innerHTML;
+    this.innerHTML = "Press a key";
+
+    setKeys.delete(currentKey);
+
+    // remove respective keyboard shortcut in prep for new one
+    switch (this.id) {
+      case "customize-start":
+        startKey = null;
+        break;
+      case "customize-volume-up":
+        volumeUpKey = null;
+        break;
+      case "customize-volume-down":
+        volumneDownKey = null;
+        break;
+      default:
+        this.innerHTML = "Press a key";
+    }
+
+    // take user input for key customization
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        isCustomizingKey = false;
+        if (event.code != currentKey && setKeys.has(event.code)) {
+          this.innerHTML = KEY_ERROR;
+          return;
+        }
+        this.innerHTML = event.code;
+        setKeys.add(event.code);
+
+        // customize respective shortcut based on button pressed
+        switch (this.id) {
+          case "customize-start":
+            startKey = event.code;
+            break;
+          case "customize-volume-up":
+            volumeUpKey = event.code;
+            break;
+          case "customize-volume-down":
+            volumneDownKey = event.code;
+            break;
+          default:
+            this.innerHTML = "Press a key";
+        }
+      },
+      { once: true }
+    );
+  }
+}
+
+/**
+ * @name getSetKeys
+ * @function
+ * @description Gets the currently set keyboard shortcuts object for testing purposes
+ * @return {Set} The Set object containing the shortcuts
+ */
+function getSetKeys() {
+  return setKeys;
 }
 
 // export functions and variables for testing
@@ -361,6 +553,9 @@ export {
   keyboardShortcut,
   revealSettings,
   hideSettings,
+  customizeKey,
+  getSetKeys,
+  setDefaultSettings,
   SHORT_STATE,
   LONG_STATE,
   WORK_STATE,

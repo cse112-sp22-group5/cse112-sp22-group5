@@ -1,9 +1,13 @@
+// import { doc } from "prettier";
 import {
   onStart,
   onReset,
   checkState,
   updateState,
   timer,
+  customizeKey,
+  keyboardShortcut,
+  getSetKeys,
 } from "../../source/modules/timer.js";
 
 beforeEach(() => {
@@ -13,17 +17,17 @@ beforeEach(() => {
       <meta charset='UTF-8'>
       <meta name='viewport' content='width=device-width, initial-scale=1.0'>
       <meta name='description' content='Increase productivity with the Productoro Pomodoro timer.'>
-      <link rel='stylesheet' href='styles.css'>
+      <link rel='stylesheet' href='./styles.css'>
       <link rel="stylesheet" href="./third_party/intro.min.css">
       <link rel='icon' href='./img/tomato.ico' type='image/x-icon'/>
   
-      <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
       <script type="module" src="./main.js"></script>
       
       <title>Productoro</title>
   </head>
   <body data-state='pomo'>
-  
+      <div id='blur-background'></div>
       <!-- IntroJs javascript -->
       <script src="./third_party/intro.min.js"></script> 
       <header> 
@@ -37,8 +41,8 @@ beforeEach(() => {
       <main>
   
           <!-- Break Reminder -->
-          <p id='break-reminder' style='color:#464646; visibility: hidden'></p>
-          <p id='reminder' onload='breakReminders()' style='color:#464646; visibility: hidden'></p>  
+          <p id='break-reminder' style='visibility: hidden'></p>
+          <p id='reminder' onload='breakReminders()' style='visibility: hidden'></p>  
   
           <!-- Current State  -->
           <h2 class='text-center' id='state' hidden>Work State</h2> 
@@ -98,10 +102,15 @@ beforeEach(() => {
           <i class="menu-icon" id="tasks-icon" data-associated-div="tasks-div" title="task list">
               <img  class="icon" src="./img/icons/task-list.svg" >
           </i>
+  
+          <i class="menu-icon" id="theme-icon" data-associated-div="theme-div" title="styles and themes">
+              <img class="icon" src="./img/icons/painting-icon.svg">
+          </i>
       </div>
   
       <!-- Side bar contents-->
       <div class="sidebar-content" id="help-div">
+          <h2>Productoro</h2>
           <h3>What is a Pomodoro Timer?</h3>
                 <p>A Pomodoro Timer is a time management tool that breaks down work into intervals (pomos).  
                     Work intervals are typically 25 minutes long with five minute breaks between each interval. 
@@ -121,39 +130,24 @@ beforeEach(() => {
               <form id='time-limits'>
                   <h3>Time (minutes)</h3>
                   <p id='warning' style='display:none'>Wait until the end of your next break to change the times!</p>     
-                  <fieldset class='setting-flex-container' id='form-enabler'>
                       
-                      <div class='setting-flex-item'>
-                          <label id='work-label'>Work Session</label> 
-                          <select name='work-time' id='work-time'>
-                              <option id='work-option25' value='25' selected>25</option>
-                              <option id='work-option30' value='30'>30</option>
-                              <option id='work-option45' value='45'>45</option>
-                              <option id='work-option60' value='60'>60</option>
-                          </select>
-                      </div>
+                      <fieldset id="form-enabler">
+                          <div>
+                              <label id="work-label">Work Session</label>
+                              <input id="work-time" for="work-label" type="number" step="1" min="25" value="25">
+                          </div>
   
-                      <div class='setting-flex-item'>
-                          <label id='short-break-label'>Short Break</label>
-                          <select name='short-break-time' id='short-break-time'>
-                          <option id='sb-option5' value='5' selected>5</option>
-                          <option id='sb-option10' value='10'>10</option>
-                          <option id='sb-option15' value='15'>15</option>
-                          </select>
-                      </div>
+                          <div>
+                              <label id="short-break-label">Short Break</label>
+                              <input id="short-break-time" for="short-break-label" type="number" min="5" value="5">
+                          </div>
   
-                      <div class='setting-flex-item'>
-                          <label id='long-break-label'>Long Break</label>
-                          <select name='long-break-time' id='long-break-time'>
-                          <option id='lb-option15' value='15' selected>15</option>
-                          <option id='lb-option20' value='20'>20</option>
-                          <option id='lb-option25' value='25'>25</option>
-                          <option id='lb-option30' value='30'>30</option>
-                          </select>
-                      </div>
-                  </fieldset>  
+                          <div>
+                              <label id="long-break-label">Long Break</label>
+                              <input id="long-break-time" for="long-break-label" type="number" min="15" value="15">
+                          </div>
+                      </fieldset>
       
-                  <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
                   <h3 >Background Music</h3>
                   <fieldset class='setting-flex-container' id="bg-music-container">
                       <div class='setting-flex-item'>
@@ -168,7 +162,9 @@ beforeEach(() => {
                   
                   <div id='current-mix' style='display: none;'>
                       <p id='track-name'></p>
-                      <audio id='background-audio' controls></audio>
+                      <audio id='background-audio' controls>
+                          Browser does not support audio element.
+                      </audio>
                       <button type=button id='prev-track-button' style='position: relative;'>Prev</button>
                       <button type=button id='nxt-track-button'  style='position: relative;'>Next</button>
                   </div>
@@ -186,6 +182,20 @@ beforeEach(() => {
                           </select>
                       </div>
                   </fieldset>
+                  <fieldset class='setting-flex-container' id='shortcut-customization' >
+                      <div class='setting-flex-item'>
+                          <label for='customize-start'>Timer Start/Stop</label>
+                          <button type='button' id='customize-start' >Space</button>
+                      </div>
+                      <div class='setting-flex-item'>
+                          <label for='customize-volume-up'>Alarm Volume Up</label>
+                          <button type='button' id='customize-volume-up' >ArrowUp</button>
+                      </div>
+                      <div class='setting-flex-item'>
+                          <label for='customize-volume-down'>Alarm Volume Down</label>
+                          <button type='button' id='customize-volume-down'>ArrowDown</button>
+                      </div>
+                  </fieldset>
                           
                   <h3> Alarm</h3>
                   <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
@@ -201,15 +211,17 @@ beforeEach(() => {
                       </div>
                       <div class='setting-flex-item'>
                           <label for='alarm-volume'>Alarm Volume</label>
-                          <input type='range' min='0' max='100' value='100' name='alarm-volume' id='alarm-volume'>
+                          <div id='range-container'>
+                          <input type='range' min='0' max='100' value='50' name='alarm-volume' id='alarm-volume'>
+                          </div>
                       </div>
   
                       <div class='setting-flex-item'>
                         <label id='alarm-sounds-label'>Alarm Sounds</label>
                         <select name='alarm-sounds' id='alarm-sounds'>
                           <option id='alarm-sound-option1' value='1' selected>Default</option>
-                          <option id='alarm-sound-option2' value='2'>Sound 2</option>
-                          <option id='alarm-sound-option3' value='3'>Sound 3</option>
+                          <option id='alarm-sound-option2' value='2'>Birds</option>
+                          <option id='alarm-sound-option3' value='3'>Rooster</option>
                         </select>
                       </div>
                   </fieldset>
@@ -219,12 +231,14 @@ beforeEach(() => {
                       <label> Select your language</label>
                       <div id="google-translate-element"></div> 
                     </div>
-                 
-                  
+              
+              <p id='notif-reminder'><strong>Remember to have system notifications enabled!</strong></p>
+              
               </form> 
-              <div id='empty-box'></div>   
+             
+              <div class='empty-box'></div>   
               <div class="bottom">
-                  <i type="button" id="default-settings">Set to Default</i>
+                  <input type="button" id="default-settings" value="Set to Default">
               </div>
                
       </div>
@@ -240,10 +254,52 @@ beforeEach(() => {
           <label>Current Tasks:</label>
           <ul id="task-list"></ul>
           <div class="bottom">
-            <i type="button" id="clear-completed-tasks-button">Clear Completed Tasks</i>
-            <i type="button" id="clear-tasks-button">Clear All</i>
+            <input type="button" id="clear-completed-tasks-button" value="Clear Completed Tasks">
+            <input type="button" id="clear-tasks-button" value="Clear All">
           </div>
       </div>
+  
+      <div class="sidebar-content" id="theme-div">
+          <h2>Styles and Themes</h2>
+          <h3>Themes</h3>
+          <fieldset class='setting-flex-container'>
+              <div class='setting-flex-item'>
+                  <label for='theme'>Select</label>
+                  <select name='theme' id='theme'>
+                    <option id='theme-option1' value='1' selected>Default</option>
+                    <option id='theme-option2' value='2'>Dark</option>
+                    <option id='theme-option2' value='3'>Light</option>
+                  </select>
+                </div>
+          </fieldset>
+  
+          <h3>Color Blindness</h3>
+          <fieldset class='setting-flex-container'>
+              <div class='setting-flex-item'>
+                  <label for='color-blindness'>Enable Color Blindness (default themes only)</label>
+                  <select name='color-blindness' id='color-blindness'>
+                      <option value='4'          >On</option>
+                      <option value='0' selected>Off</option>
+                  </select>
+                </div>
+          </fieldset>
+          
+          <h3>Upload Your Own Image: (url only)</h3>
+          <fieldset class='setting-flex-container'>
+              <div class='setting-flex-item'>
+                  <input type="text" id="bg-url" placeholder="URL">
+                  <input type="button" id="bg-url-submit" value="submit">
+                </div>
+          </fieldset> 
+  
+          <h3>Background Images: </h3>
+          <div class='setting-grid' id='background-images'></div>
+          <div class='empty-box'></div>
+          <div class="bottom">
+              <input type="button" id="theme-default" value='Set to Default'>
+          </div>
+      </div>
+      
   </body>
   </html>`;
 });
@@ -362,5 +418,68 @@ describe(".updateState()", () => {
     expect(htmlState).toBe("Short Break State");
     let htmlTime = document.getElementById("timer-display").innerText;
     expect(htmlTime).toBe("05:00");
+  });
+});
+
+describe("Keyboard shortcut tests", () => {
+  test("Check default shortcuts exist", () => {
+    expect(getSetKeys()).not.toBeNull();
+  }),
+    test("Check default shortcuts are set", () => {
+      expect(getSetKeys()).toEqual(new Set(["Space", "ArrowUp", "ArrowDown"]));
+    });
+  test("Check keyboard shortcut toggle", () => {
+    const keyboardToggle = document.getElementById("keyboard-toggle");
+    expect(keyboardToggle).toBeTruthy;
+  });
+  test("Check start shortcut", () => {
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "Space " }));
+    expect(onStart).toBeCalled;
+  });
+  test("Check reset shortcut", () => {
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "Space " }));
+    expect(onReset).toBeCalled;
+  });
+  test("Check volume up", () => {
+    document.getElementById("alarm-volume").value = 50;
+    const volBefore = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowUp" }));
+    const volAfter = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    expect(volAfter).toBeGreaterThan(volBefore);
+  });
+  test("Check volume down", () => {
+    document.getElementById("alarm-volume").value = 50;
+    const volBefore = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowDown" }));
+    const volAfter = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    expect(volAfter).toBeLessThan(volBefore);
+  });
+  test("shortcut customization", () => {
+    let startShortcutBtn = document.getElementById("customize-start");
+    startShortcutBtn.addEventListener("click", customizeKey);
+    startShortcutBtn.click();
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "KeyS" }));
+    expect(getSetKeys()).toContain("KeyS");
+  });
+  test("shortcut customization but key is already in use", () => {
+    let volUpShortcutBtn = document.getElementById("customize-volume-up");
+    let volUpTextBefore = volUpShortcutBtn.innerHTML;
+    volUpShortcutBtn.addEventListener("click", customizeKey);
+    volUpShortcutBtn.click();
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "Space" }));
+    let volUpTextAfter = volUpShortcutBtn.innerHTML;
+    expect(volUpTextAfter).not.toEqual(volUpTextBefore);
   });
 });
