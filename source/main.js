@@ -5,6 +5,7 @@ import {
   onReset,
   setCustomTime,
   keyboardShortcut,
+  setDefaultSettings,
 } from "./modules/timer.js";
 import { setBackgroundMusic } from "./modules/background-music.js";
 import {
@@ -14,7 +15,7 @@ import {
   loadTaskListFromLocal,
 } from "./modules/task-list.js";
 
-import { setDefaultSettings } from "./modules/side-nav-bar.js";
+import "./modules/side-nav-bar.js";
 
 import {
   setTheme,
