@@ -321,6 +321,10 @@ select {
   color: var(--side-bar-content-text);
 }
 
+input[type="number"] {
+  color: black;
+}
+
 /* google translate */
 .goog-te-combo > * {
   color: black;
@@ -342,4 +346,29 @@ option,
 p,
 button {
   font-family: var(--side-bar-font-family);
+}
+
+#form-enabler {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border: none;
+  padding: 0;
+}
+
+#form-enabler > div > label {
+  display: block;
+  font-size: 10px;
+  text-align: left;
+  font-family: var(--side-bar-font-family);
+}
+
+#form-enabler > div > input {
+  font-family: var(--side-bar-font-family);
+  width: 100%;
+  max-width: 80px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
 }

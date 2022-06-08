@@ -237,6 +237,21 @@ function setCustomTime() {
   let lbTime = document.getElementById("long-break-time");
   let warning = document.getElementById("warning");
 
+  // prevent number inputs from showing below the minimum and upating the timer even if it below the min
+  if (Number(wTime.value) < 25) {
+    POMO_MINS = 25;
+    wTime.value = POMO_MINS;
+    return;
+  } else if (Number(sbTime.value) < 5) {
+    SHORT_MINS = 5;
+    sbTime.value = 5;
+    return;
+  } else if (Number(lbTime.value) < 15) {
+    LONG_MINS = 15;
+    lbTime.value = LONG_MINS;
+    return;
+  }
+
   if (
     Number(wTime.value) <= Number(sbTime.value) ||
     Number(wTime.value) <= Number(lbTime.value)
@@ -269,7 +284,8 @@ function setCustomTime() {
  */
 function onStart() {
   getNotificationStatus();
-  document.querySelector("#form-enabler").disabled = "disabled";
+  document.querySelector("#form-enabler").disabled = true;
+  document.getElementById("default-settings").disabled = true; // disable default settings btn
 
   // enable a warning if the user tries changing the time limits during a pomo
   document.getElementById("warning").innerText =
@@ -292,6 +308,7 @@ function onReset() {
   document.getElementById("reset-button").disabled = true;
   document.getElementById("start-button").disabled = false;
   document.getElementById("warning").style.display = "none";
+  document.getElementById("default-settings").disabled = false;
   document.getElementById("form-enabler").removeAttribute("disabled");
   document.title = "Productoro";
   timer.counter.streak = 0;
@@ -300,6 +317,34 @@ function onReset() {
   checkState();
 
   //    document.getElementById('tasks').className = 'tasks';
+}
+
+/**
+ * @name setDefaultSettings
+ * @function
+ * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
+ */
+function setDefaultSettings() {
+  POMO_MINS = 25;
+  SHORT_MINS = 5;
+  LONG_MINS = 15;
+
+  const defaultSetting = {
+    "work-time": "25",
+    "short-break-time": "5",
+    "long-break-time": "15",
+    "bg-music": "None",
+    "keyboard-toggle": "on",
+    "notif-toggle": "on",
+    "alarm-volume": "100",
+    "alarm-sounds": "1",
+  };
+
+  for (const key in defaultSetting) {
+    document.getElementById(key).value = defaultSetting[key];
+  }
+
+  setCustomTime();
 }
 
 /**
@@ -361,6 +406,7 @@ export {
   keyboardShortcut,
   revealSettings,
   hideSettings,
+  setDefaultSettings,
   SHORT_STATE,
   LONG_STATE,
   WORK_STATE,
