@@ -333,7 +333,6 @@ describe(".setDefaultThemes()", () => {
   });
 });
 
-// loadThemeFromStorage()
 describe(".loadThemeFromStorage()", () => {
   test("Load background image saved in storage", () => {
     const theme = {
@@ -353,9 +352,6 @@ describe(".loadThemeFromStorage()", () => {
       "url(https://wallpaperaccess.com/full/274198.jpg)"
     );
   });
-});
-
-describe(".loadThemeFromStorage()", () => {
   test("Load Theme saved in storage", () => {
     const theme = {
       theme: {
@@ -372,7 +368,7 @@ describe(".loadThemeFromStorage()", () => {
     expect(document.documentElement.className).toBe("dark-theme");
   });
 });
-// setBGImage
+
 describe(".setBGImage()", () => {
   test("Set Event Listener for all imgages", () => {
     const BackgroundImages = [
