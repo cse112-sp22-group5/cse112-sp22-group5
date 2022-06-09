@@ -1,3 +1,6 @@
+## Note
+The below documentation is the archive for the CSE110 project that were the original developers working on this project. For updated documentation for the Spring 2022 CSE112 Team 5 10X Raccons please navigate to the team [wiki](https://github.com/cse112-sp22-group5/cse112-sp22-group5/wiki).
+
 ## Productoro
 Productoro is a new Pomodoro Timer application. Using the Pomodoro technique, Productoro breaks down work in to intervals called pomos as a means to enhances user time management and increase user productivity and focus. [Here is the link to our app!](https://productoro-b340e.web.app/), and [here is the link to our demo video!](https://youtu.be/HGqff-ElEuk)
 
