@@ -10,7 +10,7 @@ module.exports = {
   globals: {
     global: "writable",
   },
-  extends: ["eslint:recommended", "prettier"],
+  extends: ["eslint:recommended", "prettier", "plugin:cypress/recommended"],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",

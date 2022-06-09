@@ -13,11 +13,13 @@ const CONTENT_DIV = {
   "help-div": false,
   "setting-div": false,
   "tasks-div": false,
+  "theme-div": false,
 };
 const CONTENT_ICONS = {
   "help-icon": false,
   "setting-icon": false,
   "tasks-icon": false,
+  "theme-icon": false,
 };
 
 const SCREEN_SIZE = 700;
@@ -37,7 +39,7 @@ function setdivWidth(windowWidth) {
 
 // Let the sidebar panel stop toggling between switching panels
 // potential overlay sidebar if PANEL_Z_INDEX >= 99
-let PANEL_Z_INDEX = 0;
+let PANEL_Z_INDEX = 1;
 /**
  * @name toggleMenu
  * @function
@@ -46,8 +48,11 @@ let PANEL_Z_INDEX = 0;
  */
 function toggleMenu(divID) {
   let content_div = JSON.parse(JSON.stringify(CONTENT_DIV));
-  if (divID == null) PANEL_Z_INDEX = 0; // reset when all panels collapse
-
+  let blurBackground = document.querySelector("#blur-background");
+  if (divID == null) {
+    PANEL_Z_INDEX = 1; // reset when all panels collapse
+    blurBackground.classList.remove("blur-background");
+  }
   if (divID != null) {
     let sideContent = document.getElementById(divID);
     const sideBarWidth = 70; // px
@@ -56,8 +61,9 @@ function toggleMenu(divID) {
     let sideBarWidthPercentage = Math.round((sideBarWidth / windowWidth) * 100);
     divWidth = setdivWidth(windowWidth);
 
+    blurBackground.classList.add("blur-background");
     // Only the first panel has transition
-    if (PANEL_Z_INDEX >= 1) sideContent.style.transition = "0s";
+    if (PANEL_Z_INDEX >= 2) sideContent.style.transition = "0s";
     sideContent.style.visibility = "visible";
     sideContent.style.zIndex = PANEL_Z_INDEX; // the choosen panel always appear on top
     sideContent.style.width = `${divWidth - sideBarWidthPercentage}%`;
@@ -83,7 +89,7 @@ function toggleMenu(divID) {
 function setIconBackGround(btnID) {
   let content_icons = JSON.parse(JSON.stringify(CONTENT_ICONS));
   if (Object.prototype.hasOwnProperty.call(content_icons, btnID))
-    content_icons[btnID] = true;  
+    content_icons[btnID] = true;
   for (const key in content_icons) {
     if (content_icons[key])
       document.getElementById(key).classList.add("button-clicked");
@@ -125,100 +131,81 @@ function setSideBar() {
   else minimizeSideBar();
 }
 
-/**
- * @name setDefaultSettings
- * @function
- * @description Set timer, music, keyboard shortcuts, and alarm settings to default values
- */
-function setDefaultSettings() {
-  const defaultSetting = {
-    "work-time": "25",
-    "short-break-time": "5",
-    "long-break-time": "15",
-    "bg-music": "None",
-    "keyboard-toggle": "on",
-    "notif-toggle": "on",
-    "alarm-volume": "100",
-    "alarm-sounds": "1",
-  };
-  for (const key in defaultSetting) {
-    document.getElementById(key).value = defaultSetting[key];
-  }
-}
-
-// Expands sidebar based on window width
-document.querySelector("#arrow-down").addEventListener("click", () => {
-  const menuStyle = document.querySelector(".side-nav-bar").style;
-  if (parseInt(menuStyle.height, 10) === 0 || menuStyle.height === "") {
-    expandSideBar();
-  } else {
-    minimizeSideBar();
-  }
-});
-
-// Set background color for menu icons
-document.querySelectorAll(".menu-icon").forEach((elem) => {
-  elem.addEventListener("click", () => {
-    const id = elem.getAttribute("data-associated-div");
-    const side = document.getElementById(id).offsetWidth;
-    if (side === 0) {
-      toggleMenu(id);
-      setIconBackGround(elem.getAttribute("id"));
+function sidebarInit() {
+  // Expands sidebar based on window width
+  document.querySelector("#arrow-down").addEventListener("click", () => {
+    const menuStyle = document.querySelector(".side-nav-bar").style;
+    if (parseInt(menuStyle.height, 10) === 0 || menuStyle.height === "") {
+      expandSideBar();
     } else {
+      minimizeSideBar();
+    }
+  });
+
+  // Set background color for menu icons
+  document.querySelectorAll(".menu-icon").forEach((elem) => {
+    elem.addEventListener("click", () => {
+      const id = elem.getAttribute("data-associated-div");
+      const side = document.getElementById(id).offsetWidth;
+      if (side === 0) {
+        toggleMenu(id);
+        setIconBackGround(elem.getAttribute("id"));
+      } else {
+        toggleMenu(null);
+        setIconBackGround(null);
+      }
+    });
+  });
+
+  // closes side bar or panels when resizing the window
+  window.addEventListener("resize", () => {
+    toggleMenu(null);
+    setIconBackGround(null);
+    setSideBar();
+  });
+
+  /**
+   * If user clicks on areas that are outside menu and panels, it closes
+   */
+  window.addEventListener("click", (event) => {
+    const windowWidth = window.innerWidth;
+    const divWidth = setdivWidth(windowWidth);
+    const menuWidth = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--side-bar-width");
+
+    if ((event.clientX / windowWidth) * 100 >= divWidth) {
       toggleMenu(null);
       setIconBackGround(null);
     }
+
+    // the click coordinate must greater than sidebar width and no panels are open
+    if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 1) {
+      setSideBar();
+    }
   });
-});
 
-// closes side bar or panels when resizing the window
-window.addEventListener("resize", () => {
-  toggleMenu(null);
-  setIconBackGround(null);
-  setSideBar();
-});
+  // For touch screen devices
+  window.addEventListener("touchstart", (event) => {
+    const windowWidth = window.innerWidth;
+    const divWidth = setdivWidth(windowWidth);
+    const menuWidth = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--side-bar-width");
+    if ((event.touches[0].clientX / windowWidth) * 100 >= divWidth) {
+      toggleMenu(null);
+      setIconBackGround(null);
+      setSideBar();
+    }
 
-/**
- * If user clicks on areas that are outside menu and panels, it closes
- */
-window.addEventListener("click", (event) => {
-  const windowWidth = window.innerWidth;
-  const divWidth = setdivWidth(windowWidth);
-  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
-    "--side-bar-width"
-  );
+    // the click coordinate must greater than sidebar width and no panels are open
+    if (
+      event.touches[0].clientX >= parseInt(menuWidth, 10) &&
+      PANEL_Z_INDEX === 1
+    ) {
+      setSideBar();
+    }
+  });
+}
 
-  if ((event.clientX / windowWidth) * 100 >= divWidth) {
-    toggleMenu(null);
-    setIconBackGround(null);
-  }
-
-  // the click coordinate must greater than sidebar width and no panels are open
-  if (event.clientX >= parseInt(menuWidth, 10) && PANEL_Z_INDEX === 0) {
-    setSideBar();
-  }
-});
-
-// For touch screen devices
-window.addEventListener("touchstart", (event) => {
-  const windowWidth = window.innerWidth;
-  const divWidth = setdivWidth(windowWidth);
-  const menuWidth = getComputedStyle(document.documentElement).getPropertyValue(
-    "--side-bar-width"
-  );
-  if ((event.touches[0].clientX / windowWidth) * 100 >= divWidth) {
-    toggleMenu(null);
-    setIconBackGround(null);
-    setSideBar();
-  }
-
-  // the click coordinate must greater than sidebar width and no panels are open
-  if (
-    event.touches[0].clientX >= parseInt(menuWidth, 10) &&
-    PANEL_Z_INDEX === 0
-  ) {
-    setSideBar();
-  }
-});
-
- export { setDefaultSettings, toggleMenu, setIconBackGround };
+export { sidebarInit, toggleMenu, setIconBackGround };

@@ -40,18 +40,18 @@ jobs:
           npm test timer.test.js
           npm test notifications.test.js
           npm test notifications.showNotif.test.js
-          npm test help.test.js
           npm test color-change.test.js
           npm test progress-bar.test.js
 
-  # cypress-run:
-  #   name: Run E2E Testing
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v2
+  cypress-run:
+    name: Run Cypress Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
   
   run-jsdocs-dev:
     name: Deploy JSDocs
