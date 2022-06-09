@@ -100,10 +100,16 @@ describe("Settings Model", () => {
         cy.get("#setting-icon").click();
   
         cy.wait(500); // wait till the sidebar appears
-        cy.get('#work-time').select('30').should('have.value', '30');
+        cy.get('#work-time').click()
+
+        cy.wait(500); // wait till the sidebar appears
+        cy.get('#work-time').type('0');
+
+        cy.wait(500); // wait for the time to change
+        cy.get("#setting-icon").click();
         cy.get('#timer-display').should(
             "have.text",
-            "30:00"
+            "250:00"
         );
     });
 

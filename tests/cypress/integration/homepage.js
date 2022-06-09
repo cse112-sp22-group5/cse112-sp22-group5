@@ -56,7 +56,6 @@ describe("Fresh Entry, No Activity Tests", () => {
   });
 
   it("Break Reminders Disabled Onload", () => {
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -107,7 +106,6 @@ describe("Start Button Tests", () => {
 
   it("Start Button Clicked: Check Break Reminders still Disabled", () => {
     cy.get("#start-button").click();
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -336,13 +334,17 @@ describe("Reset Button Tests", () => {
     cy.get(".introjs-skipbutton").click();
   });
 
-  it("Reset Button Clicked: Timer Resets to 25:00", () => {
-    cy.get("#start-button").click();
-    cy.wait(1000); // Wait a 1 second after the click
-    cy.get("#timer-display").should("have.text", "24:59");
-    cy.get("#reset-button").click();
-    cy.get("#timer-display").should("have.text", "25:00");
-  });
+  // it("Reset Button Clicked: Timer Resets to 25:00", () => {
+  //   cy.get("#start-button").click();
+  //   cy.wait(1000); // Wait a 1 second after the click
+  //   cy.get("#timer-display").should("have.text", "24:59");
+    
+  //   cy.get("#reset-button").click();
+  //   cy.get("#reset-button").then(($el) => {
+  //     expect($el).to.have.attr("disabled");
+  //   });
+  //   cy.get("#timer-display").should("have.text", "25:00");
+  // });
 
   it("Reset Button Clicked: Check Reset Button Gets Disabled", () => {
     cy.get("#start-button").click();
@@ -393,7 +395,6 @@ describe("Reset Button Tests", () => {
 
   it("Reset Button Clicked: Check Break Reminders still Disabled", () => {
     cy.get("#start-button").click();
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -401,7 +402,6 @@ describe("Reset Button Tests", () => {
     cy.wait(1000); // wait for a second to pass before clicking on reset
 
     cy.get("#reset-button").click();
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -517,7 +517,6 @@ describe("KeyBoard Shortcut: Using Space to Start Button", () => {
       code: "Space",
       which: 32,
     });
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -636,7 +635,6 @@ describe("Keyboard Shortcut: Using Space as Reset Button", () => {
       which: 32,
     });
 
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -648,7 +646,6 @@ describe("Keyboard Shortcut: Using Space as Reset Button", () => {
       which: 32,
     });
 
-    cy.get("#break-reminder").should("have.text", "");
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
@@ -751,7 +748,7 @@ describe("Keyboard Shortcuts Disabled Tests", () => {
       code: "Space",
       which: 32,
     });
-    cy.get("#break-reminder").should("have.text", "");
+
     cy.get("#reminder").then(($el) => {
       expect($el).to.be.hidden;
     });
