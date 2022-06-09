@@ -1,9 +1,13 @@
+// import { doc } from "prettier";
 import {
   onStart,
   onReset,
   checkState,
   updateState,
   timer,
+  customizeKey,
+  keyboardShortcut,
+  getSetKeys,
 } from "../../source/modules/timer.js";
 
 beforeEach(() => {
@@ -166,7 +170,21 @@ beforeEach(() => {
                         </select>
                     </div>
                 </fieldset>
+                <fieldset class='setting-flex-container' id='shortcut-customization' >
+                    <div class='setting-flex-item'>
+                        <label for='customize-start'>Timer Start/Stop</label>
+                        <button type='button' id='customize-start' >Space</button>
+                    </div>
+                    <div class='setting-flex-item'>
+                        <label for='customize-volume-up'>Alarm Volume Up</label>
+                        <button type='button' id='customize-volume-up' >Arrow Up</button>
+                    </div>
+                    <div class='setting-flex-item'>
+                        <label for='customize-volume-down'>Alarm Volume Down</label>
+                        <button type='button' id='customize-volume-down'>Arrow Down</button>
+                    </div>
                 <p>Press space to start/reset timer</p>
+                </fieldset>
                 <h3> Alarm</h3>
                 <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
                     <div class='setting-flex-item'>
@@ -387,5 +405,68 @@ describe(".updateState()", () => {
     expect(htmlState).toBe("Short Break");
     let htmlTime = document.getElementById("timer-display").innerText;
     expect(htmlTime).toBe("05:00");
+  });
+});
+
+describe("Keyboard shortcut tests", () => {
+  test("Check default shortcuts exist", () => {
+    expect(getSetKeys()).not.toBeNull();
+  }),
+    test("Check default shortcuts are set", () => {
+      expect(getSetKeys()).toEqual(new Set(["Space", "ArrowUp", "ArrowDown"]));
+    });
+  test("Check keyboard shortcut toggle", () => {
+    const keyboardToggle = document.getElementById("keyboard-toggle");
+    expect(keyboardToggle).toBeTruthy;
+  });
+  test("Check start shortcut", () => {
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "Space " }));
+    expect(onStart).toBeCalled;
+  });
+  test("Check reset shortcut", () => {
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "Space " }));
+    expect(onReset).toBeCalled;
+  });
+  test("Check volume up", () => {
+    document.getElementById("alarm-volume").value = 50;
+    const volBefore = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowUp" }));
+    const volAfter = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    expect(volAfter).toBeGreaterThan(volBefore);
+  });
+  test("Check volume down", () => {
+    document.getElementById("alarm-volume").value = 50;
+    const volBefore = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    keyboardShortcut(new KeyboardEvent("keydown", { code: "ArrowDown" }));
+    const volAfter = parseInt(
+      document.getElementById("alarm-volume").value,
+      10
+    );
+    expect(volAfter).toBeLessThan(volBefore);
+  });
+  test("shortcut customization", () => {
+    let startShortcutBtn = document.getElementById("customize-start");
+    startShortcutBtn.addEventListener("click", customizeKey);
+    startShortcutBtn.click();
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "KeyS" }));
+    expect(getSetKeys()).toContain("KeyS");
+  });
+  test("shortcut customization but key is already in use", () => {
+    let volUpShortcutBtn = document.getElementById("customize-volume-up");
+    let volUpTextBefore = volUpShortcutBtn.innerHTML;
+    volUpShortcutBtn.addEventListener("click", customizeKey);
+    volUpShortcutBtn.click();
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "Space" }));
+    let volUpTextAfter = volUpShortcutBtn.innerHTML;
+    expect(volUpTextAfter).not.toEqual(volUpTextBefore);
   });
 });

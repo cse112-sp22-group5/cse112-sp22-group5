@@ -1,4 +1,4 @@
-const /** @constant @type {number} */
+const /** @constant @type {number} **/
   MS = 1000,
   /** @constant @type {number} **/
   NUM_SEC = 60;

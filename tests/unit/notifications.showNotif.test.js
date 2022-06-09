@@ -269,13 +269,13 @@ beforeEach(() => {
 
 describe(".showNotfif()", () => {
   test("when a long break begins", () => {
-    let body = showNotif("Long Break");
+    let body = showNotif("Long Break State");
     expect(body).toBe(
       "You have completed a pomo! Your long break begins now :)"
     );
   });
   test("when a short break begins", () => {
-    let body = showNotif("Short Break");
+    let body = showNotif("Short Break State");
     expect(body).toBe(
       "You have completed a pomo! Your short break begins now :)"
     );

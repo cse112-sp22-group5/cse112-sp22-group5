@@ -21,7 +21,7 @@ function playSound() {
   let soundIdx = document.getElementById("alarm-sounds").value;
   alarm = new Audio("./audio/notification-alert-" + soundIdx + ".wav");
   // Set alarm volume
-  alarm.volume = document.getElementById("alarm-volume").value / 100;
+  setAlarmVolume();
   //Play the alarm once
   alarm.play();
   //Wait 2 seconds then play it again
@@ -32,6 +32,15 @@ function playSound() {
   setTimeout(function () {
     alarm.play();
   }, 4000);
+}
+
+/**
+ * @name setAlarmVolume
+ * @function
+ * @description Gets current volume from alarm volume slider and sets alarm volume
+ */
+function setAlarmVolume() {
+  alarm.volume = document.getElementById("alarm-volume").value / 100;
 }
 
 /**
@@ -49,9 +58,9 @@ function showNotif(typeOfNotif) {
   let body = "";
 
   // body of notification depends on the current state
-  if (typeOfNotif === "Long Break") {
+  if (typeOfNotif === "Long Break State") {
     body = "You have completed a pomo! Your long break begins now :)";
-  } else if (typeOfNotif === "Short Break") {
+  } else if (typeOfNotif === "Short Break State") {
     body = "You have completed a pomo! Your short break begins now :)";
   } else if (typeOfNotif === "Work State") {
     body = "Your break has ended. A new pomo begins now :)";
@@ -92,4 +101,10 @@ function getNotificationStatus() {
 }
 
 // export functions for testing
-export { showNotif, getNotificationStatus, playSound, getAlarm };
+export {
+  showNotif,
+  getNotificationStatus,
+  playSound,
+  getAlarm,
+  setAlarmVolume,
+};
