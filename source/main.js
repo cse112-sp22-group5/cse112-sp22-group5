@@ -86,7 +86,7 @@ document.getElementById("theme-default").addEventListener("click", () => {
   setDefaultThemes();
 });
 
-// load task list from local storage
+// Load task list from local storage
 window.addEventListener("load", () => {
   sidebarInit();
   loadBackgroundImages();
