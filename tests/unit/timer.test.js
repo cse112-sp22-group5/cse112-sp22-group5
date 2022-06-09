@@ -170,7 +170,21 @@ beforeEach(() => {
                         </select>
                     </div>
                 </fieldset>
+                <fieldset class='setting-flex-container' id='shortcut-customization' >
+                    <div class='setting-flex-item'>
+                        <label for='customize-start'>Timer Start/Stop</label>
+                        <button type='button' id='customize-start' >Space</button>
+                    </div>
+                    <div class='setting-flex-item'>
+                        <label for='customize-volume-up'>Alarm Volume Up</label>
+                        <button type='button' id='customize-volume-up' >Arrow Up</button>
+                    </div>
+                    <div class='setting-flex-item'>
+                        <label for='customize-volume-down'>Alarm Volume Down</label>
+                        <button type='button' id='customize-volume-down'>Arrow Down</button>
+                    </div>
                 <p>Press space to start/reset timer</p>
+                </fieldset>
                 <h3> Alarm</h3>
                 <fieldset class='setting-flex-container alarm-settings' id="alarm-enabler">
                     <div class='setting-flex-item'>
