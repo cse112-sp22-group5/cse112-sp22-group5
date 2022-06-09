@@ -3,9 +3,8 @@ exclude_paths:
   - ".github/**"
   - "admin/**"
   - "coverage/**"
-  - "cypress/**"
   - "node_modules/**"
   - "specs/**"
   - package-lock.json
   - "source/third_party/**"
-  - "tests/cypress"
+  - "tests/**"
