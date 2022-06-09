@@ -27,10 +27,6 @@ import {
 } from "./modules/skins-themes.js";
 import { startWalkthrough, isReturningUser } from "./modules/walkthrough.js";
 
-// import { googleTranslateElementInit } from "./modules/multi-language.js";
-
-// googleTranslateElementInit();
-
 // Timer
 document
   .getElementById("form-enabler")
@@ -44,9 +40,6 @@ document.addEventListener("keydown", (event) => {
   if (document.activeElement !== document.querySelector("#task-name"))
     keyboardShortcut(event);
 });
-// document.getElementById('customize-start').addEventListener('click', customizeKey);
-// document.getElementById('customize-volume-up').addEventListener('click', customizeKey);
-// document.getElementById('customize-volume-down').addEventListener('click', customizeKey);
 
 // Default button
 document
@@ -100,7 +93,6 @@ window.addEventListener("load", () => {
 
   loadThemeFromStorage();
   loadTaskListFromLocal();
-  //document.documentElement.className = "default-theme";
   setBGImage();
 });
 
